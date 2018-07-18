@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build --mode test",
+    "lint": "vue-cli-service lint",
+    "deploy": "vue-cli-service build",
+    "postbuild": "vue-cli-service ftp"
   },
   "dependencies": {
     "vue": "^2.5.16",
@@ -17,6 +19,7 @@
     "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
     "@vue/cli-service": "^3.0.0-rc.5",
     "@vue/eslint-config-prettier": "^3.0.0-rc.5",
+    "@wb/vue-cli-plugin-weibo": "^1.0.3",
     "lint-staged": "^7.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
