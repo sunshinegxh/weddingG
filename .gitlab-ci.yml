@@ -3,7 +3,7 @@ stages:
   - stage
 pages:
   script:
-    - cp -r doc public
+    - cp -r docs public
   artifacts:
     paths:
     - public
