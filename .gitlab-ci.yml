@@ -1,0 +1,14 @@
+image: 'hub.weibo.cn/h5/runner'
+stages:
+  - stage
+pages:
+  script:
+    - cp -r docs public
+  artifacts:
+    paths:
+    - public
+  tags:
+    - HTML5
+  stage: stage
+  only:
+    - master@html5/newbee
