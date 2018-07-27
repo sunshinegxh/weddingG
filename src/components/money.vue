@@ -39,12 +39,10 @@ export default {
   },
   methods: {
     printing(con) {
-      alert("con:" + con);
-      console.log(window.appInterface);
       if (window.appInterface) {
-        alert(88);
+        alert(`http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`);
         window.appInterface.call("urlDownload", {
-          url: `../assets/${con}.docx`,
+          url: `http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`,
           name: con
         });
       }
