@@ -13,7 +13,7 @@
         </div>
         <div class="hrbp-content-des">
           <h3>车辆管理</h3>
-          <p>打印填写<span @click="printing('新浪大厦报备车辆员工安全承诺书')" class="und">《安全承诺书》</span>，手签相关内容；<br/>
+          <p>打印填写<span @click="printing('promise')" class="und">《安全承诺书》</span>，手签相关内容；<br/>
              车辆为员工<span>本人</span>，提交<span>行驶证复印件；</span><br/>
              车辆为员工<span>配偶</span>,提交<span>行驶证、结婚证复印件；</span><br/>
              车辆为员工<span>家属</span>,提交<span>行驶证、户口本复印件；</span>
@@ -111,6 +111,7 @@ export default {
     },
     printing(con) {
       if (window.appInterface) {
+        alert(`http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`);
         window.appInterface.call("urlDownload", {
           url: `http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`,
           name: con

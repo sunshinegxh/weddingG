@@ -15,10 +15,10 @@
             <div class="money-content-des-con">
             <div class="money-content-des-con-left">链接文档：</div>
             <div class="money-content-des-con-right">
-                <span @click="printing('个人报销使用帮助-PC版')">《个人报销使用帮助-PC版》</span>
-                <span @click="printing('出差报销')">《出差报销》</span>
-                <span @click="printing('报销改错')">《报销改错》</span>
-                <span @click="printing('其他细则补充说明')">《其他细则补充说明》</span>
+                <span @click="printing('PC')">《个人报销使用帮助-PC版》</span>
+                <span @click="printing('m')">《出差报销》</span>
+                <span @click="printing('m_mistake')">《报销改错》</span>
+                <span @click="printing('rules')">《其他细则补充说明》</span>
             </div>
         </div>
         </div>
