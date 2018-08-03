@@ -17,7 +17,7 @@
             <div class="money-content-des-con-right">
                 <span @click="printing('PC', '个人报销使用帮助')">《个人报销使用帮助-PC版》</span><br/>
                 <span @click="printing('m', '出差报销')">《出差报销》</span><br/>
-                <span @click="printing('m_mistake', '报销改错')">《报销改错》</span><br/>
+                <span @click="printing('mistake', '报销改错')">《报销改错》</span><br/>
                 <span @click="printing('rules', '其他细则补充说明')">《其他细则补充说明》</span>
             </div>
         </div>
