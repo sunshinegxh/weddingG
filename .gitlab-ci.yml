@@ -1,6 +1,4 @@
 image: 'hub.weibo.cn/h5/runner'
-stages:
-  - stage
 pages:
   script:
     - cp -r docs public
@@ -9,6 +7,21 @@ pages:
     - public
   tags:
     - HTML5
-  stage: stage
   only:
     - master@html5/newbee
+deploy:
+  environment: production
+  tags:
+    - HTML5
+  only:
+   - tags@html5/newbee
+  script:
+    - 'npm run deploy'
+    - 'rm $CI_PROJECT_DIR/dist/index.html'
+    - 'cat $CI_PROJECT_DIR/webpack-assets.json'
+    - 'push2cdn --m=h5_sinaimg_m --pre=v8 --src=$CI_PROJECT_DIR/dist'
+    - 'update_version'
+  artifacts:
+    paths:
+    - dist/
+
