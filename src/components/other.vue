@@ -38,10 +38,13 @@
 					</div>
 				</div>
 			</div>
+      <home @changePage="changePage"></home>
     </div>
 </template>
 
 <script>
+import Home from "./home";
+
 export default {
   name: "other",
   data() {
@@ -73,6 +76,14 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    changePage(index) {
+      this.$emit("changePage", index);
+    }
+  },
+  components: {
+    Home
   }
 };
 </script>

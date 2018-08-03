@@ -4,22 +4,22 @@
           <introduce></introduce>
         </page>
         <page :currentPage="currentPage">
-          <read></read>
+          <read @changePage="changePage"></read>
         </page>
         <page :currentPage="currentPage">
           <lead @changePage="changePage"></lead>
         </page>
         <page :currentPage="currentPage">
-          <good></good>
+          <good @changePage="changePage"></good>
         </page>
         <page :currentPage="currentPage">
-          <hrbp></hrbp>
+          <hrbp @changePage="changePage"></hrbp>
         </page>
         <page :currentPage="currentPage">
-          <money></money>
+          <money @changePage="changePage"></money>
         </page>
         <page :currentPage="currentPage">
-          <other></other>
+          <other @changePage="changePage"></other>
         </page>
         <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
     </div>
@@ -59,7 +59,7 @@ export default {
       options: [
         {
           // the color of background
-          background: "url(" + intro + ") no-repeat",
+          background: "url(" + intro + ") no-repeat center center fixed",
           // the color of text
           color: "#fff",
           // is content center
@@ -70,42 +70,42 @@ export default {
           beforeLeave: beforeLeaveAnimate
         },
         {
-          background: "url(" + read + ") no-repeat",
+          background: "url(" + read + ") no-repeat center center fixed",
           color: "#fff",
           isCenter: true,
           afterEnter: afterEnterAnimate,
           beforeLeave: beforeLeaveAnimate
         },
         {
-          background: "url(" + leadall + ") no-repeat",
+          background: "url(" + leadall + ") no-repeat center center fixed",
           color: "#fff",
           isCenter: true,
           afterEnter: afterEnterAnimate,
           beforeLeave: beforeLeaveAnimate
         },
         {
-          background: "url(" + bg + ") no-repeat",
+          background: "url(" + bg + ") no-repeat center center fixed",
           color: "#fff",
           isCenter: true,
           afterEnter: afterEnterAnimate,
           beforeLeave: beforeLeaveAnimate
         },
         {
-          background: "url(" + bg + ") no-repeat",
+          background: "url(" + bg + ") no-repeat center center fixed",
           color: "#fff",
           isCenter: true,
           afterEnter: afterEnterAnimate,
           beforeLeave: beforeLeaveAnimate
         },
         {
-          background: "url(" + bg + ") no-repeat",
+          background: "url(" + bg + ") no-repeat center center fixed",
           color: "#fff",
           isCenter: true,
           afterEnter: afterEnterAnimate,
           beforeLeave: beforeLeaveAnimate
         },
         {
-          background: "url(" + bg + ") no-repeat",
+          background: "url(" + bg + ") no-repeat center center fixed",
           color: "#fff",
           isCenter: true,
           afterEnter: afterEnterAnimate,
@@ -118,18 +118,13 @@ export default {
         highlight: true,
         loop: false
       },
-      loading: true,
-      login: false,
-      ticket: false
+      loading: true
     };
   },
   computed: {
     // 总page数
     pageNum() {
       return this.options.length;
-    },
-    illegal() {
-      return this.login || this.ticket;
     }
   },
   methods: {
@@ -161,26 +156,7 @@ export default {
     Money,
     Other
   },
-  created() {
-    this.$http
-      .get("//m.weibo.cn/z/newstaff/getinfo")
-      .then(response => {
-        this.loading = false;
-        // console.log("response data:", response.data);
-        let res = response.data;
-        if (res.ok === 1) {
-          // console.log("fromKoudai:", res.data.fromKoudai);
-          // console.log("fromCPB:", res.data.fromCPB);
-          // this.ticket = !res.data.fromKoudai;
-          // this.login = !res.data.fromCPB;
-        } else {
-          alert(res.msg);
-        }
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  },
+  created() {},
   mounted() {
     this.$children.forEach((child, index) => {
       // 动态设置各个page内的options
@@ -242,39 +218,6 @@ ul {
   padding-left: 1em;
 }
 
-.illegal {
-  height: 100%;
-  background: url("../assets/bg.jpg") no-repeat;
-  background-size: cover;
-  overflow: hidden;
-  text-align: center;
-  &-con {
-    width: 600 * $px;
-    height: 696 * $px;
-    margin: 255 * $px auto 64 * $px;
-    background: #fff;
-    border-radius: 10 * $px;
-    img {
-      margin: 70 * $px 0;
-      width: 406 * $px;
-    }
-    p {
-      color: #606060;
-      font-size: 30 * $px;
-    }
-  }
-  &-close {
-    width: 64 * $px;
-    height: 64 * $px;
-    line-height: 64 * $px;
-    font-size: 50 * $px;
-    text-align: center;
-    margin: 0 auto;
-    color: #fff;
-    border-radius: 100%;
-    border: 1px solid #fff;
-  }
-}
 .loadEffect {
   width: 100px;
   height: 100px;

@@ -26,10 +26,13 @@
         </div>
         <div class="good-content-des" v-html="item"></div>
       </div>
+      <home @changePage="changePage"></home>
     </div>
 </template>
 
 <script>
+import Home from "./home";
+
 export default {
   name: "good",
   data() {
@@ -49,7 +52,13 @@ export default {
     jump() {
       location.href =
         "https://proc1.erp.sina.com.cn/erp.php/list_goodsapply/change/indexcontroller/loadDraftView?default_id=BF671DF9-01E2-4324-BE56-6A8F222BB588";
+    },
+    changePage(index) {
+      this.$emit("changePage", index);
     }
+  },
+  components: {
+    Home
   }
 };
 </script>
@@ -74,7 +83,7 @@ export default {
       p {
         width: 35 * $px;
         height: 35 * $px;
-        line-height: 35 * $px;
+        line-height: 38 * $px;
         text-align: center;
         margin: 0;
         background: #faa746;

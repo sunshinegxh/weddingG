@@ -1,6 +1,6 @@
 <template>
     <section class="page" v-if="option" 
-        :style="{height: '100%',background: option.background,color: option.color||'#fff',backgroundSize: '100%'}"      
+        :style="{height: '100%',background: option.background,color: option.color||'#fff',backgroundSize: 'cover'}"      
         :class="{'page-before': option.index < currentPage,
                 'page-after': option.index > currentPage,
                 'page-current': option.index === currentPage}">

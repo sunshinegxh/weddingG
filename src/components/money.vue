@@ -15,18 +15,21 @@
             <div class="money-content-des-con">
             <div class="money-content-des-con-left">链接文档：</div>
             <div class="money-content-des-con-right">
-                <span @click="printing('PC')">《个人报销使用帮助-PC版》</span>
-                <span @click="printing('m')">《出差报销》</span>
-                <span @click="printing('m_mistake')">《报销改错》</span>
-                <span @click="printing('rules')">《其他细则补充说明》</span>
+                <span @click="printing('PC', '个人报销使用帮助')">《个人报销使用帮助-PC版》</span><br/>
+                <span @click="printing('m', '出差报销')">《出差报销》</span><br/>
+                <span @click="printing('m_mistake', '报销改错')">《报销改错》</span><br/>
+                <span @click="printing('rules', '其他细则补充说明')">《其他细则补充说明》</span>
             </div>
         </div>
         </div>
       </div>
+      <home @changePage="changePage"></home>
     </div>
 </template>
 
 <script>
+import Home from "./home";
+
 export default {
   name: "money",
   data() {
@@ -38,15 +41,20 @@ export default {
     };
   },
   methods: {
-    printing(con) {
+    changePage(index) {
+      this.$emit("changePage", index);
+    },
+    printing(con, cn) {
       if (window.appInterface) {
-        alert(`http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`);
         window.appInterface.call("urlDownload", {
           url: `http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`,
-          name: con
+          name: `${cn}.docx`
         });
       }
     }
+  },
+  components: {
+    Home
   }
 };
 </script>
@@ -72,7 +80,7 @@ export default {
       p {
         width: 35 * $px;
         height: 35 * $px;
-        line-height: 35 * $px;
+        line-height: 38 * $px;
         text-align: center;
         margin: 0;
         background: #faa746;

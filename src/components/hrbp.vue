@@ -13,7 +13,7 @@
         </div>
         <div class="hrbp-content-des">
           <h3>车辆管理</h3>
-          <p>打印填写<span @click="printing('promise')" class="und">《安全承诺书》</span>，手签相关内容；<br/>
+          <p>打印填写<span @click="printing('promise', '安全承诺书')" class="und">《安全承诺书》</span>，手签相关内容；<br/>
              车辆为员工<span>本人</span>，提交<span>行驶证复印件；</span><br/>
              车辆为员工<span>配偶</span>,提交<span>行驶证、结婚证复印件；</span><br/>
              车辆为员工<span>家属</span>,提交<span>行驶证、户口本复印件；</span>
@@ -65,10 +65,13 @@
           <p>营业时间：每周一、三、五10：00~17:00</p>
         </div>
       </div>
+      <home @changePage="changePage"></home>
     </div>
 </template>
 
 <script>
+import Home from "./home";
+
 export default {
   name: "hrbp",
   data() {
@@ -101,6 +104,9 @@ export default {
     };
   },
   methods: {
+    changePage(index) {
+      this.$emit("changePage", index);
+    },
     jump(text) {
       if (text === "erp") {
         location.href =
@@ -109,15 +115,17 @@ export default {
         location.href = "http://hr.intra.sina.com.cn/index.php/index/empl";
       }
     },
-    printing(con) {
+    printing(con, cn) {
       if (window.appInterface) {
-        alert(`http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`);
         window.appInterface.call("urlDownload", {
           url: `http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`,
-          name: con
+          name: `${cn}.docx`
         });
       }
     }
+  },
+  components: {
+    Home
   }
 };
 </script>
@@ -142,7 +150,7 @@ export default {
       p {
         width: 35 * $px;
         height: 35 * $px;
-        line-height: 35 * $px;
+        line-height: 38 * $px;
         text-align: center;
         margin: 0;
         background: #faa746;

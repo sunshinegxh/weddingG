@@ -7,6 +7,7 @@ import store from "./store";
 const app = {
   launch() {
     this.initRem();
+    this.script();
     Vue.use(Resource);
     new Vue({
       router,
@@ -26,6 +27,13 @@ const app = {
 
     win.addEventListener(evt, fn, false);
     doc.addEventListener("DOMContentLoaded", fn, false);
+  },
+  script() {
+    var head = document.getElementsByTagName("head")[0];
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://vpn.sina.com/res/my_m2/js/app-interface.js";
+    head.appendChild(script);
   }
 };
 

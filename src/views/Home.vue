@@ -10,7 +10,7 @@
       <span></span>
       <span></span>
     </div>
-    <div v-else>
+    <div class="aa" v-else>
       <div v-if="illegal" class="illegal">
         <div class="illegal-con" v-if="ticket">
           <img src="../assets/ticket.jpg" alt="">
@@ -55,10 +55,8 @@ export default {
         this.loading = false;
         let res = response.data;
         if (res.ok === 1) {
-          // console.log("fromKoudai:", res.data.fromKoudai);
-          // console.log("fromCPB:", res.data.fromCPB);
-          // this.ticket = !res.data.fromKoudai;
-          // this.login = !res.data.fromCPB;
+          this.ticket = !res.data.fromKoudai;
+          this.login = !res.data.fromCPB;
         } else {
           alert(res.msg);
         }
@@ -117,10 +115,12 @@ dt {
 ul {
   padding-left: 1em;
 }
-
+.aa {
+  height: 100%;
+}
 .illegal {
   height: 100%;
-  background: url("../assets/bg.jpg") no-repeat;
+  background: url("../assets/bg.jpg") no-repeat center center fixed;
   background-size: cover;
   overflow: hidden;
   text-align: center;
