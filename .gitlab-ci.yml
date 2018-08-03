@@ -19,7 +19,7 @@ deploy:
     - 'npm run deploy'
     - 'rm $CI_PROJECT_DIR/dist/index.html'
     - 'cat $CI_PROJECT_DIR/webpack-assets.json'
-    - 'push2cdn --m=h5_sinaimg_m --pre=v8 --src=$CI_PROJECT_DIR/dist'
+    - 'push2cdn --m=h5_sinaimg_m --pre=newbee --src=$CI_PROJECT_DIR/dist'
     - 'update_version'
   artifacts:
     paths:
