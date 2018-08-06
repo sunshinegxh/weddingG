@@ -14,7 +14,7 @@
       <div v-if="illegal" class="illegal">
         <div class="illegal-con" v-if="ticket">
           <img src="../assets/ticket.jpg" alt="">
-          <p>请使用"新浪口袋"扫码登陆</p>
+          <p>请使用"新浪口袋"扫码登录</p>
         </div>
         <div class="illegal-con" v-else>
           <img src="../assets/login.jpg" alt="">
@@ -63,7 +63,7 @@ export default {
         }
       })
       .catch(e => {
-        console.log(e);
+        document.write(e);
       });
   }
 };
