@@ -33,10 +33,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" type="text/css">
-@import "../common.scss";
-</style>
-<style>
+<style type="text/css">
 .page {
   overflow: hidden;
   position: fixed;
