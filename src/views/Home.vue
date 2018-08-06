@@ -56,8 +56,8 @@ export default {
         let res = response.data;
         if (res.ok === 1) {
           // 本地注释掉
-          this.ticket = !res.data.fromKoudai;
-          this.login = !res.data.fromCPB;
+          // this.ticket = !res.data.fromKoudai;
+          // this.login = !res.data.fromCPB;
         } else {
           alert(res.msg);
         }

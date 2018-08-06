@@ -29,6 +29,7 @@
 
 <script>
 import Home from "./home";
+import loadDown from "../assets/const";
 
 export default {
   name: "money",
@@ -47,7 +48,7 @@ export default {
     printing(con, cn) {
       if (window.appInterface) {
         window.appInterface.call("urlDownload", {
-          url: `http://html5.pages.intra.weibo.cn/newbee/docs/${con}.docx`,
+          url: `${loadDown}${con}.docx`,
           name: `${cn}.docx`
         });
       }
