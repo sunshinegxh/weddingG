@@ -14,8 +14,9 @@ deploy:
   tags:
     - HTML5
   only:
-   - tags@html5/newbee
+    - tags@html5/newbee
   script:
+    - 'yarn install'
     - 'npm run deploy'
     - 'rm $CI_PROJECT_DIR/dist/index.html'
     - 'cat $CI_PROJECT_DIR/webpack-assets.json'
