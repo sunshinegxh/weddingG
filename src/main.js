@@ -7,7 +7,7 @@ import store from "./store";
 const app = {
   launch() {
     this.initRem();
-    // this.script();
+    this.script();
     Vue.use(Resource);
     new Vue({
       router,
