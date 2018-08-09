@@ -1,13 +1,13 @@
 <template>
     <div>
         <page :currentPage="currentPage">
+          <read @changePage="changePage" :currentPage="currentPage"></read>
+        </page>
+        <page :currentPage="currentPage">
           <introduce></introduce>
         </page>
         <page :currentPage="currentPage">
-          <read @changePage="changePage"></read>
-        </page>
-        <page :currentPage="currentPage">
-          <lead @changePage="changePage"></lead>
+          <lead @changePage="changePage" :currentPage="currentPage"></lead>
         </page>
         <page :currentPage="currentPage">
           <good @changePage="changePage"></good>
@@ -58,6 +58,13 @@ export default {
       currentPage: 1,
       options: [
         {
+          background: "url(" + read + ") no-repeat center center fixed",
+          color: "#fff",
+          isCenter: true,
+          afterEnter: afterEnterAnimate,
+          beforeLeave: beforeLeaveAnimate
+        },
+        {
           // the color of background
           background: "url(" + intro + ") no-repeat center center fixed",
           // the color of text
@@ -67,13 +74,6 @@ export default {
           // the function before page show
           afterEnter: afterEnterAnimate,
           // the function after page show
-          beforeLeave: beforeLeaveAnimate
-        },
-        {
-          background: "url(" + read + ") no-repeat center center fixed",
-          color: "#fff",
-          isCenter: true,
-          afterEnter: afterEnterAnimate,
           beforeLeave: beforeLeaveAnimate
         },
         {
