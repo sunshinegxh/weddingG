@@ -1,12 +1,6 @@
 <template>
-    <div class="hrbp animate" ref="section4">
+    <div class="hrbp animate" ref="idx">
       <img src="../assets/hrbpTitle.png" alt="">
-      <!-- <div class="hrbp-content" v-for="(item, index) in desc" :key="index">
-        <div class="hrbp-content-idx">
-          <p>{{ index + 1 }}</p>
-        </div>
-        <div class="hrbp-content-des" v-html="item"></div>
-      </div> -->
       <div class="hrbp-content">
         <div class="hrbp-content-idx">
           <p>1</p>
@@ -65,16 +59,15 @@
           <p>营业时间：每周一、三、五10：00~17:00</p>
         </div>
       </div>
-      <home @changePage="changePage"></home>
     </div>
 </template>
 
 <script>
-import Home from "./home";
 import loadDown from "../assets/const";
 
 export default {
-  name: "hrbp",
+  name: "forth",
+  props: ["idx"],
   data() {
     return {
       desc: [
@@ -124,9 +117,6 @@ export default {
         });
       }
     }
-  },
-  components: {
-    Home
   }
 };
 </script>

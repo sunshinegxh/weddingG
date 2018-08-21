@@ -1,26 +1,8 @@
 <template>
     <div>
-        <page :currentPage="currentPage">
-          <read @changePage="changePage" :currentPage="currentPage"></read>
-        </page>
-        <page :currentPage="currentPage">
-          <introduce></introduce>
-        </page>
-        <page :currentPage="currentPage">
-          <lead @changePage="changePage" :currentPage="currentPage"></lead>
-        </page>
-        <page :currentPage="currentPage">
-          <good @changePage="changePage"></good>
-        </page>
-        <page :currentPage="currentPage">
-          <hrbp @changePage="changePage"></hrbp>
-        </page>
-        <page :currentPage="currentPage">
-          <money @changePage="changePage"></money>
-        </page>
-        <page :currentPage="currentPage">
-          <other @changePage="changePage"></other>
-        </page>
+      <page :currentPage="currentPage" v-for="(item, index) in indexData" :key="index">
+        <component :currentPage="currentPage" :idx="index+1" :is="isCom(+item.id)" :con="item"></component>
+      </page>
         <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
     </div>
 </template>
@@ -28,90 +10,32 @@
 <script>
 import Page from "../components/Page.vue";
 import PageController from "../components/PageController.vue";
-import Introduce from "../components/introduce.vue";
-import Read from "../components/read.vue";
-import Lead from "../components/lead.vue";
-import Good from "../components/good.vue";
-import Hrbp from "../components/hrbp.vue";
+import Cover from "../components/cover.vue";
+import First from "../components/first.vue";
+import Second from "../components/second.vue";
+import Third from "../components/third.vue";
+import Forth from "../components/forth.vue";
 import Money from "../components/money.vue";
 import Other from "../components/other.vue";
 
 // 页面进出动画
-function afterEnterAnimate($child) {
-  $child.$el
-    .querySelector(".animate")
-    .classList.remove("move-left", "move-right");
-}
-function beforeLeaveAnimate($child) {
-  let moveType = Math.random() > 0.5 ? "move-left" : "move-right";
-  $child.$el.querySelector(".animate").classList.add(moveType);
-}
-const intro = require("../assets/intro.jpg");
-const read = require("../assets/read.jpg");
-const leadall = require("../assets/leadall.jpg");
-const bg = require("../assets/bg.jpg");
+// function afterEnterAnimate($child) {
+//   $child.$el
+//     .querySelector(".animate")
+//     .classList.remove("move-left", "move-right");
+// }
+// function beforeLeaveAnimate($child) {
+//   let moveType = Math.random() > 0.5 ? "move-left" : "move-right";
+//   $child.$el.querySelector(".animate").classList.add(moveType);
+// }
 
 export default {
   name: "fullpage",
+  props: ["indexData"],
   data() {
     return {
       currentPage: 1,
-      options: [
-        {
-          background: "url(" + read + ") no-repeat center center fixed",
-          color: "#fff",
-          isCenter: true,
-          afterEnter: afterEnterAnimate,
-          beforeLeave: beforeLeaveAnimate
-        },
-        {
-          // the color of background
-          background: "url(" + intro + ") no-repeat center center fixed",
-          // the color of text
-          color: "#fff",
-          // is content center
-          isCenter: true,
-          // the function before page show
-          afterEnter: afterEnterAnimate,
-          // the function after page show
-          beforeLeave: beforeLeaveAnimate
-        },
-        {
-          background: "url(" + leadall + ") no-repeat center center fixed",
-          color: "#fff",
-          isCenter: true,
-          afterEnter: afterEnterAnimate,
-          beforeLeave: beforeLeaveAnimate
-        },
-        {
-          background: "url(" + bg + ") no-repeat center center fixed",
-          color: "#fff",
-          isCenter: true,
-          afterEnter: afterEnterAnimate,
-          beforeLeave: beforeLeaveAnimate
-        },
-        {
-          background: "url(" + bg + ") no-repeat center center fixed",
-          color: "#fff",
-          isCenter: true,
-          afterEnter: afterEnterAnimate,
-          beforeLeave: beforeLeaveAnimate
-        },
-        {
-          background: "url(" + bg + ") no-repeat center center fixed",
-          color: "#fff",
-          isCenter: true,
-          afterEnter: afterEnterAnimate,
-          beforeLeave: beforeLeaveAnimate
-        },
-        {
-          background: "url(" + bg + ") no-repeat center center fixed",
-          color: "#fff",
-          isCenter: true,
-          afterEnter: afterEnterAnimate,
-          beforeLeave: beforeLeaveAnimate
-        }
-      ],
+      options: [],
       controllerOption: {
         arrowsType: false,
         navbar: false,
@@ -124,7 +48,7 @@ export default {
   computed: {
     // 总page数
     pageNum() {
-      return this.options.length;
+      return this.indexData.length;
     }
   },
   methods: {
@@ -143,20 +67,46 @@ export default {
         typeof enterFunction === "function" &&
           enterFunction.call(this, this.$children[nextIndex]);
       });
+    },
+    isCom(val) {
+      switch (val) {
+        case 1:
+          return "cover";
+        case 2:
+          return "first";
+        case 3:
+          return "second";
+        case 4:
+          return "third";
+        case 5:
+          return "forth";
+      }
     }
   },
   components: {
     Page,
     PageController,
-    Introduce,
-    Read,
-    Lead,
-    Good,
-    Hrbp,
+    Cover,
+    First,
+    Second,
+    Third,
+    Forth,
     Money,
     Other
   },
-  created() {},
+  created() {
+    let arr = new Array();
+    let len = this.indexData.length;
+
+    for (let i = 0; i < len; i++) {
+      let obj = new Object();
+      obj.background = "#fff";
+      obj.color = "#fff";
+      obj.index = i + 1;
+      arr[i] = obj;
+    }
+    this.options = arr;
+  },
   mounted() {
     this.$children.forEach((child, index) => {
       // 动态设置各个page内的options

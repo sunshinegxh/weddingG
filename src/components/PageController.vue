@@ -1,10 +1,10 @@
 <template>
     <nav class="controller">
-        <button v-if="option.arrowsType" class="prev-btn" :class="{moving:option.arrowsType === 'animate'}" @click="changePage(prevIndex)"></button>
-        <ul v-if="option.navbar">
-            <li v-for="index in pageNum" @click="changePage(index)" :class="{current:option.highlight && index === currentPage}" :key="'controller-'+index" :data-index="index" class="controller-item"></li>
-        </ul>
-        <button v-if="option.arrowsType" class="next-btn" :class="{moving:option.arrowsType === 'animate'}" @click="changePage(nextIndex)"></button>
+      <button v-if="option.arrowsType" class="prev-btn" :class="{moving:option.arrowsType === 'animate'}" @click="changePage(prevIndex)"></button>
+      <ul v-if="option.navbar">
+        <li v-for="index in pageNum" @click="changePage(index)" :class="{current:option.highlight && index === currentPage}" :key="'controller-'+index" :data-index="index" class="controller-item"></li>
+      </ul>
+      <button v-if="option.arrowsType" class="next-btn" :class="{moving:option.arrowsType === 'animate'}" @click="changePage(nextIndex)"></button>
     </nav>
 </template>
 
