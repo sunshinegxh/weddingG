@@ -15,8 +15,6 @@ import First from "../components/first.vue";
 import Second from "../components/second.vue";
 import Third from "../components/third.vue";
 import Forth from "../components/forth.vue";
-import Money from "../components/money.vue";
-import Other from "../components/other.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -90,9 +88,7 @@ export default {
     First,
     Second,
     Third,
-    Forth,
-    Money,
-    Other
+    Forth
   },
   created() {
     let arr = new Array();

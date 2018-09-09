@@ -125,37 +125,6 @@ export default {
   animation-delay: 2.5s;
 }
 
-.to-show-2 {
-  -webkit-animation: toShow2 2s linear;
-  -moz-animation: toShow2 2s linear;
-  animation: toShow2 2s linear;
-}
-
-@-moz-keyframes toShow2 {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes toShow2 {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes toShow2 {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .from-bottom60 {
   -webkit-animation: fBtm60 2s forwards;
   -moz-animation: fBtm60 2s forwards;

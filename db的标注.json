@@ -1,9 +1,9 @@
 {
   // 页面主入口需要给我的数据
   "getIndex": {
-    "respCode": 0,
-    "respMsg": "请求数据成功",
-    "respData": [
+    "code": "0", // seccess 0000
+    "message": "请求数据成功",
+    "data": [
       {
         "id": 1, // 对应的封面页面
         "groom": "新郎",
@@ -49,7 +49,110 @@
           "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
           "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
         ]
+      },
+      {
+        "id": 6, // 致宾客页
+        "time": "2020/05/20 13:14",
+        "address": "北京朝阳区幸福街国际维也纳酒店66号88厅",
+        "goodsImg": [
+          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
+        ]
+      },
+      {
+        "id": 6, // 赴宴信息页
+        "goodsImg": [
+          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
+        ]
       }
     ]
+  },
+  // 赴宴宾客关系接口
+  "getRelative": {
+    "code": 0,
+    "message": "请求数据成功",
+    "data": {
+      "head": [
+        {
+          "relationClassify": 1,
+          "relationId": 1,
+          "relationName": "新娘的"
+        },
+        {
+          "relationClassify": 1,
+          "relationId": 2,
+          "relationName": "新郎的"
+        },
+        {
+          "relationClassify": 1,
+          "relationId": 3,
+          "relationName": "新娘父亲的"
+        },
+        {
+          "relationClassify": 1,
+          "relationId": 4,
+          "relationName": "新娘母亲的"
+        },
+        {
+          "relationClassify": 1,
+          "relationId": 5,
+          "relationName": "新郎父亲的"
+        },
+        {
+          "relationClassify": 1,
+          "relationId": 6,
+          "relationName": "新郎母亲的"
+        }
+      ],
+      "tail": [
+        {
+          "relationClassify": 2,
+          "relationId": 7,
+          "relationName": "亲戚"
+        },
+        {
+          "relationClassify": 2,
+          "relationId": 8,
+          "relationName": "朋友"
+        },
+        {
+          "relationClassify": 2,
+          "relationId": 9,
+          "relationName": "同学"
+        },
+        {
+          "relationClassify": 2,
+          "relationId": 10,
+          "relationName": "同事"
+        },
+        {
+          "relationClassify": 2,
+          "relationId": 11,
+          "relationName": "其他"
+        }
+      ]
+    }
+  },
+  // 提交赴宴信息接口
+  "post": {
+    "code": "0000",
+    "message": "success",
+    "data": {
+        "message": "添加成功",
+        "code": "0000",
+        "data": {
+            "visitorId": 20
+        }
+    }
+  },
+  // 弹幕信息
+  "danmnu": {
+    "code": "0000",
+    "message": "success",
+    "data": {
+        "message": "添加成功",
+        "code": "0000",
+        "data": ["", ""]
+    }
   }
 }
