@@ -1,122 +1,53 @@
 <template>
-    <div class="hrbp animate" ref="idx">
-      <img src="../assets/hrbpTitle.png" alt="">
-      <div class="hrbp-content">
-        <div class="hrbp-content-idx">
-          <p>1</p>
-        </div>
-        <div class="hrbp-content-des">
-          <h3>车辆管理</h3>
-          <p>打印填写<span @click="printing('promise', '安全承诺书')" class="und">《安全承诺书》</span>，手签相关内容；<br/>
-             车辆为员工<span>本人</span>，提交<span>行驶证复印件；</span><br/>
-             车辆为员工<span>配偶</span>,提交<span>行驶证、结婚证复印件；</span><br/>
-             车辆为员工<span>家属</span>,提交<span>行驶证、户口本复印件；</span>
-          </p>
-          <p>安全承诺书和车辆材料提交纸质版，钉在一起交至<span>部门助理处</span></p>
-          <p>访客车辆停放：提前一天报备，邮件发送访客姓名、电话、车型、车牌号，到访时间段，到访原因至部门助理邮箱</p>
-        </div>
-      </div>
-      <div class="hrbp-content">
-        <div class="hrbp-content-idx">
-          <p>2</p>
-        </div>
-        <div class="hrbp-content-des">
-          <h3>门禁/工牌卡补办</h3>
-          <p>门禁卡(考勤卡)补办：<span class="und" @click="jump('erp')">登录ERP-行政服务-新建-门禁卡补办申请</span></p>
-          <p>工牌卡(照片卡)补办：邮件发送补办需求至秦鹏<br/>
-            <span class="und"><a href="mailto:qinpeng@staff.sina.com.cn">（qinpeng@staff.sina.com.cn）</a></span>
-          </p>
-        </div>
-      </div>
-      <div class="hrbp-content">
-        <div class="hrbp-content-idx">
-          <p>3</p>
-        </div>
-        <div class="hrbp-content-des">
-          <h3>加入工会</h3>
-          <p>邮件发送“<span>姓名</span>”“<span>工号</span>”及<span>申请加入工会</span>至傅毅<br/>
-            <span class="und"><a href="mailto:fuyi@staff.sina.com.cn">（fuyi@staff.sina.com.cn）</a></span>
-          </p>
-        </div>
-      </div>
-      <div class="hrbp-content">
-        <div class="hrbp-content-idx">
-          <p>4</p>
-        </div>
-        <div class="hrbp-content-des">
-          <h3>人力资源相关</h3>
-          <p>可通过<span>ERP-MYHR-HR门户</span>中查询<br/>
-             链接：<span class="und" @click="jump('hr')">MY HR</span>
-          </p>
-        </div>
-      </div>
-      <div class="hrbp-content">
-        <div class="hrbp-content-idx">
-          <p>5</p>
-        </div>
-        <div class="hrbp-content-des">
-          <h3>健康中心</h3>
-          <p>营业时间：每周一、三、五10：00~17:00</p>
-        </div>
-      </div>
-    </div>
+  <div class="forth animate" ref="idx">
+    <span
+      :style="`background: url(${img1}) no-repeat;backgroundSize: cover`"
+      :class="{'from-right': isCurrent, 'delay': isCurrent}">
+    </span>
+    <span
+      :style="`background: url(${img2}) no-repeat;backgroundSize: cover`"
+      :class="{'to-show-2': isCurrent, 'delay3': isCurrent}">
+    </span>
+    <span
+      :style="`background: url(${img3}) no-repeat;backgroundSize: cover`"
+      :class="{'to-show-2': isCurrent, 'delay3': isCurrent}">
+    </span>
+    <span
+      :style="`background: url(${img4}) no-repeat;backgroundSize: cover`"
+      :class="{'from-left': isCurrent, 'delayP5': isCurrent}">
+    </span>
+    <img
+      src="../assets/page4_marry you.png"
+      :class="{'from-bottom200': isCurrent, 'delay1': isCurrent}"
+      alt="">
+    <img
+      src="../assets/page4_lovestory.png"
+      :class="{'from-left24': isCurrent, 'delayP15': isCurrent}"
+      alt="">
+  </div>
 </template>
 
 <script>
-import loadDown from "../assets/const";
-
 export default {
   name: "forth",
-  props: ["idx"],
+  props: ["idx", "con", "currentPage"],
+  watch: {
+    currentPage(newV) {
+      this.isCurrent = newV === this.idx;
+    }
+  },
   data() {
     return {
-      desc: [
-        `<h3>车辆管理</h3>
-          <p>打印填写<span class="und">《安全承诺书》</span>，手签相关内容；<br/>
-             车辆为员工<span>本人</span>，提交<span>行驶证复印件；</span><br/>
-             车辆为员工<span>配偶</span>,提交<span>行驶证、结婚证复印件；</span><br/>
-             车辆为员工<span>家属</span>,提交<span>行驶证、户口本复印件；</span>
-          </p>
-          <p>安全承诺书和车辆材料提交纸质版，钉在一起交至<span>部门助理处</span></p>
-          <p>访客车辆停放：提前一天报备，邮件发送访客姓名、电话、车型、车牌号，到访时间段，到访原 因至部门助理邮箱</p>`,
-        `<h3>门禁/工牌卡补办</h3>
-          <p>门禁卡(考勤卡)补办：<span class="und">登录ERP-行政服务-新建 -门禁卡补办申请</span></p>
-          <p>工牌卡(照片卡)补办：邮件发送补办需求至秦鹏<br/>
-            <span class="und">（qinpeng@staff.sina.com.cn）</span>
-          </p>`,
-        `<h3>加入工会</h3>
-          <p>邮件发送“<span>姓名</span>”“<span>工号</span>”及<span>申请加入工会</span>至傅毅<br/>
-            <span class="und">（fuyi@staff.sina.com.cn）</span>
-          </p>`,
-        `<h3>人力资源相关</h3>
-          <p>可通过<span>ERP-MYHR-HR门户</span>中查询<br/>
-             链接：<span class="und">MY HR</span>
-          </p>`,
-        `<h3>健康中心</h3>
-          <p>营业时间：每周一、三、五10：00~17:00</p>`
-      ]
+      isCurrent: false,
+      // img1: this.con.goodsImg[0],
+      // img2: this.con.goodsImg[1],
+      // img3: this.con.goodsImg[2],
+      // img4: this.con.goodsImg[3],
+      img1: require("../assets/page4_bg_up_left.png"),
+      img2: require("../assets/page4_bg_up_right.png"),
+      img3: require("../assets/page4_bg_down_left.png"),
+      img4: require("../assets/page4_bg_down_right.png")
     };
-  },
-  methods: {
-    changePage(index) {
-      this.$emit("changePage", index);
-    },
-    jump(text) {
-      if (text === "erp") {
-        location.href =
-          "http://oa.erp.sina.com.cn/workflow/index.php/queryForm/create_xz?currentMenuId=FE3B6A24-303C-43F9-A94A-76FA5F80C14A";
-      } else if (text === "hr") {
-        location.href = "http://hr.intra.sina.com.cn/index.php/index/empl";
-      }
-    },
-    printing(con, cn) {
-      if (window.appInterface) {
-        window.appInterface.call("urlDownload", {
-          url: `${loadDown}${con}.docx`,
-          name: `${cn}.docx`
-        });
-      }
-    }
   }
 };
 </script>
@@ -124,62 +55,110 @@ export default {
 <style lang="scss" type="text/css">
 @import "../common.scss";
 
-.hrbp {
-  img {
-    margin-top: 76 * $px;
-    width: 100%;
+.forth {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  span {
+    display: inline-block;
+    width: 50%;
+    height: 50vh;
   }
-  &-content {
-    font-size: 26 * $px;
-    display: flex;
-    padding-right: 60 * $px;
-    position: relative;
-    &-idx {
-      width: 35 * $px;
-      height: 100%;
-      margin: 0 24 * $px 0 49 * $px;
-      p {
-        width: 35 * $px;
-        height: 35 * $px;
-        line-height: 38 * $px;
-        text-align: center;
-        margin: 0;
-        background: #faa746;
-        border-radius: 100%;
-        font-weight: bold;
-      }
-    }
-    &-idx::after {
-      content: "";
-      top: 35 * $px;
-      bottom: 0px;
-      width: 2px;
-      left: 65 * $px;
-      background: #faa746;
-      position: absolute;
-    }
-    &-des {
-      flex: 1;
-      text-align: left;
-      h3 {
-        margin: 0 0 15 * $px 0;
-      }
-      p {
-        margin: 0 0 8 * $px 0;
-        span {
-          color: #ffdd20;
-        }
-      }
-    }
+  span:nth-of-type(1) {
+    transform: translateX(100%);
   }
-  &-content:nth-of-type(5) {
-    .hrbp-content-idx::after {
-      content: "";
-      top: 0;
-      bottom: 0;
-      width: 0;
-      position: absolute;
-    }
+  span:nth-of-type(2),
+  span:nth-of-type(3) {
+    opacity: 0;
+  }
+  span:nth-of-type(4) {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  img:nth-of-type(1) {
+    width: 180 * $px;
+    position: absolute;
+    left: 24 * $px;
+    top: 1200 * $px;
+  }
+  img:nth-of-type(2) {
+    width: 318 * $px;
+    position: absolute;
+    right: -2400 * $px;
+    bottom: 120 * $px;
+    opacity: 0;
+  }
+}
+.forth .delayP5 {
+  -moz-animation-delay: 0.5s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+.forth .delay1 {
+  -moz-animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+.forth .delayP15 {
+  -moz-animation-delay: 1.5s;
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+}
+.forth .delay3 {
+  -moz-animation-delay: 3s;
+  -webkit-animation-delay: 3s;
+  animation-delay: 3s;
+}
+
+.from-bottom200 {
+  -webkit-animation: fBtm200 2s forwards;
+  -moz-animation: fBtm200 2s forwards;
+  animation: fBtm200 2s forwards;
+}
+@-moz-keyframes fBtm200 {
+  0% {
+    top: 1200 * $px;
+    opacity: 0;
+  }
+  100% {
+    top: 200 * $px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fBtm200 {
+  0% {
+    top: 1200 * $px;
+    opacity: 0;
+  }
+  100% {
+    top: 200 * $px;
+    opacity: 1;
+  }
+}
+@keyframes fBtm200 {
+  0% {
+    top: 1200 * $px;
+    opacity: 0;
+  }
+  100% {
+    top: 200 * $px;
+    opacity: 1;
+  }
+}
+.from-left24 {
+  -webkit-animation: fLeft24 2s forwards;
+  -moz-animation: fLeft24 2s forwards;
+  animation: fLeft24 2s forwards;
+}
+@keyframes fLeft24 {
+  0% {
+    right: -2400 * $px;
+    opacity: 0;
+  }
+  100% {
+    right: 24 * $px;
+    opacity: 1;
   }
 }
 </style>

@@ -5,6 +5,7 @@
         :class="{'from-left': isCurrent}">
       </span>
       <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">
+        <!-- 在固定宽度下面 靠左显示 -->
         <p v-for="(item, index) in con.desc" :key="index">{{ item }}</p>
       </div>
       <span
@@ -69,78 +70,6 @@ export default {
   -moz-animation-delay: 2s;
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
-}
-
-.from-left {
-  -webkit-animation: fromL 2s forwards;
-  -moz-animation: fromL 2s forwards;
-  animation: fromL 2s forwards;
-}
-@-moz-keyframes fromL {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fromL {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes fromL {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.from-right {
-  -webkit-animation: fromR 2s forwards;
-  -moz-animation: fromR 2s forwards;
-  animation: fromR 2s forwards;
-}
-@-moz-keyframes fromR {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fromR {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes fromR {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 .scale01 {

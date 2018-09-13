@@ -15,7 +15,7 @@
 						<span><p>myHR@</p><p>5588</p></span>
 						<span>
 							<a href="tel:010-62675588">
-								<img src="../assets/phone.png" alt="">
+								<!-- <img src="../assets/phone.png" alt=""> -->
 							</a>
 						</span>
 					</div>
@@ -23,7 +23,7 @@
 						<span v-for="(item1, index1) in item.cont" :key="index1">{{ item1 }}</span>
 						<span>
 							<a :href="'tel:'+item.tel">
-								<img src="../assets/phone.png" alt="">
+								<!-- <img src="../assets/phone.png" alt=""> -->
 							</a>
 						</span>
 					</div>
