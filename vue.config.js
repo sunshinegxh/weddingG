@@ -2,6 +2,12 @@ module.exports = {
   lintOnSave: true,
   productionSourceMap: false,
   devServer: {
-    disableHostCheck: true
+    disableHostCheck: true,
+    proxy: {
+      "/()": {
+        target: "http://47.105.43.207:81/",
+        secure: false
+      }
+    }
   }
 };
