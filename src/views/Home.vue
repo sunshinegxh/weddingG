@@ -11,13 +11,11 @@
       <span></span>
     </div>
     <full-page v-else :indexData="indexData"></full-page>
-    <button data-html2canvas-ignore="true" style="height: 100px; position: relative; z-index: 1000" @click="shotScreen">这里是截屏按钮</button>
   </div>
 </template>
 
 <script>
 import fullPage from "./fullpage.vue";
-import html2canvas from "html2canvas";
 
 export default {
   name: "app",
@@ -27,27 +25,7 @@ export default {
       indexData: []
     };
   },
-  methods: {
-    shotScreen() {
-      html2canvas(document.body, {
-        proxy: true,
-        useCORS: true,
-        backgroundColor: "#fff",
-        width: window.innerWidth / window.devicePixelRatio,
-        height: window.innerHeight / window.devicePixelRatio
-      }).then(function(canvas) {
-        document.body.appendChild(canvas);
-        // var link = document.createElement('a');
-        // link.href = canvas.toDataURL('image/png');
-        // link.download = 'myChart.png';
-        // link.click()
-        var image = new Image();
-        image.src = canvas.toDataURL("image/png");
-        document.body.appendChild(image);
-        return image;
-      });
-    }
-  },
+  methods: {},
   components: {
     fullPage
   },

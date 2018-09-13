@@ -1,5 +1,6 @@
 <template>
     <div class="cover animate shot_pic" ref="`section${idx}`">
+      <shot-screen></shot-screen>
       <span class="cover-bg to-show-2" :class="{done:loaded}">
         <div class="cover-bg-white from-bottom60 delayP5"></div>
         <img class="from-right30 delay1" src="../assets/cover_wedding.png" alt="">
@@ -13,6 +14,8 @@
 </template>
 
 <script>
+import shotScreen from "./ShotScreen.vue";
+
 export default {
   name: "cover",
   props: ["idx", "con"],
@@ -21,6 +24,9 @@ export default {
       current: 0,
       loaded: false
     };
+  },
+  components: {
+    shotScreen
   },
   created() {
     console.log(this.con);
