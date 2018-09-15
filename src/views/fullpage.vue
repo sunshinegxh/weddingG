@@ -15,6 +15,7 @@ import First from "../components/first.vue";
 import Second from "../components/second.vue";
 import Third from "../components/third.vue";
 import Forth from "../components/forth.vue";
+import Guide from "../components/guide.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -78,6 +79,8 @@ export default {
           return "third";
         case 5:
           return "forth";
+        case 6:
+          return "guide";
       }
     }
   },
@@ -88,7 +91,8 @@ export default {
     First,
     Second,
     Third,
-    Forth
+    Forth,
+    Guide
   },
   created() {
     let arr = new Array();

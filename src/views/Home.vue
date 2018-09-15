@@ -11,27 +11,67 @@
       <span></span>
     </div>
     <full-page v-else :indexData="indexData"></full-page>
+    <!-- <shot-screen></shot-screen> -->
+    <!-- 只有封面有编辑按钮 每个页面都有上传图片的按钮 -->
+    <img
+      src="../assets/invite_ic_pic.png"
+      class="invite_ic_pic"
+      v-if="edit"
+      alt="">
+    <img
+      src="../assets/invite_ic_edit.png"
+      class="edit"
+      v-if="edit"
+      @click="editNative"
+      alt="">
   </div>
 </template>
 
 <script>
 import fullPage from "./fullpage.vue";
+import shotScreen from "../components/ShotScreen";
 
 export default {
   name: "app",
   data() {
     return {
       loading: true,
-      indexData: []
+      indexData: [],
+      edit: false,
+      cardId: 0,
+      token: ""
+      // musicNativeUrl: ""
     };
   },
-  methods: {},
   components: {
-    fullPage
+    fullPage,
+    shotScreen
+  },
+  computed: {
+    musicNativeUrl() {
+      return localStorage.getItem("musicNativeUrl");
+    }
+  },
+  watch: {
+    musicNativeUrl(newV, oldV) {
+      alert(newV + oldV);
+    }
   },
   created() {
+    alert("created");
+    this.edit = +this.$route.query.edit === 1;
+    this.cardId = +this.$route.query.cardId;
+    this.token = this.$route.query.token;
+    // this.musicNativeUrl = localStorage.getItem("musicNativeUrl");
+    // alert("musicNativeUrl:" + this.musicNativeUrl);
     this.$http
-      .get("http://localhost:3000/getIndex")
+      .get("http://192.168.0.134:3000/getIndex")
+      // .get("http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg", {
+      //   params: {
+      //     cardId: this.cardId,
+      //     token: this.token
+      //   }
+      // })
       .then(response => {
         this.loading = false;
         let res = response.data;
@@ -45,6 +85,22 @@ export default {
       .catch(e => {
         document.write(e);
       });
+  },
+  methods: {
+    editNative() {
+      let self = this;
+      const bridge = window.Android;
+      function toEditPage() {
+        window.Android.toEditPage(self.cardId);
+      }
+      if (bridge) {
+        toEditPage();
+      } else {
+        document.addEventListener("Android", () => {
+          toEditPage();
+        });
+      }
+    }
   }
 };
 </script>
@@ -56,6 +112,24 @@ export default {
   height: 100%;
   width: 100%;
   background: #3243c7;
+  .edit {
+    width: 112 * $px;
+    height: 112 * $px;
+    position: fixed;
+    bottom: 248 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic {
+    width: 112 * $px;
+    height: 112 * $px;
+    position: fixed;
+    top: 612 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
 }
 
 /* 下面的是与fullPage无关的样式 */
