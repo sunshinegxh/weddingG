@@ -30,11 +30,11 @@ import Guide from "../components/guide.vue";
 
 export default {
   name: "fullpage",
-  // props: ["indexData", "currentPage"],
-  props: ["indexData"],
+  props: ["indexData", "currentPage"],
+  // props: ["indexData"],
   data() {
     return {
-      currentPage: 1,
+      // currentPage: 1,
       options: [],
       controllerOption: {
         arrowsType: false,
