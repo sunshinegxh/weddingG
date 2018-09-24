@@ -16,6 +16,7 @@ import Second from "../components/second.vue";
 import Third from "../components/third.vue";
 import Forth from "../components/forth.vue";
 import Guide from "../components/guide.vue";
+import thirdCover from "../components/third/cover.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -71,7 +72,7 @@ export default {
     isCom(val) {
       switch (val) {
         case 1:
-          return "cover";
+          return "thirdCover";
         case 2:
           return "first";
         case 3:
@@ -93,7 +94,8 @@ export default {
     Second,
     Third,
     Forth,
-    Guide
+    Guide,
+    thirdCover
   },
   created() {
     let arr = new Array();

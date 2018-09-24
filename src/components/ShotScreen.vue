@@ -25,11 +25,10 @@ export default {
         link.href = shotScreen;
         link.download = "shotScreen.png";
         link.click();
-        self.uploadShotScreen(shotScreen);
         // var image = new Image();
-        // image.src = canvas.toDataURL("image/png");
+        // image.src = "http://cued.xunlei.com/demos/publ/img/P_006.jpg"
         // document.body.appendChild(image);
-        // return image;
+        self.uploadShotScreen(shotScreen);
       });
     },
     uploadShotScreen(img) {
@@ -37,12 +36,13 @@ export default {
       data.append("cardId", 1);
       data.append("pageId", 1);
       data.append("file", img);
+      console.log(data);
       this.$http
         .post(
           "http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg?cardId=1&pageId=1",
           data,
           {
-            headers: { "Content-Type": "multipart/form-data" }
+            "Content-Type": "multipart/form-data"
           }
         )
         .then(response => {

@@ -13,12 +13,10 @@ function cleanRequest(req) {
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = null;
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-axios.defaults.headers.post["Content-Type"] =
-  "application/x-www-form-urlencoded";
+// axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 let ajax = {};
 ajax.install = function(Vue) {
-  console.log("jsjjsjsj");
   axios.defaults.baseURL = location.protocol + "//47.105.43.207:80/()/banhunli";
 
   Vue.prototype.$http = axios;
