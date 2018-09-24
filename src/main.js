@@ -4,9 +4,9 @@ import Resource from "vue-resource";
 import router from "./router";
 import store from "./store";
 
-// import ajax from "./libs/ajax";
+import ajax from "./libs/ajax";
 import jssdk from "./libs/jssdk";
-// Vue.use(ajax);
+Vue.use(ajax);
 Vue.use(jssdk);
 
 const app = {

@@ -17,13 +17,15 @@ export default {
           isSystem: 1,
           musicId: 2,
           musicName: "love me tender2",
-          musicUrl: "music/system/love me tender.mp3"
+          musicUrl:
+            "https://96.f.1ting.com/5b9cc88f/40a8d52b660b6d22355decefbc988ba3/zzzzzmp3/2013lDec/16W/16chenglin/02.mp3"
         },
         {
           isSystem: 2,
           musicId: 3,
           musicName: "love me tender3",
-          musicUrl: "music/system/love me tender.mp3"
+          musicUrl:
+            "https://96.f.1ting.com/5b9cc88f/40a8d52b660b6d22355decefbc988ba3/zzzzzmp3/2013lDec/16W/16chenglin/02.mp3"
         }
       ],
       cur: {}

@@ -18,11 +18,8 @@ axios.defaults.headers.post["Content-Type"] =
 
 let ajax = {};
 ajax.install = function(Vue) {
-  // axios.defaults.baseURL = location.protocol + '//top.star.weibo.com';
-  // if (ENV === 'development') {
-  //   axios.defaults.baseURL = 'https://top.star.weibo.com';
-  //   axios.defaults.baseURL = 'http://top.star.weibo.com';
-  // }
+  console.log("jsjjsjsj");
+  axios.defaults.baseURL = location.protocol + "//47.105.43.207:80/()/banhunli";
 
   Vue.prototype.$http = axios;
   Vue.http = axios;
@@ -38,10 +35,10 @@ ajax.install = function(Vue) {
         cleanRequest(body);
         if (body.append) {
           // formdata
-          body.append("st", window.st);
+          body.append("st", window.config.st);
         } else {
           // 普通表单
-          body.st = window.st;
+          body.st = window.config.st;
           request.data = qs.stringify(body);
         }
       }

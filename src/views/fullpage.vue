@@ -1,7 +1,7 @@
 <template>
     <div>
       <page :currentPage="currentPage" v-for="(item, index) in indexData" :key="index">
-        <component :currentPage="currentPage" :idx="index+1" :is="isCom(+item.id)" :con="item"></component>
+        <component :currentPage="currentPage" :idx="index+1" :is="isCom(+item.templatePageId)" :con="item"></component>
       </page>
         <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
     </div>
@@ -30,6 +30,7 @@ import Guide from "../components/guide.vue";
 
 export default {
   name: "fullpage",
+  // props: ["indexData", "currentPage"],
   props: ["indexData"],
   data() {
     return {

@@ -21,8 +21,35 @@ export default {
       current: 0
     };
   },
-  created() {},
+  created() {
+    window.setInfo = this.setInfo;
+  },
   methods: {
+    setInfo() {
+      alert("refresh");
+      this.$http
+        .get("http://192.168.0.134:3000/getIndex")
+        // .post("/card/getInvitationsInfo.gg", {
+        //   params: {
+        //     pageNo: 1,
+        //     pageSize: 20
+        //   }
+        // })
+        .then(response => {
+          // this.loading = false;
+          console.log(response);
+          // let res = response.data;
+          // if (res.respCode === 0) {
+          //   // 本地注释掉
+          //   this.indexData = res.respData;
+          // } else {
+          //   alert(res.respMsg);
+          // }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
     changePage(index) {
       this.$emit("changePage", index);
     },
