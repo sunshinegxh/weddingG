@@ -1,6 +1,6 @@
 <template>
   <div >
-    <input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="upload($event)"/>
+    <input enctype="multipart/form-data" class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="upload($event)"/>
   </div>
 </template>
 

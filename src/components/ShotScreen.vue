@@ -25,6 +25,7 @@ export default {
         link.href = shotScreen;
         link.download = "shotScreen.png";
         link.click();
+        shotScreen = require("../assets/music.png");
         self.uploadShotScreen(shotScreen);
         // var image = new Image();
         // image.src = canvas.toDataURL("image/png");
@@ -36,7 +37,9 @@ export default {
       let data = new FormData();
       data.append("cardId", 1);
       data.append("pageId", 1);
+      console.log(img);
       data.append("file", img);
+      // return;
       this.$http
         .post(
           "http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg?cardId=1&pageId=1",

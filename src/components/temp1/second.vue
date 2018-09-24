@@ -1,6 +1,6 @@
 <template>
   <div class="second animate" ref="idx">
-    <img src="../assets/page2_lovestory.png" alt="">
+    <img src="../../assets/page2_lovestory.png" alt="">
     <span
       :style="`background: url(${img1}) no-repeat;backgroundSize: contain;`"
       :class="{'from-top': isCurrent}">
@@ -31,16 +31,16 @@ export default {
       // img1: this.con.goodsImg[0],
       // img2: this.con.goodsImg[1],
       // img3: this.con.goodsImg[2],
-      img1: require("../assets/page2_bg_up.png"),
-      img2: require("../assets/page2_bg_down_left.png"),
-      img3: require("../assets/page2_bg_down_right.png")
+      img1: require("../../assets/page2_bg_up.png"),
+      img2: require("../../assets/page2_bg_down_left.png"),
+      img3: require("../../assets/page2_bg_down_right.png")
     };
   }
 };
 </script>
 
 <style lang="scss" type="text/css">
-@import "../common.scss";
+@import "../../common.scss";
 
 .second {
   position: relative;

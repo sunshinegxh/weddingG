@@ -17,10 +17,10 @@ export default {
 </script>
 
 <style lang="scss" type="text/css">
-@import "../common.scss";
+@import "../../common.scss";
 
 .home {
-  background: url("../assets/home.png") no-repeat;
+  background: url("../../assets/home.png") no-repeat;
   background-size: 100%;
   width: 50 * $px;
   height: 50 * $px;

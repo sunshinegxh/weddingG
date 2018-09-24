@@ -18,7 +18,6 @@ axios.defaults.headers.post["Content-Type"] =
 
 let ajax = {};
 ajax.install = function(Vue) {
-  console.log("jsjjsjsj");
   axios.defaults.baseURL = location.protocol + "//47.105.43.207:80/()/banhunli";
 
   Vue.prototype.$http = axios;

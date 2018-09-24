@@ -17,11 +17,11 @@
       :class="{'from-left': isCurrent, 'delayP5': isCurrent}">
     </span>
     <img
-      src="../assets/page4_marry you.png"
+      src="../../assets/page4_marry you.png"
       :class="{'from-bottom200': isCurrent, 'delay1': isCurrent}"
       alt="">
     <img
-      src="../assets/page4_lovestory.png"
+      src="../../assets/page4_lovestory.png"
       :class="{'from-left24': isCurrent, 'delayP15': isCurrent}"
       alt="">
   </div>
@@ -43,17 +43,17 @@ export default {
       // img2: this.con.goodsImg[1],
       // img3: this.con.goodsImg[2],
       // img4: this.con.goodsImg[3],
-      img1: require("../assets/page4_bg_up_left.png"),
-      img2: require("../assets/page4_bg_up_right.png"),
-      img3: require("../assets/page4_bg_down_left.png"),
-      img4: require("../assets/page4_bg_down_right.png")
+      img1: require("../../assets/page4_bg_up_left.png"),
+      img2: require("../../assets/page4_bg_up_right.png"),
+      img3: require("../../assets/page4_bg_down_left.png"),
+      img4: require("../../assets/page4_bg_down_right.png")
     };
   }
 };
 </script>
 
 <style lang="scss" type="text/css">
-@import "../common.scss";
+@import "../../common.scss";
 
 .forth {
   position: relative;

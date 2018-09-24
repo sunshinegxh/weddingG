@@ -10,12 +10,12 @@
 <script>
 import Page from "../components/Page.vue";
 import PageController from "../components/PageController.vue";
-import Cover from "../components/cover.vue";
-import First from "../components/first.vue";
-import Second from "../components/second.vue";
-import Third from "../components/third.vue";
-import Forth from "../components/forth.vue";
-import Guide from "../components/guide.vue";
+import Cover1 from "../components/temp1/cover.vue";
+import First1 from "../components/temp1/first.vue";
+import Second1 from "../components/temp1/second.vue";
+import Third1 from "../components/temp1/third.vue";
+import Forth1 from "../components/temp1/forth.vue";
+import Guide1 from "../components/temp1/guide.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -71,29 +71,29 @@ export default {
     isCom(val) {
       switch (val) {
         case 1:
-          return "cover";
+          return "cover1";
         case 2:
-          return "first";
+          return "first1";
         case 3:
-          return "second";
+          return "second1";
         case 4:
-          return "third";
+          return "third1";
         case 5:
-          return "forth";
+          return "forth1";
         case 6:
-          return "guide";
+          return "guide1";
       }
     }
   },
   components: {
     Page,
     PageController,
-    Cover,
-    First,
-    Second,
-    Third,
-    Forth,
-    Guide
+    Cover1,
+    First1,
+    Second1,
+    Third1,
+    Forth1,
+    Guide1
   },
   created() {
     let arr = new Array();
