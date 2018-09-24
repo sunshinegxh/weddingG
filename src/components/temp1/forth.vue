@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: "forth",
+  name: "forth1",
   props: ["idx", "con", "currentPage"],
   watch: {
     currentPage(newV) {

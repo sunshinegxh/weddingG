@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "third",
+  name: "third1",
   props: ["idx", "con", "currentPage"],
   watch: {
     currentPage(newV) {

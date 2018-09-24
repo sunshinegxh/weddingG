@@ -1,11 +1,12 @@
 <template>
-  <div class="guide animate" ref="`section${idx}`">
-    <span :class="{'guide-bg': true, 'to-show-2': isCurrent}">
-      <div :class="{'guide-bg-white': true, 'from-bottomCenter': isCurrent}">
-        <img src="../../assets/location_welcome.png" :class="{'from-topG': isCurrent, 'delayP5': isCurrent}" alt="">
-        <img src="../../assets/location.jpg" :class="{'scale21': isCurrent, 'delayP15': isCurrent}" alt="">
+  <div class="info animate" ref="`section${idx}`">
+    <span :class="{'info-bg': true}">
+      <div :class="{'info-bg-white': true}">
+        <img src="../../assets/location_welcome.png" alt="">
+        <p>为了方便新人，请填写您的赴宴信息</p>
+        <!-- <img src="../../assets/location.jpg" :class="{'scale21': isCurrent, 'delayP15': isCurrent}" alt="">
         <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">{{ con.extra.address}}</div>
-        <div :class="{'scale01': isCurrent, 'delayP25': isCurrent}">{{ con.extra.time }}</div>
+        <div :class="{'scale01': isCurrent, 'delayP25': isCurrent}">{{ con.extra.time }}</div> -->
       </div>
     </span>
   </div>
@@ -13,7 +14,7 @@
 
 <script>
 export default {
-  name: "guide1",
+  name: "info1",
   props: ["idx", "con", "currentPage"],
   watch: {
     currentPage(newV) {
@@ -31,7 +32,7 @@ export default {
 
 <style lang="scss" type="text/css">
 @import "../../common.scss";
-.guide {
+.info {
   position: relative;
   width: 100%;
   height: 100%;
@@ -40,7 +41,7 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background: url("../../assets/location_bg.png") no-repeat;
+    background: url("../../assets/page4_bg_down_left.png") no-repeat;
     background-size: 100%;
     &-white {
       color: #8eb559;
@@ -49,15 +50,23 @@ export default {
       height: 862 * $px;
       background: #fff;
       position: absolute;
-      top: 1000px;
+      top: 50%;
+      // top: 1000px;
       left: 50%;
       margin-left: -351 * $px;
       margin-top: -431 * $px;
       img:nth-of-type(1) {
         position: relative;
-        top: -1000px;
+        top: 0;
+        // top: -1000px;
         width: 100%;
         height: 250 * $px;
+      }
+      p {
+        text-align: center;
+        color: #999999;
+        font-size: 32 * $px;
+        margin: 0;
       }
       img:nth-of-type(2) {
         opacity: 0;

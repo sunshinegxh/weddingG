@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "second",
+  name: "info1",
   props: ["idx", "con", "currentPage"],
   watch: {
     currentPage(newV) {

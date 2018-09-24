@@ -3,7 +3,7 @@
       <page :currentPage="currentPage" v-for="(item, index) in indexData" :key="index">
         <component :currentPage="currentPage" :idx="index+1" :is="isCom(+item.templatePageId)" :con="item"></component>
       </page>
-        <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
+      <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
     </div>
 </template>
 
@@ -16,6 +16,7 @@ import Second1 from "../components/temp1/second.vue";
 import Third1 from "../components/temp1/third.vue";
 import Forth1 from "../components/temp1/forth.vue";
 import Guide1 from "../components/temp1/guide.vue";
+import Info1 from "../components/temp1/info.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -82,6 +83,8 @@ export default {
           return "forth1";
         case 6:
           return "guide1";
+        case 7:
+          return "info1";
       }
     }
   },
@@ -93,7 +96,8 @@ export default {
     Second1,
     Third1,
     Forth1,
-    Guide1
+    Guide1,
+    Info1
   },
   created() {
     let arr = new Array();

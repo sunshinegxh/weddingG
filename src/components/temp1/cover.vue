@@ -1,7 +1,7 @@
 <template>
   <div class="cover animate" ref="`section${idx}`">
     <shot-screen></shot-screen>
-    <!-- <upload-image></upload-image> -->
+    <upload-image></upload-image>
     <span class="cover-bg to-show-2">
       <div class="cover-bg-white from-bottom60 delayP5"></div>
       <img class="from-right30 delay1" src="../../assets/cover_wedding.png" alt="">
@@ -16,10 +16,10 @@
 
 <script>
 import shotScreen from "..//ShotScreen.vue";
-// import uploadImage from "./UploadImage";
+import uploadImage from "../UploadImage";
 
 export default {
-  name: "cover",
+  name: "cover1",
   props: ["idx", "con", "currentPage"],
   data() {
     return {
@@ -28,8 +28,8 @@ export default {
     };
   },
   components: {
-    shotScreen
-    // uploadImage
+    shotScreen,
+    uploadImage
   },
   created() {
     window.setInfo = this.setInfo;
