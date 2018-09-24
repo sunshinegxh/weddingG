@@ -10,41 +10,102 @@
       <span></span>
       <span></span>
     </div>
-    <full-page v-else :indexData="indexData"></full-page>
+    <full-page v-else :indexData="indexData" :currentPage="currentPage"></full-page>
+    <shot-screen></shot-screen>
+    <!-- 只有封面有编辑按钮 每个页面都有上传图片的按钮 -->
+    <!-- 接口请求 跨域问题 -->
+    <audio class="invite_music" :src="musicNativeUrl" controls="controls" preload id="music1"></audio>
+    <img
+      src="../assets/invite_ic_pic.png"
+      class="invite_ic_pic"
+      v-if="edit"
+      alt="">
+    <img
+      src="../assets/invite_ic_edit.png"
+      class="edit"
+      v-if="edit"
+      @click="editNative"
+      alt="">
   </div>
 </template>
 
 <script>
 import fullPage from "./fullpage.vue";
+import shotScreen from "../components/ShotScreen";
 
 export default {
   name: "app",
   data() {
     return {
       loading: true,
-      indexData: []
+      indexData: [],
+      edit: false,
+      cardId: 0,
+      token: "",
+      musicNativeUrl: "",
+      currentPage: 1
     };
   },
-  methods: {},
   components: {
-    fullPage
+    fullPage,
+    shotScreen
   },
   created() {
-    this.$http
-      .get("http://localhost:3000/getIndex")
-      .then(response => {
-        this.loading = false;
-        let res = response.data;
-        if (res.respCode === 0) {
-          // 本地注释掉
-          this.indexData = res.respData;
-        } else {
-          alert(res.respMsg);
-        }
-      })
-      .catch(e => {
-        document.write(e);
-      });
+    this.edit = +this.$route.query.edit === 1;
+    this.cardId = +this.$route.query.cardId;
+    this.cardId = 16;
+    window.setMusic = this.setMusic;
+    window.refreshPage = this.refreshPage;
+    this.getIndexInfo();
+  },
+  methods: {
+    getIndexInfo() {
+      this.$http
+        // .get("http://192.168.0.134:3000/getIndex")
+        .post(
+          "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
+          {
+            cardId: this.cardId
+          }
+        )
+        .then(response => {
+          this.loading = false;
+          let res = response.body.data;
+          console.log(res.pageList);
+          if (response.body.code === "0000") {
+            this.indexData = res.pageList;
+          } else {
+            console.log("res.respCode", res.message);
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
+    setMusic(params) {
+      alert("this.musicNativeUrl:" + params);
+      this.musicNativeUrl = params;
+      alert("this.musicNativeUrl:" + this.musicNativeUrl);
+    },
+    refreshPage(curPage) {
+      this.getIndexInfo();
+      this.currentPage = curPage;
+      // 定位到倒数第四页 currentpage  curPage
+    },
+    editNative() {
+      let self = this;
+      const bridge = window.Android;
+      function toEditPage() {
+        window.Android.toEditPage(self.cardId);
+      }
+      if (bridge) {
+        toEditPage();
+      } else {
+        document.addEventListener("Android", () => {
+          toEditPage();
+        });
+      }
+    }
   }
 };
 </script>
@@ -56,6 +117,32 @@ export default {
   height: 100%;
   width: 100%;
   background: #3243c7;
+  .invite_music {
+    width: 64 * $px;
+    height: 64 * $px;
+    position: fixed;
+    top: 52 * $px;
+    right: 24 * $px;
+    z-index: 1000;
+  }
+  .edit {
+    width: 112 * $px;
+    height: 112 * $px;
+    position: fixed;
+    bottom: 248 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic {
+    width: 112 * $px;
+    height: 112 * $px;
+    position: fixed;
+    top: 612 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
 }
 
 /* 下面的是与fullPage无关的样式 */

@@ -1,7 +1,7 @@
 <template>
     <div>
       <page :currentPage="currentPage" v-for="(item, index) in indexData" :key="index">
-        <component :currentPage="currentPage" :idx="index+1" :is="isCom(+item.id)" :con="item"></component>
+        <component :currentPage="currentPage" :idx="index+1" :is="isCom(+item.templatePageId)" :con="item"></component>
       </page>
         <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
     </div>
@@ -15,6 +15,7 @@ import First from "../components/first.vue";
 import Second from "../components/second.vue";
 import Third from "../components/third.vue";
 import Forth from "../components/forth.vue";
+import Guide from "../components/guide.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -29,6 +30,7 @@ import Forth from "../components/forth.vue";
 
 export default {
   name: "fullpage",
+  // props: ["indexData", "currentPage"],
   props: ["indexData"],
   data() {
     return {
@@ -78,6 +80,8 @@ export default {
           return "third";
         case 5:
           return "forth";
+        case 6:
+          return "guide";
       }
     }
   },
@@ -88,7 +92,8 @@ export default {
     First,
     Second,
     Third,
-    Forth
+    Forth,
+    Guide
   },
   created() {
     let arr = new Array();

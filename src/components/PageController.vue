@@ -93,9 +93,9 @@ export default {
     window.addEventListener("touchstart", function(event) {
       start = event.touches[0].clientY;
     });
-    window.addEventListener("touchmove", function(event) {
-      event.preventDefault();
-    });
+    // window.addEventListener("touchmove", function(event) {
+    //   event.preventDefault();
+    // });
     window.addEventListener("touchend", function(event) {
       let spacing = event.changedTouches[0].clientY - start;
       let direction;

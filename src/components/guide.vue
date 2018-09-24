@@ -1,64 +1,37 @@
 <template>
-  <div class="cover animate" ref="`section${idx}`">
-    <shot-screen></shot-screen>
-    <span class="cover-bg to-show-2">
-      <div class="cover-bg-white from-bottom60 delayP5"></div>
-      <img class="from-right30 delay1" src="../assets/cover_wedding.png" alt="">
-      <p class="from-right30 delayP15">{{ con.groom }}</p>
+  <div class="guide animate" ref="`section${idx}`">
+    <span class="guide-bg">
+      <div class="guide-bg-white">
+        <img src="../assets/location_welcome.png" alt="">
+        <img src="../assets/map.jpg" alt="">
+      </div>
+      <!-- <p class="from-right30 delayP15">{{ con.groom }}</p>
       <p class="from-right30 delayP15">＆</p>
       <p class="from-right30 delayP15">{{ con.bride }}</p>
       <span class="from-right30 delay2">{{ con.time }}</span>
-      <span class="from-right30 delayP25">{{ con.address}}</span>
+      <span class="from-right30 delayP25">{{ con.address}}</span> -->
     </span>
   </div>
 </template>
 
 <script>
-import shotScreen from "./ShotScreen.vue";
-
 export default {
-  name: "cover",
+  name: "guide",
   props: ["idx", "con"],
   data() {
     return {
-      current: 0,
-      loaded: false
+      current: 0
     };
   },
-  components: {
-    shotScreen
-  },
-  created() {
-    window.setInfo = this.setInfo;
-  },
+  created() {},
   methods: {
-    setInfo() {
-      alert("refresh");
-      this.$http
-        .get("http://192.168.0.134:3000/getIndex")
-        // .post("/card/getInvitationsInfo.gg", {
-        //   params: {
-        //     pageNo: 1,
-        //     pageSize: 20
-        //   }
-        // })
-        .then(response => {
-          // this.loading = false;
-          console.log(response);
-          // let res = response.data;
-          // if (res.respCode === 0) {
-          //   // 本地注释掉
-          //   this.indexData = res.respData;
-          // } else {
-          //   alert(res.respMsg);
-          // }
-        })
-        .catch(e => {
-          document.write(e);
-        });
-    },
     changePage(index) {
       this.$emit("changePage", index);
+      // let music = 'jjjj';
+
+      // window.aa = function(params) {
+      //   return music
+      // }
     },
     comClass() {
       return {
@@ -72,7 +45,7 @@ export default {
 
 <style lang="scss" type="text/css">
 @import "../common.scss";
-.cover {
+.guide {
   position: relative;
   width: 100%;
   height: 100%;
@@ -81,53 +54,24 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background: url("../assets/cover_bg.png") no-repeat;
+    background: url("../assets/location_bg.png") no-repeat;
     background-size: 100%;
-    overflow: hidden;
     &-white {
-      width: 410 * $px;
-      height: 676 * $px;
+      width: 95%;
+      height: 750 * $px;
       background: #fff;
       position: absolute;
-      left: 36 * $px;
-      bottom: -1000px;
-    }
-    img {
-      position: absolute;
-      top: 610 * $px;
-      width: 482 * $px;
-      opacity: 1;
-      left: 1000px;
-    }
-    p {
-      position: absolute;
-      color: #222222;
-      font-size: 48 * $px;
-      left: 1000px;
-    }
-    span {
-      position: absolute;
-      display: inline-block;
-      color: #222222;
-      font-size: 28 * $px;
-      text-align: left;
-      left: 1000px;
-    }
-    p:nth-of-type(1) {
-      top: 700 * $px;
-    }
-    p:nth-of-type(2) {
-      top: 790 * $px;
-    }
-    p:nth-of-type(3) {
-      top: 880 * $px;
-    }
-    span:nth-of-type(1) {
-      top: 1040 * $px;
-    }
-    span:nth-of-type(2) {
-      width: 360 * $px;
-      top: 1100 * $px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      img:nth-of-type(1) {
+        width: 600 * $px;
+        // height: 676 * $px;
+      }
+      img:nth-of-type(2) {
+        width: 640 * $px;
+        height: 300 * $px;
+      }
     }
   }
 }
