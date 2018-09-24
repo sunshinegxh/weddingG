@@ -4,11 +4,11 @@
     <span class="cover-bg to-show-2">
       <div class="cover-bg-white from-bottom60 delayP5"></div>
       <img class="from-right30 delay1" src="../assets/cover_wedding.png" alt="">
-      <p class="from-right30 delayP15">{{ con.groom }}</p>
+      <p class="from-right30 delayP15">{{ con.extra.groom }}</p>
       <p class="from-right30 delayP15">＆</p>
-      <p class="from-right30 delayP15">{{ con.bride }}</p>
-      <span class="from-right30 delay2">{{ con.time }}</span>
-      <span class="from-right30 delayP25">{{ con.address}}</span>
+      <p class="from-right30 delayP15">{{ con.extra.bride }}</p>
+      <span class="from-right30 delay2">{{ con.extra.time }}</span>
+      <span class="from-right30 delayP25">{{ con.extra.address}}</span>
     </span>
   </div>
 </template>

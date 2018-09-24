@@ -13,7 +13,6 @@
     <full-page v-else :indexData="indexData" :currentPage="currentPage"></full-page>
     <shot-screen></shot-screen>
     <!-- 只有封面有编辑按钮 每个页面都有上传图片的按钮 -->
-    <!-- 接口请求 跨域问题 -->
     <audio class="invite_music" :src="musicNativeUrl" controls="controls" preload id="music1"></audio>
     <img
       src="../assets/invite_ic_pic.png"
@@ -61,19 +60,20 @@ export default {
   methods: {
     getIndexInfo() {
       this.$http
-        // .get("http://192.168.0.134:3000/getIndex")
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
-          {
-            cardId: this.cardId
-          }
-        )
+        .get("http://localhost:3000/getIndex")
+        // .post(
+        //   "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
+        //   {
+        //     cardId: this.cardId
+        //   }
+        // )
         .then(response => {
           this.loading = false;
           let res = response.body.data;
-          console.log(res.pageList);
+          // console.log(response, response.body, res, response.body.code);
           if (response.body.code === "0000") {
             this.indexData = res.pageList;
+            console.log(this.indexData);
           } else {
             console.log("res.respCode", res.message);
           }
@@ -124,6 +124,7 @@ export default {
     top: 52 * $px;
     right: 24 * $px;
     z-index: 1000;
+    background: url("../assets/invitetion_ic_music_default.png") no-repeat;
   }
   .edit {
     width: 112 * $px;

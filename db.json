@@ -1,63 +1,81 @@
 {
   "getIndex": {
-    "respCode": 0,
-    "respMsg": "请求数据成功",
-    "respData": [
-      {
-        "id": 1,
-        "groom": "新郎",
-        "bride": "新娘",
-        "time": "2020/05/20 13:14",
-        "address": "北京朝阳区幸福街国际维也纳酒店66号88厅",
-        "goodsImg": [
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
-        ]
-      },
-      {
-        "id": 2,
-        "desc": [
-          "愿我们最美好的婚礼时光 有你见证",
-          "见证我们最美好的时刻",
-          "余生与TA共度，不辜负此生幸福"
-        ],
-        "goodsImg": [
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
-        ]
-      },
-      {
-        "id": 3,
-        "goodsImg": [
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
-        ]
-      },
-      {
-        "id": 4,
-        "goodsImg": [
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
-        ]
-      },
-      {
-        "id": 5,
-        "goodsImg": [
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
-        ]
-      },
-      {
-        "id": 6,
-        "goodsImg": [
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
-          "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
-        ]
-      }
-    ]
+    "code": "0000",
+    "message": "请求数据成功",
+    "data": {
+      "musicUrl": "http://47.105.43.207/music/system/dream a little dream.mp3",
+      "pageList": [
+        {
+          "pageId": 14,
+          "templateId": 1,
+          "templatePageId": 1,
+          "extra": {
+            "id": 1,
+            "groom": "新郎",
+            "bride": "新娘",
+            "time": "2020/05/20 13:14",
+            "address": "北京朝阳区幸福街国际维也纳酒店66号88厅"
+          },
+          "goodsImg": [
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
+          ]
+        },
+        {
+          "pageId": 14,
+          "templateId": 1,
+          "templatePageId": 2,
+          "desc": [
+            "愿我们最美好的婚礼时光 有你见证",
+            "见证我们最美好的时刻",
+            "余生与TA共度，不辜负此生幸福"
+          ],
+          "goodsImg": [
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
+          ]
+        },
+        {
+          "pageId": 14,
+          "templateId": 1,
+          "templatePageId": 3,
+          "goodsImg": [
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
+          ]
+        },
+        {
+          "pageId": 14,
+          "templateId": 1,
+          "templatePageId": 4,
+          "goodsImg": [
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
+          ]
+        },
+        {
+          "pageId": 14,
+          "templateId": 1,
+          "templatePageId": 5,
+          "goodsImg": [
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
+          ]
+        },
+        {
+          "pageId": 14,
+          "templateId": 1,
+          "templatePageId": 6,
+          "goodsImg": [
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png",
+            "http://pic1.58cdn.com.cn/zhuanzh/n_v25b24a369493740bfa06bb75082f12b43.png"
+          ]
+        }
+      ]
+    }
   }
 }
