@@ -1,5 +1,6 @@
 <template>
   <div class="cover animate" ref="`section${idx}`">
+    <shot-screen></shot-screen>
     <span class="cover-bg to-show-2">
       <div class="cover-bg-white from-bottom60 delayP5"></div>
       <img class="from-right30 delay1" src="../assets/cover_wedding.png" alt="">
@@ -13,13 +14,19 @@
 </template>
 
 <script>
+import shotScreen from "./ShotScreen.vue";
+
 export default {
   name: "cover",
   props: ["idx", "con", "currentPage"],
   data() {
     return {
-      current: 0
+      current: 0,
+      loaded: false
     };
+  },
+  components: {
+    shotScreen
   },
   created() {
     window.setInfo = this.setInfo;
@@ -76,6 +83,7 @@ export default {
     display: inline-block;
     background: url("../assets/cover_bg.png") no-repeat;
     background-size: 100%;
+    overflow: hidden;
     &-white {
       width: 410 * $px;
       height: 676 * $px;
