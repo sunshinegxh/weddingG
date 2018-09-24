@@ -3,7 +3,7 @@
     <span class="guide-bg">
       <div class="guide-bg-white">
         <img src="../assets/location_welcome.png" alt="">
-        <img src="../assets/map.jpg" alt="">
+        <img src="../assets/location.jpg" alt="">
       </div>
       <!-- <p class="from-right30 delayP15">{{ con.groom }}</p>
       <p class="from-right30 delayP15">＆</p>
@@ -17,26 +17,22 @@
 <script>
 export default {
   name: "guide",
-  props: ["idx", "con"],
+  props: ["idx", "con", "currentPage"],
+  watch: {
+    currentPage(newV) {
+      this.isCurrent = newV === this.idx;
+    }
+  },
   data() {
     return {
-      current: 0
+      isCurrent: false
     };
   },
   created() {},
   methods: {
-    changePage(index) {
-      this.$emit("changePage", index);
-      // let music = 'jjjj';
-
-      // window.aa = function(params) {
-      //   return music
-      // }
-    },
     comClass() {
       return {
-        toRead: true,
-        big: this.current === 1
+        toRead: true
       };
     }
   }
@@ -57,20 +53,19 @@ export default {
     background: url("../assets/location_bg.png") no-repeat;
     background-size: 100%;
     &-white {
-      width: 95%;
-      height: 750 * $px;
+      width: 702 * $px;
+      height: 862 * $px;
       background: #fff;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       img:nth-of-type(1) {
-        width: 600 * $px;
-        // height: 676 * $px;
+        width: 100%;
+        height: 250 * $px;
       }
       img:nth-of-type(2) {
-        width: 640 * $px;
-        height: 300 * $px;
+        width: 582 * $px;
       }
     }
   }

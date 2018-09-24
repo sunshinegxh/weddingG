@@ -70,10 +70,9 @@ export default {
         .then(response => {
           this.loading = false;
           let res = response.body.data;
-          // console.log(response, response.body, res, response.body.code);
           if (response.body.code === "0000") {
             this.indexData = res.pageList;
-            console.log(this.indexData);
+            // console.log(this.indexData);
           } else {
             console.log("res.respCode", res.message);
           }

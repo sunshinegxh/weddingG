@@ -15,7 +15,7 @@
 <script>
 export default {
   name: "cover",
-  props: ["idx", "con"],
+  props: ["idx", "con", "currentPage"],
   data() {
     return {
       current: 0
