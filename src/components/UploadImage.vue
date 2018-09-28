@@ -1,6 +1,6 @@
 <template>
-  <div >
-    <input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="upload($event)"/>
+  <div class="upload">
+    <input enctype="multipart/form-data" class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="uploadShotScreen($event)"/>
   </div>
 </template>
 
@@ -23,24 +23,24 @@ export default {
     }
   },
   methods: {
-    upload(e) {
-      this.cardId = 1;
-      this.pageId = 1;
-      this.imageSort = 1;
-
+    uploadShotScreen(e) {
       let file = e.target.files[0];
       let param = new FormData();
-      param.append("file", file, file.name);
-      param.append("cardId", this.cardId);
-      param.append("pageId", this.pageId);
-      param.append("imageSort", this.imageSort);
-
-      let config = {
-        headers: { "Content-Type": "multipart/form-data" }
-      };
-      this.$http.post(this.upload_url, param, config).then(response => {
-        console.log(response.data);
-      });
+      param.append("file", file);
+      this.$http
+        .post(
+          "http://47.105.43.207:80/()/banhunli/card/replacePageImg.gg?cardId=16&pageId=10&imageSort=1",
+          param,
+          {
+            headers: { "Content-Type": "multipart/form-data" }
+          }
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          document.write(e);
+        });
     }
   }
 };
@@ -48,8 +48,8 @@ export default {
 
 <style>
 input {
-  height: 100px;
-  position: relative;
+  position: absolute;
+  left: 0;
   z-index: 1000;
 }
 </style>

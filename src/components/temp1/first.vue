@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "first",
+  name: "first1",
   props: ["idx", "con", "currentPage"],
   watch: {
     currentPage(newV) {
@@ -28,8 +28,8 @@ export default {
     return {
       // img1: this.con.goodsImg[0],
       // img2: this.con.goodsImg[1]
-      img1: require("../assets/page1_bg_down.png"),
-      img2: require("../assets/page1_bg_up.png"),
+      img1: require("../../assets/page1_bg_down.png"),
+      img2: require("../../assets/page1_bg_up.png"),
       isCurrent: false
     };
   }
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss" type="text/css">
-@import "../common.scss";
+@import "../../common.scss";
 
 .first {
   position: relative;
@@ -70,35 +70,5 @@ export default {
   -moz-animation-delay: 2s;
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
-}
-
-.scale01 {
-  -webkit-animation: scale1 2s forwards;
-  -moz-animation: scale1 2s forwards;
-  animation: scale1 2s forwards;
-}
-@-moz-keyframes scale1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@-webkit-keyframes scale1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes scale1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
 </style>

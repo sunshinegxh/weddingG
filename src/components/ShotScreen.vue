@@ -33,13 +33,10 @@ export default {
     },
     uploadShotScreen(img) {
       let data = new FormData();
-      data.append("cardId", 1);
-      data.append("pageId", 1);
-      data.append("file", img);
-      console.log(data);
+      data.append("file", this.dataURLtoFile(img, "shot"));
       this.$http
         .post(
-          "http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg?cardId=1&pageId=1",
+          "http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg?cardId=16&pageId=10",
           data,
           {
             "Content-Type": "multipart/form-data"
@@ -51,6 +48,17 @@ export default {
         .catch(e => {
           document.write(e);
         });
+    },
+    dataURLtoFile(dataurl, filename) {
+      var arr = dataurl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: mime });
     }
   }
 };

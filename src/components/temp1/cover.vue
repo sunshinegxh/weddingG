@@ -1,9 +1,10 @@
 <template>
   <div class="cover animate" ref="`section${idx}`">
     <shot-screen></shot-screen>
+    <upload-image></upload-image>
     <span class="cover-bg to-show-2">
       <div class="cover-bg-white from-bottom60 delayP5"></div>
-      <img class="from-right30 delay1" src="../assets/cover_wedding.png" alt="">
+      <img class="from-right30 delay1" src="../../assets/cover_wedding.png" alt="">
       <p class="from-right30 delayP15">{{ con.extra.groom }}</p>
       <p class="from-right30 delayP15">＆</p>
       <p class="from-right30 delayP15">{{ con.extra.bride }}</p>
@@ -14,11 +15,12 @@
 </template>
 
 <script>
-import shotScreen from "./ShotScreen.vue";
+import shotScreen from "..//ShotScreen.vue";
+import uploadImage from "../UploadImage";
 
 export default {
-  name: "cover",
-  props: ["idx", "con"],
+  name: "cover1",
+  props: ["idx", "con", "currentPage"],
   data() {
     return {
       current: 0,
@@ -26,7 +28,8 @@ export default {
     };
   },
   components: {
-    shotScreen
+    shotScreen,
+    uploadImage
   },
   created() {
     window.setInfo = this.setInfo;
@@ -71,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" type="text/css">
-@import "../common.scss";
+@import "../../common.scss";
 .cover {
   position: relative;
   width: 100%;
@@ -81,7 +84,7 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background: url("../assets/cover_bg.png") no-repeat;
+    background: url("../../assets/cover_bg.png") no-repeat;
     background-size: 100%;
     overflow: hidden;
     &-white {
@@ -136,7 +139,7 @@ export default {
   -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
-.cover-bg .delay1 {
+.cover-bg3 .delay1 {
   -moz-animation-delay: 1s;
   -webkit-animation-delay: 1s;
   animation-delay: 1s;

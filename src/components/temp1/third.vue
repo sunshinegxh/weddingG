@@ -9,14 +9,14 @@
       :class="{'from-left': isCurrent, 'delay2': isCurrent}">
     </span>
     <p :class="{'from-right48': isCurrent, 'delay4': isCurrent}">5 / 20</p>
-    <img :class="{'from-left100': isCurrent, 'delay4': isCurrent}" src="../assets/page3_sweetday.png" alt="">
-    <img :class="{'from-right48': isCurrent, 'delay3': isCurrent}" src="../assets/page3_marryyou.png" alt="">
+    <img :class="{'from-left100': isCurrent, 'delay4': isCurrent}" src="../../assets/page3_sweetday.png" alt="">
+    <img :class="{'from-right48': isCurrent, 'delay3': isCurrent}" src="../../assets/page3_marryyou.png" alt="">
   </div>
 </template>
 
 <script>
 export default {
-  name: "third",
+  name: "third1",
   props: ["idx", "con", "currentPage"],
   watch: {
     currentPage(newV) {
@@ -28,15 +28,15 @@ export default {
       isCurrent: false,
       // img1: this.con.goodsImg[0],
       // img2: this.con.goodsImg[1],
-      img1: require("../assets/page4_bg_up_left.png"),
-      img2: require("../assets/page4_bg_down_right.png")
+      img1: require("../../assets/page4_bg_up_left.png"),
+      img2: require("../../assets/page4_bg_down_right.png")
     };
   }
 };
 </script>
 
 <style lang="scss" type="text/css">
-@import "../common.scss";
+@import "../../common.scss";
 
 .third {
   position: relative;

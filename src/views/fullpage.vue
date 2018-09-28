@@ -3,20 +3,22 @@
       <page :currentPage="currentPage" v-for="(item, index) in indexData" :key="index">
         <component :currentPage="currentPage" :idx="index+1" :is="isCom(+item.templatePageId)" :con="item"></component>
       </page>
-        <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
+      <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
     </div>
 </template>
 
 <script>
 import Page from "../components/Page.vue";
 import PageController from "../components/PageController.vue";
-import Cover from "../components/cover.vue";
-import First from "../components/first.vue";
-import Second from "../components/second.vue";
-import Third from "../components/third.vue";
-import Forth from "../components/forth.vue";
-import Guide from "../components/guide.vue";
-import thirdCover from "../components/third/cover.vue";
+import Cover1 from "../components/temp1/cover.vue";
+import First1 from "../components/temp1/first.vue";
+import Second1 from "../components/temp1/second.vue";
+import Third1 from "../components/temp1/third.vue";
+import Forth1 from "../components/temp1/forth.vue";
+import Guide1 from "../components/temp1/guide.vue";
+import Info1 from "../components/temp1/info.vue";
+import Cover3 from "../components/temp3/cover.vue";
+import First3 from "../components/temp3/first.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -72,30 +74,34 @@ export default {
     isCom(val) {
       switch (val) {
         case 1:
-          return "thirdCover";
+          return "cover3";
         case 2:
-          return "first";
+          return "first3";
         case 3:
-          return "second";
+          return "second1";
         case 4:
-          return "third";
+          return "third1";
         case 5:
-          return "forth";
+          return "forth1";
         case 6:
-          return "guide";
+          return "guide1";
+        case 7:
+          return "info1";
       }
     }
   },
   components: {
     Page,
     PageController,
-    Cover,
-    First,
-    Second,
-    Third,
-    Forth,
-    Guide,
-    thirdCover
+    Cover3,
+    First3,
+    Cover1,
+    First1,
+    Second1,
+    Third1,
+    Forth1,
+    Guide1,
+    Info1
   },
   created() {
     let arr = new Array();
