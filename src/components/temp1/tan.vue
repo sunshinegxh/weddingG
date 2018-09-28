@@ -4,7 +4,8 @@
       <img src="../../assets/barrage_thankyou.png" :class="{'from-right24': isCurrent}" alt="">
       <div>
         <ul>
-          <li v-for="(item, index) in tanData" :key="index" :class="liClass(index)">{{ item }}</li>
+          <li v-for="(item, index) in tanData" :key="index" class="firstA">{{ item }}</li>
+          <!-- <li v-for="(item, index) in tanData" :key="index" :class="liClass(index)">{{ item }}</li> -->
         </ul>
       </div>
       <input
@@ -21,22 +22,13 @@ export default {
   watch: {
     currentPage(newV) {
       this.isCurrent = newV === this.idx;
-      if (this.isCurrent) {
-        console.log(this.tanData);
-        setInterval(() => {
-          // this.tanData = [
-          //   "马先生祝福：祝新人早生贵子，百年好合～",
-          //   "333",
-          //   "4444",
-          //   "5",
-          //   "666666666",
-          //   "111"
-          // ];
-          // debugger;
-          let arr = [...this.tanData];
-          this.tanData = [...arr.slice(1), arr[0]];
-        }, 2000);
-      }
+      // if (this.isCurrent) {
+      //   console.log(this.tanData);
+      //   setInterval(() => {
+      //     let arr = [...this.tanData];
+      //     this.tanData = [...arr.slice(1), arr[0]];
+      //   }, 2000);
+      // }
     }
   },
   data() {
@@ -44,12 +36,12 @@ export default {
       isCurrent: false,
       blession: "",
       tanData: [
-        "111",
-        "马先生祝福：祝新人早生贵子，百年好合～",
-        "333",
-        "4444",
-        "5",
-        "666666666"
+        // "马先生祝福：祝新人早生贵子，百年好合～111",
+        // "马先生祝福：祝新人早生贵子，百年好合～222",
+        // "马先生祝福：祝新人早生贵子，百年好合～333",
+        // "马先生祝福：祝新人早生贵子，百年好合～4444",
+        // "马先生祝福：祝新人早生贵子，百年好合～5",
+        "马先生祝福：祝新人早生贵子，百年好合～666666666"
       ]
     };
   },
@@ -147,6 +139,7 @@ export default {
           box-sizing: border-box;
           line-height: 30 * $px;
           padding: 20 * $px 30 * $px;
+          position: absolute;
         }
         li.tan-bg-third {
           margin-bottom: 0;
@@ -154,27 +147,28 @@ export default {
       }
     }
     &-info {
-      background: rgba(0, 0, 0, 0.4);
+      // background: rgba(0, 0, 0, 0.4);
+      // position: absolute;
+      // left: 24 * $px;
     }
     &-first {
-      height: 96 * $px;
-      color: rgba(255, 255, 255, 0.4);
-      position: absolute;
-      top: 0;
+      // height: 96 * $px;
+      // color: rgba(255, 255, 255, 0.4);
+      // top: 0;
     }
     &-second {
-      height: 96 * $px;
-      color: rgba(255, 255, 255, 1);
-      position: absolute;
-      top: 144 * $px;
+      // height: 96 * $px;
+      // color: rgba(255, 255, 255, 1);
+      // position: absolute;
+      // top: 144 * $px;
     }
     &-third {
-      width: 264 * $px;
-      height: 74 * $px;
-      color: rgba(255, 255, 255, 0.4);
-      position: absolute;
-      top: 288 * $px;
-      left: 24 * $px;
+      // width: 264 * $px;
+      // height: 74 * $px;
+      // color: rgba(255, 255, 255, 0.4);
+      // position: absolute;
+      // top: 288 * $px;
+      // left: 24 * $px;
     }
     &-none {
       opacity: 0;
@@ -238,14 +232,31 @@ export default {
 }
 
 .firstA {
-  -webkit-animation: fa 2s ease infinite;
-  -moz-animation: fa 2s ease infinite;
-  animation: fa 2s ease infinite;
+  -webkit-animation: fa 8s ease infinite;
+  -moz-animation: fa 8s ease infinite;
+  animation: fa 8s ease infinite;
 }
 @keyframes fa {
   0% {
-    top: 0;
+    opacity: 0;
+    top: 300 * $px;
+  }
+  25% {
     opacity: 1;
+    top: 288 * $px;
+    color: rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    opacity: 1;
+    color: rgba(255, 255, 255, 1);
+    top: 144 * $px;
+    transform: scale(1.2);
+  }
+  75% {
+    opacity: 1;
+    color: rgba(255, 255, 255, 0.4);
+    top: 0;
+    transform: scale(1);
   }
   100% {
     top: -20 * $px;
