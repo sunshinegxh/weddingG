@@ -10,7 +10,7 @@
       <span></span>
       <span></span>
     </div>
-    <full-page v-else :indexData="indexData" :currentPage="currentPage"></full-page>
+    <full-page v-else :indexData="indexData"></full-page>
     <!-- <shot-screen></shot-screen> -->
     <!-- 只有封面有编辑按钮 每个页面都有上传图片的按钮 -->
     <audio class="invite_music" :src="musicNativeUrl" controls="controls" preload id="music1"></audio>
@@ -41,8 +41,7 @@ export default {
       edit: false,
       cardId: 0,
       token: "",
-      musicNativeUrl: "",
-      currentPage: 1
+      musicNativeUrl: ""
     };
   },
   components: {
@@ -54,7 +53,6 @@ export default {
     this.cardId = +this.$route.query.cardId;
     this.cardId = 16;
     window.setMusic = this.setMusic;
-    window.refreshPage = this.refreshPage;
     this.getIndexInfo();
   },
   methods: {
@@ -72,7 +70,6 @@ export default {
           let res = response.body.data;
           if (response.body.code === "0000") {
             this.indexData = res.pageList;
-            // console.log(this.indexData);
           } else {
             console.log("res.respCode", res.message);
           }
@@ -85,11 +82,6 @@ export default {
       alert("this.musicNativeUrl:" + params);
       this.musicNativeUrl = params;
       alert("this.musicNativeUrl:" + this.musicNativeUrl);
-    },
-    refreshPage(curPage) {
-      this.getIndexInfo();
-      this.currentPage = curPage;
-      // 定位到倒数第四页 currentpage  curPage
     },
     editNative() {
       let self = this;

@@ -1,13 +1,16 @@
 <template>
-  <div class="guide animate" ref="`section${idx}`">
-    <span :class="{'guide-bg': true, 'to-show-2': isCurrent}">
-      <div :class="{'guide-bg-white': true, 'from-bottomCenter': isCurrent}">
-        <img src="../../assets/location_welcome.png" :class="{'from-topG': isCurrent, 'delayP5': isCurrent}" alt="">
-        <img src="../../assets/location.jpg" :class="{'scale21': isCurrent, 'delayP15': isCurrent}" alt="">
-        <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">{{ con.extra.address}}</div>
-        <div :class="{'scale01': isCurrent, 'delayP25': isCurrent}">{{ con.extra.time }}</div>
+  <div class="tan animate" ref="`section${idx}`">
+    <div :class="{'tan-bg': true, 'to-show-2': isCurrent}">
+      <img src="../../assets/barrage_thankyou.png" :class="{'from-right24': isCurrent}" alt="">
+      <div>
+        <ul>
+          <li v-for="(item, index) in tanData" :key="index" :class="liClass(index)">{{ item }}</li>
+        </ul>
       </div>
-    </span>
+      <input
+        placeholder="写下你的祝福"
+        v-model="blession"/>
+    </div>
   </div>
 </template>
 
@@ -18,19 +21,65 @@ export default {
   watch: {
     currentPage(newV) {
       this.isCurrent = newV === this.idx;
+      if (this.isCurrent) {
+        console.log(this.tanData);
+        setInterval(() => {
+          // this.tanData = [
+          //   "马先生祝福：祝新人早生贵子，百年好合～",
+          //   "333",
+          //   "4444",
+          //   "5",
+          //   "666666666",
+          //   "111"
+          // ];
+          // debugger;
+          let arr = [...this.tanData];
+          this.tanData = [...arr.slice(1), arr[0]];
+        }, 2000);
+      }
     }
   },
   data() {
     return {
-      isCurrent: false
+      isCurrent: false,
+      blession: "",
+      tanData: [
+        "111",
+        "马先生祝福：祝新人早生贵子，百年好合～",
+        "333",
+        "4444",
+        "5",
+        "666666666"
+      ]
     };
   },
   created() {},
   methods: {
-    comClass() {
-      return {
-        toRead: true
-      };
+    liClass(index) {
+      switch (+index) {
+        case 0:
+          return {
+            "tan-bg-info": true,
+            "tan-bg-first": this.isCurrent,
+            firstA: this.isCurrent
+          };
+        case 1:
+          return {
+            "tan-bg-info": true,
+            "tan-bg-second": this.isCurrent,
+            secondA: this.isCurrent
+          };
+        case 2:
+          return {
+            "tan-bg-info": true,
+            "tan-bg-third": this.isCurrent,
+            thirdA: this.isCurrent
+          };
+        default:
+          return {
+            "tan-bg-none": true
+          };
+      }
     }
   }
 };
@@ -38,7 +87,7 @@ export default {
 
 <style lang="scss" type="text/css">
 @import "../../common.scss";
-.guide {
+.tan {
   position: relative;
   width: 100%;
   height: 100%;
@@ -47,131 +96,191 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background: url("../../assets/location_bg.png") no-repeat;
+    background: url("../../assets/barrage_bg.png") no-repeat;
     background-size: 100%;
-    &-white {
-      color: #8eb559;
-      font-size: 36 * $px;
-      width: 702 * $px;
-      height: 862 * $px;
-      background: #fff;
+    img {
       position: absolute;
-      top: 1000px;
+      width: 40 * $px;
+      top: 50%;
+      transform: translate(0, -50%);
+      right: -1000 * $px;
+      opacity: 0;
+    }
+    input {
+      width: 700 * $px;
+      height: 80 * $px;
+      border: none;
+      border-radius: 48 * $px;
+      line-height: 80 * $px;
+      text-align: left;
+      color: rgba(255, 255, 255, 1);
+      background: rgba(0, 0, 0, 0.4);
+      display: inline-block;
+      position: absolute;
+      bottom: 48 * $px;
       left: 50%;
-      margin-left: -351 * $px;
-      margin-top: -431 * $px;
-      img:nth-of-type(1) {
+      margin-left: -350 * $px;
+      box-sizing: border-box;
+      padding: 0 30 * $px;
+    }
+    input:-ms-input-placeholder {
+      color: #fff;
+      opacity: 1;
+    }
+    input::-webkit-input-placeholder {
+      color: #fff;
+      opacity: 1;
+    }
+    div {
+      position: absolute;
+      width: 350 * $px;
+      height: 400 * $px;
+      bottom: 260 * $px;
+      ul {
         position: relative;
-        top: -1000px;
-        width: 100%;
-        height: 250 * $px;
+        height: 100%;
+        li {
+          font-size: 24 * $px;
+          margin-left: 24 * $px;
+          border-radius: 48 * $px;
+          text-align: left;
+          box-sizing: border-box;
+          line-height: 30 * $px;
+          padding: 20 * $px 30 * $px;
+        }
+        li.tan-bg-third {
+          margin-bottom: 0;
+        }
       }
-      img:nth-of-type(2) {
-        opacity: 0;
-        width: 582 * $px;
-      }
-      div:nth-of-type(1) {
-        opacity: 0;
-        margin: 23 * $px auto;
-        width: 582 * $px;
-      }
-      div:nth-of-type(2) {
-        opacity: 0;
-        margin: 0 auto;
-      }
+    }
+    &-info {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    &-first {
+      height: 96 * $px;
+      color: rgba(255, 255, 255, 0.4);
+      position: absolute;
+      top: 0;
+    }
+    &-second {
+      height: 96 * $px;
+      color: rgba(255, 255, 255, 1);
+      position: absolute;
+      top: 144 * $px;
+    }
+    &-third {
+      width: 264 * $px;
+      height: 74 * $px;
+      color: rgba(255, 255, 255, 0.4);
+      position: absolute;
+      top: 288 * $px;
+      left: 24 * $px;
+    }
+    &-none {
+      opacity: 0;
     }
   }
 }
-.guide .delayP5 {
+.tan .delayP5 {
   -moz-animation-delay: 0.5s;
   -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
-.guide .delayP15 {
+.tan .delayP15 {
   -moz-animation-delay: 1.5s;
   -webkit-animation-delay: 1.5s;
   animation-delay: 1.5s;
 }
-.guide .delay2 {
+.tan .delay2 {
   -moz-animation-delay: 2s;
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
 }
-.guide .delayP25 {
+.tan .delayP25 {
   -moz-animation-delay: 2.5s;
   -webkit-animation-delay: 2.5s;
   animation-delay: 2.5s;
 }
+.from-right24 {
+  -webkit-animation: fRht24 2s ease forwards;
+  -moz-animation: fRht24 2s ease forwards;
+  animation: fRht24 2s ease forwards;
+}
+@-moz-keyframes fRht24 {
+  0% {
+    right: -1000 * $px;
+    opacity: 0;
+  }
+  100% {
+    right: 24 * $px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fRht24 {
+  0% {
+    right: -1000 * $px;
+    opacity: 0;
+  }
+  100% {
+    right: 24 * $px;
+    opacity: 1;
+  }
+}
+@keyframes fRht24 {
+  0% {
+    right: -1000 * $px;
+    opacity: 0;
+  }
+  100% {
+    right: 24 * $px;
+    opacity: 1;
+  }
+}
 
-.from-bottomCenter {
-  -webkit-animation: fBtmCen 2s forwards;
-  -moz-animation: fBtmCen 2s forwards;
-  animation: fBtmCen 2s forwards;
+.firstA {
+  -webkit-animation: fa 2s ease infinite;
+  -moz-animation: fa 2s ease infinite;
+  animation: fa 2s ease infinite;
 }
-@-moz-keyframes fBtmCen {
+@keyframes fa {
   0% {
-    top: 1000px;
-    opacity: 0;
-  }
-  100% {
-    top: 50%;
+    top: 0;
     opacity: 1;
   }
-}
-@-webkit-keyframes fBtmCen {
-  0% {
-    top: 1000px;
-    opacity: 0;
-  }
   100% {
-    top: 50%;
-    opacity: 1;
-  }
-}
-@keyframes fBtmCen {
-  0% {
-    top: 1000px;
+    top: -20 * $px;
     opacity: 0;
-  }
-  100% {
-    top: 50%;
-    opacity: 1;
   }
 }
 
-.from-topG {
-  -webkit-animation: fromTG 2s forwards;
-  -moz-animation: fromTG 2s forwards;
-  animation: fromTG 2s forwards;
+.secondA {
+  -webkit-animation: sa 2s ease infinite;
+  -moz-animation: sa 2s ease infinite;
+  animation: sa 2s ease infinite;
 }
-@-moz-keyframes fromTG {
+@keyframes sa {
   0% {
-    top: -1000px;
-    opacity: 0;
+    top: 144 * $px;
   }
   100% {
     top: 0;
-    opacity: 1;
   }
 }
-@-webkit-keyframes fromTG {
-  0% {
-    top: -1000px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
+
+.thirdA {
+  -webkit-animation: ta 2s ease infinite;
+  -moz-animation: ta 2s ease infinite;
+  animation: ta 2s ease infinite;
 }
-@keyframes fromTG {
+@keyframes ta {
   0% {
-    top: -1000px;
-    opacity: 0;
+    top: 288 * $px;
+    left: 24 * $px;
   }
   100% {
-    top: 0;
-    opacity: 1;
+    top: 144 * $px;
+    transform: scale(1.2);
+    left: 24 * $px;
   }
 }
 </style>

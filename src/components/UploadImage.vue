@@ -13,15 +13,6 @@ export default {
       // port: '81'
     };
   },
-  computed: {
-    upload_url() {
-      return (
-        "/()/banhunli/card/replacePageImg.gg?token={{" +
-        this.token +
-        "}}&cardId=1&pageId=1&imageSort=1"
-      );
-    }
-  },
   methods: {
     uploadShotScreen(e) {
       let file = e.target.files[0];

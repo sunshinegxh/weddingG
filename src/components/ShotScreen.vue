@@ -32,24 +32,45 @@ export default {
         // return image;
       });
     },
+    b64toBlob(b64Data, contentType, sliceSize) {
+      contentType = contentType || "";
+      sliceSize = sliceSize || 512;
+      var byteCharacters = atob(b64Data.substring(b64Data.indexOf(",") + 1));
+      var byteArrays = [];
+      for (
+        var offset = 0;
+        offset < byteCharacters.length;
+        offset += sliceSize
+      ) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+        var byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+      var blob = new Blob(byteArrays, { type: contentType });
+      console.log(blob);
+      return blob;
+    },
     uploadShotScreen(img) {
       let data = new FormData();
-      data.append("file", this.dataURLtoFile(img, "shot"));
-      // return;
-      this.$http
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg?cardId=16&pageId=10",
-          data,
-          {
-            headers: { "Content-Type": "multipart/form-data" }
-          }
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(e => {
-          document.write(e);
-        });
+      // data.append("file", img);
+      data.append("file", this.b64toBlob(img));
+      console.log(img);
+      // this.$http
+      //   .post("http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg", {
+      //     cardId: 16,
+      //     pageId: 10,
+      //     base64ImgUrl: img
+      //   })
+      //   .then(response => {
+      //     console.log("success:", response.url);
+      //   })
+      //   .catch(e => {
+      //     console.log(e);
+      //   });
     },
     dataURLtoFile(dataurl, filename) {
       var arr = dataurl.split(","),
