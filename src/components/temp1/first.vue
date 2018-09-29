@@ -7,7 +7,7 @@
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
       <span
-        :style="`background: url(${imgArr[0]}) no-repeat;backgroundSize: cover;`"
+        :style="`backgroundImage: url(${imgArr[0]})`"
         :class="{'from-left': isCurrent}">
       </span>
       <div :class="{'scale01': isCurrent, 'delay2': isCurrent, 'first-text': true}">
@@ -15,7 +15,7 @@
         <p v-for="(item, index) in con.desc" :key="index">{{ item }}</p>
       </div>
       <span
-        :style="`background: url(${imgArr[1]}) no-repeat;backgroundSize: cover;`"
+        :style="`backgroundImage: url(${imgArr[1]})`"
         :class="{'from-right': isCurrent}">
       </span>
     </div>
@@ -72,7 +72,8 @@ export default {
     display: inline-block;
     width: 100%;
     height: 560 * $px;
-    background-size: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
   span:nth-of-type(2) {
     position: absolute;

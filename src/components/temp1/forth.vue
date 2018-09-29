@@ -13,19 +13,19 @@
       <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="4" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
-      :style="`background: url(${imgArr[0]}) no-repeat;backgroundSize: cover`"
+      :style="`backgroundImage: url(${imgArr[0]})`"
       :class="{'from-right': isCurrent, 'delay': isCurrent}">
     </span>
     <span
-      :style="`background: url(${imgArr[1]}) no-repeat;backgroundSize: cover`"
+      :style="`backgroundImage: url(${imgArr[1]})`"
       :class="{'to-show-2': isCurrent, 'delay3': isCurrent}">
     </span>
     <span
-      :style="`background: url(${imgArr[2]}) no-repeat;backgroundSize: cover`"
+      :style="`backgroundImage: url(${imgArr[2]})`"
       :class="{'to-show-2': isCurrent, 'delay3': isCurrent}">
     </span>
     <span
-      :style="`background: url(${imgArr[3]}) no-repeat;backgroundSize: cover`"
+      :style="`backgroundImage: url(${imgArr[3]})`"
       :class="{'from-left': isCurrent, 'delayP5': isCurrent}">
     </span>
     <img
@@ -90,6 +90,8 @@ export default {
     display: inline-block;
     width: 50%;
     height: 50vh;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
   span:nth-of-type(1) {
     transform: translateX(100%);

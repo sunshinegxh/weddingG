@@ -7,11 +7,11 @@
       <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
-      :style="`background: url(${imgArr[0]}) no-repeat;backgroundSize: cover;`"
+      :style="`backgroundImage: url(${imgArr[0]})`"
       :class="{'from-right': isCurrent, 'delay1': isCurrent}">
     </span>
     <span
-      :style="`background: url(${imgArr[1]}) no-repeat;backgroundSize: contain;`"
+      :style="`backgroundImage: url(${imgArr[1]})`"
       :class="{'from-left': isCurrent, 'delay2': isCurrent}">
     </span>
     <p :class="{'from-right48': isCurrent, 'delay4': isCurrent}">5 / 20</p>
@@ -81,6 +81,8 @@ export default {
   span {
     display: inline-block;
     width: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
   span:nth-of-type(1) {
     transform: translateX(-100%);

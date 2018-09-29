@@ -117,7 +117,7 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     overflow: hidden;
     &-white {
