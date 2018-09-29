@@ -7,7 +7,7 @@
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
       <span
-        :style="`background: url(${img1}) no-repeat;backgroundSize: cover;`"
+        :style="`background: url(${imgArr[0]}) no-repeat;backgroundSize: cover;`"
         :class="{'from-left': isCurrent}">
       </span>
       <div :class="{'scale01': isCurrent, 'delay2': isCurrent, 'first-text': true}">
@@ -15,7 +15,7 @@
         <p v-for="(item, index) in con.desc" :key="index">{{ item }}</p>
       </div>
       <span
-        :style="`background: url(${img2}) no-repeat;backgroundSize: cover;`"
+        :style="`background: url(${imgArr[1]}) no-repeat;backgroundSize: cover;`"
         :class="{'from-right': isCurrent}">
       </span>
     </div>
@@ -36,28 +36,23 @@ export default {
   computed: {
     ...mapState({
       edit: state => state.edit,
-      cardId: state => state.edcardIdit
+      cardId: state => state.cardId
     })
   },
   created() {
-    // this.imgSrc = "require("../../assets/cover_wedding.png")";
     window.setInfo = this.setInfo;
   },
   data() {
     return {
-      // img1: this.con.goodsImg[0],
-      // img2: this.con.goodsImg[1]
       img1: require("../../assets/page1_bg_down.png"),
       img2: require("../../assets/page1_bg_up.png"),
+      imgArr: this.con.goodsImg,
       isCurrent: false
     };
   },
   methods: {
     changeUrl(info) {
-      console.log(info);
-      // let aa = img
-      this.img1 = info.url;
-      // this.$emit('maiBiz', true)
+      this.$set(this.imgArr, info.index - 1, info.url);
     }
   },
   components: {

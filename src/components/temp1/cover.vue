@@ -44,21 +44,15 @@ export default {
   computed: {
     ...mapState({
       edit: state => state.edit,
-      cardId: state => state.edcardIdit
+      cardId: state => state.cardId
     })
   },
   created() {
-    // this.imgSrc = "require("../../assets/cover_wedding.png")";
-    // this.imgSrc =
-    //   "https://img2.mukewang.com/5b3b0e3a0001090a04800519-300-300.jpg";
     window.setInfo = this.setInfo;
   },
   methods: {
     changeUrl(info) {
-      console.log(info);
       this.$set(this.imgSrc, info.index - 1, info.url);
-      // this.imgSrc[info.index-1] = info.url;
-      // this.$emit('maiBiz', true)
     },
     setInfo() {
       alert("refresh");
