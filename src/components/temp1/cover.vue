@@ -1,10 +1,18 @@
 <template>
   <div class="cover animate" ref="`section${idx}`">
-    <shot-screen></shot-screen>
-    <upload-image></upload-image>
-    <span class="cover-bg to-show-2">
+    <div class="invite_ic_pic" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+    </div>
+    <img
+      src="../../assets/invite_ic_edit.png"
+      class="edit"
+      v-if="edit"
+      @click="editNative"
+      alt="">
+    <span class="cover-bg to-show-2" :style="{backgroundImage: 'url(' + imgSrc + ')'}">
       <div class="cover-bg-white from-bottom60 delayP5"></div>
       <img class="from-right30 delay1" src="../../assets/cover_wedding.png" alt="">
+      <!-- <img class="from-right30 delay1" :src="imgSrc" alt=""> -->
       <p class="from-right30 delayP15">{{ con.extra.groom }}</p>
       <p class="from-right30 delayP15">＆</p>
       <p class="from-right30 delayP15">{{ con.extra.bride }}</p>
@@ -15,7 +23,8 @@
 </template>
 
 <script>
-import shotScreen from "..//ShotScreen.vue";
+import { mapState } from "vuex";
+import shotScreen from "../ShotScreen.vue";
 import uploadImage from "../UploadImage";
 
 export default {
@@ -24,17 +33,32 @@ export default {
   data() {
     return {
       current: 0,
-      loaded: false
+      loaded: false,
+      imgSrc: ""
     };
   },
   components: {
     shotScreen,
     uploadImage
   },
+  computed: {
+    ...mapState({
+      edit: state => state.edit,
+      cardId: state => state.edcardIdit
+    })
+  },
   created() {
+    // this.imgSrc = "require("../../assets/cover_wedding.png")";
+    this.imgSrc =
+      "https://img2.mukewang.com/5b3b0e3a0001090a04800519-300-300.jpg";
     window.setInfo = this.setInfo;
   },
   methods: {
+    changeUrl(info) {
+      console.log(info);
+      this.imgSrc = info;
+      // this.$emit('maiBiz', true)
+    },
     setInfo() {
       alert("refresh");
       this.$http
@@ -68,12 +92,26 @@ export default {
         toRead: true,
         big: this.current === 1
       };
+    },
+    editNative() {
+      let self = this;
+      const bridge = window.Android;
+      function toEditPage() {
+        window.Android.toEditPage(self.cardId);
+      }
+      if (bridge) {
+        toEditPage();
+      } else {
+        document.addEventListener("Android", () => {
+          toEditPage();
+        });
+      }
     }
   }
 };
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" type="text/css" scoped>
 @import "../../common.scss";
 .cover {
   position: relative;
@@ -84,8 +122,8 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background: url("../../assets/cover_bg.png") no-repeat;
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
     overflow: hidden;
     &-white {
       width: 410 * $px;
@@ -132,6 +170,19 @@ export default {
       width: 360 * $px;
       top: 1100 * $px;
     }
+  }
+  .invite_ic_pic {
+    position: fixed;
+    top: 612 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .edit {
+    position: fixed;
+    bottom: 248 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
 .cover-bg .delayP5 {

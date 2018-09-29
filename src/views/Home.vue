@@ -14,7 +14,7 @@
     <!-- <shot-screen></shot-screen> -->
     <!-- 只有封面有编辑按钮 每个页面都有上传图片的按钮 -->
     <audio class="invite_music" :src="musicNativeUrl" controls="controls" preload id="music1"></audio>
-    <img
+    <!-- <img
       src="../assets/invite_ic_pic.png"
       class="invite_ic_pic"
       v-if="edit"
@@ -24,7 +24,7 @@
       class="edit"
       v-if="edit"
       @click="editNative"
-      alt="">
+      alt=""> -->
   </div>
 </template>
 
@@ -51,7 +51,8 @@ export default {
   created() {
     this.edit = +this.$route.query.edit === 1;
     this.cardId = +this.$route.query.cardId;
-    this.cardId = 16;
+    this.$store.commit("SET_EDIT", this.edit);
+    this.$store.commit("SET_CARDID", this.cardId);
     window.setMusic = this.setMusic;
     this.getIndexInfo();
   },
@@ -82,20 +83,6 @@ export default {
       alert("this.musicNativeUrl:" + params);
       this.musicNativeUrl = params;
       alert("this.musicNativeUrl:" + this.musicNativeUrl);
-    },
-    editNative() {
-      let self = this;
-      const bridge = window.Android;
-      function toEditPage() {
-        window.Android.toEditPage(self.cardId);
-      }
-      if (bridge) {
-        toEditPage();
-      } else {
-        document.addEventListener("Android", () => {
-          toEditPage();
-        });
-      }
     }
   }
 };
@@ -120,19 +107,6 @@ export default {
   .edit {
     width: 112 * $px;
     height: 112 * $px;
-    position: fixed;
-    bottom: 248 * $px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 1000;
-  }
-  .invite_ic_pic {
-    width: 112 * $px;
-    height: 112 * $px;
-    position: fixed;
-    top: 612 * $px;
-    left: 50%;
-    transform: translate(-50%, 0);
     z-index: 1000;
   }
 }

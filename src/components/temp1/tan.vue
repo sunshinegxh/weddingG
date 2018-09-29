@@ -2,70 +2,114 @@
   <div class="tan animate" ref="`section${idx}`">
     <div :class="{'tan-bg': true, 'to-show-2': isCurrent}">
       <img src="../../assets/barrage_thankyou.png" :class="{'from-right24': isCurrent}" alt="">
-      <div>
-        <ul>
-          <li v-for="(item, index) in tanData" :key="index" class="firstA">{{ item }}</li>
-          <!-- <li v-for="(item, index) in tanData" :key="index" :class="liClass(index)">{{ item }}</li> -->
+      <div class="tan-bg-text">
+        <ul v-if="showData.length > 0">
+          <li v-for="(item, index) in showData" :key="index" :class="liClass(index)"><span>{{ item }}</span></li>
         </ul>
       </div>
-      <input
-        placeholder="写下你的祝福"
-        v-model="blession"/>
+      <div class="tan-bg-bless">
+        <input
+          placeholder="写下你的祝福"
+          v-model="blession"/>
+        <span @click="submit">发送</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import toast from "../common/toast";
+
 export default {
   name: "tan1",
   props: ["idx", "con", "currentPage"],
   watch: {
     currentPage(newV) {
       this.isCurrent = newV === this.idx;
-      // if (this.isCurrent) {
-      //   console.log(this.tanData);
-      //   setInterval(() => {
-      //     let arr = [...this.tanData];
-      //     this.tanData = [...arr.slice(1), arr[0]];
-      //   }, 2000);
-      // }
+      if (this.isCurrent) {
+        let i = 0;
+        let self = this;
+        setInterval(() => {
+          let sindex = i % this.showData.length;
+          let tindex = i % this.tanData.length;
+          self.$set(self.showData, sindex, self.tanData[tindex]);
+          i++;
+        }, 2000);
+      }
     }
   },
   data() {
     return {
       isCurrent: false,
       blession: "",
-      tanData: [
-        // "马先生祝福：祝新人早生贵子，百年好合～111",
-        // "马先生祝福：祝新人早生贵子，百年好合～222",
-        // "马先生祝福：祝新人早生贵子，百年好合～333",
-        // "马先生祝福：祝新人早生贵子，百年好合～4444",
-        // "马先生祝福：祝新人早生贵子，百年好合～5",
-        "马先生祝福：祝新人早生贵子，百年好合～666666666"
-      ]
+      showData: [],
+      tanData: []
     };
   },
-  created() {},
+  created() {
+    this.getDanInfo();
+  },
   methods: {
+    getDanInfo() {
+      this.$http
+        .post(
+          "http://47.105.43.207:80/()/banhunli/card/getPublishWishList.gg",
+          {
+            cardId: 78,
+            pageNo: 1,
+            pageSize: 20
+          }
+        )
+        .then(response => {
+          let res = response.body.data;
+          if (response.body.code === "0000") {
+            res.wishList.map(v => {
+              this.tanData.push(v.wish);
+            });
+            this.showData = [this.tanData[0], this.tanData[1], this.tanData[2]];
+          } else {
+            console.log("res.respCode", res.message);
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
+    submit() {
+      this.$http
+        .post("http://47.105.43.207:80/()/banhunli/card/addWish.gg", {
+          cardId: 78,
+          wishUserName: "sfs",
+          wish: this.blession
+        })
+        .then(response => {
+          if (response.body.code === "0000") {
+            this.blession = "";
+            toast("添加成功，待审核");
+          } else {
+            toast("添加失败");
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
     liClass(index) {
       switch (+index) {
         case 0:
           return {
-            "tan-bg-info": true,
-            "tan-bg-first": this.isCurrent,
+            delay2: this.isCurrent,
             firstA: this.isCurrent
           };
         case 1:
           return {
-            "tan-bg-info": true,
-            "tan-bg-second": this.isCurrent,
-            secondA: this.isCurrent
+            delay4: this.isCurrent,
+            firstA: this.isCurrent
           };
         case 2:
           return {
-            "tan-bg-info": true,
-            "tan-bg-third": this.isCurrent,
-            thirdA: this.isCurrent
+            delay6: this.isCurrent,
+            firstA: this.isCurrent
           };
         default:
           return {
@@ -98,32 +142,46 @@ export default {
       right: -1000 * $px;
       opacity: 0;
     }
-    input {
-      width: 700 * $px;
-      height: 80 * $px;
-      border: none;
-      border-radius: 48 * $px;
-      line-height: 80 * $px;
-      text-align: left;
-      color: rgba(255, 255, 255, 1);
-      background: rgba(0, 0, 0, 0.4);
-      display: inline-block;
+    &-bless {
       position: absolute;
       bottom: 48 * $px;
-      left: 50%;
-      margin-left: -350 * $px;
-      box-sizing: border-box;
-      padding: 0 30 * $px;
+      width: 100%;
+      height: 80 * $px;
+      line-height: 80 * $px;
+      input {
+        width: 530 * $px;
+        border-radius: 48 * $px;
+        height: 100%;
+        border: none;
+        text-align: left;
+        color: rgba(255, 255, 255, 1);
+        background: rgba(0, 0, 0, 0.4);
+        display: inline-block;
+        margin-left: 24 * $px;
+        box-sizing: border-box;
+        padding: 0 30 * $px;
+      }
+      input:-ms-input-placeholder {
+        color: #fff;
+        opacity: 1;
+      }
+      input::-webkit-input-placeholder {
+        color: #fff;
+        opacity: 1;
+      }
+      span {
+        float: right;
+        width: 148 * $px;
+        height: 100%;
+        background: #8eb559;
+        border-radius: 48 * $px;
+        text-align: center;
+        color: #fff;
+        margin-right: 24 * $px;
+        font-size: 32 * $px;
+      }
     }
-    input:-ms-input-placeholder {
-      color: #fff;
-      opacity: 1;
-    }
-    input::-webkit-input-placeholder {
-      color: #fff;
-      opacity: 1;
-    }
-    div {
+    &-text {
       position: absolute;
       width: 350 * $px;
       height: 400 * $px;
@@ -136,65 +194,50 @@ export default {
           margin-left: 24 * $px;
           border-radius: 48 * $px;
           text-align: left;
-          box-sizing: border-box;
-          line-height: 30 * $px;
-          padding: 20 * $px 30 * $px;
+          padding: 14 * $px 32 * $px;
           position: absolute;
-        }
-        li.tan-bg-third {
-          margin-bottom: 0;
+          opacity: 0;
+          left: 24 * $px;
+          top: 366 * $px;
+          word-break: break-all;
+          span {
+            height: 48 * $px;
+            line-height: 24 * $px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+          }
         }
       }
-    }
-    &-info {
-      // background: rgba(0, 0, 0, 0.4);
-      // position: absolute;
-      // left: 24 * $px;
-    }
-    &-first {
-      // height: 96 * $px;
-      // color: rgba(255, 255, 255, 0.4);
-      // top: 0;
-    }
-    &-second {
-      // height: 96 * $px;
-      // color: rgba(255, 255, 255, 1);
-      // position: absolute;
-      // top: 144 * $px;
-    }
-    &-third {
-      // width: 264 * $px;
-      // height: 74 * $px;
-      // color: rgba(255, 255, 255, 0.4);
-      // position: absolute;
-      // top: 288 * $px;
-      // left: 24 * $px;
     }
     &-none {
       opacity: 0;
     }
   }
 }
-.tan .delayP5 {
-  -moz-animation-delay: 0.5s;
-  -webkit-animation-delay: 0.5s;
-  animation-delay: 0.5s;
-}
-.tan .delayP15 {
-  -moz-animation-delay: 1.5s;
-  -webkit-animation-delay: 1.5s;
-  animation-delay: 1.5s;
-}
+
 .tan .delay2 {
   -moz-animation-delay: 2s;
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
 }
-.tan .delayP25 {
-  -moz-animation-delay: 2.5s;
-  -webkit-animation-delay: 2.5s;
-  animation-delay: 2.5s;
+.tan .delay4 {
+  -moz-animation-delay: 4s;
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
 }
+.tan .delay6 {
+  -moz-animation-delay: 6s;
+  -webkit-animation-delay: 6s;
+  animation-delay: 6s;
+}
+.tan .delay8 {
+  -moz-animation-delay: 8s;
+  -webkit-animation-delay: 8s;
+  animation-delay: 8s;
+}
+
 .from-right24 {
   -webkit-animation: fRht24 2s ease forwards;
   -moz-animation: fRht24 2s ease forwards;
@@ -232,66 +275,40 @@ export default {
 }
 
 .firstA {
-  -webkit-animation: fa 8s ease infinite;
-  -moz-animation: fa 8s ease infinite;
-  animation: fa 8s ease infinite;
+  -webkit-animation: fa 6s linear infinite;
+  -moz-animation: fa 6s linear infinite;
+  animation: fa 6s linear infinite;
 }
 @keyframes fa {
   0% {
     opacity: 0;
-    top: 300 * $px;
+    left: 24 * $px;
+    top: 366 * $px;
   }
-  25% {
+  33% {
     opacity: 1;
-    top: 288 * $px;
+    top: 244 * $px;
+    left: 24 * $px;
     color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.4);
   }
-  50% {
+  66% {
     opacity: 1;
     color: rgba(255, 255, 255, 1);
-    top: 144 * $px;
+    background: rgba(0, 0, 0, 0.6);
+    top: 122 * $px;
+    left: 24 * $px;
     transform: scale(1.2);
-  }
-  75% {
-    opacity: 1;
-    color: rgba(255, 255, 255, 0.4);
-    top: 0;
-    transform: scale(1);
+    transform-origin: left bottom;
   }
   100% {
-    top: -20 * $px;
     opacity: 0;
-  }
-}
-
-.secondA {
-  -webkit-animation: sa 2s ease infinite;
-  -moz-animation: sa 2s ease infinite;
-  animation: sa 2s ease infinite;
-}
-@keyframes sa {
-  0% {
-    top: 144 * $px;
-  }
-  100% {
-    top: 0;
-  }
-}
-
-.thirdA {
-  -webkit-animation: ta 2s ease infinite;
-  -moz-animation: ta 2s ease infinite;
-  animation: ta 2s ease infinite;
-}
-@keyframes ta {
-  0% {
-    top: 288 * $px;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.4);
+    top: 0 * $px;
     left: 24 * $px;
-  }
-  100% {
-    top: 144 * $px;
     transform: scale(1.2);
-    left: 24 * $px;
+    transform-origin: left bottom;
   }
 }
 </style>
