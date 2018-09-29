@@ -8,10 +8,16 @@
       :style="`background: url(${img1}) no-repeat;backgroundSize: contain;`"
       :class="{'from-top': isCurrent}">
     </span>
+    <div class="invite_ic_pic" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+    </div>
     <span
       :style="`background: url(${img2}) no-repeat;backgroundSize: contain;`"
       :class="{'from-right': isCurrent, 'delay2': isCurrent}">
     </span>
+    <div class="invite_ic_pic" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
+    </div>
     <span
       :style="`background: url(${img3}) no-repeat;backgroundSize: contain;`"
       :class="{'from-left': isCurrent, 'delay2': isCurrent}">
@@ -21,9 +27,14 @@
 
 <script>
 import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "info1",
   props: ["idx", "con", "currentPage"],
+  components: {
+    uploadImage
+  },
   watch: {
     currentPage(newV) {
       this.isCurrent = newV === this.idx;
@@ -43,13 +54,14 @@ export default {
   computed: {
     ...mapState({
       edit: state => state.edit,
-      cardId: state => state.edcardIdit
+      cardId: state => state.cardId
     })
   },
   methods: {
     changeUrl(info) {
       console.log(info);
-      this.imgSrc = info;
+      this.$set(this.imgSrc, info.index - 1, info.url);
+      // this.imgSrc[info.index-1] = info.url;
       // this.$emit('maiBiz', true)
     }
   }

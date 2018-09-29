@@ -9,7 +9,7 @@
       v-if="edit"
       @click="editNative"
       alt="">
-    <span class="cover-bg to-show-2" :style="{backgroundImage: 'url(' + imgSrc + ')'}">
+    <span class="cover-bg to-show-2" :style="{backgroundImage: 'url(' + imgSrc[0] + ')'}">
       <div class="cover-bg-white from-bottom60 delayP5"></div>
       <img class="from-right30 delay1" src="../../assets/cover_wedding.png" alt="">
       <!-- <img class="from-right30 delay1" :src="imgSrc" alt=""> -->
@@ -34,7 +34,7 @@ export default {
     return {
       current: 0,
       loaded: false,
-      imgSrc: []
+      imgSrc: this.con.goodsImg
     };
   },
   components: {
@@ -44,20 +44,20 @@ export default {
   computed: {
     ...mapState({
       edit: state => state.edit,
-      cardId: state => state.edcardIdit
+      cardId: state => state.cardId
     })
   },
   created() {
     // this.imgSrc = "require("../../assets/cover_wedding.png")";
-    // this.imgSrc[0] = "https://img2.mukewang.com/5b3b0e3a0001090a04800519-300-300.jpg";
-    this.imgSrc = this.con.goodsImg;
-
+    // this.imgSrc =
+    //   "https://img2.mukewang.com/5b3b0e3a0001090a04800519-300-300.jpg";
     window.setInfo = this.setInfo;
   },
   methods: {
     changeUrl(info) {
       console.log(info);
-      this.imgSrc[info.index] = info.url;
+      this.$set(this.imgSrc, info.index - 1, info.url);
+      // this.imgSrc[info.index-1] = info.url;
       // this.$emit('maiBiz', true)
     },
     setInfo() {
@@ -123,7 +123,7 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
     overflow: hidden;
     &-white {
