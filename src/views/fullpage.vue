@@ -19,6 +19,7 @@ import Guide1 from "../components/temp1/guide.vue";
 import Info1 from "../components/temp1/info.vue";
 import Cover3 from "../components/temp3/cover.vue";
 import First3 from "../components/temp3/first.vue";
+import Second3 from "../components/temp3/seconds.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -78,7 +79,7 @@ export default {
         case 2:
           return "first3";
         case 3:
-          return "second1";
+          return "Second3";
         case 4:
           return "third1";
         case 5:
@@ -95,6 +96,7 @@ export default {
     PageController,
     Cover3,
     First3,
+    Second3,
     Cover1,
     First1,
     Second1,
