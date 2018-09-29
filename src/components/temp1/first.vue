@@ -1,10 +1,16 @@
 <template>
     <div class="first animate" ref="`section${idx}`">
+      <div class="invite_ic_pic1" v-if="edit">
+        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      </div>
+      <div class="invite_ic_pic2" v-if="edit">
+        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+      </div>
       <span
         :style="`background: url(${img1}) no-repeat;backgroundSize: cover;`"
         :class="{'from-left': isCurrent}">
       </span>
-      <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">
+      <div :class="{'scale01': isCurrent, 'delay2': isCurrent, 'first-text': true}">
         <!-- 在固定宽度下面 靠左显示 -->
         <p v-for="(item, index) in con.desc" :key="index">{{ item }}</p>
       </div>
@@ -16,6 +22,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "first1",
   props: ["idx", "con", "currentPage"],
@@ -23,6 +32,16 @@ export default {
     currentPage(newV) {
       this.isCurrent = newV === this.idx;
     }
+  },
+  computed: {
+    ...mapState({
+      edit: state => state.edit,
+      cardId: state => state.edcardIdit
+    })
+  },
+  created() {
+    // this.imgSrc = "require("../../assets/cover_wedding.png")";
+    window.setInfo = this.setInfo;
   },
   data() {
     return {
@@ -32,11 +51,22 @@ export default {
       img2: require("../../assets/page1_bg_up.png"),
       isCurrent: false
     };
+  },
+  methods: {
+    changeUrl(info) {
+      console.log(info);
+      // let aa = img
+      this.img1 = info.url;
+      // this.$emit('maiBiz', true)
+    }
+  },
+  components: {
+    uploadImage
   }
 };
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" type="text/css" scoped>
 @import "../../common.scss";
 
 .first {
@@ -54,7 +84,7 @@ export default {
     left: 0;
     bottom: 0;
   }
-  div {
+  &-text {
     width: 428 * $px;
     margin: 50 * $px auto 0;
     font-size: 28 * $px;
@@ -64,6 +94,20 @@ export default {
     p {
       margin: 0;
     }
+  }
+  .invite_ic_pic1 {
+    position: fixed;
+    top: 224 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic2 {
+    position: fixed;
+    top: 1000 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
   }
 }
 .first .delay2 {

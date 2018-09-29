@@ -29,7 +29,7 @@ export default {
           toast("上传成功！");
           let url =
             "https://img2.mukewang.com/szimg/5bab70af00014fe105400300-360-202.jpg";
-          this.$emit("change-url", url);
+          this.$emit("change-url", { url: url, index: this.imageSort });
           console.log("uploadShotScreen:", response);
         })
         .catch(e => {
