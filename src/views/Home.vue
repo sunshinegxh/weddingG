@@ -63,7 +63,8 @@ export default {
         // .post(
         //   "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
         //   {
-        //     cardId: this.cardId
+        //     cardId: this.cardId,
+        //     edit: this.edit
         //   }
         // )
         .then(response => {

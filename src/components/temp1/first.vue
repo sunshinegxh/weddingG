@@ -44,8 +44,8 @@ export default {
   },
   data() {
     return {
-      img1: require("../../assets/page1_bg_down.png"),
-      img2: require("../../assets/page1_bg_up.png"),
+      // img1: require("../../assets/page1_bg_down.png"),
+      // img2: require("../../assets/page1_bg_up.png"),
       imgArr: this.con.goodsImg,
       isCurrent: false
     };

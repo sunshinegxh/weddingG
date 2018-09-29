@@ -1,11 +1,17 @@
 <template>
   <div class="third animate" ref="idx">
+    <div class="invite_ic_pic1" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+    </div>
+    <div class="invite_ic_pic2" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+    </div>
     <span
-      :style="`background: url(${img1}) no-repeat;backgroundSize: cover;`"
+      :style="`background: url(${imgArr[0]}) no-repeat;backgroundSize: cover;`"
       :class="{'from-right': isCurrent, 'delay1': isCurrent}">
     </span>
     <span
-      :style="`background: url(${img2}) no-repeat;backgroundSize: contain;`"
+      :style="`background: url(${imgArr[1]}) no-repeat;backgroundSize: contain;`"
       :class="{'from-left': isCurrent, 'delay2': isCurrent}">
     </span>
     <p :class="{'from-right48': isCurrent, 'delay4': isCurrent}">5 / 20</p>
@@ -15,6 +21,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "third1",
   props: ["idx", "con", "currentPage"],
@@ -23,25 +32,52 @@ export default {
       this.isCurrent = newV === this.idx;
     }
   },
+  computed: {
+    ...mapState({
+      edit: state => state.edit,
+      cardId: state => state.cardId
+    })
+  },
   data() {
     return {
       isCurrent: false,
-      // img1: this.con.goodsImg[0],
-      // img2: this.con.goodsImg[1],
-      img1: require("../../assets/page4_bg_up_left.png"),
-      img2: require("../../assets/page4_bg_down_right.png")
+      // img1: require("../../assets/page4_bg_up_left.png"),
+      // img2: require("../../assets/page4_bg_down_right.png"),
+      imgArr: this.con.goodsImg
     };
+  },
+  methods: {
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
+    }
+  },
+  components: {
+    uploadImage
   }
 };
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" type="text/css" scoped>
 @import "../../common.scss";
 
 .third {
   position: relative;
   width: 100%;
   height: 100%;
+  .invite_ic_pic1 {
+    position: fixed;
+    top: 224 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic2 {
+    position: fixed;
+    top: 1000 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
   span {
     display: inline-block;
     width: 100%;
