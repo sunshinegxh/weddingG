@@ -19,7 +19,8 @@ import Guide1 from "../components/temp1/guide.vue";
 import Info1 from "../components/temp1/info.vue";
 import Cover3 from "../components/temp3/cover.vue";
 import First3 from "../components/temp3/first.vue";
-import Second3 from "../components/temp3/seconds.vue";
+// import Second3 from "../components/temp3/seconds.vue";
+import Tan1 from "../components/temp1/tan.vue";
 
 // 页面进出动画
 // function afterEnterAnimate($child) {
@@ -34,11 +35,10 @@ import Second3 from "../components/temp3/seconds.vue";
 
 export default {
   name: "fullpage",
-  props: ["indexData", "currentPage"],
-  // props: ["indexData"],
+  props: ["indexData"],
   data() {
     return {
-      // currentPage: 1,
+      currentPage: 1,
       options: [],
       controllerOption: {
         arrowsType: false,
@@ -75,11 +75,15 @@ export default {
     isCom(val) {
       switch (val) {
         case 1:
-          return "cover3";
+          return "Cover1";
         case 2:
-          return "first3";
+          return "First1";
+        // case 1:
+        //   return "cover3";
+        // case 2:
+        //   return "first3";
         case 3:
-          return "Second3";
+          return "Second1";
         case 4:
           return "third1";
         case 5:
@@ -88,7 +92,14 @@ export default {
           return "guide1";
         case 7:
           return "info1";
+        case 8:
+          return "tan1";
       }
+    },
+    refreshPage(curPage) {
+      this.getIndexInfo();
+      this.currentPage = curPage;
+      // 定位到倒数第四页 currentpage  curPage
     }
   },
   components: {
@@ -96,14 +107,15 @@ export default {
     PageController,
     Cover3,
     First3,
-    Second3,
+    // Second3,
     Cover1,
     First1,
     Second1,
     Third1,
     Forth1,
     Guide1,
-    Info1
+    Info1,
+    Tan1
   },
   created() {
     let arr = new Array();
@@ -117,6 +129,7 @@ export default {
       arr[i] = obj;
     }
     this.options = arr;
+    window.refreshPage = this.refreshPage;
   },
   mounted() {
     this.$children.forEach((child, index) => {

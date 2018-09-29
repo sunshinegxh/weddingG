@@ -1,36 +1,121 @@
 <template>
-  <div class="guide animate" ref="`section${idx}`">
-    <span :class="{'guide-bg': true, 'to-show-2': isCurrent}">
-      <div :class="{'guide-bg-white': true, 'from-bottomCenter': isCurrent}">
-        <img src="../../assets/location_welcome.png" :class="{'from-topG': isCurrent, 'delayP5': isCurrent}" alt="">
-        <img src="../../assets/location.jpg" :class="{'scale21': isCurrent, 'delayP15': isCurrent}" alt="">
-        <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">{{ con.extra.address}}</div>
-        <div :class="{'scale01': isCurrent, 'delayP25': isCurrent}">{{ con.extra.time }}</div>
+  <div class="tan animate" ref="`section${idx}`">
+    <div :class="{'tan-bg': true, 'to-show-2': isCurrent}">
+      <img src="../../assets/barrage_thankyou.png" :class="{'from-right24': isCurrent}" alt="">
+      <div class="tan-bg-text">
+        <ul v-if="showData.length > 0">
+          <li v-for="(item, index) in showData" :key="index" :class="liClass(index)"><span>{{ item }}</span></li>
+        </ul>
       </div>
-    </span>
+      <div class="tan-bg-bless">
+        <input
+          placeholder="写下你的祝福"
+          v-model="blession"/>
+        <span @click="submit">发送</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import toast from "../common/toast";
+
 export default {
   name: "tan1",
   props: ["idx", "con", "currentPage"],
   watch: {
     currentPage(newV) {
       this.isCurrent = newV === this.idx;
+      if (this.isCurrent) {
+        let i = 0;
+        let self = this;
+        setInterval(() => {
+          let sindex = i % this.showData.length;
+          let tindex = i % this.tanData.length;
+          self.$set(self.showData, sindex, self.tanData[tindex]);
+          i++;
+        }, 2000);
+      }
     }
   },
   data() {
     return {
-      isCurrent: false
+      isCurrent: false,
+      blession: "",
+      showData: [],
+      tanData: []
     };
   },
-  created() {},
+  created() {
+    this.getDanInfo();
+  },
   methods: {
-    comClass() {
-      return {
-        toRead: true
-      };
+    getDanInfo() {
+      this.$http
+        .post(
+          "http://47.105.43.207:80/()/banhunli/card/getPublishWishList.gg",
+          {
+            cardId: 78,
+            pageNo: 1,
+            pageSize: 20
+          }
+        )
+        .then(response => {
+          let res = response.body.data;
+          if (response.body.code === "0000") {
+            res.wishList.map(v => {
+              this.tanData.push(v.wish);
+            });
+            this.showData = [this.tanData[0], this.tanData[1], this.tanData[2]];
+          } else {
+            console.log("res.respCode", res.message);
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
+    submit() {
+      this.$http
+        .post("http://47.105.43.207:80/()/banhunli/card/addWish.gg", {
+          cardId: 78,
+          wishUserName: "sfs",
+          wish: this.blession
+        })
+        .then(response => {
+          if (response.body.code === "0000") {
+            this.blession = "";
+            toast("添加成功，待审核");
+          } else {
+            toast("添加失败");
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
+    liClass(index) {
+      switch (+index) {
+        case 0:
+          return {
+            delay2: this.isCurrent,
+            firstA: this.isCurrent
+          };
+        case 1:
+          return {
+            delay4: this.isCurrent,
+            firstA: this.isCurrent
+          };
+        case 2:
+          return {
+            delay6: this.isCurrent,
+            firstA: this.isCurrent
+          };
+        default:
+          return {
+            "tan-bg-none": true
+          };
+      }
     }
   }
 };
@@ -38,7 +123,7 @@ export default {
 
 <style lang="scss" type="text/css">
 @import "../../common.scss";
-.guide {
+.tan {
   position: relative;
   width: 100%;
   height: 100%;
@@ -47,131 +132,183 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background: url("../../assets/location_bg.png") no-repeat;
+    background: url("../../assets/barrage_bg.png") no-repeat;
     background-size: 100%;
-    &-white {
-      color: #8eb559;
-      font-size: 36 * $px;
-      width: 702 * $px;
-      height: 862 * $px;
-      background: #fff;
+    img {
       position: absolute;
-      top: 1000px;
-      left: 50%;
-      margin-left: -351 * $px;
-      margin-top: -431 * $px;
-      img:nth-of-type(1) {
+      width: 40 * $px;
+      top: 50%;
+      transform: translate(0, -50%);
+      right: -1000 * $px;
+      opacity: 0;
+    }
+    &-bless {
+      position: absolute;
+      bottom: 48 * $px;
+      width: 100%;
+      height: 80 * $px;
+      line-height: 80 * $px;
+      input {
+        width: 530 * $px;
+        border-radius: 48 * $px;
+        height: 100%;
+        border: none;
+        text-align: left;
+        color: rgba(255, 255, 255, 1);
+        background: rgba(0, 0, 0, 0.4);
+        display: inline-block;
+        margin-left: 24 * $px;
+        box-sizing: border-box;
+        padding: 0 30 * $px;
+      }
+      input:-ms-input-placeholder {
+        color: #fff;
+        opacity: 1;
+      }
+      input::-webkit-input-placeholder {
+        color: #fff;
+        opacity: 1;
+      }
+      span {
+        float: right;
+        width: 148 * $px;
+        height: 100%;
+        background: #8eb559;
+        border-radius: 48 * $px;
+        text-align: center;
+        color: #fff;
+        margin-right: 24 * $px;
+        font-size: 32 * $px;
+      }
+    }
+    &-text {
+      position: absolute;
+      width: 350 * $px;
+      height: 400 * $px;
+      bottom: 260 * $px;
+      ul {
         position: relative;
-        top: -1000px;
-        width: 100%;
-        height: 250 * $px;
+        height: 100%;
+        li {
+          font-size: 24 * $px;
+          margin-left: 24 * $px;
+          border-radius: 48 * $px;
+          text-align: left;
+          padding: 14 * $px 32 * $px;
+          position: absolute;
+          opacity: 0;
+          left: 24 * $px;
+          top: 366 * $px;
+          word-break: break-all;
+          span {
+            height: 48 * $px;
+            line-height: 24 * $px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+          }
+        }
       }
-      img:nth-of-type(2) {
-        opacity: 0;
-        width: 582 * $px;
-      }
-      div:nth-of-type(1) {
-        opacity: 0;
-        margin: 23 * $px auto;
-        width: 582 * $px;
-      }
-      div:nth-of-type(2) {
-        opacity: 0;
-        margin: 0 auto;
-      }
+    }
+    &-none {
+      opacity: 0;
     }
   }
 }
-.guide .delayP5 {
-  -moz-animation-delay: 0.5s;
-  -webkit-animation-delay: 0.5s;
-  animation-delay: 0.5s;
-}
-.guide .delayP15 {
-  -moz-animation-delay: 1.5s;
-  -webkit-animation-delay: 1.5s;
-  animation-delay: 1.5s;
-}
-.guide .delay2 {
+
+.tan .delay2 {
   -moz-animation-delay: 2s;
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
 }
-.guide .delayP25 {
-  -moz-animation-delay: 2.5s;
-  -webkit-animation-delay: 2.5s;
-  animation-delay: 2.5s;
+.tan .delay4 {
+  -moz-animation-delay: 4s;
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
+}
+.tan .delay6 {
+  -moz-animation-delay: 6s;
+  -webkit-animation-delay: 6s;
+  animation-delay: 6s;
+}
+.tan .delay8 {
+  -moz-animation-delay: 8s;
+  -webkit-animation-delay: 8s;
+  animation-delay: 8s;
 }
 
-.from-bottomCenter {
-  -webkit-animation: fBtmCen 2s forwards;
-  -moz-animation: fBtmCen 2s forwards;
-  animation: fBtmCen 2s forwards;
+.from-right24 {
+  -webkit-animation: fRht24 2s ease forwards;
+  -moz-animation: fRht24 2s ease forwards;
+  animation: fRht24 2s ease forwards;
 }
-@-moz-keyframes fBtmCen {
+@-moz-keyframes fRht24 {
   0% {
-    top: 1000px;
+    right: -1000 * $px;
     opacity: 0;
   }
   100% {
-    top: 50%;
+    right: 24 * $px;
     opacity: 1;
   }
 }
-@-webkit-keyframes fBtmCen {
+@-webkit-keyframes fRht24 {
   0% {
-    top: 1000px;
+    right: -1000 * $px;
     opacity: 0;
   }
   100% {
-    top: 50%;
+    right: 24 * $px;
     opacity: 1;
   }
 }
-@keyframes fBtmCen {
+@keyframes fRht24 {
   0% {
-    top: 1000px;
+    right: -1000 * $px;
     opacity: 0;
   }
   100% {
-    top: 50%;
+    right: 24 * $px;
     opacity: 1;
   }
 }
 
-.from-topG {
-  -webkit-animation: fromTG 2s forwards;
-  -moz-animation: fromTG 2s forwards;
-  animation: fromTG 2s forwards;
+.firstA {
+  -webkit-animation: fa 6s linear infinite;
+  -moz-animation: fa 6s linear infinite;
+  animation: fa 6s linear infinite;
 }
-@-moz-keyframes fromTG {
+@keyframes fa {
   0% {
-    top: -1000px;
     opacity: 0;
+    left: 24 * $px;
+    top: 366 * $px;
+  }
+  33% {
+    opacity: 1;
+    top: 244 * $px;
+    left: 24 * $px;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.4);
+  }
+  66% {
+    opacity: 1;
+    color: rgba(255, 255, 255, 1);
+    background: rgba(0, 0, 0, 0.6);
+    top: 122 * $px;
+    left: 24 * $px;
+    transform: scale(1.2);
+    transform-origin: left bottom;
   }
   100% {
-    top: 0;
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fromTG {
-  0% {
-    top: -1000px;
     opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
-}
-@keyframes fromTG {
-  0% {
-    top: -1000px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.4);
+    top: 0 * $px;
+    left: 24 * $px;
+    transform: scale(1.2);
+    transform-origin: left bottom;
   }
 }
 </style>

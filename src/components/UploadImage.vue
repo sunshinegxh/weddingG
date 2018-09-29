@@ -5,22 +5,12 @@
 </template>
 
 <script>
+import toast from "./common/toast";
+
 export default {
+  props: ["cardId", "pageId", "imageSort"],
   data() {
-    return {
-      token: "b40389e69909665b2a320da48747d528"
-      // ip: '47.105.43.207',
-      // port: '81'
-    };
-  },
-  computed: {
-    upload_url() {
-      return (
-        "/()/banhunli/card/replacePageImg.gg?token={{" +
-        this.token +
-        "}}&cardId=1&pageId=1&imageSort=1"
-      );
-    }
+    return {};
   },
   methods: {
     uploadShotScreen(e) {
@@ -36,7 +26,11 @@ export default {
           }
         )
         .then(response => {
-          console.log(response);
+          toast("上传成功！");
+          let url =
+            "https://img2.mukewang.com/szimg/5bab70af00014fe105400300-360-202.jpg";
+          this.$emit("change-url", { url: url, index: this.imageSort });
+          console.log("uploadShotScreen:", response);
         })
         .catch(e => {
           document.write(e);
@@ -46,10 +40,23 @@ export default {
 };
 </script>
 
-<style>
-input {
-  position: absolute;
-  left: 0;
-  z-index: 1000;
+<style lang="scss" type="text/css" scoped>
+@import "../common.scss";
+
+.upload {
+  width: 112 * $px;
+  height: 112 * $px;
+  background: url("../assets/invite_ic_pic.png") no-repeat;
+  background-size: 100%;
+  input {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    font-size: 0;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    // display: none;
+  }
 }
 </style>

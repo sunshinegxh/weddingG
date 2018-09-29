@@ -4,6 +4,10 @@ import Resource from "vue-resource";
 import router from "./router";
 import store from "./store";
 
+import { Picker } from "mint-ui";
+Vue.component(Picker.name, Picker);
+
+import "mint-ui/lib/style.css";
 import ajax from "./libs/ajax";
 import jssdk from "./libs/jssdk";
 Vue.use(ajax);

@@ -1,5 +1,8 @@
 <template>
   <div class="second animate" ref="idx">
+    <div class="invite_ic_pic" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+    </div>
     <img src="../../assets/page2_lovestory.png" alt="">
     <span
       :style="`background: url(${img1}) no-repeat;backgroundSize: contain;`"
@@ -17,6 +20,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "info1",
   props: ["idx", "con", "currentPage"],
@@ -35,6 +39,19 @@ export default {
       img2: require("../../assets/page2_bg_down_left.png"),
       img3: require("../../assets/page2_bg_down_right.png")
     };
+  },
+  computed: {
+    ...mapState({
+      edit: state => state.edit,
+      cardId: state => state.edcardIdit
+    })
+  },
+  methods: {
+    changeUrl(info) {
+      console.log(info);
+      this.imgSrc = info;
+      // this.$emit('maiBiz', true)
+    }
   }
 };
 </script>
