@@ -1,19 +1,31 @@
 <template>
   <div class="forth animate" ref="idx">
+    <div class="invite_ic_pic1" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+    </div>
+    <div class="invite_ic_pic2" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+    </div>
+    <div class="invite_ic_pic3" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
+    </div>
+    <div class="invite_ic_pic4" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="4" v-on:change-url="changeUrl"></upload-image>
+    </div>
     <span
-      :style="`background: url(${img1}) no-repeat;backgroundSize: cover`"
+      :style="`background: url(${imgArr[0]}) no-repeat;backgroundSize: cover`"
       :class="{'from-right': isCurrent, 'delay': isCurrent}">
     </span>
     <span
-      :style="`background: url(${img2}) no-repeat;backgroundSize: cover`"
+      :style="`background: url(${imgArr[1]}) no-repeat;backgroundSize: cover`"
       :class="{'to-show-2': isCurrent, 'delay3': isCurrent}">
     </span>
     <span
-      :style="`background: url(${img3}) no-repeat;backgroundSize: cover`"
+      :style="`background: url(${imgArr[2]}) no-repeat;backgroundSize: cover`"
       :class="{'to-show-2': isCurrent, 'delay3': isCurrent}">
     </span>
     <span
-      :style="`background: url(${img4}) no-repeat;backgroundSize: cover`"
+      :style="`background: url(${imgArr[3]}) no-repeat;backgroundSize: cover`"
       :class="{'from-left': isCurrent, 'delayP5': isCurrent}">
     </span>
     <img
@@ -28,6 +40,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "forth1",
   props: ["idx", "con", "currentPage"],
@@ -39,15 +54,26 @@ export default {
   data() {
     return {
       isCurrent: false,
-      // img1: this.con.goodsImg[0],
-      // img2: this.con.goodsImg[1],
-      // img3: this.con.goodsImg[2],
-      // img4: this.con.goodsImg[3],
-      img1: require("../../assets/page4_bg_up_left.png"),
-      img2: require("../../assets/page4_bg_up_right.png"),
-      img3: require("../../assets/page4_bg_down_left.png"),
-      img4: require("../../assets/page4_bg_down_right.png")
+      imgArr: this.con.goodsImg
+      // img1: require("../../assets/page4_bg_up_left.png"),
+      // img2: require("../../assets/page4_bg_up_right.png"),
+      // img3: require("../../assets/page4_bg_down_left.png"),
+      // img4: require("../../assets/page4_bg_down_right.png")
     };
+  },
+  computed: {
+    ...mapState({
+      edit: state => state.edit,
+      cardId: state => state.cardId
+    })
+  },
+  methods: {
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
+    }
+  },
+  components: {
+    uploadImage
   }
 };
 </script>
@@ -88,6 +114,34 @@ export default {
     right: -2400 * $px;
     bottom: 120 * $px;
     opacity: 0;
+  }
+  .invite_ic_pic1 {
+    position: fixed;
+    top: 224 * $px;
+    left: 25%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic2 {
+    position: fixed;
+    top: 224 * $px;
+    left: 75%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic3 {
+    position: fixed;
+    top: 1000 * $px;
+    left: 25%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic4 {
+    position: fixed;
+    top: 1000 * $px;
+    left: 75%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
   }
 }
 .forth .delayP5 {
