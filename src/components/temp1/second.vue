@@ -5,21 +5,21 @@
     </div>
     <img src="../../assets/page2_lovestory.png" alt="">
     <span
-      :style="`background: url(${img1}) no-repeat;backgroundSize: contain;`"
+      :style="`backgroundImage: url(${imgSrc[0]})`"
       :class="{'from-top': isCurrent}">
     </span>
     <div class="invite_ic_pic" v-if="edit">
       <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
-      :style="`background: url(${img2}) no-repeat;backgroundSize: contain;`"
+      :style="`backgroundImage: url(${imgSrc[1]})`"
       :class="{'from-right': isCurrent, 'delay2': isCurrent}">
     </span>
     <div class="invite_ic_pic" v-if="edit">
       <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
-      :style="`background: url(${img3}) no-repeat;backgroundSize: contain;`"
+      :style="`backgroundImage: url(${imgSrc[2]})`"
       :class="{'from-left': isCurrent, 'delay2': isCurrent}">
     </span>
   </div>
@@ -43,12 +43,13 @@ export default {
   data() {
     return {
       isCurrent: false,
+      imgSrc: this.con.goodsImg
       // img1: this.con.goodsImg[0],
       // img2: this.con.goodsImg[1],
       // img3: this.con.goodsImg[2],
-      img1: require("../../assets/page2_bg_up.png"),
-      img2: require("../../assets/page2_bg_down_left.png"),
-      img3: require("../../assets/page2_bg_down_right.png")
+      // img1: require("../../assets/page2_bg_up.png"),
+      // img2: require("../../assets/page2_bg_down_left.png"),
+      // img3: require("../../assets/page2_bg_down_right.png")
     };
   },
   computed: {
@@ -84,6 +85,8 @@ export default {
   }
   span {
     display: inline-block;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
   span:nth-of-type(1) {
     transform: translateY(-100%);
@@ -101,6 +104,23 @@ export default {
     transform: translateX(100%);
     width: 50%;
     height: 100%;
+  }
+  .invite_ic_pic {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    &:first-of-type {
+      top: 320 * $px;
+    }
+    &:nth-of-type(2) {
+      top: 1000 * $px;
+      left: 25%;
+    }
+    &:nth-of-type(3) {
+      top: 1000 * $px;
+      left: 75%;
+    }
   }
 }
 .second .delay2 {
