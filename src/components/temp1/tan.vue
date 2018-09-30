@@ -19,6 +19,7 @@
 
 <script>
 import toast from "../common/toast";
+import { mapState } from "vuex";
 
 export default {
   name: "tan1",
@@ -47,7 +48,14 @@ export default {
     };
   },
   created() {
-    this.getDanInfo();
+    if (this.isCurrent) {
+      this.getDanInfo();
+    }
+  },
+  computed: {
+    ...mapState({
+      cardId: state => state.cardId
+    })
   },
   methods: {
     getDanInfo() {
@@ -55,7 +63,7 @@ export default {
         .post(
           "http://47.105.43.207:80/()/banhunli/card/getPublishWishList.gg",
           {
-            cardId: 78,
+            cardId: this.cardId,
             pageNo: 1,
             pageSize: 20
           }
@@ -68,7 +76,7 @@ export default {
             });
             this.showData = [this.tanData[0], this.tanData[1], this.tanData[2]];
           } else {
-            console.log("res.respCode", res.message);
+            console.log("getPublishWishList:", response.body.message);
           }
         })
         .catch(e => {
@@ -78,7 +86,7 @@ export default {
     submit() {
       this.$http
         .post("http://47.105.43.207:80/()/banhunli/card/addWish.gg", {
-          cardId: 78,
+          cardId: this.cardId,
           wishUserName: "sfs",
           wish: this.blession
         })
@@ -121,7 +129,7 @@ export default {
 };
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" type="text/css" scoped>
 @import "../../common.scss";
 .tan {
   position: relative;

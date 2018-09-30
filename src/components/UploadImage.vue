@@ -17,29 +17,27 @@ export default {
       let file = e.target.files[0];
       let param = new FormData();
       param.append("file", file);
-
-      toast("上传成功！");
-      let url =
-        "https://img2.mukewang.com/szimg/5bab70af00014fe105400300-360-202.jpg";
-      this.$emit("change-url", { url: url, index: this.imageSort });
-      // this.$http
-      //   .post(
-      //     `http://47.105.43.207:80/()/banhunli/card/replacePageImg.gg?cardId=${this.cardId}&pageId=${this.pageId}&imageSort=${this.imageSort}`,
-      //     param,
-      //     {
-      //       headers: { "Content-Type": "multipart/form-data" }
-      //     }
-      //   )
-      //   .then(response => {
-      //     toast("上传成功！");
-      //     let url =
-      //       "https://img2.mukewang.com/szimg/5bab70af00014fe105400300-360-202.jpg";
-      //     this.$emit("change-url", { url: url, index: this.imageSort });
-      //     console.log("uploadShotScreen:", response);
-      //   })
-      //   .catch(e => {
-      //     document.write(e);
-      //   });
+      this.$http
+        .post(
+          `http://47.105.43.207:80/()/banhunli/card/replacePageImg.gg?cardId=${
+            this.cardId
+          }&pageId=${this.pageId}&imageSort=${this.imageSort}`,
+          param,
+          {
+            headers: { "Content-Type": "multipart/form-data" }
+          }
+        )
+        .then(response => {
+          toast("上传成功！");
+          this.$emit("change-url", {
+            url: response.body.data.imgUrl,
+            index: this.imageSort
+          });
+          console.log("uploadShotScreen:", response.body.data.imgUrl);
+        })
+        .catch(e => {
+          document.write(e);
+        });
     }
   }
 };

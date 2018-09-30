@@ -55,32 +55,20 @@ export default {
     },
     uploadShotScreen(img) {
       let data = new FormData();
-      // data.append("file", img);
       data.append("file", this.b64toBlob(img));
       console.log(img);
-      // this.$http
-      //   .post("http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg", {
-      //     cardId: 16,
-      //     pageId: 10,
-      //     base64ImgUrl: img
-      //   })
-      //   .then(response => {
-      //     console.log("success:", response.url);
-      //   })
-      //   .catch(e => {
-      //     console.log(e);
-      //   });
-    },
-    dataURLtoFile(dataurl, filename) {
-      var arr = dataurl.split(","),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
-        u8arr = new Uint8Array(n);
-      while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-      }
-      return new File([u8arr], filename, { type: mime });
+      this.$http
+        .post("http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg", {
+          cardId: 78,
+          pageId: 1,
+          base64ImgUrl: img
+        })
+        .then(response => {
+          console.log("success:", response.url);
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   }
 };

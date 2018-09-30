@@ -12,54 +12,43 @@ export default {
   name: "music",
   data() {
     return {
-      musicList: [
-        {
-          isSystem: 1,
-          musicId: 2,
-          musicName: "love me tender2",
-          musicUrl:
-            "https://96.f.1ting.com/5b9cc88f/40a8d52b660b6d22355decefbc988ba3/zzzzzmp3/2013lDec/16W/16chenglin/02.mp3"
-        },
-        {
-          isSystem: 2,
-          musicId: 3,
-          musicName: "love me tender3",
-          musicUrl:
-            "https://96.f.1ting.com/5b9cc88f/40a8d52b660b6d22355decefbc988ba3/zzzzzmp3/2013lDec/16W/16chenglin/02.mp3"
-        }
-      ],
+      musicList: [],
       cur: {}
     };
   },
   created() {
-    this.$http
-      .get("http://192.168.0.134:3000/getIndex")
-      // .post("/card/getSystemMusicList.gg", {
-      //   params: {
-      //     pageNo: 1,
-      //     pageSize: 20
-      //   }
-      // })
-      .then(response => {
-        // this.loading = false;
-        console.log(response);
-        // let res = response.data;
-        // if (res.respCode === 0) {
-        //   // 本地注释掉
-        //   this.indexData = res.respData;
-        // } else {
-        //   alert(res.respMsg);
-        // }
-      })
-      .catch(e => {
-        document.write(e);
-      });
+    this.getMusic();
+    window.getMusic = this.set;
   },
   methods: {
+    getMusic() {
+      this.$http
+        .post(
+          "http://47.105.43.207:80/()/banhunli/card/getSystemMusicList.gg",
+          {
+            pageNo: 1,
+            pageSize: 20
+          }
+        )
+        .then(response => {
+          // this.loading = false;
+          console.log(response.body.data.musics);
+          let res = response.body.data;
+          if (response.body.code === "0000") {
+            this.musicList = res.musics;
+          } else {
+            console.log("res.respCode", response.body.message);
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    set() {
+      return `${this.cur.musicId}-${this.cur.musicUrl}`;
+    },
     choose(item) {
       this.cur = item;
-      localStorage.setItem("musicId", item.musicId);
-      localStorage.setItem("musicUrl", item.musicUrl);
     }
   }
 };

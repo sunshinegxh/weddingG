@@ -7,8 +7,10 @@ export default new Vuex.Store({
   state: {
     // 页面是否可编辑
     edit: false,
-    // 能量值来源
-    cardId: 0
+    // cardID
+    cardId: 0,
+    // 当前页面
+    currentPage: 1
   },
   mutations: {
     SET_EDIT(state, data) {
@@ -16,6 +18,9 @@ export default new Vuex.Store({
     },
     SET_CARDID(state, data) {
       state.cardId = data;
+    },
+    SET_CURPAGE(state, data) {
+      state.currentPage = data;
     }
   },
   actions: {}

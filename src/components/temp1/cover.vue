@@ -12,12 +12,11 @@
     <span class="cover-bg to-show-2" :style="{backgroundImage: 'url(' + imgSrc[0] + ')'}">
       <div class="cover-bg-white from-bottom60 delayP5"></div>
       <img class="from-right30 delay1" src="../../assets/cover_wedding.png" alt="">
-      <!-- <img class="from-right30 delay1" :src="imgSrc" alt=""> -->
-      <p class="from-right30 delayP15">{{ con.extra.groom }}</p>
+      <p class="from-right30 delayP15">{{ extra.groom }}</p>
       <p class="from-right30 delayP15">＆</p>
-      <p class="from-right30 delayP15">{{ con.extra.bride }}</p>
-      <span class="from-right30 delay2">{{ con.extra.time }}</span>
-      <span class="from-right30 delayP25">{{ con.extra.address}}</span>
+      <p class="from-right30 delayP15">{{ extra.bride }}</p>
+      <span class="from-right30 delay2">{{ extra.time }}</span>
+      <span class="from-right30 delayP25">{{ extra.address}}</span>
     </span>
   </div>
 </template>
@@ -34,7 +33,8 @@ export default {
     return {
       current: 0,
       loaded: false,
-      imgSrc: this.con.goodsImg
+      imgSrc: this.con.goodsImg,
+      extra: {}
     };
   },
   components: {
@@ -48,32 +48,30 @@ export default {
     })
   },
   created() {
-    window.setInfo = this.setInfo;
+    if (this.con) {
+      this.extra = JSON.parse(this.con.extra);
+    }
+    window.refreshInfo = this.setInfo;
   },
   methods: {
     changeUrl(info) {
       this.$set(this.imgSrc, info.index - 1, info.url);
     },
     setInfo() {
-      alert("refresh");
       this.$http
-        .get("http://192.168.0.134:3000/getIndex")
-        // .post("/card/getInvitationsInfo.gg", {
-        //   params: {
-        //     pageNo: 1,
-        //     pageSize: 20
-        //   }
-        // })
+        .post(
+          "http://47.105.43.207:80/()/banhunli/card/getInvitationsInfo.gg",
+          {
+            cardId: this.cardId
+          }
+        )
         .then(response => {
-          // this.loading = false;
-          console.log(response);
-          // let res = response.data;
-          // if (res.respCode === 0) {
-          //   // 本地注释掉
-          //   this.indexData = res.respData;
-          // } else {
-          //   alert(res.respMsg);
-          // }
+          let res = response.body.data;
+          if (response.body.code === "0000") {
+            this.extra = res;
+          } else {
+            console.log("res.respCode", response.body.message);
+          }
         })
         .catch(e => {
           document.write(e);

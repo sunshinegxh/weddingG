@@ -78,7 +78,7 @@ export default {
 };
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" type="text/css" scoped>
 @import "../../common.scss";
 
 .forth {

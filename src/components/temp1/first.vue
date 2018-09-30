@@ -6,13 +6,19 @@
       <div class="invite_ic_pic2" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
+      <img
+        src="../../assets/invite_ic_edit.png"
+        class="edit"
+        v-if="edit"
+        @click="changeDesc"
+        alt="">
       <span
         :style="`backgroundImage: url(${imgArr[0]})`"
         :class="{'from-left': isCurrent}">
       </span>
       <div :class="{'scale01': isCurrent, 'delay2': isCurrent, 'first-text': true}">
         <!-- 在固定宽度下面 靠左显示 -->
-        <p v-for="(item, index) in con.desc" :key="index">{{ item }}</p>
+        <p v-for="(item, index) in con.extra" :key="index">{{ item }}</p>
       </div>
       <span
         :style="`backgroundImage: url(${imgArr[1]})`"
@@ -44,8 +50,6 @@ export default {
   },
   data() {
     return {
-      // img1: require("../../assets/page1_bg_down.png"),
-      // img2: require("../../assets/page1_bg_up.png"),
       imgArr: this.con.goodsImg,
       isCurrent: false
     };
@@ -53,7 +57,8 @@ export default {
   methods: {
     changeUrl(info) {
       this.$set(this.imgArr, info.index - 1, info.url);
-    }
+    },
+    changeDesc() {}
   },
   components: {
     uploadImage
@@ -68,10 +73,17 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  .edit {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   span {
     display: inline-block;
     width: 100%;
     height: 560 * $px;
+    // background-size: cover;
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }

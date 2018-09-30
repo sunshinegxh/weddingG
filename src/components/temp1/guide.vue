@@ -4,8 +4,8 @@
       <div :class="{'guide-bg-white': true, 'from-bottomCenter': isCurrent}">
         <img src="../../assets/location_welcome.png" :class="{'from-topG': isCurrent, 'delayP5': isCurrent}" alt="">
         <img src="../../assets/location.jpg" :class="{'scale21': isCurrent, 'delayP15': isCurrent}" alt="">
-        <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">{{ con.extra.address}}</div>
-        <div :class="{'scale01': isCurrent, 'delayP25': isCurrent}">{{ con.extra.time }}</div>
+        <!-- <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">{{ JSON.parse(con.extra).address}}</div>
+        <div :class="{'scale01': isCurrent, 'delayP25': isCurrent}">{{ JSON.parse(con.extra).time }}</div> -->
       </div>
     </span>
   </div>
@@ -29,7 +29,7 @@ export default {
 };
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" type="text/css" scoped>
 @import "../../common.scss";
 .guide {
   position: relative;

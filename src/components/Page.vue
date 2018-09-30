@@ -7,15 +7,10 @@
         <slot></slot>
     </section>
     <section class="page" v-else>
-        <div class="loadEffect">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+        <div id="loading">
+            <div>
+                <div class="loading-icon"></div>
+            </div>
         </div>
     </section>
 </template>
@@ -33,7 +28,7 @@ export default {
   }
 };
 </script>
-<style type="text/css">
+<style lang="scss" type="text/css" scoped>
 .page {
   overflow: hidden;
   position: fixed;
@@ -61,5 +56,36 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+#loading {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 1200;
+  background: #000;
+  opacity: 0.6;
+
+  div {
+    .loading-icon {
+      display: block;
+      width: 40px;
+      height: 40px;
+      background-image: url("https://h5.sinaimg.cn/upload/1005/453/2018/05/30/loading.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: loading_rotate 1s infinite;
+    }
+  }
+}
+
+@keyframes loading_rotate {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
