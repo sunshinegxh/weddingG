@@ -97,7 +97,7 @@ export default {
           let res = response.body.data;
           if (response.body.code === "0000") {
             this.musicUrl = window.encodeURI(res.musicUrl);
-            this.indexData = res.pageList;
+            this.indexData = res.pageList.slice(0, 1);
           } else {
             console.log("res.respCode", res.message);
           }
