@@ -28,9 +28,6 @@ export default {
       current: 0
     };
   },
-  mounted() {
-    console.log("template1:", this.dataList);
-  },
   methods: {
     onChange(current) {
       console.log("onChange", current);
