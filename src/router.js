@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+// import Home from "./views/Home.vue";
 import Music from "./views/Music.vue";
+import BaoMax from "./views/BaoMax.vue";
 
 Vue.use(Router);
 
@@ -10,7 +11,12 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: BaoMax
+    },
+    {
+      path: "/baomax",
+      name: "baomax",
+      component: BaoMax
     },
     {
       path: "/music",

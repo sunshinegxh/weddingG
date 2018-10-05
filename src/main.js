@@ -10,13 +10,14 @@ Vue.component(Picker.name, Picker);
 import "mint-ui/lib/style.css";
 import ajax from "./libs/ajax";
 import jssdk from "./libs/jssdk";
+
 Vue.use(ajax);
 Vue.use(jssdk);
 
 const app = {
   launch() {
     this.initRem();
-    this.script();
+    // this.script();
     Vue.use(Resource);
     new Vue({
       router,
