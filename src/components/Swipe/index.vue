@@ -40,7 +40,6 @@ export default {
       if (this.timer !== null) {
         return;
       }
-      debugger;
       if (direction === "down" && this.pageNum < this.size - 1) {
         this.pageNum = this.pageNum + 1;
       } else if (direction === "up" && this.pageNum > 0) {
