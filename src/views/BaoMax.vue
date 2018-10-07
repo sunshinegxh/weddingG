@@ -1,9 +1,9 @@
 <template>
-  <div class="app">
+  <div class="app" id="app">
     <loading v-if="loading"/>
     <div v-else>
       <div class="topbar">
-        <div class="back"></div>
+        <div class="back" @click="screenshot"></div>
         <div @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
           <audio ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
         </div>
@@ -13,7 +13,9 @@
   </div>
 </template>
 <script>
+import toast from "../components/common/toast";
 import Loading from "../components/common/loading";
+import domtoimage from "dom-to-image";
 
 export default {
   name: "BaoMax",
@@ -41,6 +43,9 @@ export default {
     }
   },
   created() {
+    this.edit = +this.$route.query.edit === 1;
+    this.$store.commit("SET_EDIT", this.edit);
+    this.$store.commit("SET_CARDID", +this.cardId);
     // TODO
     (() => import(`../components/temp${this.templateId}`))().then(mod => {
       // (() => import("../components/temp2"))().then(mod => {
@@ -91,9 +96,10 @@ export default {
     getTemplateInfo() {
       this.loading = true;
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/card/getCardTemplate.gg", {
-          templateId: this.templateId
-        })
+        // .post("http://47.105.43.207:80/()/banhunli/card/getCardTemplate.gg", {
+        //   templateId: this.templateId
+        // })
+        .get("http://localhost:3000/getIndex")
         .then(response => {
           this.loading = false;
           let res = response.body.data;
@@ -111,26 +117,29 @@ export default {
     },
     getUserTemplateInfo() {
       this.loading = true;
-      return this.$http
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
-          {
-            cardId: this.cardId
-          }
-        )
-        .then(response => {
-          this.loading = false;
-          let res = response.body.data;
-          if (response.body.code === "0000") {
-            this.musicUrl = window.encodeURI(res.musicUrl);
-            this.indexData = res.pageList;
-          } else {
-            console.log("res.respCode", response.body.message);
-          }
-        })
-        .catch(e => {
-          document.write(e);
-        });
+      return (
+        this.$http
+          // .post(
+          //   "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
+          //   {
+          //     cardId: this.cardId
+          //   }
+          // )
+          .get("http://localhost:3000/getIndex")
+          .then(response => {
+            this.loading = false;
+            let res = response.body.data;
+            if (response.body.code === "0000") {
+              this.musicUrl = window.encodeURI(res.musicUrl);
+              this.indexData = res.pageList;
+            } else {
+              console.log("res.respCode", response.body.message);
+            }
+          })
+          .catch(e => {
+            document.write(e);
+          })
+      );
     },
     setCoverData() {
       this.$http
@@ -155,6 +164,49 @@ export default {
         })
         .catch(e => {
           document.write(e);
+        });
+    },
+    screenshot() {
+      let self = this;
+      let node = document.getElementById("app");
+      domtoimage
+        .toPng(node)
+        .then(function(dataUrl) {
+          self.uploadPrintScreen(12, 22, dataUrl);
+        })
+        .catch(function(error) {
+          console.error("oops, something went wrong!", error);
+        });
+      // domtoimage.toBlob(document.getElementById('app'))
+      // .then(function (blob) {
+      //   console.log(blob)
+      //   var reader = new FileReader();
+      //   reader.onload = function(event){
+      //     var fd = new FormData();
+      //     fd.append('data', event.target.result);
+      //     this.$http.post(`http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg`, param,
+      //     {
+      //       headers: { "Content-Type": "multipart/form-data" }
+      //     }
+      //   )
+      //   }
+      //   reader.readAsDataURL(blob);
+      // });
+      console.log("jietu");
+    },
+    uploadPrintScreen(cardId, pageId, base64ImgUrl) {
+      let param = new FormData();
+      param.append("cardId", cardId);
+      param.append("pageId", pageId);
+      param.append("base64ImgUrl", base64ImgUrl);
+      this.$http
+        .post(
+          `http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg`,
+          param
+        )
+        .then(response => {
+          toast("上传成功！");
+          console.log("uploadPrintScreen:", response.body.data);
         });
     }
   },
