@@ -21,7 +21,7 @@ import page7 from "./page7";
 import page8 from "./page8";
 
 export default {
-  name: "template1",
+  name: "template2",
   props: ["dataList"],
   data() {
     return {

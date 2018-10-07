@@ -12,7 +12,7 @@
       :changeP="changeP"
       v-on:change-page="changePage">
     </full-page>
-    <shot-screen></shot-screen>
+    <!-- <shot-screen></shot-screen> -->
     <!-- 只有封面有编辑按钮 每个页面都有上传图片的按钮 -->
     <audio class="invite_music" :src="musicNativeUrl" controls="controls" preload id="music1"></audio>
   </div>

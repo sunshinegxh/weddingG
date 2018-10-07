@@ -1,5 +1,5 @@
 <template>
-  <div class="cover animate" ref="`section${idx}`">
+  <div class="cover">
     <div class="invite_ic_pic" v-if="edit">
       <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>

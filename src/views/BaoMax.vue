@@ -42,8 +42,8 @@ export default {
   },
   created() {
     // TODO
-    // (() => import(`../components/temp${this.templateId}`))().then(mod => {
-    (() => import("../components/temp2"))().then(mod => {
+    (() => import(`../components/temp${this.templateId}`))().then(mod => {
+      // (() => import("../components/temp2"))().then(mod => {
       this.template = mod.default;
     });
     if (this.status === "0") {
