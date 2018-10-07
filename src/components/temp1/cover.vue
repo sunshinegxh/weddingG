@@ -1,7 +1,7 @@
 <template>
-  <div class="cover animate" ref="`section${idx}`">
+  <div class="cover">
     <div class="invite_ic_pic" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <img
       src="../../assets/invite_ic_edit.png"
@@ -9,7 +9,7 @@
       v-if="edit"
       @click="editNative"
       alt="">
-    <span class="cover-bg to-show-2" :style="{backgroundImage: 'url(' + imgSrc[0] + ')'}">
+    <span class="cover-bg to-show-2" :style="{'background-image': `url(${imgSrc[0]})`}">
       <div class="cover-bg-white from-bottom60 delayP5"></div>
       <img class="from-right30 delay1" src="../../assets/cover_wedding.png" alt="">
       <p class="from-right30 delayP15">{{ extra.groom }}</p>
@@ -28,12 +28,12 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "cover1",
-  props: ["idx", "con", "currentPage"],
+  props: ["info"],
   data() {
     return {
       current: 0,
       loaded: false,
-      imgSrc: this.con.goodsImg,
+      imgSrc: this.info.goodsImg,
       extra: {}
     };
   },
@@ -48,8 +48,8 @@ export default {
     })
   },
   created() {
-    if (this.con) {
-      this.extra = JSON.parse(this.con.extra);
+    if (this.info) {
+      this.extra = JSON.parse(this.info.extra);
     }
     window.refreshInfo = this.setInfo;
   },
@@ -109,13 +109,14 @@ export default {
 .cover {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   &-bg {
     width: 100%;
     position: relative;
     height: 100%;
     display: inline-block;
     background-size: 100% 100%;
+    // background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
     &-white {

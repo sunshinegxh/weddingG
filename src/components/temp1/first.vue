@@ -1,10 +1,10 @@
 <template>
-    <div class="first animate" ref="`section${idx}`">
+    <div class="first animate">
       <div class="invite_ic_pic1" v-if="edit">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
       <div class="invite_ic_pic2" v-if="edit">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img
         src="../../assets/invite_ic_edit.png"
@@ -14,15 +14,15 @@
         alt="">
       <span
         :style="`backgroundImage: url(${imgArr[0]})`"
-        :class="{'from-left': isCurrent}">
+        class="from-left">
       </span>
-      <div :class="{'scale01': isCurrent, 'delay2': isCurrent, 'first-text': true}">
+      <div class="scale01 delay2 first-text">
         <!-- 在固定宽度下面 靠左显示 -->
-        <p v-for="(item, index) in con.extra" :key="index">{{ item }}</p>
+        <p v-for="(item, index) in info.extra" :key="index">{{ item }}</p>
       </div>
       <span
         :style="`backgroundImage: url(${imgArr[1]})`"
-        :class="{'from-right': isCurrent}">
+        class="from-right">
       </span>
     </div>
 </template>
@@ -33,12 +33,7 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "first1",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.idx;
-    }
-  },
+  props: ["info"],
   computed: {
     ...mapState({
       edit: state => state.edit,
@@ -50,8 +45,7 @@ export default {
   },
   data() {
     return {
-      imgArr: this.con.goodsImg,
-      isCurrent: false
+      imgArr: this.info.goodsImg
     };
   },
   methods: {
@@ -72,7 +66,7 @@ export default {
 .first {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   .edit {
     position: fixed;
     top: 50%;

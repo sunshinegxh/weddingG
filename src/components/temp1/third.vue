@@ -1,22 +1,22 @@
 <template>
-  <div class="third animate" ref="idx">
+  <div class="third">
     <div class="invite_ic_pic1" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="invite_ic_pic2" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
       :style="`backgroundImage: url(${imgArr[0]})`"
-      :class="{'from-right': isCurrent, 'delay1': isCurrent}">
+      class="from-right delay1">
     </span>
     <span
       :style="`backgroundImage: url(${imgArr[1]})`"
-      :class="{'from-left': isCurrent, 'delay2': isCurrent}">
+      class="from-left delay2">
     </span>
-    <p :class="{'from-right48': isCurrent, 'delay4': isCurrent}">5 / 20</p>
-    <img :class="{'from-left100': isCurrent, 'delay4': isCurrent}" src="../../assets/page3_sweetday.png" alt="">
-    <img :class="{'from-right48': isCurrent, 'delay3': isCurrent}" src="../../assets/page3_marryyou.png" alt="">
+    <p class="from-right48 delay4">5 / 20</p>
+    <img class="from-left100 delay4" src="../../assets/page3_sweetday.png" alt="">
+    <img class="from-right48 delay3" src="../../assets/page3_marryyou.png" alt="">
   </div>
 </template>
 
@@ -26,12 +26,7 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "third1",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.idx;
-    }
-  },
+  props: ["info"],
   computed: {
     ...mapState({
       edit: state => state.edit,
@@ -40,10 +35,9 @@ export default {
   },
   data() {
     return {
-      isCurrent: false,
       // img1: require("../../assets/page4_bg_up_left.png"),
       // img2: require("../../assets/page4_bg_down_right.png"),
-      imgArr: this.con.goodsImg
+      imgArr: this.info.goodsImg
     };
   },
   methods: {
@@ -63,7 +57,7 @@ export default {
 .third {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   .invite_ic_pic1 {
     position: fixed;
     top: 224 * $px;

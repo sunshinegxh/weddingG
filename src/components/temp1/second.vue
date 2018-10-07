@@ -1,26 +1,26 @@
 <template>
-  <div class="second animate" ref="idx">
+  <div class="second">
     <div class="invite_ic_pic" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <img src="../../assets/page2_lovestory.png" alt="">
     <span
       :style="`backgroundImage: url(${imgSrc[0]})`"
-      :class="{'from-top': isCurrent}">
+      class="from-top">
     </span>
     <div class="invite_ic_pic" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
       :style="`backgroundImage: url(${imgSrc[1]})`"
-      :class="{'from-right': isCurrent, 'delay2': isCurrent}">
+      class="from-right delay2">
     </span>
     <div class="invite_ic_pic" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
       :style="`backgroundImage: url(${imgSrc[2]})`"
-      :class="{'from-left': isCurrent, 'delay2': isCurrent}">
+      class="from-left delay2">
     </span>
   </div>
 </template>
@@ -31,19 +31,13 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "info1",
-  props: ["idx", "con", "currentPage"],
+  props: ["info"],
   components: {
     uploadImage
   },
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.idx;
-    }
-  },
   data() {
     return {
-      isCurrent: false,
-      imgSrc: this.con.goodsImg
+      imgSrc: this.info.goodsImg
       // img1: this.con.goodsImg[0],
       // img2: this.con.goodsImg[1],
       // img3: this.con.goodsImg[2],
@@ -75,7 +69,7 @@ export default {
 .second {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   img {
     width: 700 * $px;
     position: absolute;

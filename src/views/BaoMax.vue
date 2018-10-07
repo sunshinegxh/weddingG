@@ -8,7 +8,7 @@
           <audio ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
         </div>
       </div>
-      <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
+      <component :edit="status" :dataList="indexData" ref="temp" :is="template" class="template"></component>
     </div>
   </div>
 </template>
@@ -47,8 +47,8 @@ export default {
     this.$store.commit("SET_EDIT", this.edit);
     this.$store.commit("SET_CARDID", +this.cardId);
     // TODO
-    // (() => import(`../components/temp${this.templateId}`))().then(mod => {
-    (() => import("../components/temp3"))().then(mod => {
+    (() => import(`../components/temp${this.templateId}`))().then(mod => {
+      // (() => import("../components/temp2"))().then(mod => {
       this.template = mod.default;
     });
     if (this.status === "0") {
@@ -57,6 +57,8 @@ export default {
     } else {
       this.getUserTemplateInfo();
     }
+    this.$store.commit("SET_EDIT", this.status);
+    this.$store.commit("SET_CARDID", this.cardId);
   },
   mounted() {
     // TODO音乐问题，好像需要用户操作才可触发
@@ -103,7 +105,7 @@ export default {
           let res = response.body.data;
           if (response.body.code === "0000") {
             this.musicUrl = window.encodeURI(res.musicUrl);
-            this.indexData = res.pageList;
+            this.indexData = res.pageList.slice(0, 1);
           } else {
             console.log("res.respCode", res.message);
           }
