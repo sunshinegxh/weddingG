@@ -22,9 +22,6 @@ import page8 from "./tan";
 export default {
   name: "template1",
   props: ["dataList"],
-  mounted() {
-    console.log("template1:", this.dataList);
-  },
   methods: {
     isCom(val) {
       return `page${val}`;

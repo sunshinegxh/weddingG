@@ -54,6 +54,10 @@ export default {
     }
   },
   mounted() {
+    // TODO音乐问题，好像需要用户操作才可触发
+    setTimeout(() => {
+      this.$refs.music.play();
+    }, 1000);
     // 客户端修改页面number
     window.refreshPage = page => {
       this.getUserTemplateInfo().then(() => {
@@ -61,13 +65,20 @@ export default {
       });
     };
     window.setMusic = music => {
-      alert("setmusic");
-      this.musicUrl = music;
+      this.musicUrl = window.encodeURI(music);
+    };
+    window.getShowPageIndex = () => {
+      return this.$refs.temp.current || 0;
+    };
+    window.showPageIndex = page => {
+      this.$refs.temp.current = page;
+    };
+    window.refreshInfo = () => {
+      this.setCoverData();
     };
   },
   methods: {
     toogleMusic() {
-      console.log("aaaa");
       if (this.musicStop) {
         this.$refs.music.play();
       } else {
@@ -85,9 +96,8 @@ export default {
           this.loading = false;
           let res = response.body.data;
           if (response.body.code === "0000") {
-            this.musicUrl = res.musicUrl;
-            this.indexData = res.pageList;
-            console.log(this.indexData);
+            this.musicUrl = window.encodeURI(res.musicUrl);
+            this.indexData = res.pageList.slice(0, 1);
           } else {
             console.log("res.respCode", res.message);
           }
@@ -110,7 +120,33 @@ export default {
           this.loading = false;
           let res = response.body.data;
           if (response.body.code === "0000") {
+            this.musicUrl = window.encodeURI(res.musicUrl);
             this.indexData = res.pageList;
+          } else {
+            console.log("res.respCode", response.body.message);
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
+    setCoverData() {
+      this.$http
+        .post(
+          "http://47.105.43.207:80/()/banhunli/card/getInvitationsInfo.gg",
+          {
+            cardId: this.$route.query.cardId
+          }
+        )
+        .then(response => {
+          let res = response.body.data;
+          if (response.body.code === "0000") {
+            // 第一页一定是封面！！！
+            const coverData = this.indexData[0];
+            this.indexData.splice(0, 1, {
+              ...coverData,
+              extra: JSON.stringify(res)
+            });
           } else {
             console.log("res.respCode", response.body.message);
           }

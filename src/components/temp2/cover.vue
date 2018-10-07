@@ -25,15 +25,11 @@
 export default {
   name: "template-2-cover",
   props: ["info"],
-  mounted() {
-    console.log(this.info);
-  },
   computed: {
     extra() {
       return JSON.parse(this.info.extra);
     },
     cover() {
-      console.log("cover:", this.info.goodsImg[0]);
       return this.info.goodsImg[0];
     }
   }

@@ -20,7 +20,6 @@ export default {
       return JSON.parse(this.info.extra);
     },
     cover() {
-      console.log("page6:", this.info.goodsImg);
       return this.info.goodsImg[0];
     }
   }
