@@ -173,10 +173,13 @@ export default {
     z-index: 1000;
   }
   .edit {
-    position: fixed;
+    width: 112 * $px;
+    height: 112 * $px;
+    position: absolute;
     bottom: 248 * $px;
     left: 50%;
     transform: translate(-50%, 0);
+    z-index: 1000;
   }
 }
 .cover-bg .delayP5 {
