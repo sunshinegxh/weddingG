@@ -1,9 +1,9 @@
 <template>
-  <div class="guide animate" ref="`section${idx}`">
-    <span :class="{'guide-bg': true, 'to-show-2': isCurrent}">
-      <div :class="{'guide-bg-white': true, 'from-bottomCenter': isCurrent}">
-        <img src="../../assets/location_welcome.png" :class="{'from-topG': isCurrent, 'delayP5': isCurrent}" alt="">
-        <img src="../../assets/location.jpg" :class="{'scale21': isCurrent, 'delayP15': isCurrent}" alt="">
+  <div class="guide animate">
+    <span class="guide-bg to-show-2">
+      <div class="guide-bg-white from-bottomCenter">
+        <img src="../../assets/location_welcome.png" class="from-topG delayP5" alt="">
+        <img src="../../assets/location.jpg" class="scale21 delayP15" alt="">
         <!-- <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">{{ JSON.parse(con.extra).address}}</div>
         <div :class="{'scale01': isCurrent, 'delayP25': isCurrent}">{{ JSON.parse(con.extra).time }}</div> -->
       </div>
@@ -14,16 +14,9 @@
 <script>
 export default {
   name: "guide1",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.idx;
-    }
-  },
+  props: ["info"],
   data() {
-    return {
-      isCurrent: false
-    };
+    return {};
   },
   created() {}
 };
@@ -34,7 +27,7 @@ export default {
 .guide {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   &-bg {
     width: 100%;
     position: relative;

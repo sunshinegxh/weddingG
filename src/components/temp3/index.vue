@@ -2,8 +2,7 @@
   <div class="wrapper">
     <swipe :current="current" @change="onChange">
       <swipe-item v-for="(data, index) in dataList" :key="index" :active="index === current">
-        <!-- <component :is="isCom(data.templatePageId)" :info="data"></component> -->
-        <component :is="isCom(data.templatePageId)" :info="data" :edit="edit"></component>
+        <component :is="isCom(data.templatePageId)" :con="data" :currentPage="current"></component>
         <!-- <component :is="isCom(8)" :info="data" :key="data.pageId"></component> -->
       </swipe-item>
     </swipe>
@@ -13,17 +12,17 @@
 import Swipe from "../Swipe";
 import SwipeItem from "../Swipe/item";
 import page1 from "./cover";
-import page2 from "./first";
-import page3 from "./second";
-import page4 from "./third";
-import page5 from "./forth";
-import page6 from "./guide";
-import page7 from "./info";
-import page8 from "./tan";
+import page2 from "./page2";
+import page3 from "./page3";
+import page4 from "./page4";
+import page5 from "./page5";
+import page6 from "./page6";
+import page7 from "./page7";
+import page8 from "./page8";
 
 export default {
   name: "template1",
-  props: ["dataList", "edit"],
+  props: ["dataList"],
   data() {
     return {
       current: 0
@@ -61,7 +60,5 @@ export default {
 }
 .swipe-item {
   height: 100vh;
-  background: #fff;
-  background-size: 100% 100%;
 }
 </style>

@@ -4,54 +4,49 @@
     <span class="border-bg cover-bg-bottom from-bottom0"></span>
     <span class="border-bg cover-bg-right from-right0"></span>
     <span class="border-bg cover-bg-top from-top0"></span>
+
+    <div class="invite_ic_pic1" v-if="edit">
+      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+    </div>
+
     <div class="cover-bg3">
       <span class="cover_pic_copywrite delay1 from-top0"></span>
-      <span class="name delayP15 from-top200">新浪 & 新娘</span>
-      <img src="../../assets/third/cover_pic.jpg" alt="" class="cover_pic scale01 delayP25">
-      <span class="address delay2 from-bottom100">这里是地址这里是地这里是地址这里是地址</span>
-      <span class="date delay3 from-bottom204">2020 年 10 月 30 日 23 时 49 分</span>
+      <span class="name delayP15 from-top200">{{extra.groom}} & {{extra.新娘}}</span>
+      <img :src="imgArr[0]" alt="" class="cover_pic scale01 delayP25">
+      <span class="address delay2 from-bottom100">{{extra.address}}</span>
+      <span class="date delay3 from-bottom204">{{extra.time}}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "cover",
   props: ["idx", "con"],
   data() {
     return {
       current: 0,
-      loaded: false
+      loaded: false,
+      extra: this.con.extra,
+      imgArr: this.con.goodsImg
     };
+  },
+  computed: {
+    ...mapState({
+      edit: state => state.edit,
+      cardId: state => state.cardId
+    })
   },
   created() {
     window.setInfo = this.setInfo;
   },
   methods: {
-    setInfo() {
-      alert("refresh");
-      this.$http
-        .get("http://192.168.0.134:3000/getIndex")
-        // .post("/card/getInvitationsInfo.gg", {
-        //   params: {
-        //     pageNo: 1,
-        //     pageSize: 20
-        //   }
-        // })
-        .then(response => {
-          // this.loading = false;
-          console.log(response);
-          // let res = response.data;
-          // if (res.respCode === 0) {
-          //   // 本地注释掉
-          //   this.indexData = res.respData;
-          // } else {
-          //   alert(res.respMsg);
-          // }
-        })
-        .catch(e => {
-          document.write(e);
-        });
+    setInfo() {},
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
     },
     changePage(index) {
       this.$emit("changePage", index);
@@ -62,6 +57,9 @@ export default {
         big: this.current === 1
       };
     }
+  },
+  components: {
+    uploadImage
   }
 };
 </script>
@@ -70,8 +68,8 @@ export default {
 @import "../../common.scss";
 .cover {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   font-family: serif;
   &-bg3 {
     width: 702 * $px;
@@ -172,59 +170,27 @@ export default {
 }
 
 .cover-bg3 .delay1 {
-  -moz-animation-delay: 1s;
-  -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
 
 .cover-bg3 .delayP15 {
-  -moz-animation-delay: 1.5s;
-  -webkit-animation-delay: 1.5s;
   animation-delay: 1.5s;
 }
 
 .cover-bg3 .delay2 {
-  -moz-animation-delay: 2s;
-  -webkit-animation-delay: 2s;
   animation-delay: 2s;
 }
 
 .cover-bg3 .delayP25 {
-  -moz-animation-delay: 2.5s;
-  -webkit-animation-delay: 2.5s;
   animation-delay: 2.5s;
 }
 
 .cover-bg3 .delay3 {
-  -moz-animation-delay: 3s;
-  -webkit-animation-delay: 3s;
   animation-delay: 3s;
 }
 
 .from-bottom204 {
-  -webkit-animation: fBtm204 2s ease forwards;
-  -moz-animation: fBtm204 2s ease forwards;
   animation: fBtm204 2s ease forwards;
-}
-@-moz-keyframes fBtm204 {
-  0% {
-    bottom: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 204 * $px;
-    opacity: 0.8;
-  }
-}
-@-webkit-keyframes fBtm204 {
-  0% {
-    bottom: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 204 * $px;
-    opacity: 0.8;
-  }
 }
 @keyframes fBtm204 {
   0% {
@@ -238,29 +204,7 @@ export default {
 }
 
 .from-bottom100 {
-  -webkit-animation: fBtm100 2s ease forwards;
-  -moz-animation: fBtm100 2s ease forwards;
   animation: fBtm100 2s ease forwards;
-}
-@-moz-keyframes fBtm100 {
-  0% {
-    bottom: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 100 * $px;
-    opacity: 0.8;
-  }
-}
-@-webkit-keyframes fBtm100 {
-  0% {
-    bottom: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 100 * $px;
-    opacity: 0.8;
-  }
 }
 @keyframes fBtm100 {
   0% {
@@ -274,29 +218,7 @@ export default {
 }
 
 .from-top200 {
-  -webkit-animation: fTop200 2s ease forwards;
-  -moz-animation: fTop200 2s ease forwards;
   animation: fTop200 2s ease forwards;
-}
-@-moz-keyframes fTop200 {
-  0% {
-    top: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    top: 200 * $px;
-    opacity: 0.8;
-  }
-}
-@-webkit-keyframes fTop200 {
-  0% {
-    top: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    top: 200 * $px;
-    opacity: 0.8;
-  }
 }
 @keyframes fTop200 {
   0% {
@@ -310,29 +232,7 @@ export default {
 }
 
 .from-top0 {
-  -webkit-animation: fTop0 2s forwards;
-  -moz-animation: fTop0 2s forwards;
   animation: fTop0 2s forwards;
-}
-@-moz-keyframes fTop0 {
-  0% {
-    top: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    top: 0 * $px;
-    opacity: 0.8;
-  }
-}
-@-webkit-keyframes fTop0 {
-  0% {
-    top: -300px;
-    opacity: 0;
-  }
-  100% {
-    top: 0 * $px;
-    opacity: 0.8;
-  }
 }
 @keyframes fTop0 {
   0% {
@@ -346,29 +246,7 @@ export default {
 }
 
 .from-bottom0 {
-  -webkit-animation: fBtm0 2s forwards;
-  -moz-animation: fBtm0 2s forwards;
   animation: fBtm0 2s forwards;
-}
-@-moz-keyframes fBtm0 {
-  0% {
-    bottom: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 0 * $px;
-    opacity: 0.8;
-  }
-}
-@-webkit-keyframes fBtm0 {
-  0% {
-    bottom: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 0 * $px;
-    opacity: 0.8;
-  }
 }
 @keyframes fBtm0 {
   0% {
@@ -382,29 +260,7 @@ export default {
 }
 
 .from-right0 {
-  -webkit-animation: fRht0 2s ease forwards;
-  -moz-animation: fRht0 2s ease forwards;
   animation: fRht0 2s ease forwards;
-}
-@-moz-keyframes fRht0 {
-  0% {
-    right: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    right: 0 * $px;
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fRht0 {
-  0% {
-    right: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    right: 0 * $px;
-    opacity: 1;
-  }
 }
 @keyframes fRht0 {
   0% {
@@ -418,29 +274,7 @@ export default {
 }
 
 .from-left0 {
-  -webkit-animation: flft0 2s ease forwards;
-  -moz-animation: fLft0 2s ease forwards;
   animation: fLft0 2s ease forwards;
-}
-@-moz-keyframes fLft0 {
-  0% {
-    left: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    left: 0 * $px;
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fLft0 {
-  0% {
-    left: -300 * $px;
-    opacity: 0;
-  }
-  100% {
-    left: 0 * $px;
-    opacity: 1;
-  }
 }
 @keyframes fLft0 {
   0% {
@@ -451,5 +285,13 @@ export default {
     left: 0 * $px;
     opacity: 1;
   }
+}
+
+.invite_ic_pic1 {
+  position: fixed;
+  top: 580 * $px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1000;
 }
 </style>

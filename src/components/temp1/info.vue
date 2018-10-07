@@ -1,20 +1,20 @@
 <template>
-  <div class="info animate" ref="`section${idx}`">
-    <span :class="{'info-bg': true, 'to-show-2': isCurrent}">
-      <div :class="{'info-bg-white': true, 'from-bottomCenter': isCurrent}">
-        <img src="../../assets/location_welcome.png" :class="{'from-topG': isCurrent}" alt="">
-        <p :class="{'info-bg-white-p': true, 'from-bottom': isCurrent, 'delay1': isCurrent}">为了方便新人，请填写您的赴宴信息</p>
-        <div :class="{'clearflex': true, 'from-bottom': isCurrent, 'delayP15': isCurrent}">
+  <div class="info">
+    <span class="info-bg to-show-2">
+      <div class="info-bg-white from-bottomCenter">
+        <img src="../../assets/location_welcome.png" class="from-topG" alt="">
+        <p class="info-bg-white-p from-bottom delay1">为了方便新人，请填写您的赴宴信息</p>
+        <div class="clearflex from-bottom delayP15">
           <span>姓名</span>
           <input
             placeholder="请输入您的姓名"
             v-model="username"/>
         </div>
-        <div :class="{'clearflex': true, 'from-bottom': isCurrent, 'delay2': isCurrent}">
+        <div class="clearflex from-bottom delay2">
           <span>关系</span>
           <p @click="relation">{{ comfirm.length > 0 ? `${comfirm[0].relationName}${comfirm[1].relationName}` : '选择您和新人的关系' }}</p>
         </div>
-        <div :class="{'clearflex': true, 'from-bottom': isCurrent, 'delayP25': isCurrent}">
+        <div class="clearflex from-bottom delayP25">
           <span>赴宴人数</span>
           <p class="m-num">
             <span @click="count--">-</span>
@@ -22,7 +22,7 @@
             <span @click="count++">+</span>
           </p>
         </div>
-        <div @click="sub" :class="{'from-bottom': isCurrent, 'delay3': isCurrent}">确认赴宴并提交信息</div>
+        <div @click="sub" class="from-bottom delay3">确认赴宴并提交信息</div>
       </div>
       <div class="pick">
         <div class="pick-title clearflex">
@@ -40,15 +40,9 @@ import toast from "../common/toast";
 
 export default {
   name: "info1",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.idx;
-    }
-  },
+  props: ["info"],
   data() {
     return {
-      isCurrent: false,
       count: 1,
       username: "",
       slots: [
@@ -136,7 +130,7 @@ export default {
 .info {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   &-bg {
     width: 100%;
     position: relative;

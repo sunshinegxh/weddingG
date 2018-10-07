@@ -1,7 +1,7 @@
 <template>
-  <div class="tan animate" ref="`section${idx}`">
-    <div :class="{'tan-bg': true, 'to-show-2': isCurrent}">
-      <img src="../../assets/barrage_thankyou.png" :class="{'from-right24': isCurrent}" alt="">
+  <div class="tan">
+    <div class="tan-bg to-show-2">
+      <img src="../../assets/barrage_thankyou.png" class="from-right24" alt="">
       <div class="tan-bg-text">
         <ul v-if="showData.length > 0">
           <li v-for="(item, index) in showData" :key="index" :class="liClass(index)"><span>{{ item }}</span></li>
@@ -23,34 +23,32 @@ import { mapState } from "vuex";
 
 export default {
   name: "tan1",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.idx;
-      if (this.isCurrent) {
-        let i = 0;
-        let self = this;
-        setInterval(() => {
-          let sindex = i % this.showData.length;
-          let tindex = i % this.tanData.length;
-          self.$set(self.showData, sindex, self.tanData[tindex]);
-          i++;
-        }, 2000);
-      }
-    }
-  },
+  props: ["info"],
+  // watch: {
+  //   currentPage(newV) {
+  //     this.isCurrent = newV === this.idx;
+  //     if (this.isCurrent) {
+  //       let i = 0;
+  //       let self = this;
+  //       setInterval(() => {
+  //         let sindex = i % this.showData.length;
+  //         let tindex = i % this.tanData.length;
+  //         self.$set(self.showData, sindex, self.tanData[tindex]);
+  //         i++;
+  //       }, 2000);
+  //     }
+  //   }
+  // },
   data() {
     return {
-      isCurrent: false,
       blession: "",
       showData: [],
       tanData: []
     };
   },
   created() {
-    if (this.isCurrent) {
-      this.getDanInfo();
-    }
+    this.showData = ["this.tanData[0]", "this.tanData[1]", "this.tanData[2]"];
+    this.getDanInfo();
   },
   computed: {
     ...mapState({
@@ -106,18 +104,18 @@ export default {
       switch (+index) {
         case 0:
           return {
-            delay2: this.isCurrent,
-            firstA: this.isCurrent
+            delay2: true,
+            firstA: true
           };
         case 1:
           return {
-            delay4: this.isCurrent,
-            firstA: this.isCurrent
+            delay4: true,
+            firstA: true
           };
         case 2:
           return {
-            delay6: this.isCurrent,
-            firstA: this.isCurrent
+            delay6: true,
+            firstA: true
           };
         default:
           return {
@@ -134,7 +132,7 @@ export default {
 .tan {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   &-bg {
     width: 100%;
     position: relative;

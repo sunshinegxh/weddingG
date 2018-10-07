@@ -8,7 +8,7 @@
           <audio ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
         </div>
       </div>
-      <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
+      <component :edit="status" :dataList="indexData" ref="temp" :is="template" class="template"></component>
     </div>
   </div>
 </template>
@@ -52,6 +52,8 @@ export default {
     } else {
       this.getUserTemplateInfo();
     }
+    this.$store.commit("SET_EDIT", this.status);
+    this.$store.commit("SET_CARDID", this.cardId);
   },
   mounted() {
     // TODO音乐问题，好像需要用户操作才可触发

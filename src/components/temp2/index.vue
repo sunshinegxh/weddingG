@@ -2,8 +2,8 @@
   <div class="wrapper">
     <swipe :current="current" @change="onChange">
       <swipe-item v-for="(data, index) in dataList" :key="index" :active="index === current">
-        <!-- <component :is="isCom(data.templatePageId)" :info="data"></component> -->
-        <component :is="isCom(8)" :info="data" :key="data.pageId"></component>
+        <component :is="isCom(data.templatePageId)" :info="data"></component>
+        <!-- <component :is="isCom(8)" :info="data" :key="data.pageId"></component> -->
       </swipe-item>
     </swipe>
   </div>

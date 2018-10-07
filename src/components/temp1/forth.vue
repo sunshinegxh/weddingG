@@ -1,40 +1,40 @@
 <template>
-  <div class="forth animate" ref="idx">
+  <div class="forth">
     <div class="invite_ic_pic1" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="invite_ic_pic2" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="invite_ic_pic3" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="invite_ic_pic4" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="4" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="4" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
       :style="`backgroundImage: url(${imgArr[0]})`"
-      :class="{'from-right': isCurrent, 'delay': isCurrent}">
+      class="from-right delay">
     </span>
     <span
       :style="`backgroundImage: url(${imgArr[1]})`"
-      :class="{'to-show-2': isCurrent, 'delay3': isCurrent}">
+      class="to-show-2 delay3">
     </span>
     <span
       :style="`backgroundImage: url(${imgArr[2]})`"
-      :class="{'to-show-2': isCurrent, 'delay3': isCurrent}">
+      class="to-show-2 delay3">
     </span>
     <span
       :style="`backgroundImage: url(${imgArr[3]})`"
-      :class="{'from-left': isCurrent, 'delayP5': isCurrent}">
+      class="from-left delayP5">
     </span>
     <img
       src="../../assets/page4_marry you.png"
-      :class="{'from-bottom200': isCurrent, 'delay1': isCurrent}"
+      class="from-bottom200 delay1"
       alt="">
     <img
       src="../../assets/page4_lovestory.png"
-      :class="{'from-left24': isCurrent, 'delayP15': isCurrent}"
+      class="from-left24 delayP15"
       alt="">
   </div>
 </template>
@@ -45,16 +45,10 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "forth1",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.idx;
-    }
-  },
+  props: ["info"],
   data() {
     return {
-      isCurrent: false,
-      imgArr: this.con.goodsImg
+      imgArr: this.info.goodsImg
       // img1: require("../../assets/page4_bg_up_left.png"),
       // img2: require("../../assets/page4_bg_up_right.png"),
       // img3: require("../../assets/page4_bg_down_left.png"),
@@ -84,7 +78,7 @@ export default {
 .forth {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   font-size: 0;
   span {
     display: inline-block;
