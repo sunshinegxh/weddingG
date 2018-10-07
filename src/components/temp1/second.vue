@@ -1,7 +1,7 @@
 <template>
   <div class="second">
     <div class="invite_ic_pic" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <img src="../../assets/page2_lovestory.png" alt="">
     <span
@@ -9,14 +9,14 @@
       class="from-top">
     </span>
     <div class="invite_ic_pic" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
       :style="`backgroundImage: url(${imgSrc[1]})`"
       class="from-right delay2">
     </span>
     <div class="invite_ic_pic" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :pageId="info.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
       :style="`backgroundImage: url(${imgSrc[2]})`"
@@ -38,12 +38,11 @@ export default {
   data() {
     return {
       imgSrc: this.info.goodsImg
-      // img1: this.con.goodsImg[0],
-      // img2: this.con.goodsImg[1],
-      // img3: this.con.goodsImg[2],
-      // img1: require("../../assets/page2_bg_up.png"),
-      // img2: require("../../assets/page2_bg_down_left.png"),
-      // img3: require("../../assets/page2_bg_down_right.png")
+      // imgSrc: [
+      //   require("../../assets/page2_bg_up.png"),
+      //   require("../../assets/page2_bg_down_left.png"),
+      //   require("../../assets/page2_bg_down_right.png")
+      // ]
     };
   },
   computed: {
@@ -56,8 +55,6 @@ export default {
     changeUrl(info) {
       console.log(info);
       this.$set(this.imgSrc, info.index - 1, info.url);
-      // this.imgSrc[info.index-1] = info.url;
-      // this.$emit('maiBiz', true)
     }
   }
 };
@@ -79,28 +76,30 @@ export default {
   }
   span {
     display: inline-block;
-    background-size: 100% 100%;
     background-repeat: no-repeat;
   }
   span:nth-of-type(1) {
     transform: translateY(-100%);
     width: 100%;
-    height: 640 * $px;
+    height: 640 * $vh;
     float: left;
+    background-size: 100% 100%;
   }
   span:nth-of-type(2) {
     transform: translateX(-100%);
     width: 50%;
     height: 100%;
     float: left;
+    background-size: contain;
   }
   span:nth-of-type(3) {
     transform: translateX(100%);
     width: 50%;
     height: 100%;
+    background-size: contain;
   }
   .invite_ic_pic {
-    position: fixed;
+    position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;

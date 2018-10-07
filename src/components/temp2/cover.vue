@@ -27,7 +27,8 @@ export default {
   props: ["info"],
   computed: {
     extra() {
-      return JSON.parse(this.info.extra);
+      return this.info.extra;
+      // return JSON.parse(this.info.extra);
     },
     cover() {
       return this.info.goodsImg[0];

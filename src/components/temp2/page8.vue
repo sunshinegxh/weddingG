@@ -3,7 +3,6 @@
     <div class="bg"></div>
     <div class="message-wrapper">
       <div class="message-input">写下你的祝福</div>
-      <div class="message-send">发送</div>
     </div>
     <div class="message">
       <div class="message-item" :class="getClass(i)" v-for="(text, i) in showData" :key="i">
@@ -124,15 +123,9 @@ export default {
   color: #ffffff;
 }
 .message-input {
-  width: 530 * $vw;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
-  border-radius: 39 * $vw;
-}
-.message-send {
-  width: 148 * $vw;
-  height: 100%;
-  background: rgba(230, 191, 114, 1);
   border-radius: 39 * $vw;
 }
 .message {

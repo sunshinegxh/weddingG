@@ -19,7 +19,7 @@
         <span class="add-btn" role="button" @click="addNumber">+</span>
       </div>
     </div>
-    <div class="submit-btn" role="button" @click="onSubmit">确认赴宴并提交信息</div>
+    <div class="submit-btn" role="button" @click="onSubmit" :style="{backgroundColor: btnColor}">确认赴宴并提交信息</div>
     <div v-if="show" class="pick-wrapper" @touchstart.stop="" @touchend.stop="" @touchmove.stop="">
       <div class="pick-mask"></div>
       <div class="role-picker">
@@ -36,8 +36,10 @@
 <script>
 import { Picker } from "mint-ui";
 import toast from "./toast";
+
 export default {
   name: "custom-form",
+  props: ["btnColor"],
   data() {
     return {
       formDta: {

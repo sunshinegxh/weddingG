@@ -31,32 +31,7 @@ export default {
         self.uploadShotScreen(shotScreen);
       });
     },
-    b64toBlob(b64Data, contentType, sliceSize) {
-      contentType = contentType || "";
-      sliceSize = sliceSize || 512;
-      var byteCharacters = atob(b64Data.substring(b64Data.indexOf(",") + 1));
-      var byteArrays = [];
-      for (
-        var offset = 0;
-        offset < byteCharacters.length;
-        offset += sliceSize
-      ) {
-        var slice = byteCharacters.slice(offset, offset + sliceSize);
-        var byteNumbers = new Array(slice.length);
-        for (var i = 0; i < slice.length; i++) {
-          byteNumbers[i] = slice.charCodeAt(i);
-        }
-        var byteArray = new Uint8Array(byteNumbers);
-        byteArrays.push(byteArray);
-      }
-      var blob = new Blob(byteArrays, { type: contentType });
-      console.log(blob);
-      return blob;
-    },
     uploadShotScreen(img) {
-      let data = new FormData();
-      data.append("file", this.b64toBlob(img));
-      console.log(img);
       this.$http
         .post("http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg", {
           cardId: 78,

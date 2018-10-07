@@ -1,16 +1,16 @@
 <template>
-    <div class="first animate" ref="`section${idx}`">
-      <img class="page1_ic_flower" :class="{'from-rTT': isCurrent}" src="../../assets/third/page1_ic_flower.png" alt="">
-      <img class="page1_pic_up" :class="{'from-left0': isCurrent}" :src="imgArr[0]" alt="">
+    <div class="first">
+      <img class="page1_ic_flower from-rTT" src="../../assets/third/page1_ic_flower.png" alt="">
+      <img class="page1_pic_up from-left0" :src="imgArr[0]" alt="">
       <div class="invite_ic_pic2" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
-      <img class="page1_copywrite" :class="{'from-oPC': isCurrent}" src="../../assets/third/page1_copywrite.png" alt="">
-      <img class="page1_pic_down" :class="{'from-right0': isCurrent}" :src="imgArr[0]" alt="">
+      <img class="page1_copywrite from-oPC" src="../../assets/third/page1_copywrite.png" alt="">
+      <img class="page1_pic_down from-right0" :src="imgArr[0]" alt="">
       <div class="invite_ic_pic3" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
       </div>
-      <img class="page1_ic_vine delay1" :class="{'from-rTT60': isCurrent}" src="../../assets/third/page1_ic_vine.png" alt="">
+      <img class="page1_ic_vine delay1 from-rTT60" src="../../assets/third/page1_ic_vine.png" alt="">
     </div>
 </template>
 
@@ -19,18 +19,12 @@ import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
 
 export default {
-  name: "first3",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.currentPage;
-    }
-  },
+  name: "template-3-page-2",
+  props: ["con"],
   data() {
     return {
       extra: this.con.extra,
-      imgArr: this.con.goodsImg,
-      isCurrent: true
+      imgArr: this.con.goodsImg
     };
   },
   computed: {

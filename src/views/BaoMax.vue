@@ -8,7 +8,7 @@
           <audio ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
         </div>
       </div>
-      <component :edit="status" :dataList="indexData" ref="temp" :is="template" class="template"></component>
+      <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
     </div>
   </div>
 </template>
@@ -43,12 +43,25 @@ export default {
     }
   },
   created() {
-    this.edit = +this.$route.query.edit === 1;
-    this.$store.commit("SET_EDIT", this.edit);
+    let edit = +this.$route.query.edit === 1;
+    console.log("edit:", edit);
+    this.$store.commit("SET_EDIT", edit);
     this.$store.commit("SET_CARDID", +this.cardId);
-    // TODO
+
+    // if (this.templateId === '1') {
+    //   ((() => import(`../components/temp1`))()).then(mod => {
+    //     this.template = mod.default;
+    //   });
+    // } else if (this.templateId === '2') {
+    //   ((() => import(`../components/temp2`))()).then(mod => {
+    //     this.template = mod.default;
+    //   });
+    // } else {
+    //   ((() => import(`../components/temp3`))()).then(mod => {
+    //     this.template = mod.default;
+    //   });
+    // }
     (() => import(`../components/temp${this.templateId}`))().then(mod => {
-      // (() => import("../components/temp2"))().then(mod => {
       this.template = mod.default;
     });
     if (this.status === "0") {
@@ -57,8 +70,6 @@ export default {
     } else {
       this.getUserTemplateInfo();
     }
-    this.$store.commit("SET_EDIT", this.status);
-    this.$store.commit("SET_CARDID", this.cardId);
   },
   mounted() {
     // TODO音乐问题，好像需要用户操作才可触发
@@ -96,16 +107,16 @@ export default {
     getTemplateInfo() {
       this.loading = true;
       this.$http
-        // .post("http://47.105.43.207:80/()/banhunli/card/getCardTemplate.gg", {
-        //   templateId: this.templateId
-        // })
-        .get("http://localhost:3000/getIndex")
+        .post("http://47.105.43.207:80/()/banhunli/card/getCardTemplate.gg", {
+          templateId: this.templateId
+        })
+        // .get("http://localhost:3000/getIndex")
         .then(response => {
           this.loading = false;
           let res = response.body.data;
           if (response.body.code === "0000") {
             this.musicUrl = window.encodeURI(res.musicUrl);
-            this.indexData = res.pageList.slice(0, 1);
+            this.indexData = res.pageList;
           } else {
             console.log("res.respCode", res.message);
           }
@@ -119,13 +130,13 @@ export default {
       this.loading = true;
       return (
         this.$http
-          // .post(
-          //   "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
-          //   {
-          //     cardId: this.cardId
-          //   }
-          // )
-          .get("http://localhost:3000/getIndex")
+          .post(
+            "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
+            {
+              cardId: this.cardId
+            }
+          )
+          // .get("http://localhost:3000/getIndex")
           .then(response => {
             this.loading = false;
             let res = response.body.data;
@@ -245,6 +256,7 @@ export default {
   width: 60 * $vh;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  background-color: transparent;
 }
 .music.type2 {
   background-image: url(../assets/second/invitetion_ic_music_default.png);

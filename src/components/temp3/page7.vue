@@ -11,7 +11,7 @@
 import customForm from "../common/customForm";
 
 export default {
-  name: "template-2-page-7",
+  name: "template-3-page-7",
   components: {
     customForm
   },

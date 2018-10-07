@@ -24,18 +24,12 @@ import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
 
 export default {
-  name: "first3",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.currentPage;
-    }
-  },
+  name: "template-3-page-6",
+  props: ["con"],
   data() {
     return {
       extra: this.con.extra,
-      imgArr: this.con.goodsImg,
-      isCurrent: true
+      imgArr: this.con.goodsImg
     };
   },
   computed: {

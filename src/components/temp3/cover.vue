@@ -1,12 +1,12 @@
 <template>
-  <div class="cover animate" ref="`section${idx}`">
+  <div class="cover">
     <span class="border-bg cover-bg-left from-left0"></span>
     <span class="border-bg cover-bg-bottom from-bottom0"></span>
     <span class="border-bg cover-bg-right from-right0"></span>
     <span class="border-bg cover-bg-top from-top0"></span>
 
     <div class="invite_ic_pic1" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
 
     <div class="cover-bg3">
@@ -24,8 +24,8 @@ import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
 
 export default {
-  name: "cover",
-  props: ["idx", "con"],
+  name: "cover3",
+  props: ["con"],
   data() {
     return {
       current: 0,
@@ -108,11 +108,12 @@ export default {
     margin: 0 auto;
   }
   .cover_pic {
-    width: 544 * $px;
+    width: 544 * $vw;
+    height: 520 * $vh;
     position: absolute;
     left: 0;
     right: 0;
-    top: 280 * $px;
+    top: 280 * $vh;
     margin: 0 auto;
     -webkit-transform: scale(0);
     transform: scale(0);

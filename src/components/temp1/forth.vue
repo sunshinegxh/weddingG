@@ -112,28 +112,28 @@ export default {
     opacity: 0;
   }
   .invite_ic_pic1 {
-    position: fixed;
+    position: absolute;
     top: 224 * $px;
     left: 25%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic2 {
-    position: fixed;
+    position: absolute;
     top: 224 * $px;
     left: 75%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic3 {
-    position: fixed;
+    position: absolute;
     top: 1000 * $px;
     left: 25%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic4 {
-    position: fixed;
+    position: absolute;
     top: 1000 * $px;
     left: 75%;
     transform: translate(-50%, 0);

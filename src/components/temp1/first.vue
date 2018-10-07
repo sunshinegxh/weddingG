@@ -1,10 +1,10 @@
 <template>
     <div class="first animate">
       <div class="invite_ic_pic1" v-if="edit">
-        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
       <div class="invite_ic_pic2" v-if="edit">
-        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img
         src="../../assets/invite_ic_edit.png"
@@ -16,10 +16,9 @@
         :style="`backgroundImage: url(${imgArr[0]})`"
         class="from-left">
       </span>
-      <div class="scale01 delay2 first-text">
-        <!-- 在固定宽度下面 靠左显示 -->
-        <p v-for="(item, index) in info.extra" :key="index">{{ item }}</p>
-      </div>
+      <!-- 在固定宽度下面 靠左显示 -->
+      <!-- <p v-for="(item, index) in extra" :key="index">{{ item }}</p> -->
+      <textarea class="scale01 delay2 first-text" cols="30" rows="3" v-model="extra"></textarea>
       <span
         :style="`backgroundImage: url(${imgArr[1]})`"
         class="from-right">
@@ -30,6 +29,7 @@
 <script>
 import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
+import toast from "../common/toast";
 
 export default {
   name: "first1",
@@ -42,17 +42,38 @@ export default {
   },
   created() {
     window.setInfo = this.setInfo;
+    this.extra = this.info.extra.join("\n");
   },
   data() {
     return {
-      imgArr: this.info.goodsImg
+      imgArr: this.info.goodsImg,
+      extra: ""
     };
   },
   methods: {
     changeUrl(info) {
       this.$set(this.imgArr, info.index - 1, info.url);
     },
-    changeDesc() {}
+    changeDesc() {
+      let ex = this.extra.split(/[\n\t]+/g);
+      this.$http
+        .post("http://47.105.43.207:80/()/banhunli/card/updatePageExtra.gg", {
+          cardId: this.cardId,
+          pageId: this.info.pageId,
+          extra: ex
+        })
+        .then(response => {
+          // let res = response.body.data;
+          if (response.body.code === "0000") {
+            toast("修改成功");
+          } else {
+            console.log("res.respCode", response.body.message);
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    }
   },
   components: {
     uploadImage
@@ -68,7 +89,7 @@ export default {
   width: 100%;
   height: 100vh;
   .edit {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -87,25 +108,28 @@ export default {
     bottom: 0;
   }
   &-text {
-    width: 428 * $px;
+    width: 440 * $vw;
+    height: 120 * $vh;
     margin: 50 * $px auto 0;
-    font-size: 28 * $px;
+    font-size: 26 * $vh;
     text-align: left;
     color: #222222;
+    padding: 0;
     transform: scale(0);
+    border: 0;
     p {
       margin: 0;
     }
   }
   .invite_ic_pic1 {
-    position: fixed;
+    position: absolute;
     top: 224 * $px;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic2 {
-    position: fixed;
+    position: absolute;
     top: 1000 * $px;
     left: 50%;
     transform: translate(-50%, 0);

@@ -569,3 +569,9 @@ html {
 .delay3 {
   animation-delay: 3s !important;
 }
+
+.edit {
+  width: 112 * $px;
+  height: 112 * $px;
+  z-index: 1000;
+}

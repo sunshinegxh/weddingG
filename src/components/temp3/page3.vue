@@ -1,14 +1,14 @@
 <template>
-    <div class="page2 animate" ref="`section${idx}`">
-      <img class="page2_copywrite delay0_5" :class="{'from-top0': isCurrent}" src="../../assets/third/page2_pic_copywrite.png" alt="">
-      <img class="page2_main delay1" :class="{'from-bottom300': isCurrent}" :src="imgArr[0]" alt="">
+    <div class="page2">
+      <img class="page2_copywrite delay0_5 from-top0" src="../../assets/third/page2_pic_copywrite.png" alt="">
+      <img class="page2_main delay1 from-bottom300" :src="imgArr[0]" alt="">
       <div class="invite_ic_pic4" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="4" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img class="page2_ic_flower_rotate from-rTT" src="../../assets/third/page2_ic_flower.png" alt="">
-      <img class="page2_ic_flower_left delay2" :class="{'from-left50': isCurrent}" src="../../assets/third/page2_ic_flower2.png" alt="">
-      <img class="page2_ic_flower_right delay3" :class="{'from-right0': isCurrent}" src="../../assets/third/page2_ic_vine.png" alt="">
-      <div class="word delay1" :class="{'from-top500': isCurrent}">
+      <img class="page2_ic_flower_left delay2 from-left50" src="../../assets/third/page2_ic_flower2.png" alt="">
+      <img class="page2_ic_flower_right delay3 from-right0"  src="../../assets/third/page2_ic_vine.png" alt="">
+      <div class="word delay1 from-top500">
         <p>很想和你拥有一个很长很长的未来</p>
         <p>很想和你得到所有人的祝福</p>
         <p>很想陪你走完你的一生</p>
@@ -22,13 +22,8 @@ import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
 
 export default {
-  name: "first3",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.currentPage;
-    }
-  },
+  name: "template-3-page-3",
+  props: ["con"],
   data() {
     return {
       extra: this.con.extra,

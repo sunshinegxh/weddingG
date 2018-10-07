@@ -71,16 +71,16 @@ export default {
     this.$store.commit("SET_CARDID", this.cardId);
     window.setMusic = this.setMusic;
     window.refreshPage = this.refreshPage;
-    if (+this.$route.query.edit === 1) {
-      // 编辑状态
-      this.getIndexInfo();
-    } else if (+this.$route.query.edit === 0) {
-      // 获取模板信息
-      this.getTemInfo();
-    } else {
-      // 编辑完之后的预览
-      this.getIndexInfo();
-    }
+    // if (+this.$route.query.edit === 1) {
+    //   // 编辑状态
+    //   this.getIndexInfo();
+    // } else if (+this.$route.query.edit === 0) {
+    //   // 获取模板信息
+    //   this.getTemInfo();
+    // } else {
+    //   // 编辑完之后的预览
+    //   this.getIndexInfo();
+    // }
   },
   methods: {
     getIndexInfo() {

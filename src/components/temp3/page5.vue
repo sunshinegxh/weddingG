@@ -1,24 +1,24 @@
 <template>
-    <div class="page4 animate" ref="`section${idx}`">
-      <img class="page4_ic_flower" :class="{'from-zoomIn': isCurrent}" src="../../assets/third/page4_pic_flower.png" alt="">
-      <img class="page4_pic_up" :class="{'from-left0': isCurrent}" :src="imgArr[0]" alt="">
+    <div class="page4">
+      <img class="page4_ic_flower from-zoomIn" src="../../assets/third/page4_pic_flower.png" alt="">
+      <img class="page4_pic_up from-left0" :src="imgArr[0]" alt="">
       <div class="invite_ic_pic8" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="8" v-on:change-url="changeUrl"></upload-image>
       </div>
 
-      <img class="page4_pic_middle" :class="{'from-right0': isCurrent}" :src="imgArr[1]" alt="">
+      <img class="page4_pic_middle from-right0" :src="imgArr[1]" alt="">
       <div class="invite_ic_pic9" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="9" v-on:change-url="changeUrl"></upload-image>
       </div>
 
-      <div class="page4_word delay1" :class="{'from-oPC': isCurrent}">
+      <div class="page4_word delay1 from-oPC">
         <p>你就是我最想要见的人</p>
         <p>那个特别的人</p>
         <p>只要你在身边</p>
         <p>不说话</p>
         <p>我就能感到十分美好</p>
       </div>
-      <img class="page4_pic_down delay2" :class="{'from-left0': isCurrent}" :src="imgArr[2]" alt="">
+      <img class="page4_pic_down delay2 from-left0" :src="imgArr[2]" alt="">
       <div class="invite_ic_pic10" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="10" v-on:change-url="changeUrl"></upload-image>
       </div>
@@ -30,18 +30,12 @@ import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
 
 export default {
-  name: "page4",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.currentPage;
-    }
-  },
+  name: "template-3-page-5",
+  props: ["con"],
   data() {
     return {
       extra: this.con.extra,
-      imgArr: this.con.goodsImg,
-      isCurrent: true
+      imgArr: this.con.goodsImg
     };
   },
   computed: {

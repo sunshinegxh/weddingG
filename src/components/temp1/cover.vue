@@ -1,7 +1,7 @@
 <template>
   <div class="cover">
     <div class="invite_ic_pic" v-if="edit">
-      <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <img
       src="../../assets/invite_ic_edit.png"
@@ -48,9 +48,10 @@ export default {
     })
   },
   created() {
-    if (this.info) {
-      this.extra = JSON.parse(this.info.extra);
-    }
+    // if (this.info) {
+    this.extra = this.info.extra;
+    // this.extra = JSON.parse(this.info.extra);
+    // }
     window.refreshInfo = this.setInfo;
   },
   methods: {
@@ -173,13 +174,10 @@ export default {
     z-index: 1000;
   }
   .edit {
-    width: 112 * $px;
-    height: 112 * $px;
     position: absolute;
     bottom: 248 * $px;
     left: 50%;
     transform: translate(-50%, 0);
-    z-index: 1000;
   }
 }
 .cover-bg .delayP5 {

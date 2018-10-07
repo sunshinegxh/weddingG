@@ -38,6 +38,10 @@ export default {
       // img1: require("../../assets/page4_bg_up_left.png"),
       // img2: require("../../assets/page4_bg_down_right.png"),
       imgArr: this.info.goodsImg
+      // imgArr: [
+      //   require("../../assets/page3_bg_up.png"),
+      //   require("../../assets/page3_bg_down.png")
+      // ]
     };
   },
   methods: {
@@ -59,14 +63,14 @@ export default {
   width: 100%;
   height: 100vh;
   .invite_ic_pic1 {
-    position: fixed;
+    position: absolute;
     top: 224 * $px;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic2 {
-    position: fixed;
+    position: absolute;
     top: 1000 * $px;
     left: 50%;
     transform: translate(-50%, 0);
@@ -75,13 +79,13 @@ export default {
   span {
     display: inline-block;
     width: 100%;
-    background-size: 100% 100%;
+    background-size: 100%;
     background-repeat: no-repeat;
   }
   span:nth-of-type(1) {
     transform: translateX(-100%);
     clip-path: polygon(0% 0%, 100% 0%, 100% 640 * $px, 0% 100%);
-    height: 774 * $px;
+    height: 774 * $vh;
     float: left;
   }
   span:nth-of-type(2) {

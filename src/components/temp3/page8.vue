@@ -3,22 +3,23 @@
     <div class="bg"></div>
     <div class="message-wrapper">
       <div class="message-input">写下你的祝福</div>
-      <div class="message-send">发送</div>
     </div>
     <div class="message">
-      <div class="message-item" v-for="(text, index) in showData" :key="index">
+      <div class="message-item" :class="getClass(i)" v-for="(text, i) in showData" :key="i">
         {{ text }}
       </div>
     </div>
   </div>
 </template>
 <script>
+const SIZE = 4;
 export default {
-  name: "template-2-page-8",
+  name: "template-3-page-8",
   data() {
     return {
       tanData: [],
       index: 0,
+      showIndex: 0,
       showData: [],
       timmer: null
     };
@@ -30,11 +31,22 @@ export default {
     clearTimeout(this.timmer);
   },
   methods: {
+    getClass(i) {
+      if (i === this.showIndex) {
+        return "tan1";
+      }
+      if (i === (this.showIndex + 1) % SIZE) {
+        return "tan2";
+      }
+      if (i === (this.showIndex + 2) % SIZE) {
+        return "tan3";
+      }
+    },
     startTimer() {
       this.timmer = setTimeout(() => {
         this.index = (this.index + 1) % this.tanData.length;
-        this.showData.push(this.tanData[this.index]);
-        this.showData.splice(0, 1);
+        this.showData.splice(this.showIndex, 1, this.tanData[this.index]);
+        this.showIndex = (this.showIndex + 1) % SIZE;
         this.timmer = this.startTimer();
       }, 2000);
     },
@@ -55,11 +67,12 @@ export default {
             res.wishList.map(v => {
               this.tanData.push(v.wish);
             });
-            this.showData = [0, 0, 1, 2].map(item => {
+            this.showData = Array.from(Array(SIZE), (i, item) => {
               const pos = item % this.tanData.length;
               return this.tanData[pos];
             });
             this.index = 2 % this.tanData.length;
+            this.showIndex = 0;
             this.timmer = null;
             this.startTimer();
           } else {
@@ -110,22 +123,17 @@ export default {
   color: #ffffff;
 }
 .message-input {
-  width: 530 * $vw;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 39 * $vw;
 }
-.message-send {
-  width: 148 * $vw;
-  height: 100%;
-  background: rgba(230, 191, 114, 1);
-  border-radius: 39 * $vw;
-}
 .message {
   position: absolute;
-  top: 800 * $vh;
+  top: 840 * $vh;
 }
 .message-item {
+  position: absolute;
   background: rgba(0, 0, 0, 0.6);
   border-radius: 48 * $vw;
   color: #ffffff;
@@ -138,12 +146,33 @@ export default {
   -webkit-line-clamp: 2;
   font-size: 24 * $vh;
   width: 326 * $vw;
-  max-height: 96 * $vh;
+  height: 96 * $vh;
   line-height: 40 * $vh;
   padding: 10 * $vh 32 * $vw;
   box-sizing: border-box;
+  display: none;
+  transform-origin: 0% 50%;
 }
-.message-item:nth-of-type(1) {
+.tan1 {
+  top: 4 * $vh;
+  display: -webkit-box;
+  animation: first-tan 2s forwards infinite;
+}
+.tan2 {
+  top: 100 * $vh;
+  display: -webkit-box;
+  opacity: 0.6;
+  transform: scale(0.8, 0.76);
+  animation: second-tan 2s forwards infinite;
+}
+.tan3 {
+  top: 200 * $vh;
+  display: -webkit-box;
+  opacity: 0;
+  transform: scale(0.8, 0.76);
+  animation: third-tan 2s forwards infinite;
+}
+/* .message-item:nth-of-type(1) {
   display: none;
 }
 .message-item:nth-of-type(2) {
@@ -158,7 +187,7 @@ export default {
   opacity: 0;
   transform: scale(0.8, 0.76);
   animation: third-tan 2s forwards infinite;
-}
+} */
 @keyframes opacity {
   100% {
     opacity: 1;

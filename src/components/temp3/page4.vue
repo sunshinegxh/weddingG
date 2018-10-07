@@ -1,23 +1,23 @@
 <template>
-    <div class="page3 animate" ref="`section${idx}`">
-      <img class="page3_ic_flower" :class="{'from-zoomIn': isCurrent}" src="../../assets/third/page3_ic_flower.png" alt="">
-      <img class="page3_pic_left" :class="{'from-left0': isCurrent}" :src="imgArr[0]" alt="">
+    <div class="page3">
+      <img class="page3_ic_flower from-zoomIn" src="../../assets/third/page3_ic_flower.png" alt="">
+      <img class="page3_pic_left from-left0" :src="imgArr[0]" alt="">
       <div class="invite_ic_pic5" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="5" v-on:change-url="changeUrl"></upload-image>
       </div>
 
-      <img class="page3_pic_right" :class="{'from-right0': isCurrent}" :src="imgArr[1]" alt="">
+      <img class="page3_pic_right from-right0" :src="imgArr[1]" alt="">
       <div class="invite_ic_pic6" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="6" v-on:change-url="changeUrl"></upload-image>
       </div>
 
-      <img class="page3_copywrite" :class="{'from-oPC': isCurrent}" src="../../assets/third/page3_pic_copywrite.png" alt="">
-      <img class="page3_pic_down delay1" :class="{'from-bottom120': isCurrent}" :src="imgArr[2]" alt="">
+      <img class="page3_copywrite from-oPC" src="../../assets/third/page3_pic_copywrite.png" alt="">
+      <img class="page3_pic_down delay1 from-bottom120" :src="imgArr[2]" alt="">
       <div class="invite_ic_pic7" v-if="edit">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="7" v-on:change-url="changeUrl"></upload-image>
       </div>
 
-      <img class="page3_ic_flowertwo delay1" :class="{'from-right-top': isCurrent}" src="../../assets/third/page3_ic_flowertwo.png" alt="">
+      <img class="page3_ic_flowertwo delay1 from-right-top" src="../../assets/third/page3_ic_flowertwo.png" alt="">
     </div>
 </template>
 
@@ -26,18 +26,12 @@ import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
 
 export default {
-  name: "first3",
-  props: ["idx", "con", "currentPage"],
-  watch: {
-    currentPage(newV) {
-      this.isCurrent = newV === this.currentPage;
-    }
-  },
+  name: "template-3-page-4",
+  props: ["con"],
   data() {
     return {
       extra: this.con.extra,
-      imgArr: this.con.goodsImg,
-      isCurrent: true
+      imgArr: this.con.goodsImg
     };
   },
   computed: {
