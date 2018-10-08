@@ -48,22 +48,22 @@ export default {
     this.$store.commit("SET_EDIT", edit);
     this.$store.commit("SET_CARDID", +this.cardId);
 
-    // if (this.templateId === '1') {
-    //   ((() => import(`../components/temp1`))()).then(mod => {
-    //     this.template = mod.default;
-    //   });
-    // } else if (this.templateId === '2') {
-    //   ((() => import(`../components/temp2`))()).then(mod => {
-    //     this.template = mod.default;
-    //   });
-    // } else {
-    //   ((() => import(`../components/temp3`))()).then(mod => {
-    //     this.template = mod.default;
-    //   });
-    // }
-    (() => import(`../components/temp${this.templateId}`))().then(mod => {
-      this.template = mod.default;
-    });
+    if (this.templateId === "1") {
+      (() => import(`../components/temp1`))().then(mod => {
+        this.template = mod.default;
+      });
+    } else if (this.templateId === "2") {
+      (() => import(`../components/temp2`))().then(mod => {
+        this.template = mod.default;
+      });
+    } else {
+      (() => import(`../components/temp3`))().then(mod => {
+        this.template = mod.default;
+      });
+    }
+    // (() => import(`../components/temp${this.templateId}`))().then(mod => {
+    //   this.template = mod.default;
+    // });
     if (this.status === "0") {
       // 获取模板信息
       this.getTemplateInfo();
