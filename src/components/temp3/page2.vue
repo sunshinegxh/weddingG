@@ -3,12 +3,12 @@
       <img class="page1_ic_flower from-rTT" src="../../assets/third/page1_ic_flower.png" alt="">
       <img class="page1_pic_up from-left0" :src="imgArr[0]" alt="">
       <div class="invite_ic_pic2" v-if="edit">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img class="page1_copywrite from-oPC" src="../../assets/third/page1_copywrite.png" alt="">
       <img class="page1_pic_down from-right0" :src="imgArr[0]" alt="">
       <div class="invite_ic_pic3" v-if="edit">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img class="page1_ic_vine delay1 from-rTT60" src="../../assets/third/page1_ic_vine.png" alt="">
     </div>
@@ -29,8 +29,7 @@ export default {
   },
   computed: {
     ...mapState({
-      edit: state => state.edit,
-      cardId: state => state.cardId
+      edit: state => state.edit
     })
   },
   methods: {

@@ -4,8 +4,8 @@
       <div class="guide-bg-white from-bottomCenter">
         <img src="../../assets/location_welcome.png" class="from-topG delayP5" alt="">
         <img src="../../assets/location.jpg" class="scale21 delayP15" alt="">
-        <!-- <div :class="{'scale01': isCurrent, 'delay2': isCurrent}">{{ JSON.parse(con.extra).address}}</div>
-        <div :class="{'scale01': isCurrent, 'delayP25': isCurrent}">{{ JSON.parse(con.extra).time }}</div> -->
+        <div class="scale01 delay2">{{ extra.address}}</div>
+        <div class="scale01 delayP25">{{ extra.time }}</div>
       </div>
     </span>
   </div>
@@ -16,7 +16,9 @@ export default {
   name: "guide1",
   props: ["info"],
   data() {
-    return {};
+    return {
+      extra: JSON.parse(this.info.extra)
+    };
   },
   created() {}
 };

@@ -11,7 +11,7 @@
 
     <div class="cover-bg3">
       <span class="cover_pic_copywrite delay1 from-top0"></span>
-      <span class="name delayP15 from-top200">{{extra.groom}} & {{extra.新娘}}</span>
+      <span class="name delayP15 from-top200">{{extra.groom}} & {{extra.bride}}</span>
       <img :src="imgArr[0]" alt="" class="cover_pic scale01 delayP25">
       <span class="address delay2 from-bottom100">{{extra.address}}</span>
       <span class="date delay3 from-bottom204">{{extra.time}}</span>
@@ -30,14 +30,13 @@ export default {
     return {
       current: 0,
       loaded: false,
-      extra: this.con.extra,
+      extra: JSON.parse(this.con.extra),
       imgArr: this.con.goodsImg
     };
   },
   computed: {
     ...mapState({
-      edit: state => state.edit,
-      cardId: state => state.cardId
+      edit: state => state.edit
     })
   },
   created() {

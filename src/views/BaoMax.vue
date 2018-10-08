@@ -3,7 +3,8 @@
     <loading v-if="loading"/>
     <div v-else>
       <div class="topbar">
-        <div class="back" @click="screenshot"></div>
+        <div class="back"></div>
+        <!-- <div class="back" @click="screenshot"></div> -->
         <div @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
           <audio ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
         </div>
@@ -247,9 +248,9 @@ export default {
   justify-content: space-between;
   z-index: 20;
 }
-.back {
-  background-image: url(../assets/common/invitation_ic_back.png);
-}
+// .back {
+//   background-image: url(../assets/common/invitation_ic_back.png);
+// }
 .back,
 .music {
   height: 60 * $vh;

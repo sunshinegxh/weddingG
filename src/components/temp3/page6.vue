@@ -28,7 +28,7 @@ export default {
   props: ["con"],
   data() {
     return {
-      extra: this.con.extra,
+      extra: JSON.parse(this.con.extra),
       imgArr: this.con.goodsImg
     };
   },

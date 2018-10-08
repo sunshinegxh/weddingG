@@ -1,9 +1,12 @@
 <template>
   <div class="wrapper">
     <div class="cover_frame_line">
+      <div class="invite_ic_pic2" v-if="edit">
+        <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      </div>
       <div class="cover_copywrite_wemarried"></div>
       <div class="cover_frame_tiny">
-        <div class="cover_pic" :style="{'background-image': `url(${cover})`}"></div>
+        <div class="cover_pic" :style="{'background-image': `url(${imgArr[0]})`}"></div>
       </div>
       <div class="extra">
         <div class="role">
@@ -21,18 +24,35 @@
     <div class="up-arrow"></div>
   </div>
 </template>
+
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "template-2-cover",
   props: ["info"],
   computed: {
     extra() {
-      return this.info.extra;
-      // return JSON.parse(this.info.extra);
+      // return this.info.extra;
+      return JSON.parse(this.info.extra);
     },
-    cover() {
-      return this.info.goodsImg[0];
+    ...mapState({
+      edit: state => state.edit
+    })
+  },
+  data() {
+    return {
+      imgArr: this.info.goodsImg
+    };
+  },
+  methods: {
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
     }
+  },
+  components: {
+    uploadImage
   }
 };
 </script>
@@ -55,6 +75,13 @@ export default {
   background: url(../../assets/second/cover_frame_line.png) no-repeat;
   background-size: 100% 100%;
   animation: zoomIn 2s;
+  .invite_ic_pic2 {
+    position: absolute;
+    top: 580 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
 }
 .cover_copywrite_wemarried {
   width: 600 * $vw;

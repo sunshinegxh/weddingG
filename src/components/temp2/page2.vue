@@ -1,8 +1,14 @@
 <template>
   <div class="wrapper">
     <div class="left">
-      <div class="page1_pic_up"></div>
-      <div class="page1_pic_down"></div>
+      <div class="page1_pic_up" :style="{'background-image': `url(${imgArr[0]})`}"></div>
+      <div class="page1_pic_down" :style="{'background-image': `url(${imgArr[1]})`}"></div>
+    </div>
+    <div class="invite_ic_pic21" v-if="edit">
+      <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+    </div>
+    <div class="invite_ic_pic22" v-if="edit">
+      <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="right">
       <div class="text">
@@ -26,9 +32,30 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "template-2-page-2",
-  props: ["data"]
+  props: ["info"],
+  computed: {
+    ...mapState({
+      edit: state => state.edit
+    })
+  },
+  data() {
+    return {
+      imgArr: this.info.goodsImg
+    };
+  },
+  methods: {
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
+    }
+  },
+  components: {
+    uploadImage
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -41,6 +68,20 @@ export default {
   overflow: hidden;
   position: relative;
   text-align: left;
+  .invite_ic_pic21 {
+    position: absolute;
+    top: 400 * $px;
+    left: 30%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic22 {
+    position: absolute;
+    top: 950 * $px;
+    left: 30%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
 }
 .left {
   display: inline-block;
@@ -58,16 +99,16 @@ export default {
 .page1_pic_up {
   height: 600 * $vh;
   margin-bottom: 24 * $vh;
-  background: url(../../assets/second/page1_pic_up.png) no-repeat;
   background-size: 100% 100%;
+  background-repeat: no-repeat;
   transform: translateX(-100%);
   opacity: 0;
   animation: opacity 2s forwards;
 }
 .page1_pic_down {
   height: 448 * $vh;
-  background: url(../../assets/second/page1_pic_down.png) no-repeat;
   background-size: 100% 100%;
+  background-repeat: no-repeat;
   transform: translateX(-100%);
   opacity: 0;
   animation: opacity 2s 0.5s forwards;

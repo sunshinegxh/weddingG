@@ -26,13 +26,37 @@
     <div class="page4_ic_cloud_left"></div>
     <div class="page4_ic_cloud_right"></div>
     <div class="page4_frame"></div>
-    <div class="page4_pic"></div>
+    <div class="page4_pic" :style="{'background-image': `url(${imgArr[0]})`}"></div>
+    <div class="invite_ic_pic51" v-if="edit">
+      <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+    </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "template-2-page-5",
-  props: ["info"]
+  props: ["info"],
+  computed: {
+    ...mapState({
+      edit: state => state.edit
+    })
+  },
+  data() {
+    return {
+      imgArr: this.info.goodsImg
+    };
+  },
+  methods: {
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
+    }
+  },
+  components: {
+    uploadImage
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -43,6 +67,13 @@ export default {
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
+  .invite_ic_pic51 {
+    position: absolute;
+    top: 900 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
 }
 .pic_text {
   margin: auto;
@@ -143,8 +174,8 @@ export default {
   right: 48 * $vw;
   bottom: 115 * $vh;
   height: 634 * $vh;
-  background: url(../../assets/second/page4_pic.png) no-repeat;
   background-size: 100% 100%;
+  background-repeat: no-repeat;
   opacity: 0;
   transform: translateY(726 * $vh) scale(1);
   animation: move-opacity 2s 1.5s forwards;

@@ -1,19 +1,46 @@
 <template>
   <div class="wrapper">
     <div class="page2_frame right">
-      <div class="pic page2_pic_up"></div>
+      <div class="pic page2_pic_up" :style="{'background-image': `url(${imgArr[0]})`}"></div>
+    </div>
+    <div class="invite_ic_pic31" v-if="edit">
+      <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="page2_copywriting"></div>
     <div class="page2_frame left">
-      <div class="pic page2_pic_down"></div>
+      <div class="pic page2_pic_down" :style="{'background-image': `url(${imgArr[1]})`}"></div>
+    </div>
+    <div class="invite_ic_pic32" v-if="edit">
+      <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="page2_ic_cloud"></div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "template-2-page-3",
-  props: ["data"]
+  props: ["info"],
+  computed: {
+    ...mapState({
+      edit: state => state.edit
+    })
+  },
+  data() {
+    return {
+      imgArr: this.info.goodsImg
+    };
+  },
+  methods: {
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
+    }
+  },
+  components: {
+    uploadImage
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -23,6 +50,20 @@ export default {
   padding-bottom: 71 * $vh;
   box-sizing: border-box;
   position: relative;
+  .invite_ic_pic31 {
+    position: absolute;
+    top: 350 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  .invite_ic_pic32 {
+    position: absolute;
+    top: 1000 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
 }
 .page2_frame {
   width: 702 * $vw;
@@ -45,12 +86,6 @@ export default {
   height: 100%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-}
-.page2_pic_up {
-  background-image: url(../../assets/second/page2_pic_up.png);
-}
-.page2_pic_down {
-  background-image: url(../../assets/second/page2_pic_down.png);
 }
 .page2_copywriting {
   width: 702 * $vw;

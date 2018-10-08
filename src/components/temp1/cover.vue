@@ -34,7 +34,7 @@ export default {
       current: 0,
       loaded: false,
       imgSrc: this.info.goodsImg,
-      extra: {}
+      extra: JSON.parse(this.info.extra)
     };
   },
   components: {
@@ -48,10 +48,6 @@ export default {
     })
   },
   created() {
-    // if (this.info) {
-    this.extra = this.info.extra;
-    // this.extra = JSON.parse(this.info.extra);
-    // }
     window.refreshInfo = this.setInfo;
   },
   methods: {
