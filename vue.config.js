@@ -9,5 +9,6 @@ module.exports = {
         secure: false
       }
     }
-  }
+  },
+  baseUrl: "./"
 };
