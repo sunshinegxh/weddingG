@@ -30,8 +30,17 @@ export default {
   methods: {
     replacePageImg(e) {
       let file = e.target.files[0];
+
+      let size = file.size;
+      var maxSize = 5 * 1024;
+      if (size >= maxSize) {
+        alert("图片大小不能超过5M！");
+        return false;
+      }
+
       let param = new FormData();
       param.append("file", file);
+
       this.$http
         .post(
           `http://47.105.43.207:80/()/banhunli/card/replacePageImg.gg?cardId=${
@@ -48,7 +57,15 @@ export default {
             url: response.body.data.imgUrl,
             index: this.imageSort
           });
-          this.shotScreen();
+          let a = new Image();
+          a.src = response.body.data.imgUrl;
+          let self = this;
+          a.onload = function() {
+            setTimeout(() => {
+              // alert("完成加载");
+              self.shotScreen();
+            }, 5000);
+          };
           console.log("uploadShotScreen:", response.body.data.imgUrl);
         })
         .catch(e => {
@@ -57,6 +74,7 @@ export default {
     },
     shotScreen() {
       let self = this;
+      alert("33333");
       html2canvas(document.body, {
         proxy: true,
         useCORS: true,
@@ -79,6 +97,7 @@ export default {
       });
     },
     uploadShotScreen(img) {
+      console.log(img);
       this.$http
         .post("http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg", {
           cardId: this.cardId,
@@ -86,7 +105,7 @@ export default {
           base64ImgUrl: img
         })
         .then(response => {
-          console.log("success:", response.url);
+          console.log("success:", response);
         })
         .catch(e => {
           console.log(e);

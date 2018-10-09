@@ -25,9 +25,6 @@ export default {
         link.href = shotScreen;
         link.download = "shotScreen.png";
         link.click();
-        // var image = new Image();
-        // image.src = "http://cued.xunlei.com/demos/publ/img/P_006.jpg"
-        // document.body.appendChild(image);
         self.uploadShotScreen(shotScreen);
       });
     },

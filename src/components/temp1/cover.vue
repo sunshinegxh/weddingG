@@ -1,6 +1,7 @@
 <template>
   <div class="cover">
     <div class="invite_ic_pic" v-if="edit">
+      <!-- <shot-screen></shot-screen> -->
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <img
