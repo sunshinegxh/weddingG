@@ -5,9 +5,9 @@
       <div class="topbar">
         <div class="back"></div>
         <!-- <div class="back" @click="screenshot"></div> -->
-        <div @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
+        <!-- <div @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
           <audio ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
-        </div>
+        </div> -->
       </div>
       <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
     </div>
