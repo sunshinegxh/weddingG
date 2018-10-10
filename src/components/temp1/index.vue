@@ -1,17 +1,11 @@
 <template>
-  <div class="wrapper">
-    <swipe :current="current" @change="onChange">
-      <swipe-item v-for="(data, index) in dataList" :key="index" :active="index === current">
-        <!-- <component :is="isCom(data.templatePageId)" :info="data"></component> -->
-        <component :is="isCom(data.templatePageId)" :info="data" :edit="edit"></component>
-        <!-- <component :is="isCom(8)" :info="data" :key="data.pageId"></component> -->
-      </swipe-item>
-    </swipe>
+  <div class="wrapper" id="wrapper">
+    <div class="section" v-for="(data, index) in dataList" :key="index">
+      <component :is="isCom(data.templatePageId)" :info="data" :edit="edit" v-show="index === current"></component>
+    </div>
   </div>
 </template>
 <script>
-import Swipe from "../Swipe";
-import SwipeItem from "../Swipe/item";
 import page1 from "./cover";
 import page2 from "./first";
 import page3 from "./second";
@@ -20,6 +14,7 @@ import page5 from "./forth";
 import page6 from "./guide";
 import page7 from "./info";
 import page8 from "./tan";
+import "../../libs/pagepiling";
 
 export default {
   name: "template1",
@@ -29,18 +24,26 @@ export default {
       current: 0
     };
   },
+  created() {
+    let self = this;
+    setTimeout(() => {
+      /* eslint-disable no-undef */
+      $(function() {
+        $("#wrapper").pagepiling({
+          menu: null,
+          afterLoad(a, b) {
+            self.current = --b;
+          }
+        });
+      });
+    }, 1000);
+  },
   methods: {
-    onChange(current) {
-      console.log("onChange", current);
-      this.current = current;
-    },
     isCom(val) {
       return `page${val}`;
     }
   },
   components: {
-    Swipe,
-    SwipeItem,
     page1,
     page2,
     page3,
@@ -52,12 +55,16 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../common.scss";
+@import "../../libs/jquery.pagepiling.css";
 .wrapper {
   height: 100vh;
   overflow: hidden;
   font-family: Songti TC;
+}
+.section {
+  background-color: #fff;
 }
 .swipe-item {
   height: 100vh;
