@@ -12,9 +12,9 @@
         <p>X89765</p>
         <img src="../assets/help/synergy_share_btn_copy.png" alt="">
       </div>
-      <img class="help-card-middle" src="../assets/page1_bg_down.png" alt="">
+      <img class="help-card-middle" src="../assets/help/middle.jpg" alt="">
       <div class="help-card-down">
-        <img src="../assets/bg.jpg" alt="">
+        <img src="../assets/help/erweima.jpg" alt="">
         <p>长按屏幕识别二维码下载伴婚礼</p>
       </div>
     </div>
@@ -136,13 +136,12 @@ export default {
     }
     &-middle {
       width: 702 * $vw;
-      height: 50 * $vh;
     }
     &-down {
       width: 702 * $vw;
       height: 414 * $vh;
       background: #fff;
-      margin: 0 auto;
+      margin: -10 * $vh auto;
       border-top-left-radius: 0 * $vw;
       border-top-right-radius: 0 * $vw;
       border-bottom-right-radius: 50 * $vw;
