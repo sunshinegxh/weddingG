@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 module.exports = {
   lintOnSave: true,
   productionSourceMap: false,
@@ -9,6 +10,16 @@ module.exports = {
         secure: false
       }
     }
+  },
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        jquery: "jquery",
+        "window.jQuery": "jquery"
+      })
+    ]
   },
   baseUrl: "./"
 };
