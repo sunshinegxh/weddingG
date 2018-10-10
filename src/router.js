@@ -4,6 +4,7 @@ import Router from "vue-router";
 import Music from "./views/Music.vue";
 import BaoMax from "./views/BaoMax.vue";
 import Help from "./views/Help.vue";
+import Seat from "./views/Seat.vue";
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: "/help",
       name: "help",
       component: Help
+    },
+    {
+      path: "/seat",
+      name: "seat",
+      component: Seat
     }
   ]
 });
