@@ -31,12 +31,12 @@ export default {
     replacePageImg(e) {
       let file = e.target.files[0];
 
-      let size = file.size;
-      var maxSize = 5 * 1024;
-      if (size >= maxSize) {
-        alert("图片大小不能超过5M！");
-        return false;
-      }
+      // let size = file.size;
+      // var maxSize = 5 * 1024;
+      // if (size >= maxSize) {
+      //   alert("图片大小不能超过5M！");
+      //   return false;
+      // }
 
       let param = new FormData();
       param.append("file", file);
@@ -74,7 +74,7 @@ export default {
     },
     shotScreen() {
       let self = this;
-      alert("33333");
+      // alert("33333");
       html2canvas(document.body, {
         proxy: true,
         useCORS: true,

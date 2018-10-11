@@ -193,6 +193,10 @@ export default {
   flex: 1;
   text-align: left;
   justify-items: center;
+  input {
+    color: #999999;
+    font-size: 32 * $vh;
+  }
 }
 .submit-btn {
   height: 94 * $vh;

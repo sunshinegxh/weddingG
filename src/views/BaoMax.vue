@@ -81,6 +81,7 @@ export default {
       this.$refs.temp.setPage(page);
     };
     window.setMusic = music => {
+      alert("music:", music);
       this.musicUrl = window.encodeURI(music);
     };
     window.getShowPageIndex = () => {

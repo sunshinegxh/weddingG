@@ -4,6 +4,7 @@
       <img :class="{'nomussic': nomussic(item)}" src="../assets/music.png" alt="">
       <span>{{ item.musicName }}</span>
     </li>
+    <audio class="music-hidden" ref="music1" :src="cur.musicUrl" autoplay="autoplay" loop="loop"></audio>
   </ul>
 </template>
 
@@ -16,10 +17,12 @@ export default {
       cur: {}
     };
   },
+
   created() {
     this.getMusic();
     window.getMusic = this.set;
   },
+
   methods: {
     getMusic() {
       this.$http
@@ -46,10 +49,13 @@ export default {
         });
     },
     set() {
+      this.$refs.music1.pause();
+      alert("set:" + `${this.cur.musicId}-${this.cur.musicUrl}`);
       return `${this.cur.musicId}-${this.cur.musicUrl}`;
     },
     choose(item) {
       this.cur = item;
+      this.$refs.music1.play();
     },
     nomussic(item) {
       console.log(
@@ -89,6 +95,9 @@ export default {
       border-bottom: 1px solid #ccc;
       color: #010101;
     }
+  }
+  &-hidde {
+    display: none;
   }
 }
 </style>
