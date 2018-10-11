@@ -6,8 +6,8 @@
       <input type="text" placeholder="搜索宾客名称，快速查座" v-model="person" />
     </div>
     <div class="seat-contain">
-      <div class="seat-contain-table">
-        <div class="seat-contain-row" v-for="(item, i) in result" :key="i" :style="{width: '345vw'}">
+      <div class="seat-contain-table" ref="table">
+        <div class="seat-contain-row" v-for="(item, i) in result" :key="i">
           <div class="seat-contain-cell" v-for="(item1, j) in item" :key="j" :class="{'is-hidden': !item1, 'is-center': item1 && item1.isCenter}">{{ item1 && item1.tableNumber }}</div>
         </div>
       </div>
@@ -36,8 +36,8 @@ export default {
     format(data, door) {
       const result = [];
       const xArr = data.map(({ positionX }) => positionX);
-      debugger;
       const size = Math.abs(Math.min(...xArr));
+      const rolNum = size + Math.max(...xArr);
       [door, ...data].map(({ positionX, positionY, tableNumber }) => {
         const x = size + positionX;
         if (!result[positionY]) {
@@ -50,12 +50,17 @@ export default {
       if (!result[0]) {
         result[0] = [];
       }
-      result[0][size] = {
+      result[0][size - 1] = {
         tableNumber: "主席台",
         isCenter: true
       };
 
       this.result = result;
+      this.$nextTick(() => {
+        const x =
+          (((rolNum * (88 + 32) * 100) / 1334 - 50) * window.innerWidth) / 100;
+        this.$refs.table.scrollTo(x, 0);
+      });
       console.log("aaa", result);
     },
 
@@ -70,9 +75,9 @@ export default {
           let res = response.body.data;
           if (response.body.code === "0000") {
             // this.tables = res.tables;
-            this.tables = Array.from(Array(21), (i, index) => {
+            this.tables = Array.from(Array(11), (i, index) => {
               return {
-                positionX: index - 10,
+                positionX: index - 5,
                 positionY: 1,
                 tableNumber: index + 1
               };
@@ -80,6 +85,18 @@ export default {
             this.door = res.door;
             this.tables = this.tables.filter(
               ({ positionX }) => positionX !== 0
+            );
+            this.tables.push(
+              {
+                positionX: -2,
+                positionY: 0,
+                tableNumber: -1
+              },
+              {
+                positionX: 2,
+                positionY: 0,
+                tableNumber: -1
+              }
             );
             this.format(this.tables, { ...res.door, tableNumber: "门" });
             // this.cur = this.musicList[0];
@@ -146,7 +163,7 @@ export default {
   }
   &-contain {
     position: relative;
-    padding-top: 120 * $vh;
+    padding-top: 46 * $vh;
     // display: flex;
     // flex-wrap: nowrap;
     // overflow: auto;
@@ -159,9 +176,9 @@ export default {
     // bottom: 0;
     // overflow: auto;
     &-row {
-      display: block;
-      // display: flex;
-      // flex-wrap: nowrap;
+      // display: block;
+      display: flex;
+      flex-wrap: nowrap;
       // transform: translateX(-20%);
       // display: table-row;
       min-width: 100%;
@@ -182,8 +199,8 @@ export default {
         text-align: center;
         background: #dddddd;
         color: #999;
-        margin: 0;
-        transform: translateX(-110 * $vw);
+        // margin: 30 * $vh 30 * $vw;
+        margin: 0 30 * $vw;
         border-top-left-radius: 0 * $vw;
         border-top-right-radius: 0 * $vw;
         border-bottom-right-radius: 10 * $vw;

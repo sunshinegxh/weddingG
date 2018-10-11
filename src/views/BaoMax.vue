@@ -26,7 +26,8 @@ export default {
       indexData: [],
       template: null,
       musicUrl: "",
-      musicStop: false
+      musicStop: false,
+      changeMusic: false
     };
   },
   computed: {
@@ -74,9 +75,10 @@ export default {
   },
   mounted() {
     // TODO音乐问题，好像需要用户操作才可触发
-    setTimeout(() => {
-      this.$refs.music.play();
-    }, 1000);
+    // setTimeout(() => {
+    //   this.$refs.music.play();
+    //   this.musicStop = true;
+    // }, 1000);
     // 客户端修改页面number
     window.refreshPage = page => {
       this.getUserTemplateInfo().then(() => {
@@ -84,7 +86,6 @@ export default {
       });
     };
     window.setMusic = music => {
-      alert("music:", music);
       this.musicUrl = window.encodeURI(music);
     };
     window.getShowPageIndex = () => {
@@ -95,6 +96,16 @@ export default {
     };
     window.refreshInfo = () => {
       this.setCoverData();
+    };
+    window.changeMusicStatus = () => {
+      if (this.musicStop) {
+        this.changeMusic = !this.changeMusic;
+        if (this.changeMusic) {
+          this.$refs.music.play();
+        } else {
+          this.$refs.music.pause();
+        }
+      }
     };
   },
   methods: {

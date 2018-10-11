@@ -50,7 +50,7 @@ export default {
     },
     set() {
       this.$refs.music1.pause();
-      alert("set:" + `${this.cur.musicId}-${this.cur.musicUrl}`);
+      // alert("set:" + `${this.cur.musicId}-${this.cur.musicUrl}`);
       return `${this.cur.musicId}-${this.cur.musicUrl}`;
     },
     choose(item) {
