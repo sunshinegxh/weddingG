@@ -48,8 +48,10 @@ export default {
             url: response.body.data.imgUrl,
             index: this.imageSort
           });
-          this.shotScreen();
-          console.log("uploadShotScreen:", response.body.data.imgUrl);
+          setTimeout(() => {
+            this.shotScreen();
+            console.log("uploadShotScreen:", response.body.data.imgUrl);
+          }, 0);
         })
         .catch(e => {
           document.write(e);
@@ -64,7 +66,8 @@ export default {
         backgroundColor: "#fff",
         scale: 1,
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
+        logging: false
       }).then(function(canvas) {
         document.body.appendChild(canvas);
         var link = document.createElement("a");
