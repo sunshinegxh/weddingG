@@ -10,7 +10,9 @@ export default new Vuex.Store({
     // cardID
     cardId: 0,
     // 当前页面
-    currentPage: 1
+    currentPage: 0,
+    // 是否客户端调用设置页面方法
+    isSkip: false
   },
   mutations: {
     SET_EDIT(state, data) {
@@ -21,6 +23,9 @@ export default new Vuex.Store({
     },
     SET_CURPAGE(state, data) {
       state.currentPage = data;
+    },
+    SET_ISSKIP(state, data) {
+      state.isSkip = data;
     }
   },
   actions: {}

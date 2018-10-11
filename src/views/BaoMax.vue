@@ -1,7 +1,6 @@
 <template>
   <div class="app" id="app">
     <loading v-if="loading"/>
-    <div v-else>
       <div class="topbar">
         <div class="back"></div>
         <!-- <div class="back" @click="screenshot"></div> -->
@@ -10,7 +9,6 @@
         </div>
       </div>
       <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
-    </div>
   </div>
 </template>
 <script>
@@ -79,9 +77,8 @@ export default {
     }, 1000);
     // 客户端修改页面number
     window.refreshPage = page => {
-      this.getUserTemplateInfo().then(() => {
-        this.$refs.temp.current = page;
-      });
+      this.$store.commit("SET_ISSKIP", true);
+      this.$refs.temp.setPage(page);
     };
     window.setMusic = music => {
       this.musicUrl = window.encodeURI(music);
@@ -90,7 +87,8 @@ export default {
       return this.$refs.temp.current || 0;
     };
     window.showPageIndex = page => {
-      this.$refs.temp.current = page;
+      this.$store.commit("SET_ISSKIP", true);
+      this.$refs.temp.setPage(page);
     };
     window.refreshInfo = () => {
       this.setCoverData();

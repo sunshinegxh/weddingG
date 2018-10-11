@@ -6,6 +6,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import page1 from "./cover";
 import page2 from "./first";
 import page3 from "./second";
@@ -19,10 +20,11 @@ import "../../libs/pagepiling";
 export default {
   name: "template1",
   props: ["dataList", "edit"],
-  data() {
-    return {
-      current: 0
-    };
+  computed: {
+    ...mapState({
+      current: state => state.currentPage,
+      isSkip: state => state.isSkip
+    })
   },
   created() {
     let self = this;
@@ -30,9 +32,12 @@ export default {
       /* eslint-disable no-undef */
       $(function() {
         $("#wrapper").pagepiling({
-          menu: null,
           afterLoad(a, b) {
-            self.current = --b;
+            if (!self.isSkip) {
+              // 客户端调用refreshPage不调用回调方法
+              self.$store.commit("SET_CURPAGE", --b);
+            }
+            self.$store.commit("SET_ISSKIP", false);
           }
         });
       });
@@ -41,6 +46,10 @@ export default {
   methods: {
     isCom(val) {
       return `page${val}`;
+    },
+    setPage(val) {
+      $.fn.pagepiling.moveTo(val);
+      this.$store.commit("SET_CURPAGE", --val);
     }
   },
   components: {
@@ -59,7 +68,7 @@ export default {
 @import "../../common.scss";
 @import "../../libs/jquery.pagepiling.css";
 .wrapper {
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
   font-family: Songti TC;
 }
@@ -67,7 +76,7 @@ export default {
   background-color: #fff;
 }
 .swipe-item {
-  height: 100vh;
+  height: 100%;
   background: #fff;
   background-size: 100% 100%;
 }
