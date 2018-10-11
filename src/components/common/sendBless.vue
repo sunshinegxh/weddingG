@@ -119,7 +119,7 @@ export default {
   width: 100%;
   height: 278 * $vh;
   background: #fff;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   // top: 900 * $vh;
   left: 0;
