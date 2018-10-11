@@ -84,6 +84,7 @@ export default {
       });
     };
     window.setMusic = music => {
+      alert("music:", music);
       this.musicUrl = window.encodeURI(music);
     };
     window.getShowPageIndex = () => {

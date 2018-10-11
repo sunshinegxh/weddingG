@@ -74,7 +74,7 @@ export default {
     },
     shotScreen() {
       let self = this;
-      alert("33333");
+      // alert("33333");
       html2canvas(document.body, {
         proxy: true,
         useCORS: true,
