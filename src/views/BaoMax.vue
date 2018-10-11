@@ -94,6 +94,21 @@ export default {
     window.refreshInfo = () => {
       this.setCoverData();
     };
+    // 重新设置viewport宽高以适应vh单位
+    setTimeout(function() {
+      /* eslint-disable no-undef */
+      let viewheight = $(window).height();
+      let viewwidth = $(window).width();
+      let viewport = document.querySelector("meta[name=viewport]");
+      viewport.setAttribute(
+        "content",
+        "height=" +
+          viewheight +
+          "px, width=" +
+          viewwidth +
+          "px, initial-scale=1.0"
+      );
+    }, 1000);
   },
   methods: {
     toogleMusic() {
