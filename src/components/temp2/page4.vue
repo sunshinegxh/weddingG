@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="page3_pic_up" :style="{'background-image': `url(${imgArr[0]})`}"></div>
-    <div class="invite_ic_pic41" v-if="edit">
+    <div class="invite_ic_pic41" v-if="edit" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="page3_ic_cloud"></div>
@@ -24,7 +24,7 @@
         却能对你温柔以待
       </div>
       <div class="page3_pic_down" :style="{'background-image': `url(${imgArr[1]})`}"></div>
-      <div class="invite_ic_pic42" v-if="edit">
+      <div class="invite_ic_pic42" v-if="edit" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
     </div>

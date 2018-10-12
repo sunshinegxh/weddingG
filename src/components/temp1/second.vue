@@ -1,6 +1,6 @@
 <template>
   <div class="second">
-    <div class="invite_ic_pic" v-if="edit">
+    <div class="invite_ic_pic" v-if="edit" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <img src="../../assets/page2_lovestory.png" alt="">
@@ -8,14 +8,14 @@
       :style="`backgroundImage: url(${imgSrc[0]})`"
       class="from-top">
     </span>
-    <div class="invite_ic_pic" v-if="edit">
+    <div class="invite_ic_pic" v-if="edit" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span
       :style="`backgroundImage: url(${imgSrc[1]})`"
       class="from-right delay2">
     </span>
-    <div class="invite_ic_pic" v-if="edit">
+    <div class="invite_ic_pic" v-if="edit" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span

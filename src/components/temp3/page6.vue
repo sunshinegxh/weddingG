@@ -34,7 +34,6 @@ export default {
   },
   computed: {
     ...mapState({
-      edit: state => state.edit,
       cardId: state => state.cardId
     })
   },

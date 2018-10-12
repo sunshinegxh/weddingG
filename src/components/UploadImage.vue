@@ -83,21 +83,6 @@ export default {
             console.log(e);
           };
           xhr.send();
-
-          // let a = new Image();
-          // a.src = response.body.data.imgUrl;
-          // let self = this;
-          // a.onload = function() {
-          //   setTimeout(() => {
-          //     // alert("完成加载");
-          //     self.shotScreen();
-          //   }, 5000);
-          // };
-          // console.log("uploadShotScreen:", response.body.data.imgUrl);
-          // setTimeout(() => {
-          //   this.shotScreen();
-          //   console.log("uploadShotScreen:", response.body.data.imgUrl);
-          // }, 0);
         })
         .catch(e => {
           document.write(e);
@@ -105,7 +90,6 @@ export default {
     },
     shotScreen() {
       let self = this;
-      // alert("33333");
       html2canvas(document.body, {
         proxy: true,
         useCORS: true,
@@ -129,7 +113,6 @@ export default {
       });
     },
     uploadShotScreen(img) {
-      console.log(img);
       this.$http
         .post("http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg", {
           cardId: this.cardId,
@@ -138,6 +121,17 @@ export default {
         })
         .then(response => {
           console.log("success:", response);
+          const bridge = window.Android;
+          function toEditPage() {
+            window.Android.refreshThumb();
+          }
+          if (bridge) {
+            toEditPage();
+          } else {
+            document.addEventListener("Android", () => {
+              toEditPage();
+            });
+          }
         })
         .catch(e => {
           console.log(e);

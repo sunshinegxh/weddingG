@@ -3,7 +3,7 @@
     <span class="guide-bg to-show-2">
       <div class="guide-bg-white from-bottomCenter">
         <img src="../../assets/location_welcome.png" class="from-topG delayP5" alt="">
-        <img src="../../assets/location.jpg" class="scale21 delayP15" alt="">
+        <img :src="imgArr[0]" class="scale21 delayP15" alt="">
         <div class="scale01 delay2">{{ extra.address}}</div>
         <div class="scale01 delayP25">{{ extra.time }}</div>
       </div>
@@ -17,6 +17,7 @@ export default {
   props: ["info"],
   data() {
     return {
+      imgArr: this.info.goodsImg,
       extra: JSON.parse(this.info.extra)
     };
   },

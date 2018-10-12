@@ -27,7 +27,7 @@
     <div class="page4_ic_cloud_right"></div>
     <div class="page4_frame"></div>
     <div class="page4_pic" :style="{'background-image': `url(${imgArr[0]})`}"></div>
-    <div class="invite_ic_pic51" v-if="edit">
+    <div class="invite_ic_pic51" v-if="edit" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
   </div>

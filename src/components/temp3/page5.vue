@@ -2,12 +2,12 @@
     <div class="page4">
       <img class="page4_ic_flower from-zoomIn" src="../../assets/third/page4_pic_flower.png" alt="">
       <img class="page4_pic_up from-left0" :src="imgArr[0]" alt="">
-      <div class="invite_ic_pic8" v-if="edit">
+      <div class="invite_ic_pic8" v-if="edit" data-html2canvas-ignore="true">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="8" v-on:change-url="changeUrl"></upload-image>
       </div>
 
       <img class="page4_pic_middle from-right0" :src="imgArr[1]" alt="">
-      <div class="invite_ic_pic9" v-if="edit">
+      <div class="invite_ic_pic9" v-if="edit" data-html2canvas-ignore="true">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="9" v-on:change-url="changeUrl"></upload-image>
       </div>
 
@@ -19,7 +19,7 @@
         <p>我就能感到十分美好</p>
       </div>
       <img class="page4_pic_down delay2 from-left0" :src="imgArr[2]" alt="">
-      <div class="invite_ic_pic10" v-if="edit">
+      <div class="invite_ic_pic10" v-if="edit" data-html2canvas-ignore="true">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="10" v-on:change-url="changeUrl"></upload-image>
       </div>
     </div>

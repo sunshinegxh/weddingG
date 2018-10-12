@@ -127,11 +127,9 @@ export default {
         });
     },
     setMusic(params) {
-      alert("this.musicNativeUrl:" + params);
       this.musicNativeUrl = params;
     },
     refreshPage(curPage) {
-      alert("refreshPage:" + curPage);
       this.changeP = curPage + 1;
       this.getIndexInfo();
     },

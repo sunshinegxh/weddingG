@@ -5,7 +5,7 @@
     <span class="border-bg cover-bg-right from-right0"></span>
     <span class="border-bg cover-bg-top from-top0"></span>
 
-    <div class="invite_ic_pic1" v-if="edit">
+    <div class="invite_ic_pic1" v-if="edit" data-html2canvas-ignore="true">
       <upload-image :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
 

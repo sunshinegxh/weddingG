@@ -1,24 +1,32 @@
 <template>
     <div class="first animate">
-      <div class="invite_ic_pic1" v-if="edit">
+      <div class="invite_ic_pic1" v-if="edit" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
-      <div class="invite_ic_pic2" v-if="edit">
+      <div class="invite_ic_pic2" v-if="edit" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img
         src="../../assets/invite_ic_edit.png"
         class="edit"
-        v-if="edit"
-        @click="changeDesc"
-        alt="">
+        v-if="edit && textEdit"
+        @click="changeDescEdit"
+        alt=""
+        data-html2canvas-ignore="true">
       <span
         :style="`backgroundImage: url(${imgArr[0]})`"
         class="from-left">
       </span>
       <!-- 在固定宽度下面 靠左显示 -->
       <!-- <p v-for="(item, index) in extra" :key="index">{{ item }}</p> -->
-      <textarea class="scale01 delay2 first-text" cols="30" rows="3" v-model="extra"></textarea>
+      <textarea
+        ref="text"
+        class="scale01 delay2 first-text"
+        cols="30"
+        rows="3"
+        v-model="extra"
+        @blur.prevent="changeDesc">
+      </textarea>
       <span
         :style="`backgroundImage: url(${imgArr[1]})`"
         class="from-right">
@@ -47,12 +55,17 @@ export default {
   data() {
     return {
       imgArr: this.info.goodsImg,
-      extra: ""
+      extra: "",
+      textEdit: true
     };
   },
   methods: {
     changeUrl(info) {
       this.$set(this.imgArr, info.index - 1, info.url);
+    },
+    changeDescEdit() {
+      this.textEdit = false;
+      this.$refs.text.focus();
     },
     changeDesc() {
       let ex = this.extra.split(/[\n\t]+/g);
@@ -63,7 +76,7 @@ export default {
           extra: ex
         })
         .then(response => {
-          // let res = response.body.data;
+          this.textEdit = true;
           if (response.body.code === "0000") {
             toast("修改成功");
           } else {

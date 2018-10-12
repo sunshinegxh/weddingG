@@ -3,14 +3,14 @@
     <div class="page2_frame right">
       <div class="pic page2_pic_up" :style="{'background-image': `url(${imgArr[0]})`}"></div>
     </div>
-    <div class="invite_ic_pic31" v-if="edit">
+    <div class="invite_ic_pic31" v-if="edit" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="page2_copywriting"></div>
     <div class="page2_frame left">
       <div class="pic page2_pic_down" :style="{'background-image': `url(${imgArr[1]})`}"></div>
     </div>
-    <div class="invite_ic_pic32" v-if="edit">
+    <div class="invite_ic_pic32" v-if="edit" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="page2_ic_cloud"></div>
