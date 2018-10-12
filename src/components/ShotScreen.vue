@@ -1,5 +1,6 @@
 <template>
-  <img src="../assets/invite_ic_edit.png" data-html2canvas-ignore="true" class="shotS" @click="shotScreen" />
+  <button data-html2canvas-ignore="true" class="shotS" @click="shotScreen">asasa</button>
+  <!-- <img src="../assets/invite_ic_edit.png" data-html2canvas-ignore="true" class="shotS" @click="shotScreen" />c -->
   <!-- <img src="../assets/invite_ic_edit.png" data-html2canvas-ignore="true" class="shotS" @click="shotScreen" /> -->
 </template>
 

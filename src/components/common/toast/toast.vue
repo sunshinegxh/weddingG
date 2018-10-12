@@ -1,6 +1,6 @@
 <template>
   <transition name="toast-pop">
-    <div class="toast" v-if="visible" :class="customClass">
+    <div class="toast" v-if="visible" :class="customClass" data-html2canvas-ignore="true">
       <span class="toast-text">{{message}}</span>
     </div>
   </transition>

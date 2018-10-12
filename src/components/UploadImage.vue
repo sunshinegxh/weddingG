@@ -53,20 +53,51 @@ export default {
         )
         .then(response => {
           toast("上传成功！");
-          this.$emit("change-url", {
-            url: response.body.data.imgUrl,
-            index: this.imageSort
-          });
-          let a = new Image();
-          a.src = response.body.data.imgUrl;
-          let self = this;
-          a.onload = function() {
-            setTimeout(() => {
-              // alert("完成加载");
-              self.shotScreen();
-            }, 5000);
+
+          var self = this;
+          var imgUrl = response.body.data.imgUrl;
+          window.URL = window.URL || window.webkitURL;
+          var xhr = new XMLHttpRequest();
+          xhr.open("get", imgUrl, true);
+          // 至关重要
+          xhr.responseType = "blob";
+          xhr.onload = function() {
+            if (this.status == 200) {
+              //得到一个blob对象
+              var blob = this.response;
+              console.log("blob", blob);
+              //  至关重要
+              let oFileReader = new FileReader();
+              oFileReader.onloadend = function(e) {
+                let base64 = e.target.result;
+                self.$emit("change-url", {
+                  url: base64,
+                  index: self.imageSort
+                });
+                self.shotScreen();
+              };
+              oFileReader.readAsDataURL(blob);
+            }
           };
-          console.log("uploadShotScreen:", response.body.data.imgUrl);
+          xhr.onerror = function(e) {
+            console.log(e);
+          };
+          xhr.send();
+
+          // let a = new Image();
+          // a.src = response.body.data.imgUrl;
+          // let self = this;
+          // a.onload = function() {
+          //   setTimeout(() => {
+          //     // alert("完成加载");
+          //     self.shotScreen();
+          //   }, 5000);
+          // };
+          // console.log("uploadShotScreen:", response.body.data.imgUrl);
+          // setTimeout(() => {
+          //   this.shotScreen();
+          //   console.log("uploadShotScreen:", response.body.data.imgUrl);
+          // }, 0);
         })
         .catch(e => {
           document.write(e);
@@ -82,7 +113,8 @@ export default {
         backgroundColor: "#fff",
         scale: 1,
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
+        logging: false
       }).then(function(canvas) {
         document.body.appendChild(canvas);
         var link = document.createElement("a");

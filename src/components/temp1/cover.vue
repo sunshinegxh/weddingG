@@ -1,10 +1,12 @@
 <template>
   <div class="cover">
-    <div class="invite_ic_pic" v-if="edit">
+    <!-- <shot-screen></shot-screen> -->
+    <div class="invite_ic_pic" v-if="edit" data-html2canvas-ignore="true">
       <!-- <shot-screen></shot-screen> -->
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <img
+      data-html2canvas-ignore="true"
       src="../../assets/invite_ic_edit.png"
       class="edit"
       v-if="edit"
@@ -54,6 +56,31 @@ export default {
   methods: {
     changeUrl(info) {
       this.$set(this.imgSrc, info.index - 1, info.url);
+      // var self = this;
+      // var imgUrl = info.url;
+      // window.URL = window.URL || window.webkitURL;
+      // var xhr = new XMLHttpRequest();
+      // xhr.open("get", imgUrl, true);
+      // // 至关重要
+      // xhr.responseType = "blob";
+      // xhr.onload = function() {
+      //   if (this.status == 200) {
+      //     //得到一个blob对象
+      //     var blob = this.response;
+      //     console.log("blob", blob);
+      //     //  至关重要
+      //     let oFileReader = new FileReader();
+      //     oFileReader.onloadend = function(e) {
+      //       let base64 = e.target.result;
+      //       self.$set(self.imgSrc, info.index - 1, base64);
+      //     };
+      //     oFileReader.readAsDataURL(blob);
+      //   }
+      // };
+      // xhr.onerror = function(e) {
+      //   console.log(e);
+      // };
+      // xhr.send();
     },
     setInfo() {
       this.$http
