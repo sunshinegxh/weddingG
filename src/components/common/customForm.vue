@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="submit-btn" role="button" @click="onSubmit" :style="{backgroundColor: btnColor}">确认赴宴并提交信息</div>
-    <div v-if="show" class="pick-wrapper" @touchstart.stop="" @touchend.stop="" @touchmove.stop="">
+    <div v-if="show" class="pick-wrapper" @touchstart.stop="" @touchend.stop="" @touchmove.prevent>
       <div class="pick-mask"></div>
       <div class="role-picker">
         <picker :visible-item-count="3" :showToolbar="true" :slots="slots" @change="onValuesChange" valueKey="relationName">
@@ -93,12 +93,20 @@ export default {
           document.write(e);
         });
     },
+    stopRoll() {
+      /* eslint-disable no-undef */
+      $.fn.pagepiling.setAllowScrolling(false);
+    },
     pickerCancel() {
+      /* eslint-disable no-undef */
+      $.fn.pagepiling.setAllowScrolling(true);
       this.show = false;
     },
     pickerSure() {
       console.log("pickerSure");
       this.show = false;
+      /* eslint-disable no-undef */
+      $.fn.pagepiling.setAllowScrolling(true);
       this.formDta.role = this.pickerData;
     },
     addNumber() {
@@ -110,6 +118,7 @@ export default {
       }
     },
     showPicker() {
+      this.stopRoll();
       this.relation();
     },
     onValuesChange(picker, values) {
