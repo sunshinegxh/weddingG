@@ -50,6 +50,9 @@ export default {
     setPage(val) {
       $.fn.pagepiling.moveTo(val);
       this.$store.commit("SET_CURPAGE", --val);
+    },
+    isStopScrolling(falg) {
+      $.fn.pagepiling.setAllowScrolling(falg);
     }
   },
   components: {
