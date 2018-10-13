@@ -85,7 +85,7 @@ export default {
   span:nth-of-type(1) {
     transform: translateX(-100%);
     clip-path: polygon(0% 0%, 100% 0%, 100% 640 * $px, 0% 100%);
-    height: 774 * $vh;
+    height: 774 * $px;
     float: left;
   }
   span:nth-of-type(2) {
@@ -106,14 +106,14 @@ export default {
   img:nth-of-type(1) {
     // transform: translateX(100%);
     position: absolute;
-    right: -1000px;
+    right: -1000 * $px;
     height: 40 * $px;
     bottom: 220 * $px;
   }
   img:nth-of-type(2) {
     // transform: translateX(-100%);
     position: absolute;
-    left: -1000px;
+    left: -1000 * $px;
     height: 96 * $px;
     bottom: 108 * $px;
   }
@@ -145,7 +145,7 @@ export default {
 }
 @-moz-keyframes fRht48 {
   0% {
-    left: -1000px;
+    left: -1000 * $px;
     opacity: 0;
   }
   100% {
@@ -155,7 +155,7 @@ export default {
 }
 @-webkit-keyframes fRht48 {
   0% {
-    left: -1000px;
+    left: -1000 * $px;
     opacity: 0;
   }
   100% {
@@ -165,7 +165,7 @@ export default {
 }
 @keyframes fRht48 {
   0% {
-    left: -1000px;
+    left: -1000 * $px;
     opacity: 0;
   }
   100% {
@@ -181,7 +181,7 @@ export default {
 }
 @-moz-keyframes fleft100 {
   0% {
-    right: -1000px;
+    right: -1000 * $px;
     opacity: 0;
   }
   100% {
@@ -191,7 +191,7 @@ export default {
 }
 @-webkit-keyframes fleft100 {
   0% {
-    right: -1000px;
+    right: -1000 * $px;
     opacity: 0;
   }
   100% {
@@ -201,7 +201,7 @@ export default {
 }
 @keyframes fleft100 {
   0% {
-    right: -1000px;
+    right: -1000 * $px;
     opacity: 0;
   }
   100% {

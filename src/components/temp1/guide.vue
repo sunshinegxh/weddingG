@@ -45,19 +45,20 @@ export default {
       height: 862 * $px;
       background: #fff;
       position: absolute;
-      top: 1000px;
+      top: 1000 * $px;
       left: 50%;
       margin-left: -351 * $px;
       margin-top: -431 * $px;
       img:nth-of-type(1) {
         position: relative;
-        top: -1000px;
+        top: -1000 * $px;
         width: 100%;
         height: 250 * $px;
       }
       img:nth-of-type(2) {
         opacity: 0;
         width: 582 * $px;
+        height: 356 * $px;
       }
       div:nth-of-type(1) {
         opacity: 0;

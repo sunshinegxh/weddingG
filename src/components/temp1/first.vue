@@ -123,7 +123,7 @@ export default {
   &-text {
     width: 440 * $vw;
     height: 120 * $vh;
-    margin: 50 * $px auto 0;
+    margin: 40 * $px auto 0;
     font-size: 26 * $vh;
     text-align: left;
     color: #222222;

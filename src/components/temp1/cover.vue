@@ -150,20 +150,20 @@ export default {
       background: #fff;
       position: absolute;
       left: 36 * $px;
-      bottom: -1000px;
+      bottom: -1000 * $px;
     }
     img {
       position: absolute;
-      top: 610 * $px;
+      top: 580 * $px;
       width: 482 * $px;
       opacity: 1;
-      left: 1000px;
+      left: 1000 * $px;
     }
     p {
       position: absolute;
       color: #222222;
       font-size: 48 * $px;
-      left: 1000px;
+      left: 1000 * $px;
     }
     span {
       position: absolute;
@@ -171,23 +171,23 @@ export default {
       color: #222222;
       font-size: 28 * $px;
       text-align: left;
-      left: 1000px;
+      left: 1000 * $px;
     }
     p:nth-of-type(1) {
-      top: 700 * $px;
+      top: 670 * $px;
     }
     p:nth-of-type(2) {
-      top: 790 * $px;
+      top: 760 * $px;
     }
     p:nth-of-type(3) {
-      top: 880 * $px;
+      top: 850 * $px;
     }
     span:nth-of-type(1) {
-      top: 1040 * $px;
+      top: 1010 * $px;
     }
     span:nth-of-type(2) {
       width: 360 * $px;
-      top: 1100 * $px;
+      top: 1080 * $px;
     }
   }
   .invite_ic_pic {
@@ -237,31 +237,31 @@ export default {
 }
 @-moz-keyframes fBtm60 {
   0% {
-    bottom: -1000px;
+    bottom: -1000 * $px;
     opacity: 0;
   }
   100% {
-    bottom: 60px;
+    bottom: 120 * $px;
     opacity: 0.8;
   }
 }
 @-webkit-keyframes fBtm60 {
   0% {
-    bottom: -1000px;
+    bottom: -1000 * $px;
     opacity: 0;
   }
   100% {
-    bottom: 60px;
+    bottom: 120 * $px;
     opacity: 0.8;
   }
 }
 @keyframes fBtm60 {
   0% {
-    bottom: -1000px;
+    bottom: -1000 * $px;
     opacity: 0;
   }
   100% {
-    bottom: 60px;
+    bottom: 120 * $px;
     opacity: 0.8;
   }
 }
@@ -273,31 +273,31 @@ export default {
 }
 @-moz-keyframes fRht30 {
   0% {
-    left: 1000px;
+    left: 1000 * $px;
     opacity: 0;
   }
   100% {
-    left: 30px;
+    left: 60 * $px;
     opacity: 1;
   }
 }
 @-webkit-keyframes fRht30 {
   0% {
-    left: 1000px;
+    left: 1000 * $px;
     opacity: 0;
   }
   100% {
-    left: 30px;
+    left: 60 * $px;
     opacity: 1;
   }
 }
 @keyframes fRht30 {
   0% {
-    left: 1000px;
+    left: 1000 * $px;
     opacity: 0;
   }
   100% {
-    left: 30px;
+    left: 60 * $px;
     opacity: 1;
   }
 }
