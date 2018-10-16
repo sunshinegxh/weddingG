@@ -7,7 +7,7 @@
     </swipe>
 
   </div> -->
-  <div class="wrapper" id="wrapper">
+  <div class="wrapper temp2" id="wrapper">
     <div class="section" v-for="(data, index) in dataList" :key="index">
       <component :is="isCom(data.templatePageId)" :info="data" :edit="edit" v-show="index === current"></component>
     </div>
@@ -80,6 +80,10 @@ export default {
   overflow: hidden;
   font-family: Songti TC;
 }
+.wrapper.temp2 {
+  background: url(../../assets/second/invitation_bg.png) no-repeat;
+  background-size: 100% 100%;
+}
 .swipe-item {
   height: 100vh;
   background: url(../../assets/second/invitation_bg.png) no-repeat;
@@ -88,9 +92,9 @@ export default {
 .section {
   background-color: #fff;
 }
-.swipe-item {
-  height: 100vh;
-  background: #fff;
-  background-size: 100% 100%;
-}
+// .swipe-item {
+//   height: 100vh;
+//   background: #fff;
+//   background-size: 100% 100%;
+// }
 </style>

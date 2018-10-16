@@ -50,6 +50,8 @@ export default {
   padding-bottom: 71 * $vh;
   box-sizing: border-box;
   position: relative;
+  background: url(../../assets/second/invitation_bg.png) no-repeat;
+  background-size: 100% 100%;
   .invite_ic_pic31 {
     position: absolute;
     top: 350 * $px;

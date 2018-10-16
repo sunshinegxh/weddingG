@@ -1,80 +1,206 @@
 <template>
   <div class="seat">
     <div class="seat-title">
-      <span>欢迎来李雷和韩梅梅的婚礼</span>
-      <img src="../assets/seat/search.jpg" alt="" v-if="person === ''">
-      <input type="text" placeholder="搜索宾客名称，快速查座" v-model="person" />
+      <span class="title">欢迎来李雷和韩梅梅的婚礼</span>
+      <div class="input">
+        <img src="../assets/seat/search.jpg" alt="" v-show="person === ''">
+        <input type="text" placeholder="搜索宾客名称，快速查座" v-model="person" />
+        <span class="search" v-show="person !== ''" @click="search">搜索</span>
+      </div>
     </div>
-    <div class="seat-contain">
-      <div class="seat-contain-table" ref="table">
-        <div class="seat-contain-row" v-for="(item, i) in result" :key="i">
-          <div class="seat-contain-cell" v-for="(item1, j) in item" :key="j" :class="{'is-hidden': !item1, 'is-center': item1 && item1.isCenter}">{{ item1 && item1.tableNumber }}</div>
+    <div class="seat-table" ref="table">
+      <div class="seat-table-row" v-for="(rol, i) in tables" :key="i">
+        <div
+          class="seat-table-cell"
+          v-for="(cell, j) in rol"
+          :key="j"
+          :class="{
+            'is-hidden': !cell,
+            'is-center': cell && cell.isCenter,
+            'is-top-door': cell && cell.isTDoor,
+            'is-left-door': cell && cell.isLDoor,
+            'is-right-door': cell && cell.isRDoor,
+            'is-y-road': cell && cell.isYRoad,
+            'is-x-road': cell && cell.isXRoad,
+            'is-y-half-road': cell && cell.isYHRoad,
+            'is-x-l-half-road': cell && cell.isXLHRoad,
+            'is-x-r-half-road': cell && cell.isXRHRoad,
+          }"
+          v-show="!cell || !cell.hidden"
+          :style="cell && cell.style"
+        >
+        {{ cell && cell.tableNumber }}
+        <small v-if="cell && cell._selectNumber">({{cell && cell._selectNumber}})</small>
         </div>
       </div>
-      <!-- <div class="seat-contain-door" :style="style(door)">门</div> -->
     </div>
     <div class="seat-share">分享给宾客</div>
   </div>
 </template>
 
 <script>
+import toast from "../components/common/toast";
+
+const colorList = ["#51B0F9", "#FF666A", "#0ACA8D", "#FFA66A"];
+
 export default {
   name: "Seat",
   data() {
     return {
       person: "",
-      tables: [],
-      result: [],
-      rolNum: 0,
-      door: {}
+      tables: []
     };
   },
   created() {
     this.getSeat();
   },
+
+  watch: {
+    person(v) {
+      if (v === "") {
+        this.search("");
+      }
+    }
+  },
   methods: {
+    search() {
+      let selectTable = [];
+      this.tables.forEach(row => {
+        const selectCell = row.filter(item => {
+          if (item) {
+            const { persons } = item;
+            if (persons) {
+              const number = persons.filter(p => p.name === this.person.trim());
+              item.style = "";
+              if (number && number.length > 1) {
+                item._selectNumber = number.length;
+              } else {
+                item._selectNumber = 0;
+              }
+              if (number && number.length > 0) {
+                return true;
+              }
+              return false;
+            }
+            return false;
+          }
+        });
+        selectCell && (selectTable = [...selectTable, ...selectCell]);
+      });
+      selectTable.forEach((table, i) => {
+        table.style = {
+          backgroundColor: colorList[i % colorList.length],
+          color: "#fff"
+        };
+      });
+      if (!selectTable.length) {
+        toast("暂未搜到～");
+      }
+    },
+
     format(data, door) {
       const result = [];
       const xArr = data.map(({ positionX }) => positionX);
-      const size = Math.abs(Math.min(...xArr));
-      const rolNum = size + Math.max(...xArr);
-      [door, ...data].map(({ positionX, positionY, tableNumber }) => {
+      const lx = Math.abs(Math.min(...xArr));
+      const rx = Math.abs(Math.max(...xArr));
+      const size = Math.max(lx, rx);
+      const rolNum = size * 2;
+      console.log("rolNum:", lx, rx, rolNum);
+      data.map(({ positionX, positionY, tableNumber, ...rest }) => {
         const x = size + positionX;
         if (!result[positionY]) {
           result[positionY] = [];
         }
         result[positionY][x] = {
-          tableNumber
+          tableNumber,
+          ...rest,
+          _selectNumber: 0,
+          style: ""
         };
       });
+      // 处理door
+      if (!result[door.positionY]) {
+        result[door.positionY] = [];
+      }
+      let doorType = "";
+      if (door.positionX === 0) {
+        doorType = "isTDoor";
+      } else if (door.positionX > 0) {
+        doorType = "isRDoor";
+      } else {
+        doorType = "isLDoor";
+      }
+      result[door.positionY][door.positionX + size] = {
+        tableNumber: "门",
+        [doorType]: true,
+        ...door
+      };
+      // 处理主席台，主席台从 -1 到 1占3个格子
       if (!result[0]) {
         result[0] = [];
       }
-      result[0][size - 1] = {
+      result[0][size] = {
         tableNumber: "主席台",
         isCenter: true
       };
+      result[0][size - 1] = result[0][size + 1] = {
+        hidden: true
+      };
+      // 处理通道
+      for (let y = 1; y <= door.positionY; y++) {
+        if (y === door.positionY && door.positionX === 0) {
+          continue;
+        }
+        !result[y] && (result[y] = []);
+        const type = y === door.positionY ? "isYHRoad" : "isYRoad";
+        !result[y][size] && (result[y][size] = {});
+        result[y][size] = {
+          ...result[y][size],
+          [type]: true
+        };
+      }
 
-      this.result = result;
+      const minX = size + Math.min(door.positionX, 0);
+      const maxX = size + Math.max(door.positionX, 0);
+      const half = door.positionX > 0 ? "isXRHRoad" : "isXLHRoad";
+      for (let x = minX; x <= maxX; x++) {
+        if (x !== size + door.positionX) {
+          const type = x === size ? half : "isXRoad";
+          !result[door.positionY][x] && (result[door.positionY][x] = {});
+          result[door.positionY][x] = {
+            ...result[door.positionY][x],
+            [type]: true
+          };
+        }
+      }
+
+      this.tables = result;
       this.$nextTick(() => {
-        const x =
-          (((rolNum * (88 + 32) * 100) / 1334 - 50) * window.innerWidth) / 100;
+        // const x = (rolNum * 12000 / 750 - 80) * window.innerWidth / 200;
+        const x = (((rolNum * 12000) / 750) * window.innerWidth) / 200;
+        // const x = (rolNum * 12000 / 750 - 50) * window.innerWidth / 100;
+        console.log(x);
         this.$refs.table.scrollTo(x, 0);
       });
-      console.log("aaa", result);
     },
 
     getSeat() {
       this.$http
         .post("http://47.105.43.207:80/()/banhunli/tool/getAllSeatingH5.gg", {
-          weddingId: 91
+          weddingId: this.weddingId
         })
         .then(response => {
           // this.loading = false;
           console.log(response.body.data);
-          let res = response.body.data;
           if (response.body.code === "0000") {
+            // const res = response.body.data;
             // this.tables = res.tables;
+            // this.tables[0].persons.push({
+            //   name: "斌斌"
+            // });
+            // this.tables[1].persons.push({
+            //   name: "斌斌"
+            // });
             this.tables = Array.from(Array(11), (i, index) => {
               return {
                 positionX: index - 5,
@@ -82,7 +208,11 @@ export default {
                 tableNumber: index + 1
               };
             });
-            this.door = res.door;
+            // this.door = res.door;
+            this.door = {
+              positionX: 3,
+              positionY: 6
+            };
             this.tables = this.tables.filter(
               ({ positionX }) => positionX !== 0
             );
@@ -98,7 +228,7 @@ export default {
                 tableNumber: -1
               }
             );
-            this.format(this.tables, { ...res.door, tableNumber: "门" });
+            this.format(this.tables, this.door);
             // this.cur = this.musicList[0];
           } else {
             console.log("res.respCode", response.body.message);
@@ -108,13 +238,11 @@ export default {
           console.log(e);
         });
     }
-    // style(item) {
-    //   let left = (item.positionX) * 40 + (item.positionX - 1) * 16;
-    //   let top = item.positionY * 40 + (item.positionY - 1) * 16;
-    //   // let left = (item.positionX + 4) * 40 + (item.positionX - 1) * 8;
-    //   // let top = item.positionY * 40 + (item.positionY - 1) * 8;
-    //   return `left: ${left}px;top: ${top}px`;
-    // }
+  },
+  computed: {
+    weddingId() {
+      return this.$route.query.weddingId;
+    }
   }
 };
 </script>
@@ -123,13 +251,15 @@ export default {
 @import "../common.scss";
 
 .seat {
+  overflow: auto;
+  height: 100vh;
   &-title {
     background: url("../assets/seat/seatBg.jpg") no-repeat;
     background-size: 100% 100%;
     height: 280 * $vh;
     text-align: center;
     position: relative;
-    span {
+    .title {
       display: inline-block;
       font-size: 36 * $vw;
       color: #fff;
@@ -139,59 +269,70 @@ export default {
       line-height: 48 * $vh;
       margin-top: 132 * $vh;
     }
-    img {
-      width: 29 * $vw;
-      height: 29 * $vh;
-      position: absolute;
-      left: 25%;
-      bottom: -15 * $vh;
-      transform: translate(-50%, 0);
-      z-index: 10;
-    }
-    input {
+    .input {
       width: 702 * $vw;
       height: 92 * $vh;
       text-align: center;
       line-height: 92 * $vh;
-      border-radius: 50 * $vw;
-      border: none;
       position: absolute;
       left: 50%;
       bottom: -46 * $vh;
       transform: translate(-50%, 0);
+      img {
+        width: 29 * $vw;
+        height: 29 * $vh;
+        position: absolute;
+        top: 50%;
+        left: 25%;
+        // bottom: -15 * $vh;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+      }
+      input {
+        border-radius: 50 * $vw;
+        text-align: center;
+        width: 100%;
+        padding: 0 20 * $vw;
+        box-sizing: border-box;
+        position: absolute;
+        top: 10 * $vh;
+        left: 0 * $vw;
+        right: 0 * $vw;
+        bottom: 10 * $vh;
+        background: #fff;
+        border: none;
+        outline: none;
+      }
+      .search {
+        position: absolute;
+        color: #6892fa;
+        font-size: 28 * $vh;
+        line-height: 92 * $vh;
+        right: 48 * $vw;
+      }
     }
   }
-  &-contain {
+  &-table {
+    margin-top: 46 * $vh;
     position: relative;
-    padding-top: 46 * $vh;
-    // display: flex;
-    // flex-wrap: nowrap;
-    // overflow: auto;
-    // min-height: calc(100vh - 300 * $vh);
-    // width: 100%;
-    // transform: translateX(50%);
-    // top: 280 * $vh;
-    // left: 0;
-    // right: 0;
-    // bottom: 0;
-    // overflow: auto;
+    border-collapse: separate;
+    border-spacing: 16 * $vh 16 * $vw;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     &-row {
-      // display: block;
       display: flex;
       flex-wrap: nowrap;
-      // transform: translateX(-20%);
-      // display: table-row;
-      min-width: 100%;
-      // height: 88 * $vh;
-      // white-space: nowrap;
+      margin-left: auto;
+      margin-right: auto;
+      // min-width: 100%;
     }
     &-cell {
       &.is-hidden {
         visibility: hidden;
       }
       &.is-center {
-        min-width: 300 * $vw;
-        max-width: 300 * $vw;
         width: 300 * $vw;
         height: 48 * $vh;
         line-height: 48 * $vh;
@@ -199,87 +340,139 @@ export default {
         text-align: center;
         background: #dddddd;
         color: #999;
-        // margin: 30 * $vh 30 * $vw;
+        margin: 0;
+        border-radius: 0;
         margin: 0 30 * $vw;
-        border-top-left-radius: 0 * $vw;
-        border-top-right-radius: 0 * $vw;
-        border-bottom-right-radius: 10 * $vw;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
         border-bottom-left-radius: 10 * $vw;
+        border-bottom-right-radius: 10 * $vw;
+        &::after {
+          content: "";
+          margin: auto;
+          display: block;
+          width: 32 * $vw;
+          height: 74 * $vw;
+          background: #dddddd;
+        }
       }
-      display: inline-block;
-      // display: table-cell;
-
+      &.is-top-door {
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          top: -16 * $vh;
+          left: 28 * $vh;
+          width: 32 * $vw;
+          height: 16 * $vh;
+          background: #dddddd;
+        }
+      }
+      &.is-left-door,
+      &.is-right-door {
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 28 * $vh;
+          width: 16 * $vw;
+          height: 32 * $vh;
+          background: #dddddd;
+        }
+      }
+      &.is-left-door::after {
+        right: -16 * $vw;
+      }
+      &.is-right-door::after {
+        left: -16 * $vw;
+      }
+      // &.is-right-door::before {
+      //   content: '';
+      //   display: inline-block;
+      //   width: 16 * $vw;
+      //   height: 32 * $vh;
+      //   margin-left: -16 * $vw;
+      //   background: #dddddd;
+      // }
+      &.is-y-road {
+        margin-top: -32 * $vh;
+        width: 32 * $vw;
+        height: 120 * $vw;
+        margin: 0 44 * $vw;
+        background: #dddddd;
+        border-radius: 0;
+      }
+      &.is-y-half-road {
+        background: none;
+        &::before {
+          content: "";
+          display: block;
+          height: 44 * $vw;
+          width: 32 * $vw;
+          margin: -16 * $vh auto 0 auto;
+          background: #dddddd;
+          border-radius: 0;
+        }
+      }
+      &.is-x-road {
+        width: 120 * $vw;
+        height: 32 * $vh;
+        margin: 44 * $vh 0;
+        background: #dddddd;
+        border-radius: 0;
+      }
+      &.is-x-l-half-road,
+      &.is-x-r-half-road {
+        background: none;
+        &::after {
+          content: "";
+          display: block;
+          width: 76 * $vw;
+          height: 32 * $vh;
+          background: #dddddd;
+          border-radius: 0;
+        }
+      }
+      &.is-x-l-half-road::after {
+        margin-left: -16 * $vw;
+      }
+      &.is-x-r-half-road::after {
+        margin-left: 28 * $vw;
+      }
+      // &.is-x-half-road {
+      //   background: none;
+      //   &::after {
+      //     content: '';
+      //     display: block;
+      //     margin-left: -16 * $vw;
+      //     width: 76 * $vw;
+      //     height: 32 * $vh;
+      //     background: #dddddd;
+      //     border-radius: 0;
+      //   }
+      // }
       flex-shrink: 0;
       margin: 16 * $vh 16 * $vw;
-      min-width: 88 * $vw;
       width: 88 * $vw;
-      max-width: 88 * $vw;
-      height: 88 * $vh;
-      line-height: 88 * $vh;
+      height: 88 * $vw;
+      line-height: 88 * $vw;
       background: #fff;
       border-radius: 10 * $vw;
       text-align: center;
       font-size: 36 * $vw;
       text-align: center;
     }
-    &-table {
-      position: relative;
-      border-collapse: separate;
-      border-spacing: 16 * $vh 16 * $vw;
-      // transform: translateX(-50%);
-      overflow: auto;
-      // transform: translate(50%);
-      // position: absolute;
-      // display: inline-block;
-      // flex-shrink: 0;
-      // margin: 16 * $vh 16 * $vw;
-      // width: 88 * $vw;
-      // height: 88 * $vh;
-      // line-height: 88 * $vh;
-      // background: #fff;
-      // border-radius: 10 * $vw;
-      // text-align: center;
-      // font-size: 36 * $vw;
-      // text-align: center;
-    }
-    &-center {
-      width: 300 * $vw;
-      height: 48 * $vh;
-      line-height: 48 * $vh;
-      font-size: 28 * $vw;
-      text-align: center;
-      background: #dddddd;
-      color: #999;
-      position: absolute;
-      left: 16 * $vw;
-      left: 50%;
-      top: 46 * $vh;
-      transform: translate(-50%, 0);
-      border-top-left-radius: 0 * $vw;
-      border-top-right-radius: 0 * $vw;
-      border-bottom-right-radius: 10 * $vw;
-      border-bottom-left-radius: 10 * $vw;
-    }
-    &-door {
-      width: 88 * $vw;
-      height: 88 * $vh;
-      line-height: 88 * $vh;
-      font-size: 28 * $vw;
-      text-align: center;
-      background: #dddddd;
-      color: #999;
-      position: absolute;
-      border-radius: 10 * $vw;
-    }
   }
   &-share {
     width: 502 * $vw;
     height: 94 * $vh;
+    margin: 20 * $vh auto;
     line-height: 94 * $vh;
-    position: absolute;
-    left: 50%;
-    bottom: 48 * $vh;
-    transform: translate(-50%, 0);
+    text-align: center;
+    // position: absolute;
+    // left: 50%;
+    // bottom: 48 * $vh;
+    // transform: translate(-50%, 0);
     color: #fff;
     background: #739afc;
     font-size: 36 * $vw;

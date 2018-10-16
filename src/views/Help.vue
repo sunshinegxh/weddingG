@@ -1,15 +1,15 @@
 <template>
   <div class="help">
     <div class="help-title">
-      <img src="../assets/logo.png" alt="">
-      <span>用户昵称</span>
+      <img :src="user.userIcon" alt="">
+      <span>{{ user.nickName }}</span>
     </div>
     <p>邀请你使用伴婚礼</p>
     <p>帮助ta一起完成备婚</p>
     <div class="help-card">
       <div class="help-card-up">
         <span>他的婚礼ID</span>
-        <p>X89765</p>
+        <p>{{ weddingId }}</p>
         <img src="../assets/help/synergy_share_btn_copy.png" alt="">
       </div>
       <img class="help-card-middle" src="../assets/help/middle.jpg" alt="">
@@ -25,26 +25,34 @@
 export default {
   name: "Help",
   data() {
-    return {};
+    return {
+      user: {}
+    };
   },
-  created() {},
+  computed: {
+    weddingId() {
+      return this.$route.query.weddingId;
+    },
+    userId() {
+      return this.$route.query.userId;
+    }
+  },
+  created() {
+    this.getUserInfo();
+  },
   methods: {
-    getMusic() {
+    getUserInfo() {
       this.$http
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/getSystemMusicList.gg",
-          {
-            pageNo: 1,
-            pageSize: 20
-          }
-        )
+        .post("http://47.105.43.207:80/()/banhunli/mine/getUserInfo.gg", {
+          userId: this.userId
+        })
         .then(response => {
           // this.loading = false;
-          console.log(response.body.data.musics);
-          let res = response.body.data;
+          // console.log(response.body.data);
+          // let res = response.body.data;
           if (response.body.code === "0000") {
-            this.musicList = res.musics;
-            this.cur = this.musicList[0];
+            this.user = response.body.data;
+            // this.cur = this.musicList[0];
           } else {
             console.log("res.respCode", response.body.message);
           }

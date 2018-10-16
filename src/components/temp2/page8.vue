@@ -91,10 +91,11 @@ export default {
 @import "../../common.scss";
 .wrapper {
   height: 100%;
-  background: #ffffff;
   position: relative;
   overflow: hidden;
   font-family: PingFangSC-Regular;
+  background: url(../../assets/second/invitation_bg.png) no-repeat;
+  background-size: 100% 100%;
 }
 .bg {
   position: absolute;

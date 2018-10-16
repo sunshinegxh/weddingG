@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import toast from "./common/toast";
 import html2canvas from "html2canvas";
 import { mapState } from "vuex";
 
@@ -52,8 +51,6 @@ export default {
           }
         )
         .then(response => {
-          toast("上传成功！");
-
           var self = this;
           var imgUrl = response.body.data.imgUrl;
           window.URL = window.URL || window.webkitURL;
@@ -74,7 +71,7 @@ export default {
                   url: base64,
                   index: self.imageSort
                 });
-                self.shotScreen();
+                // self.shotScreen();
               };
               oFileReader.readAsDataURL(blob);
             }

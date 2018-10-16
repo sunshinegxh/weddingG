@@ -66,9 +66,13 @@ export default {
     changeDescEdit() {
       this.textEdit = false;
       this.$refs.text.focus();
+      /* eslint-disable no-undef */
+      $.fn.pagepiling.setAllowScrolling(false);
     },
     changeDesc() {
       let ex = this.extra.split(/[\n\t]+/g);
+      /* eslint-disable no-undef */
+      $.fn.pagepiling.setAllowScrolling(true);
       this.$http
         .post("http://47.105.43.207:80/()/banhunli/card/updatePageExtra.gg", {
           cardId: this.cardId,

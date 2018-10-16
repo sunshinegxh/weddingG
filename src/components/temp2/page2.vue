@@ -68,6 +68,8 @@ export default {
   overflow: hidden;
   position: relative;
   text-align: left;
+  background: url(../../assets/second/invitation_bg.png) no-repeat;
+  background-size: 100% 100%;
   .invite_ic_pic21 {
     position: absolute;
     top: 400 * $px;

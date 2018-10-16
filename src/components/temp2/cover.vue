@@ -65,6 +65,8 @@ export default {
   padding: 20 * $vh 24 * $vw 120 * $vw 24 * $vh;
   box-sizing: border-box;
   position: relative;
+  background: url(../../assets/second/invitation_bg.png) no-repeat;
+  background-size: 100% 100%;
 }
 .cover_frame_line {
   height: 1174 * $vh;

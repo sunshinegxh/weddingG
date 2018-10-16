@@ -1,17 +1,23 @@
 <template>
   <div class="guide animate">
-    <span class="guide-bg to-show-2">
+    <span class="guide-bg to-show-2" :style="{'background-image': `url(${imgArr[0]})`}">
       <div class="guide-bg-white from-bottomCenter">
         <img src="../../assets/location_welcome.png" class="from-topG delayP5" alt="">
-        <img :src="imgArr[0]" class="scale21 delayP15" alt="">
+        <img :src="imgArr[1]" class="scale21 delayP15" alt="">
         <div class="scale01 delay2">{{ extra.address}}</div>
         <div class="scale01 delayP25">{{ extra.time }}</div>
+      </div>
+      <div class="invite_ic_pic" v-if="edit" data-html2canvas-ignore="true">
+        <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
     </span>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "guide1",
   props: ["info"],
@@ -21,7 +27,20 @@ export default {
       extra: JSON.parse(this.info.extra)
     };
   },
-  created() {}
+  computed: {
+    ...mapState({
+      edit: state => state.edit
+    })
+  },
+  created() {},
+  components: {
+    uploadImage
+  },
+  methods: {
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
+    }
+  }
 };
 </script>
 
@@ -31,12 +50,19 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
+  .invite_ic_pic {
+    position: fixed;
+    top: 100 * $px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
   &-bg {
     width: 100%;
     position: relative;
     height: 100%;
     display: inline-block;
-    background: url("../../assets/location_bg.png") no-repeat;
+    background-repeat: no-repeat;
     background-size: 100%;
     &-white {
       color: #8eb559;

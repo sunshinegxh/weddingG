@@ -4,8 +4,8 @@
       <div class="topbar">
         <div class="back"></div>
         <!-- <div class="back" @click="screenshot"></div> -->
-        <div @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
-          <audio ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
+        <div data-html2canvas-ignore="true" @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
+          <audio @playing="playing" ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
         </div>
       </div>
       <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
@@ -24,6 +24,7 @@ export default {
       indexData: [],
       template: null,
       musicUrl: "",
+      // true：暂停， false：播放
       musicStop: false,
       changeMusic: false
     };
@@ -41,6 +42,9 @@ export default {
     musicType() {
       return `type${this.templateId}`;
     }
+  },
+  updated() {
+    console.log("updated");
   },
   created() {
     let edit = +this.$route.query.edit === 1;
@@ -80,7 +84,10 @@ export default {
     // 客户端修改页面number
     window.refreshPage = page => {
       this.$store.commit("SET_ISSKIP", true);
-      this.$refs.temp.setPage(page);
+      this.getUserTemplateInfo().then(() => {
+        // this.$refs.temp.current = page;
+        this.$refs.temp.setPage(++page);
+      });
     };
     window.setMusic = music => {
       this.musicUrl = window.encodeURI(music);
@@ -90,15 +97,16 @@ export default {
     };
     window.showPageIndex = page => {
       this.$store.commit("SET_ISSKIP", true);
-      this.$refs.temp.setPage(page);
+      this.$refs.temp.setPage(++page);
     };
     window.refreshInfo = () => {
       this.setCoverData();
     };
     window.changeMusicStatus = () => {
-      if (this.musicStop) {
+      // 音乐在播放
+      if (!this.musicStop) {
         this.changeMusic = !this.changeMusic;
-        if (this.changeMusic) {
+        if (!this.changeMusic) {
           this.$refs.music.play();
         } else {
           this.$refs.music.pause();
@@ -122,6 +130,9 @@ export default {
     }, 1000);
   },
   methods: {
+    playing() {
+      console.log("aaaa");
+    },
     toogleMusic() {
       if (this.musicStop) {
         this.$refs.music.play();
@@ -129,6 +140,7 @@ export default {
         this.$refs.music.pause();
       }
       this.musicStop = !this.musicStop;
+      this.changeMusic = !this.changeMusic;
     },
     getTemplateInfo() {
       this.loading = true;
