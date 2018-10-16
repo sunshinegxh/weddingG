@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="seat-share">分享给宾客</div>
+    <!-- <div class="seat-share">分享给宾客</div> -->
   </div>
 </template>
 
@@ -104,7 +104,7 @@ export default {
       const lx = Math.abs(Math.min(...xArr));
       const rx = Math.abs(Math.max(...xArr));
       const size = Math.max(lx, rx);
-      const rolNum = size * 2;
+      const rolNum = size * 2 + 1;
       console.log("rolNum:", lx, rx, rolNum);
       data.map(({ positionX, positionY, tableNumber, ...rest }) => {
         const x = size + positionX;
@@ -177,9 +177,9 @@ export default {
       this.tables = result;
       this.$nextTick(() => {
         // const x = (rolNum * 12000 / 750 - 80) * window.innerWidth / 200;
-        const x = (((rolNum * 12000) / 750) * window.innerWidth) / 200;
-        // const x = (rolNum * 12000 / 750 - 50) * window.innerWidth / 100;
-        console.log(x);
+        // const x = (rolNum * 12000 / 750 - 50）* window.innerWidth / 200;
+        const x = (((rolNum * 12000) / 750 - 100) * window.innerWidth) / 200;
+        console.log("x:", x);
         this.$refs.table.scrollTo(x, 0);
       });
     },
@@ -193,41 +193,41 @@ export default {
           // this.loading = false;
           console.log(response.body.data);
           if (response.body.code === "0000") {
-            // const res = response.body.data;
-            // this.tables = res.tables;
+            const res = response.body.data;
+            this.tables = res.tables;
             // this.tables[0].persons.push({
             //   name: "斌斌"
             // });
             // this.tables[1].persons.push({
             //   name: "斌斌"
             // });
-            this.tables = Array.from(Array(11), (i, index) => {
-              return {
-                positionX: index - 5,
-                positionY: 1,
-                tableNumber: index + 1
-              };
-            });
-            // this.door = res.door;
-            this.door = {
-              positionX: 3,
-              positionY: 6
-            };
+            // this.tables = Array.from(Array(11), (i, index) => {
+            //   return {
+            //     positionX: index - 5,
+            //     positionY: 11,
+            //     tableNumber: index + 1
+            //   };
+            // });
+            this.door = res.door;
+            // this.door = {
+            //   positionX: 3,
+            //   positionY: 6
+            // };
             this.tables = this.tables.filter(
               ({ positionX }) => positionX !== 0
             );
-            this.tables.push(
-              {
-                positionX: -2,
-                positionY: 0,
-                tableNumber: -1
-              },
-              {
-                positionX: 2,
-                positionY: 0,
-                tableNumber: -1
-              }
-            );
+            // this.tables.push(
+            //   {
+            //     positionX: -2,
+            //     positionY: 0,
+            //     tableNumber: -1
+            //   },
+            //   {
+            //     positionX: 2,
+            //     positionY: 0,
+            //     tableNumber: -1
+            //   }
+            // );
             this.format(this.tables, this.door);
             // this.cur = this.musicList[0];
           } else {
@@ -317,6 +317,8 @@ export default {
     position: relative;
     border-collapse: separate;
     border-spacing: 16 * $vh 16 * $vw;
+    // height: 100vh - 280 * $vh;
+    max-height: 100vh - 280 * $vh;
     overflow: auto;
     &::-webkit-scrollbar {
       display: none;
@@ -326,6 +328,7 @@ export default {
       flex-wrap: nowrap;
       margin-left: auto;
       margin-right: auto;
+      height: 120 * $vw;
       // min-width: 100%;
     }
     &-cell {
@@ -452,7 +455,7 @@ export default {
       //   }
       // }
       flex-shrink: 0;
-      margin: 16 * $vh 16 * $vw;
+      margin: 16 * $vw 16 * $vw;
       width: 88 * $vw;
       height: 88 * $vw;
       line-height: 88 * $vw;

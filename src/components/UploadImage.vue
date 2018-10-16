@@ -71,7 +71,7 @@ export default {
                   url: base64,
                   index: self.imageSort
                 });
-                // self.shotScreen();
+                self.shotScreen();
               };
               oFileReader.readAsDataURL(blob);
             }
