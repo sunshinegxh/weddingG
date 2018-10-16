@@ -2,17 +2,21 @@
   <div class="wrapper">
     <div class="bg"></div>
     <div class="message-wrapper">
-      <div class="message-input">写下你的祝福</div>
+      <div class="message-input" @click="showBless">写下你的祝福</div>
     </div>
     <div class="message">
       <div class="message-item" :class="getClass(i)" v-for="(text, i) in showData" :key="i">
         {{ text }}
       </div>
     </div>
+    <send-bless v-show="showB" @send="send"></send-bless>
   </div>
 </template>
 <script>
+import sendBless from "../common/sendBless";
+import { mapState } from "vuex";
 const SIZE = 4;
+
 export default {
   name: "template-3-page-8",
   data() {
@@ -21,16 +25,30 @@ export default {
       index: 0,
       showIndex: 0,
       showData: [],
-      timmer: null
+      timmer: null,
+      showB: false
     };
   },
   created() {
     this.getDanInfo();
   },
+  computed: {
+    ...mapState({
+      edit: state => state.edit
+    })
+  },
+  components: {
+    sendBless
+  },
   unmounted() {
     clearTimeout(this.timmer);
   },
   methods: {
+    showBless() {
+      if (+this.edit === 2) {
+        this.showB = !this.showB;
+      }
+    },
     getClass(i) {
       if (i === this.showIndex) {
         return "tan1";
@@ -82,6 +100,9 @@ export default {
         .catch(e => {
           document.write(e);
         });
+    },
+    send() {
+      this.showB = false;
     }
   }
 };

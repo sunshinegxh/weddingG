@@ -9,7 +9,7 @@
   </div> -->
   <div class="wrapper temp2" id="wrapper">
     <div class="section" v-for="(data, index) in dataList" :key="index">
-      <component :is="isCom(data.templatePageId)" :info="data" :edit="edit" v-show="index === current"></component>
+      <component :is="isCom(data.templatePageId)" :info="data" v-show="index === current"></component>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ import "../../libs/pagepiling";
 
 export default {
   name: "template2",
-  props: ["dataList", "edit"],
+  props: ["dataList"],
   computed: {
     ...mapState({
       current: state => state.currentPage,

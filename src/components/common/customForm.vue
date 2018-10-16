@@ -3,7 +3,8 @@
     <p class="title">为了方便新人，请填写您的赴宴信息</p>
     <div class="form-item">
       <span class="label">姓名</span>
-      <div class="input-wrapper"><input type="text" placeholder="请输入您的姓名" v-model="formDta.name" /></div>
+      <div class="input-wrapper" v-if="+edit === 2"><input  type="text" placeholder="请输入您的姓名" v-model="formDta.name" /></div>
+      <div class="input-wrapper" v-else><input type="text" placeholder="请输入您的姓名" v-model="formDta.name" readonly="readonly"/></div>
     </div>
     <div class="form-item">
       <span class="label">关系</span>
@@ -36,6 +37,7 @@
 <script>
 import { Picker } from "mint-ui";
 import toast from "./toast";
+import { mapState } from "vuex";
 
 export default {
   name: "custom-form",
@@ -66,6 +68,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      edit: state => state.edit
+    }),
     roleText() {
       if (!this.formDta.role || this.formDta.role.length === 0) {
         return "选择您和新人的关系";
@@ -110,46 +115,52 @@ export default {
       this.formDta.role = this.pickerData;
     },
     addNumber() {
-      this.formDta.person += 1;
+      if (+this.edit === 2) {
+        this.formDta.person += 1;
+      }
     },
     delNumber() {
-      if (this.formDta.person > 1) {
+      if (this.formDta.person > 1 && +this.edit === 2) {
         this.formDta.person -= 1;
       }
     },
     showPicker() {
-      this.stopRoll();
-      this.relation();
+      if (+this.edit === 2) {
+        this.stopRoll();
+        this.relation();
+      }
     },
     onValuesChange(picker, values) {
       console.log("picker", values);
       this.pickerData = values;
     },
     onSubmit() {
-      const data = this.formDta;
-      if (!data.name.trim() || (!data.role || data.role.length === 0)) {
-        toast("请完善个人信息！");
-        return;
+      if (+this.edit === 2) {
+        const data = this.formDta;
+        if (!data.name.trim() || (!data.role || data.role.length === 0)) {
+          toast("请完善个人信息！");
+          return;
+        }
+        this.$http
+          .post("http://47.105.43.207:80/()/banhunli/card/h5AddVisitor.gg", {
+            cardId: this.$route.query.cardId,
+            visitorName: data.name,
+            carryNumber: data.person,
+            relationHead: data.role[0].relationId,
+            relationTail: data.role[1].relationId
+          })
+          .then(response => {
+            if (response.body.code === "0000") {
+              toast("添加成功");
+              this.$emit("submit");
+            } else {
+              toast(response.body.message);
+            }
+          })
+          .catch(e => {
+            document.write(e);
+          });
       }
-      this.$http
-        .post("http://47.105.43.207:80/()/banhunli/card/h5AddVisitor.gg", {
-          cardId: this.$route.query.cardId,
-          visitorName: data.name,
-          carryNumber: data.person,
-          relationHead: data.role[0].relationId,
-          relationTail: data.role[1].relationId
-        })
-        .then(response => {
-          if (response.body.code === "0000") {
-            toast("添加成功");
-            this.$emit("submit");
-          } else {
-            toast(response.body.message);
-          }
-        })
-        .catch(e => {
-          document.write(e);
-        });
     }
   },
   components: {

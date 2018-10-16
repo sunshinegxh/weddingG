@@ -15,8 +15,9 @@
 </template>
 <script>
 import sendBless from "../common/sendBless";
-
+import { mapState } from "vuex";
 const SIZE = 4;
+
 export default {
   name: "template-1-page-8",
   data() {
@@ -37,7 +38,9 @@ export default {
   },
   methods: {
     showBless() {
-      this.showB = !this.showB;
+      if (+this.edit === 2) {
+        this.showB = !this.showB;
+      }
     },
     getClass(i) {
       if (i === this.showIndex) {
@@ -97,6 +100,11 @@ export default {
   },
   components: {
     sendBless
+  },
+  computed: {
+    ...mapState({
+      edit: state => state.edit
+    })
   }
 };
 </script>

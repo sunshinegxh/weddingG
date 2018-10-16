@@ -1,13 +1,13 @@
 <template>
   <div class="cover">
-    <div class="invite_ic_pic" v-if="edit" data-html2canvas-ignore="true">
+    <div class="invite_ic_pic" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <img
       data-html2canvas-ignore="true"
       src="../../assets/invite_ic_edit.png"
       class="edit"
-      v-if="edit"
+      v-if="+edit === 1"
       @click="editNative"
       alt="">
     <span class="cover-bg to-show-2" :style="{'background-image': `url(${imgSrc[0]})`}">

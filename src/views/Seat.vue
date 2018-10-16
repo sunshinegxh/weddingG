@@ -176,10 +176,7 @@ export default {
 
       this.tables = result;
       this.$nextTick(() => {
-        // const x = (rolNum * 12000 / 750 - 80) * window.innerWidth / 200;
-        // const x = (rolNum * 12000 / 750 - 50）* window.innerWidth / 200;
         const x = (((rolNum * 12000) / 750 - 100) * window.innerWidth) / 200;
-        console.log("x:", x);
         this.$refs.table.scrollTo(x, 0);
       });
     },

@@ -4,10 +4,10 @@
       <div class="page1_pic_up" :style="{'background-image': `url(${imgArr[0]})`}"></div>
       <div class="page1_pic_down" :style="{'background-image': `url(${imgArr[1]})`}"></div>
     </div>
-    <div class="invite_ic_pic21" v-if="edit" data-html2canvas-ignore="true">
+    <div class="invite_ic_pic21" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
-    <div class="invite_ic_pic22" v-if="edit" data-html2canvas-ignore="true">
+    <div class="invite_ic_pic22" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="right">

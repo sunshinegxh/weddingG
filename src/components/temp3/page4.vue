@@ -2,18 +2,18 @@
     <div class="page3">
       <img class="page3_ic_flower from-zoomIn" src="../../assets/third/page3_ic_flower.png" alt="">
       <img class="page3_pic_left from-left0" :src="imgArr[0]" alt="">
-      <div class="invite_ic_pic5" v-if="edit" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic5" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="5" v-on:change-url="changeUrl"></upload-image>
       </div>
 
       <img class="page3_pic_right from-right0" :src="imgArr[1]" alt="">
-      <div class="invite_ic_pic6" v-if="edit" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic6" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="6" v-on:change-url="changeUrl"></upload-image>
       </div>
 
       <img class="page3_copywrite from-oPC" src="../../assets/third/page3_pic_copywrite.png" alt="">
       <img class="page3_pic_down delay1 from-bottom120" :src="imgArr[2]" alt="">
-      <div class="invite_ic_pic7" v-if="edit" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic7" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="7" v-on:change-url="changeUrl"></upload-image>
       </div>
 

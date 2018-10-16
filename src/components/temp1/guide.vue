@@ -7,7 +7,7 @@
         <div class="scale01 delay2">{{ extra.address}}</div>
         <div class="scale01 delayP25">{{ extra.time }}</div>
       </div>
-      <div class="invite_ic_pic" v-if="edit" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
     </span>

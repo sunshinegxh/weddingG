@@ -2,7 +2,7 @@
     <div class="page2">
       <img class="page2_copywrite delay0_5 from-top0" src="../../assets/third/page2_pic_copywrite.png" alt="">
       <img class="page2_main delay1 from-bottom300" :src="imgArr[0]" alt="">
-      <div class="invite_ic_pic4" v-if="edit" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic4" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="4" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img class="page2_ic_flower_rotate from-rTT" src="../../assets/third/page2_ic_flower.png" alt="">

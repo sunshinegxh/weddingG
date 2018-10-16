@@ -47,9 +47,8 @@ export default {
     console.log("updated");
   },
   created() {
-    let edit = +this.$route.query.edit === 1;
-    console.log("edit:", edit);
-    this.$store.commit("SET_EDIT", edit);
+    // let edit = +this.$route.query.edit === 1;
+    this.$store.commit("SET_EDIT", this.status);
     this.$store.commit("SET_CARDID", +this.cardId);
 
     if (this.templateId === "1") {

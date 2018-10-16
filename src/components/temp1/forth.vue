@@ -1,15 +1,15 @@
 <template>
   <div class="forth">
-    <div class="invite_ic_pic1" v-if="edit" data-html2canvas-ignore="true">
+    <div class="invite_ic_pic1" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
-    <div class="invite_ic_pic2" v-if="edit" data-html2canvas-ignore="true">
+    <div class="invite_ic_pic2" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
     </div>
-    <div class="invite_ic_pic3" v-if="edit" data-html2canvas-ignore="true">
+    <div class="invite_ic_pic3" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
     </div>
-    <div class="invite_ic_pic4" v-if="edit" data-html2canvas-ignore="true">
+    <div class="invite_ic_pic4" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="4" v-on:change-url="changeUrl"></upload-image>
     </div>
     <span

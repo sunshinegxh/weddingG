@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="cover_frame_line">
-      <div class="invite_ic_pic2" v-if="edit" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic2" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
       <div class="cover_copywrite_wemarried"></div>

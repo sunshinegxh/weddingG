@@ -1,15 +1,15 @@
 <template>
     <div class="first animate">
-      <div class="invite_ic_pic1" v-if="edit" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic1" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
-      <div class="invite_ic_pic2" v-if="edit" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic2" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img
         src="../../assets/invite_ic_edit.png"
         class="edit"
-        v-if="edit && textEdit"
+        v-if="+edit === 1 && textEdit"
         @click="changeDescEdit"
         alt=""
         data-html2canvas-ignore="true">
