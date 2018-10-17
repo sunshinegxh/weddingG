@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="seat-share">分享给宾客</div> -->
+    <div class="seat-share">分享给宾客</div>
   </div>
 </template>
 
@@ -105,7 +105,6 @@ export default {
       const rx = Math.abs(Math.max(...xArr));
       const size = Math.max(lx, rx);
       const rolNum = size * 2 + 1;
-      console.log("rolNum:", lx, rx, rolNum);
       data.map(({ positionX, positionY, tableNumber, ...rest }) => {
         const x = size + positionX;
         if (!result[positionY]) {
@@ -190,26 +189,26 @@ export default {
           // this.loading = false;
           console.log(response.body.data);
           if (response.body.code === "0000") {
-            const res = response.body.data;
-            this.tables = res.tables;
+            // const res = response.body.data;
+            // this.tables = res.tables;
             // this.tables[0].persons.push({
             //   name: "斌斌"
             // });
             // this.tables[1].persons.push({
             //   name: "斌斌"
             // });
-            // this.tables = Array.from(Array(11), (i, index) => {
-            //   return {
-            //     positionX: index - 5,
-            //     positionY: 11,
-            //     tableNumber: index + 1
-            //   };
-            // });
-            this.door = res.door;
-            // this.door = {
-            //   positionX: 3,
-            //   positionY: 6
-            // };
+            this.tables = Array.from(Array(11), (i, index) => {
+              return {
+                positionX: index - 5,
+                positionY: 11,
+                tableNumber: index + 1
+              };
+            });
+            // this.door = res.door;
+            this.door = {
+              positionX: 3,
+              positionY: 6
+            };
             this.tables = this.tables.filter(
               ({ positionX }) => positionX !== 0
             );
@@ -248,7 +247,7 @@ export default {
 @import "../common.scss";
 
 .seat {
-  overflow: auto;
+  /* overflow: auto; */
   height: 100vh;
   &-title {
     background: url("../assets/seat/seatBg.jpg") no-repeat;
@@ -256,25 +255,27 @@ export default {
     height: 280 * $vh;
     text-align: center;
     position: relative;
+    z-index: 10;
     .title {
       display: inline-block;
       font-size: 36 * $vw;
       color: #fff;
       font-weight: bolder;
-      height: 100%;
-      vertical-align: middle;
+      /* height: 100%; */
+      /* vertical-align: middle; */
       line-height: 48 * $vh;
-      margin-top: 132 * $vh;
+      margin-top: 140 * $vh;
     }
     .input {
       width: 702 * $vw;
       height: 92 * $vh;
       text-align: center;
-      line-height: 92 * $vh;
-      position: absolute;
-      left: 50%;
-      bottom: -46 * $vh;
-      transform: translate(-50%, 0);
+      /* line-height: 92 * $vh; */
+      position: relative;
+      margin: 46 * $vh auto 0 auto;
+      /* left: 50%; */
+      /* bottom: -46 * $vh; */
+      /* transform: translate(-50%, 0); */
       img {
         width: 29 * $vw;
         height: 29 * $vh;
@@ -289,13 +290,14 @@ export default {
         border-radius: 50 * $vw;
         text-align: center;
         width: 100%;
+        height: 92 * $vh;
         padding: 0 20 * $vw;
         box-sizing: border-box;
-        position: absolute;
-        top: 10 * $vh;
-        left: 0 * $vw;
-        right: 0 * $vw;
-        bottom: 10 * $vh;
+        /* position: absolute; */
+        /* top: 10 * $vh; */
+        /* left: 0 * $vw; */
+        /* right: 0 * $vw; */
+        /* bottom: 10 * $vh; */
         background: #fff;
         border: none;
         outline: none;
@@ -310,12 +312,14 @@ export default {
     }
   }
   &-table {
-    margin-top: 46 * $vh;
+    /* margin-top: 46 * $vh; */
     position: relative;
     border-collapse: separate;
     border-spacing: 16 * $vh 16 * $vw;
-    // height: 100vh - 280 * $vh;
-    max-height: 100vh - 280 * $vh;
+    height: 100vh - 280 * $vh - 134 * $vh;
+    padding-top: 46 * $vh;
+    box-sizing: border-box;
+    // max-height: 100vh - 280 * $vh;
     overflow: auto;
     &::-webkit-scrollbar {
       display: none;
@@ -334,8 +338,8 @@ export default {
       }
       &.is-center {
         width: 300 * $vw;
-        height: 48 * $vh;
-        line-height: 48 * $vh;
+        height: 48 * $vw;
+        line-height: 48 * $vw;
         font-size: 28 * $vw;
         text-align: center;
         background: #dddddd;
@@ -361,10 +365,10 @@ export default {
         &::after {
           content: "";
           position: absolute;
-          top: -16 * $vh;
-          left: 28 * $vh;
+          top: -16 * $vw;
+          left: 28 * $vw;
           width: 32 * $vw;
-          height: 16 * $vh;
+          height: 16 * $vw;
           background: #dddddd;
         }
       }
@@ -374,9 +378,9 @@ export default {
         &::after {
           content: "";
           position: absolute;
-          top: 28 * $vh;
+          top: 28 * $vw;
           width: 16 * $vw;
-          height: 32 * $vh;
+          height: 32 * $vw;
           background: #dddddd;
         }
       }
@@ -395,7 +399,7 @@ export default {
       //   background: #dddddd;
       // }
       &.is-y-road {
-        margin-top: -32 * $vh;
+        margin-top: -32 * $vw;
         width: 32 * $vw;
         height: 120 * $vw;
         margin: 0 44 * $vw;
@@ -409,15 +413,15 @@ export default {
           display: block;
           height: 44 * $vw;
           width: 32 * $vw;
-          margin: -16 * $vh auto 0 auto;
+          margin: -16 * $vw auto 0 auto;
           background: #dddddd;
           border-radius: 0;
         }
       }
       &.is-x-road {
         width: 120 * $vw;
-        height: 32 * $vh;
-        margin: 44 * $vh 0;
+        height: 32 * $vw;
+        margin: 44 * $vw 0;
         background: #dddddd;
         border-radius: 0;
       }
@@ -428,7 +432,7 @@ export default {
           content: "";
           display: block;
           width: 76 * $vw;
-          height: 32 * $vh;
+          height: 32 * $vw;
           background: #dddddd;
           border-radius: 0;
         }
