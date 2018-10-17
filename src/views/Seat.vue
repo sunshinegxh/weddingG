@@ -200,13 +200,13 @@ export default {
             this.tables = Array.from(Array(11), (i, index) => {
               return {
                 positionX: index - 5,
-                positionY: 11,
+                positionY: 1,
                 tableNumber: index + 1
               };
             });
             // this.door = res.door;
             this.door = {
-              positionX: 3,
+              positionX: 0,
               positionY: 6
             };
             this.tables = this.tables.filter(
@@ -319,6 +319,8 @@ export default {
     height: 100vh - 280 * $vh - 134 * $vh;
     padding-top: 46 * $vh;
     box-sizing: border-box;
+    display: inline-block;
+    max-width: 100vw;
     // max-height: 100vh - 280 * $vh;
     overflow: auto;
     &::-webkit-scrollbar {
