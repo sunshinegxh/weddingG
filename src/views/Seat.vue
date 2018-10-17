@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="seat-share">分享给宾客</div>
+    <!-- <div class="seat-share">分享给宾客</div> -->
   </div>
 </template>
 
@@ -316,7 +316,7 @@ export default {
     position: relative;
     border-collapse: separate;
     border-spacing: 16 * $vh 16 * $vw;
-    height: 100vh - 280 * $vh - 134 * $vh;
+    height: 100vh - 280 * $vh;
     padding-top: 46 * $vh;
     box-sizing: border-box;
     display: inline-block;
