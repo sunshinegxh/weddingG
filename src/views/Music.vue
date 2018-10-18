@@ -92,7 +92,7 @@ export default {
       padding-left: 84 * $px;
       line-height: 96 * $px;
       font-size: 32 * $px;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #e5e5e5;
       color: #010101;
     }
   }
