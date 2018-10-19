@@ -189,29 +189,29 @@ export default {
           // this.loading = false;
           console.log(response.body.data);
           if (response.body.code === "0000") {
-            // const res = response.body.data;
-            // this.tables = res.tables;
+            const res = response.body.data;
+            this.tables = res.tables;
             // this.tables[0].persons.push({
             //   name: "斌斌"
             // });
             // this.tables[1].persons.push({
             //   name: "斌斌"
             // });
-            this.tables = Array.from(Array(11), (i, index) => {
-              return {
-                positionX: index - 5,
-                positionY: 1,
-                tableNumber: index + 1
-              };
-            });
-            // this.door = res.door;
-            this.door = {
-              positionX: 4,
-              positionY: 6
-            };
-            this.tables = this.tables.filter(
-              ({ positionX }) => positionX !== 0
-            );
+            // this.tables = Array.from(Array(11), (i, index) => {
+            //   return {
+            //     positionX: index - 5,
+            //     positionY: 1,
+            //     tableNumber: index + 1
+            //   };
+            // });
+            this.door = res.door;
+            // this.door = {
+            //   positionX: 4,
+            //   positionY: 6
+            // };
+            // this.tables = this.tables.filter(
+            //   ({ positionX }) => positionX !== 0
+            // );
             // this.tables.push(
             //   {
             //     positionX: -2,
