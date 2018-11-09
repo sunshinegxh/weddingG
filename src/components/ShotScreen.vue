@@ -6,6 +6,7 @@
 
 <script>
 import html2canvas from "html2canvas";
+import utils from "../libs/utils";
 
 export default {
   methods: {
@@ -31,7 +32,7 @@ export default {
     },
     uploadShotScreen(img) {
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg", {
+        .post(`http://${utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, {
           cardId: 78,
           pageId: 1,
           base64ImgUrl: img

@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import utils from "../libs/utils";
+
 export default {
   name: "music",
   data() {
@@ -22,17 +24,13 @@ export default {
     this.getMusic();
     window.getMusic = this.set;
   },
-
   methods: {
     getMusic() {
       this.$http
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/getSystemMusicList.gg",
-          {
-            pageNo: 1,
-            pageSize: 20
-          }
-        )
+        .post(`http://${utils.api()}/()/banhunli/card/getSystemMusicList.gg`, {
+          pageNo: 1,
+          pageSize: 20
+        })
         .then(response => {
           // this.loading = false;
           console.log(response.body.data.musics);

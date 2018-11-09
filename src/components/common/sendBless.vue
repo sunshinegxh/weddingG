@@ -19,6 +19,7 @@
 import { Picker } from "mint-ui";
 import toast from "./toast";
 import { mapState } from "vuex";
+import utils from "../../libs/utils";
 
 export default {
   name: "send-bless",
@@ -40,7 +41,7 @@ export default {
     sub() {
       if (this.isSend) {
         this.$http
-          .post("http://47.105.43.207:80/()/banhunli/card/addWish.gg", {
+          .post(`http://${utils.api()}/()/banhunli/card/addWish.gg`, {
             cardId: this.cardId,
             wishUserName: this.person,
             wish: this.blession
@@ -88,7 +89,7 @@ export default {
         return;
       }
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/card/h5AddVisitor.gg", {
+        .post(`http://${utils.api()}/()/banhunli/card/h5AddVisitor.gg`, {
           cardId: this.$route.query.cardId,
           visitorName: data.name,
           carryNumber: data.person,

@@ -63,7 +63,7 @@ export default {
     height: 100%;
     display: inline-block;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     &-white {
       color: #8eb559;
       font-size: 36 * $px;

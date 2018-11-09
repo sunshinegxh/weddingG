@@ -83,7 +83,7 @@ export default {
     width: 100%;
     height: 640 * $vh;
     float: left;
-    background-size: 100% 100%;
+    background-size: cover;
   }
   span:nth-of-type(2) {
     transform: translateX(-100%);

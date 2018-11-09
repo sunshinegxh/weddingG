@@ -16,6 +16,7 @@
 <script>
 import sendBless from "../common/sendBless";
 import { mapState } from "vuex";
+import utils from "../../libs/utils";
 const SIZE = 4;
 
 export default {
@@ -63,14 +64,11 @@ export default {
     },
     getDanInfo() {
       this.$http
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/getPublishWishList.gg",
-          {
-            cardId: this.$route.query.cardId,
-            pageNo: 1,
-            pageSize: 20
-          }
-        )
+        .post(`http://${utils.api()}/()/banhunli/card/getPublishWishList.gg`, {
+          cardId: this.$route.query.cardId,
+          pageNo: 1,
+          pageSize: 20
+        })
         .then(response => {
           let res = response.body.data;
           if (response.body.code === "0000") {

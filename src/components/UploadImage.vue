@@ -15,6 +15,7 @@
 <script>
 import html2canvas from "html2canvas";
 import { mapState } from "vuex";
+import utils from "../libs/utils";
 
 export default {
   props: ["pageId", "imageSort"],
@@ -42,7 +43,7 @@ export default {
 
       this.$http
         .post(
-          `http://47.105.43.207:80/()/banhunli/card/replacePageImg.gg?cardId=${
+          `http://${utils.api()}/()/banhunli/card/replacePageImg.gg?cardId=${
             this.cardId
           }&pageId=${this.pageId}&imageSort=${this.imageSort}`,
           param,
@@ -111,7 +112,7 @@ export default {
     },
     uploadShotScreen(img) {
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg", {
+        .post(`http://${utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, {
           cardId: this.cardId,
           pageId: this.pageId,
           base64ImgUrl: img

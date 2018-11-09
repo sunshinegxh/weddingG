@@ -79,7 +79,7 @@ export default {
   span {
     display: inline-block;
     width: 100%;
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
   }
   span:nth-of-type(1) {

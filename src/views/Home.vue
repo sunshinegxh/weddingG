@@ -34,6 +34,7 @@ import Cover3 from "../components/temp3/cover.vue";
 import First3 from "../components/temp3/first.vue";
 // import Second3 from "../components/temp3/seconds.vue";
 import Tan1 from "../components/temp1/tan.vue";
+import utils from "../libs/utils";
 
 export default {
   name: "app",
@@ -86,12 +87,9 @@ export default {
     getIndexInfo() {
       this.$http
         // .get("http://localhost:3000/getIndex")
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
-          {
-            cardId: this.cardId
-          }
-        )
+        .post(`http://${utils.api()}/()/banhunli/card/getCardInvitations.gg`, {
+          cardId: this.cardId
+        })
         .then(response => {
           this.loading = false;
           let res = response.body.data;
@@ -109,7 +107,7 @@ export default {
     getTemInfo() {
       this.$http
         // .get("http://localhost:3000/getIndex")
-        .post("http://47.105.43.207:80/()/banhunli/card/getCardTemplate.gg", {
+        .post(`http://${utils.api()}/()/banhunli/card/getCardTemplate.gg`, {
           templateId: this.templateId
         })
         .then(response => {

@@ -38,6 +38,7 @@
 import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
 import toast from "../common/toast";
+import utils from "../../libs/utils";
 
 export default {
   name: "first1",
@@ -74,7 +75,7 @@ export default {
       /* eslint-disable no-undef */
       $.fn.pagepiling.setAllowScrolling(true);
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/card/updatePageExtra.gg", {
+        .post(`http://${utils.api()}/()/banhunli/card/updatePageExtra.gg`, {
           cardId: this.cardId,
           pageId: this.info.pageId,
           extra: ex
@@ -115,8 +116,8 @@ export default {
     display: inline-block;
     width: 100%;
     height: 560 * $px;
-    // background-size: cover;
-    background-size: 100% 100%;
+    background-size: cover;
+    // background-size: 100% 100%;
     background-repeat: no-repeat;
   }
   span:nth-of-type(2) {

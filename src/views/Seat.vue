@@ -29,7 +29,8 @@
           v-show="!cell || !cell.hidden"
           :style="cell && cell.style"
         >
-        {{ cell && cell.tableNumber }}
+        <div class="cell-text">{{ cell && cell.tableNumber }}</div>
+        <div v-if="cell && cell.isCenter" class="center-after"></div>
         <small v-if="cell && cell._selectNumber">({{cell && cell._selectNumber}})</small>
         </div>
       </div>
@@ -40,7 +41,7 @@
 
 <script>
 import toast from "../components/common/toast";
-
+import utils from "../libs/utils";
 const colorList = ["#51B0F9", "#FF666A", "#0ACA8D", "#FFA66A"];
 
 export default {
@@ -99,16 +100,19 @@ export default {
     },
 
     format(data, door) {
+      if (!door) {
+        return;
+      }
       const result = [];
       const xArr = data.map(({ positionX }) => positionX);
       const lx = Math.abs(Math.min(...xArr));
       const rx = Math.abs(Math.max(...xArr));
-      const size = Math.max(lx, rx);
+      const size = Math.max(lx, rx, Math.abs(door.positionX));
       const rolNum = size * 2 + 1;
       data.map(({ positionX, positionY, tableNumber, ...rest }) => {
         const x = size + positionX;
         if (!result[positionY]) {
-          result[positionY] = [];
+          result[positionY] = Array(rolNum);
         }
         result[positionY][x] = {
           tableNumber,
@@ -119,7 +123,7 @@ export default {
       });
       // 处理door
       if (!result[door.positionY]) {
-        result[door.positionY] = [];
+        result[door.positionY] = Array(rolNum);
       }
       let doorType = "";
       if (door.positionX === 0) {
@@ -136,7 +140,7 @@ export default {
       };
       // 处理主席台，主席台从 -1 到 1占3个格子
       if (!result[0]) {
-        result[0] = [];
+        result[0] = Array(rolNum);
       }
       result[0][size] = {
         tableNumber: "主席台",
@@ -176,13 +180,13 @@ export default {
       this.tables = result;
       this.$nextTick(() => {
         const x = (((rolNum * 12000) / 750 - 100) * window.innerWidth) / 200;
-        this.$refs.table.scrollTo(x, 0);
+        this.$refs.table.scrollLeft = x;
       });
     },
 
     getSeat() {
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/tool/getAllSeatingH5.gg", {
+        .post(`http://${utils.api()}/()/banhunli/tool/getAllSeatingH5.gg`, {
           weddingId: this.weddingId
         })
         .then(response => {
@@ -197,17 +201,22 @@ export default {
             // this.tables[1].persons.push({
             //   name: "斌斌"
             // });
-            // this.tables = Array.from(Array(11), (i, index) => {
+            // this.tables = Array.from(Array(3), (i, index) => {
             //   return {
-            //     positionX: index - 5,
+            //     positionX: index - 1,
             //     positionY: 1,
             //     tableNumber: index + 1
             //   };
             // });
+            // this.tables.push({
+            //   positionX: 7,
+            //   positionY: 1,
+            //   tableNumber: 13
+            // })
             this.door = res.door;
             // this.door = {
-            //   positionX: 4,
-            //   positionY: 6
+            //   positionX: 6,
+            //   positionY: 2
             // };
             // this.tables = this.tables.filter(
             //   ({ positionX }) => positionX !== 0
@@ -339,28 +348,39 @@ export default {
         visibility: hidden;
       }
       &.is-center {
-        width: 300 * $vw;
-        height: 48 * $vw;
-        line-height: 48 * $vw;
-        font-size: 28 * $vw;
-        text-align: center;
-        background: #dddddd;
-        color: #999;
-        margin: 0;
-        border-radius: 0;
-        margin: 0 30 * $vw;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 10 * $vw;
-        border-bottom-right-radius: 10 * $vw;
-        &::after {
-          content: "";
-          margin: auto;
+        background: none;
+        margin-top: 0;
+        .cell-text {
+          width: 300 * $vw;
+          height: 48 * $vw;
+          line-height: 48 * $vw;
+          font-size: 28 * $vw;
+          text-align: center;
+          background: #dddddd;
+          color: #999;
+          margin: 0 14 * $vw;
+          border-radius: 0;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 10 * $vw;
+          border-bottom-right-radius: 10 * $vw;
+        }
+        // overflow: hidden;
+        .center-after {
+          margin: 0 148 * $vw;
           display: block;
           width: 32 * $vw;
-          height: 74 * $vw;
+          height: 72 * $vw;
           background: #dddddd;
         }
+        // &::after {
+        //   content: "";
+        //   margin: 0 auto;
+        //   display: block;
+        //   width: 32 * $vw;
+        //   height: 76 * $vw;
+        //   background: #dddddd;
+        // }
       }
       &.is-top-door {
         position: relative;

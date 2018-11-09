@@ -26,6 +26,7 @@
 import { mapState } from "vuex";
 import shotScreen from "../ShotScreen.vue";
 import uploadImage from "../UploadImage";
+import utils from "../../libs/utils";
 
 export default {
   name: "cover1",
@@ -57,12 +58,9 @@ export default {
     },
     setInfo() {
       this.$http
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/getInvitationsInfo.gg",
-          {
-            cardId: this.cardId
-          }
-        )
+        .post(`http://${utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
+          cardId: this.cardId
+        })
         .then(response => {
           let res = response.body.data;
           if (response.body.code === "0000") {
@@ -113,8 +111,8 @@ export default {
     position: relative;
     height: 100%;
     display: inline-block;
-    background-size: 100% 100%;
-    // background-size: cover;
+    // background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
     &-white {

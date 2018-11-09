@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import utils from "../libs/utils";
+
 export default {
   name: "Help",
   data() {
@@ -43,7 +45,7 @@ export default {
   methods: {
     getUserInfo() {
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/mine/getUserInfo.gg", {
+        .post(`http://${utils.api()}/()/banhunli/mine/getUserInfo.gg`, {
           userId: this.userId
         })
         .then(response => {

@@ -38,6 +38,7 @@
 import { Picker } from "mint-ui";
 import toast from "./toast";
 import { mapState } from "vuex";
+import utils from "../../libs/utils";
 
 export default {
   name: "custom-form",
@@ -81,7 +82,7 @@ export default {
   methods: {
     relation() {
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/tool/getRelations.gg", {
+        .post(`http://${utils.api()}/()/banhunli/tool/getRelations.gg`, {
           haveSelf: 0
         })
         .then(response => {
@@ -142,7 +143,7 @@ export default {
           return;
         }
         this.$http
-          .post("http://47.105.43.207:80/()/banhunli/card/h5AddVisitor.gg", {
+          .post(`http://${utils.api()}/()/banhunli/card/h5AddVisitor.gg`, {
             cardId: this.$route.query.cardId,
             visitorName: data.name,
             carryNumber: data.person,

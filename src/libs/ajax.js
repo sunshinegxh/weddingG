@@ -1,5 +1,6 @@
 import axios from "axios";
 import qs from "qs";
+import utils from "../libs/utils";
 
 function cleanRequest(req) {
   for (const i in req) {
@@ -17,7 +18,7 @@ axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 let ajax = {};
 ajax.install = function(Vue) {
-  axios.defaults.baseURL = location.protocol + "//47.105.43.207:80/()/banhunli";
+  axios.defaults.baseURL = location.protocol + `//${utils.api()}/()/banhunli`;
 
   Vue.prototype.$http = axios;
   Vue.http = axios;

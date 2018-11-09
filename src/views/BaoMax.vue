@@ -15,6 +15,7 @@
 import toast from "../components/common/toast";
 import Loading from "../components/common/loading";
 import domtoimage from "dom-to-image";
+import Utils from "../libs/utils";
 
 export default {
   name: "BaoMax",
@@ -144,7 +145,7 @@ export default {
     getTemplateInfo() {
       this.loading = true;
       this.$http
-        .post("http://47.105.43.207:80/()/banhunli/card/getCardTemplate.gg", {
+        .post(`http://${Utils.api()}/()/banhunli/card/getCardTemplate.gg`, {
           templateId: this.templateId
         })
         // .get("http://localhost:3000/getIndex")
@@ -168,7 +169,7 @@ export default {
       return (
         this.$http
           .post(
-            "http://47.105.43.207:80/()/banhunli/card/getCardInvitations.gg",
+            `http://${Utils.api()}/()/banhunli/card/getCardInvitations.gg`,
             {
               cardId: this.cardId
             }
@@ -191,12 +192,9 @@ export default {
     },
     setCoverData() {
       this.$http
-        .post(
-          "http://47.105.43.207:80/()/banhunli/card/getInvitationsInfo.gg",
-          {
-            cardId: this.$route.query.cardId
-          }
-        )
+        .post(`http://${Utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
+          cardId: this.$route.query.cardId
+        })
         .then(response => {
           let res = response.body.data;
           if (response.body.code === "0000") {
@@ -232,7 +230,7 @@ export default {
       //   reader.onload = function(event){
       //     var fd = new FormData();
       //     fd.append('data', event.target.result);
-      //     this.$http.post(`http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg`, param,
+      //     this.$http.post(`http://${Utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, param,
       //     {
       //       headers: { "Content-Type": "multipart/form-data" }
       //     }
@@ -249,7 +247,7 @@ export default {
       param.append("base64ImgUrl", base64ImgUrl);
       this.$http
         .post(
-          `http://47.105.43.207:80/()/banhunli/card/uploadPrintScreen.gg`,
+          `http://${Utils.api()}/()/banhunli/card/uploadPrintScreen.gg`,
           param
         )
         .then(response => {

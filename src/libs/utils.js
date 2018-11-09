@@ -20,6 +20,10 @@ const Utils = {
       }
     }
     return items;
+  },
+  api() {
+    return "customer.banhunli.net";
+    // return "customertest.banhunli.net";
   }
 };
 

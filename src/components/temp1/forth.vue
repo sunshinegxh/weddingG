@@ -84,7 +84,7 @@ export default {
     display: inline-block;
     width: 50%;
     height: 50vh;
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
   }
   span:nth-of-type(1) {
