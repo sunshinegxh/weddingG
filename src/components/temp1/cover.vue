@@ -58,7 +58,7 @@ export default {
     },
     setInfo() {
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
+        .post(`${utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
           cardId: this.cardId
         })
         .then(response => {

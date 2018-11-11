@@ -145,7 +145,7 @@ export default {
     getTemplateInfo() {
       this.loading = true;
       this.$http
-        .post(`http://${Utils.api()}/()/banhunli/card/getCardTemplate.gg`, {
+        .post(`${Utils.api()}/()/banhunli/card/getCardTemplate.gg`, {
           templateId: this.templateId
         })
         // .get("http://localhost:3000/getIndex")
@@ -156,7 +156,7 @@ export default {
             this.musicUrl = window.encodeURI(res.musicUrl);
             this.indexData = res.pageList;
           } else {
-            console.log("res.respCode", res.message);
+            console.log("res.respCode", response.body.message);
           }
         })
         .catch(e => {
@@ -168,12 +168,9 @@ export default {
       this.loading = true;
       return (
         this.$http
-          .post(
-            `http://${Utils.api()}/()/banhunli/card/getCardInvitations.gg`,
-            {
-              cardId: this.cardId
-            }
-          )
+          .post(`${Utils.api()}/()/banhunli/card/getCardInvitations.gg`, {
+            cardId: this.cardId
+          })
           // .get("http://localhost:3000/getIndex")
           .then(response => {
             this.loading = false;
@@ -192,7 +189,7 @@ export default {
     },
     setCoverData() {
       this.$http
-        .post(`http://${Utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
+        .post(`${Utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
           cardId: this.$route.query.cardId
         })
         .then(response => {
@@ -230,7 +227,7 @@ export default {
       //   reader.onload = function(event){
       //     var fd = new FormData();
       //     fd.append('data', event.target.result);
-      //     this.$http.post(`http://${Utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, param,
+      //     this.$http.post(`${Utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, param,
       //     {
       //       headers: { "Content-Type": "multipart/form-data" }
       //     }
@@ -246,10 +243,7 @@ export default {
       param.append("pageId", pageId);
       param.append("base64ImgUrl", base64ImgUrl);
       this.$http
-        .post(
-          `http://${Utils.api()}/()/banhunli/card/uploadPrintScreen.gg`,
-          param
-        )
+        .post(`${Utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, param)
         .then(response => {
           toast("上传成功！");
           console.log("uploadPrintScreen:", response.body.data);

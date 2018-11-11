@@ -18,7 +18,7 @@ axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 let ajax = {};
 ajax.install = function(Vue) {
-  axios.defaults.baseURL = location.protocol + `//${utils.api()}/()/banhunli`;
+  axios.defaults.baseURL = `${utils.api()}/()/banhunli`;
 
   Vue.prototype.$http = axios;
   Vue.http = axios;

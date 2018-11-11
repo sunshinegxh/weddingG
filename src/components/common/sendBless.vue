@@ -41,7 +41,7 @@ export default {
     sub() {
       if (this.isSend) {
         this.$http
-          .post(`http://${utils.api()}/()/banhunli/card/addWish.gg`, {
+          .post(`${utils.api()}/()/banhunli/card/addWish.gg`, {
             cardId: this.cardId,
             wishUserName: this.person,
             wish: this.blession
@@ -89,7 +89,7 @@ export default {
         return;
       }
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/card/h5AddVisitor.gg`, {
+        .post(`${utils.api()}/()/banhunli/card/h5AddVisitor.gg`, {
           cardId: this.$route.query.cardId,
           visitorName: data.name,
           carryNumber: data.person,

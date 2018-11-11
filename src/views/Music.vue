@@ -27,7 +27,7 @@ export default {
   methods: {
     getMusic() {
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/card/getSystemMusicList.gg`, {
+        .post(`${utils.api()}/()/banhunli/card/getSystemMusicList.gg`, {
           pageNo: 1,
           pageSize: 20
         })

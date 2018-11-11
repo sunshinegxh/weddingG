@@ -87,7 +87,7 @@ export default {
     getIndexInfo() {
       this.$http
         // .get("http://localhost:3000/getIndex")
-        .post(`http://${utils.api()}/()/banhunli/card/getCardInvitations.gg`, {
+        .post(`${utils.api()}/()/banhunli/card/getCardInvitations.gg`, {
           cardId: this.cardId
         })
         .then(response => {
@@ -107,7 +107,7 @@ export default {
     getTemInfo() {
       this.$http
         // .get("http://localhost:3000/getIndex")
-        .post(`http://${utils.api()}/()/banhunli/card/getCardTemplate.gg`, {
+        .post(`${utils.api()}/()/banhunli/card/getCardTemplate.gg`, {
           templateId: this.templateId
         })
         .then(response => {

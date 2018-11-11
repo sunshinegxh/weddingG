@@ -45,7 +45,7 @@ export default {
   methods: {
     getUserInfo() {
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/mine/getUserInfo.gg`, {
+        .post(`${utils.api()}/()/banhunli/mine/getUserInfo.gg`, {
           userId: this.userId
         })
         .then(response => {

@@ -75,7 +75,7 @@ export default {
       /* eslint-disable no-undef */
       $.fn.pagepiling.setAllowScrolling(true);
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/card/updatePageExtra.gg`, {
+        .post(`${utils.api()}/()/banhunli/card/updatePageExtra.gg`, {
           cardId: this.cardId,
           pageId: this.info.pageId,
           extra: ex

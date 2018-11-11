@@ -32,7 +32,7 @@ export default {
     },
     uploadShotScreen(img) {
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, {
+        .post(`${utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, {
           cardId: 78,
           pageId: 1,
           base64ImgUrl: img

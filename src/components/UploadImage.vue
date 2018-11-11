@@ -43,7 +43,7 @@ export default {
 
       this.$http
         .post(
-          `http://${utils.api()}/()/banhunli/card/replacePageImg.gg?cardId=${
+          `${utils.api()}/()/banhunli/card/replacePageImg.gg?cardId=${
             this.cardId
           }&pageId=${this.pageId}&imageSort=${this.imageSort}`,
           param,
@@ -112,7 +112,7 @@ export default {
     },
     uploadShotScreen(img) {
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, {
+        .post(`${utils.api()}/()/banhunli/card/uploadPrintScreen.gg`, {
           cardId: this.cardId,
           pageId: this.pageId,
           base64ImgUrl: img

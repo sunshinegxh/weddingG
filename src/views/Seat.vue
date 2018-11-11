@@ -186,7 +186,7 @@ export default {
 
     getSeat() {
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/tool/getAllSeatingH5.gg`, {
+        .post(`${utils.api()}/()/banhunli/tool/getAllSeatingH5.gg`, {
           weddingId: this.weddingId
         })
         .then(response => {

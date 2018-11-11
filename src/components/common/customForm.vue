@@ -82,7 +82,7 @@ export default {
   methods: {
     relation() {
       this.$http
-        .post(`http://${utils.api()}/()/banhunli/tool/getRelations.gg`, {
+        .post(`${utils.api()}/()/banhunli/tool/getRelations.gg`, {
           haveSelf: 0
         })
         .then(response => {
@@ -143,7 +143,7 @@ export default {
           return;
         }
         this.$http
-          .post(`http://${utils.api()}/()/banhunli/card/h5AddVisitor.gg`, {
+          .post(`${utils.api()}/()/banhunli/card/h5AddVisitor.gg`, {
             cardId: this.$route.query.cardId,
             visitorName: data.name,
             carryNumber: data.person,
