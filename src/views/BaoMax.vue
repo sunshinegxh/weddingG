@@ -1,14 +1,21 @@
 <template>
   <div class="app" id="app">
     <loading v-if="loading"/>
-      <div class="topbar">
-        <div class="back"></div>
-        <!-- <div class="back" @click="screenshot"></div> -->
-        <div data-html2canvas-ignore="true" @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
-          <audio @playing="playing" ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
-        </div>
+    <div class="topbar">
+      <div class="back"></div>
+      <!-- <div class="back" @click="screenshot"></div> -->
+      <div data-html2canvas-ignore="true" @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
+        <audio @playing="playing" ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
       </div>
-      <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
+    </div>
+    <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
+    <div class="share-join" v-if="showInfo">
+      <span class="share-join-text">是否参加婚宴？</span>
+      <span class="share-join-btn" @click="join">参加</span>
+      <span class="share-join-btn" @click="notjoin">不参加</span>
+    </div>
+    <div v-if="cfShow" class="share-join-bg"></div>
+    <cus-form @submit="onSubmit" v-if="cfShow"></cus-form>
   </div>
 </template>
 <script>
@@ -16,6 +23,7 @@ import toast from "../components/common/toast";
 import Loading from "../components/common/loading";
 import domtoimage from "dom-to-image";
 import Utils from "../libs/utils";
+import cusFormBtn from "../components/common/customFormBottom";
 
 export default {
   name: "BaoMax",
@@ -27,7 +35,9 @@ export default {
       musicUrl: "",
       // true：暂停， false：播放
       musicStop: false,
-      changeMusic: false
+      changeMusic: false,
+      showInfo: true,
+      cfShow: false
     };
   },
   computed: {
@@ -130,6 +140,9 @@ export default {
     }, 1000);
   },
   methods: {
+    onSubmit() {
+      this.cfShow = false;
+    },
     playing() {
       console.log("aaaa");
     },
@@ -248,10 +261,18 @@ export default {
           toast("上传成功！");
           console.log("uploadPrintScreen:", response.body.data);
         });
+    },
+    notjoin() {
+      this.showInfo = false;
+    },
+    join() {
+      this.showInfo = false;
+      this.cfShow = true;
     }
   },
   components: {
-    loading: Loading
+    loading: Loading,
+    cusForm: cusFormBtn
   }
 };
 </script>
@@ -298,6 +319,41 @@ export default {
   background-image: url(../assets/second/invitetion_ic_music_default.png);
   &.is-stop {
     background-image: url(../assets/second/invitetion_ic_music_select.png);
+  }
+}
+.share-join {
+  width: 100%;
+  height: 98 * $vh;
+  line-height: 98 * $vh;
+  background-color: rgba($color: #8eb559, $alpha: 0.8);
+  color: #fff;
+  font-size: 32 * $vw;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  &-text {
+    float: left;
+    margin-left: 24 * $vw;
+  }
+  &-btn {
+    float: right;
+    width: 148 * $vw;
+    height: 60 * $vh;
+    line-height: 60 * $vh;
+    background: #fff;
+    color: #8eb559;
+    border-radius: 30 * $vw;
+    margin-right: 24 * $vw;
+    margin-top: 19 * $vh;
+  }
+  &-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 99;
   }
 }
 </style>
