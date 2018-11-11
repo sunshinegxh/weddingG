@@ -9,7 +9,7 @@
       </div>
     </div>
     <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
-    <div class="share-join" v-if="showInfo">
+    <div class="share-join" v-if="showInfo && +status === 2">
       <span class="share-join-text">是否参加婚宴？</span>
       <span class="share-join-btn" @click="join">参加</span>
       <span class="share-join-btn" @click="notjoin">不参加</span>

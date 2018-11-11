@@ -20,7 +20,8 @@
         <span class="add-btn" role="button" @click="addNumber">+</span>
       </div>
     </div>
-    <div class="submit-btn" role="button" @click="onSubmit" :style="{backgroundColor: btnColor}">确认赴宴并提交信息</div>
+    <div class="submit-btn" v-if="!done" role="button" @click="onSubmit" :style="{backgroundColor: btnColor}">确认赴宴并提交信息</div>
+    <div class="submit-btn-done" v-else role="button">已成功提交赴宴信息</div>
     <div v-if="show" class="pick-wrapper" @touchstart.stop="" @touchend.stop="" @touchmove.prevent>
       <div class="pick-mask"></div>
       <div class="role-picker">
@@ -65,7 +66,8 @@ export default {
           className: "slot3",
           textAlign: "center"
         }
-      ]
+      ],
+      done: false
     };
   },
   computed: {
@@ -153,6 +155,7 @@ export default {
           .then(response => {
             if (response.body.code === "0000") {
               toast("添加成功");
+              this.done = true;
               this.$emit("submit");
             } else {
               toast(response.body.message);
@@ -231,6 +234,13 @@ export default {
   opacity: 0;
   transform: translateY(40%);
   animation: move-opacity 2s 3s forwards;
+  &-done {
+    color: #999999;
+    background: #fff;
+    line-height: 94 * $vh;
+    text-align: center;
+    margin-top: 60 * $vh;
+  }
 }
 .number {
   margin-left: 48 * $vw;
