@@ -52,7 +52,7 @@ export default {
   height: 100vh;
   .invite_ic_pic {
     position: fixed;
-    top: 100 * $px;
+    top: 100 * $vh;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
@@ -67,29 +67,29 @@ export default {
     &-white {
       color: #8eb559;
       font-size: 36 * $px;
-      width: 702 * $px;
-      height: 862 * $px;
+      width: 702 * $vw;
+      height: 862 * $vh;
       background: #fff;
       position: absolute;
-      top: 1000 * $px;
+      top: 1000 * $vw;
       left: 50%;
-      margin-left: -351 * $px;
-      margin-top: -431 * $px;
+      margin-left: -351 * $vw;
+      margin-top: -431 * $vh;
       img:nth-of-type(1) {
         position: relative;
-        top: -1000 * $px;
+        top: -1000 * $vh;
         width: 100%;
-        height: 250 * $px;
+        height: 250 * $vh;
       }
       img:nth-of-type(2) {
         opacity: 0;
-        width: 582 * $px;
-        height: 356 * $px;
+        width: 582 * $vw;
+        height: 356 * $vh;
       }
       div:nth-of-type(1) {
         opacity: 0;
-        margin: 23 * $px auto;
-        width: 582 * $px;
+        margin: 23 * $vh auto;
+        width: 582 * $vw;
       }
       div:nth-of-type(2) {
         opacity: 0;

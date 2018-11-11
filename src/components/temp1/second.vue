@@ -68,10 +68,10 @@ export default {
   width: 100%;
   height: 100vh;
   img {
-    width: 700 * $px;
+    width: 700 * $vw;
     position: absolute;
-    top: 484 * $px;
-    left: 24 * $px;
+    top: 484 * $vh;
+    left: 24 * $vw;
     z-index: 1;
   }
   span {
@@ -104,14 +104,14 @@ export default {
     transform: translate(-50%, -50%);
     z-index: 1000;
     &:first-of-type {
-      top: 320 * $px;
+      top: 320 * $vh;
     }
     &:nth-of-type(2) {
-      top: 1000 * $px;
+      top: 1000 * $vh;
       left: 25%;
     }
     &:nth-of-type(3) {
-      top: 1000 * $px;
+      top: 1000 * $vh;
       left: 75%;
     }
   }

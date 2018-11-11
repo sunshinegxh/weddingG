@@ -3,10 +3,10 @@ $px: (320 / 750) * (1 / 16) * 1rem;
 $vh: (100 / 1334) * 1vh;
 $vw: (100 / 750) * 1vw;
 
-$bas-width: 750 * $px;
+$bas-width: 750 * $vw;
 
 /*common padding*/
-$pd20: 20 * $px;
+$pd20: 20 * $vh;
 
 html,
 body {
@@ -571,7 +571,7 @@ html {
 }
 
 .edit {
-  width: 112 * $px;
-  height: 112 * $px;
+  width: 112 * $vw;
+  height: 112 * $vh;
   z-index: 1000;
 }
