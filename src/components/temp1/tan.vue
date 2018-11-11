@@ -63,7 +63,6 @@ export default {
       }, 2000);
     },
     getDanInfo() {
-      alert(this.$route.query.cardId);
       this.$http
         .post(`${utils.api()}/()/banhunli/card/getPublishWishList.gg`, {
           cardId: this.$route.query.cardId,

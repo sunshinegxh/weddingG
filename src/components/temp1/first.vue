@@ -115,7 +115,7 @@ export default {
   span {
     display: inline-block;
     width: 100%;
-    height: 560 * $px;
+    height: 560 * $vh;
     background-size: cover;
     // background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -128,7 +128,7 @@ export default {
   &-text {
     width: 440 * $vw;
     height: 120 * $vh;
-    margin: 40 * $px auto 0;
+    margin: 40 * $vh auto 0;
     font-size: 26 * $vh;
     text-align: left;
     color: #222222;
@@ -141,14 +141,14 @@ export default {
   }
   .invite_ic_pic1 {
     position: absolute;
-    top: 224 * $px;
+    top: 224 * $vh;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic2 {
     position: absolute;
-    top: 1000 * $px;
+    top: 1000 * $vh;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;

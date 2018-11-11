@@ -99,10 +99,10 @@ export default {
     transform: translateX(-100%);
   }
   img:nth-of-type(1) {
-    width: 180 * $px;
+    width: 180 * $vw;
     position: absolute;
-    left: 24 * $px;
-    top: 1200 * $px;
+    left: 24 * $vw;
+    top: 1200 * $vh;
   }
   img:nth-of-type(2) {
     width: 318 * $px;

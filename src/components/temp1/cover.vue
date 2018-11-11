@@ -116,25 +116,25 @@ export default {
     background-repeat: no-repeat;
     overflow: hidden;
     &-white {
-      width: 410 * $px;
-      height: 676 * $px;
+      width: 410 * $vw;
+      height: 676 * $vh;
       background: #fff;
       position: absolute;
-      left: 36 * $px;
-      bottom: -1000 * $px;
+      left: 36 * $vw;
+      bottom: -1000 * $vh;
     }
     img {
       position: absolute;
-      top: 580 * $px;
-      width: 482 * $px;
+      top: 580 * $vh;
+      width: 482 * $vw;
       opacity: 1;
-      left: 1000 * $px;
+      left: 1000 * $vw;
     }
     p {
       position: absolute;
       color: #222222;
       font-size: 48 * $px;
-      left: 1000 * $px;
+      left: 1000 * $vw;
     }
     span {
       position: absolute;
@@ -142,35 +142,35 @@ export default {
       color: #222222;
       font-size: 28 * $px;
       text-align: left;
-      left: 1000 * $px;
+      left: 1000 * $vw;
     }
     p:nth-of-type(1) {
-      top: 670 * $px;
+      top: 670 * $vh;
     }
     p:nth-of-type(2) {
-      top: 760 * $px;
+      top: 760 * $vh;
     }
     p:nth-of-type(3) {
-      top: 850 * $px;
+      top: 850 * $vh;
     }
     span:nth-of-type(1) {
-      top: 1010 * $px;
+      top: 1010 * $vh;
     }
     span:nth-of-type(2) {
-      width: 360 * $px;
-      top: 1080 * $px;
+      width: 360 * $vw;
+      top: 1080 * $vh;
     }
   }
   .invite_ic_pic {
     position: fixed;
-    top: 612 * $px;
+    top: 612 * $vh;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .edit {
     position: absolute;
-    bottom: 248 * $px;
+    bottom: 248 * $vh;
     left: 50%;
     transform: translate(-50%, 0);
   }
@@ -208,31 +208,31 @@ export default {
 }
 @-moz-keyframes fBtm60 {
   0% {
-    bottom: -1000 * $px;
+    bottom: -1000 * $vh;
     opacity: 0;
   }
   100% {
-    bottom: 120 * $px;
+    bottom: 120 * $vh;
     opacity: 0.8;
   }
 }
 @-webkit-keyframes fBtm60 {
   0% {
-    bottom: -1000 * $px;
+    bottom: -1000 * $vh;
     opacity: 0;
   }
   100% {
-    bottom: 120 * $px;
+    bottom: 120 * $vh;
     opacity: 0.8;
   }
 }
 @keyframes fBtm60 {
   0% {
-    bottom: -1000 * $px;
+    bottom: -1000 * $vh;
     opacity: 0;
   }
   100% {
-    bottom: 120 * $px;
+    bottom: 120 * $vh;
     opacity: 0.8;
   }
 }
@@ -244,31 +244,31 @@ export default {
 }
 @-moz-keyframes fRht30 {
   0% {
-    left: 1000 * $px;
+    left: 1000 * $vw;
     opacity: 0;
   }
   100% {
-    left: 60 * $px;
+    left: 60 * $vw;
     opacity: 1;
   }
 }
 @-webkit-keyframes fRht30 {
   0% {
-    left: 1000 * $px;
+    left: 1000 * $vw;
     opacity: 0;
   }
   100% {
-    left: 60 * $px;
+    left: 60 * $vw;
     opacity: 1;
   }
 }
 @keyframes fRht30 {
   0% {
-    left: 1000 * $px;
+    left: 1000 * $vw;
     opacity: 0;
   }
   100% {
-    left: 60 * $px;
+    left: 60 * $vw;
     opacity: 1;
   }
 }
