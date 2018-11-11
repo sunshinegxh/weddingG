@@ -4,7 +4,7 @@
     <div class="topbar">
       <div class="back"></div>
       <!-- <div class="back" @click="screenshot"></div> -->
-      <div data-html2canvas-ignore="true" @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop}]">
+      <div data-html2canvas-ignore="true" @click="toogleMusic()" class="music" :class="[musicType, {'is-stop': musicStop,'is-rotate': !musicStop}]">
         <audio @playing="playing" ref="music" :src="musicUrl" autoplay="autoplay" loop="loop"></audio>
       </div>
     </div>
@@ -278,6 +278,23 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../common.scss";
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .app {
   height: 100%;
   width: 100%;
@@ -319,6 +336,10 @@ export default {
   background-image: url(../assets/second/invitetion_ic_music_default.png);
   &.is-stop {
     background-image: url(../assets/second/invitetion_ic_music_select.png);
+  }
+  &.is-rotate {
+    -webkit-animation: rotate 3s infinite linear;
+    animation: rotate 3s infinite linear;
   }
 }
 .share-join {

@@ -105,36 +105,36 @@ export default {
     top: 1200 * $vh;
   }
   img:nth-of-type(2) {
-    width: 318 * $px;
+    width: 318 * $vw;
     position: absolute;
-    right: -2400 * $px;
-    bottom: 120 * $px;
+    right: -2400 * $vw;
+    bottom: 120 * $vh;
     opacity: 0;
   }
   .invite_ic_pic1 {
     position: absolute;
-    top: 224 * $px;
+    top: 224 * $vh;
     left: 25%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic2 {
     position: absolute;
-    top: 224 * $px;
+    top: 224 * $vh;
     left: 75%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic3 {
     position: absolute;
-    top: 1000 * $px;
+    top: 1000 * $vh;
     left: 25%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic4 {
     position: absolute;
-    top: 1000 * $px;
+    top: 1000 * $vh;
     left: 75%;
     transform: translate(-50%, 0);
     z-index: 1000;
@@ -168,31 +168,31 @@ export default {
 }
 @-moz-keyframes fBtm200 {
   0% {
-    top: 1200 * $px;
+    top: 1200 * $vh;
     opacity: 0;
   }
   100% {
-    top: 200 * $px;
+    top: 200 * $vh;
     opacity: 1;
   }
 }
 @-webkit-keyframes fBtm200 {
   0% {
-    top: 1200 * $px;
+    top: 1200 * $vh;
     opacity: 0;
   }
   100% {
-    top: 200 * $px;
+    top: 200 * $vh;
     opacity: 1;
   }
 }
 @keyframes fBtm200 {
   0% {
-    top: 1200 * $px;
+    top: 1200 * $vh;
     opacity: 0;
   }
   100% {
-    top: 200 * $px;
+    top: 200 * $vh;
     opacity: 1;
   }
 }
@@ -203,11 +203,11 @@ export default {
 }
 @keyframes fLeft24 {
   0% {
-    right: -2400 * $px;
+    right: -2400 * $vw;
     opacity: 0;
   }
   100% {
-    right: 24 * $px;
+    right: 24 * $vw;
     opacity: 1;
   }
 }

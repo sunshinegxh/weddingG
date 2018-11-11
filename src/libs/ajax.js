@@ -51,19 +51,19 @@ ajax.install = function(Vue) {
   // Add a response interceptor
   axios.interceptors.response.use(
     function(response) {
-      if (response.status >= 400) {
-        let msg = "";
-        if (response.body && response.body.msg) {
-          msg = response.body.msg;
-        } else {
-          msg = "接口请求失败";
-          if (response.status) {
-            msg += `(${response.status})`;
-          }
-        }
-        alert(msg);
-        return response;
-      }
+      // if (response.status >= 400) {
+      //   let msg = ""
+      //   if (response.body && response.body.msg) {
+      //     msg = response.body.msg;
+      //   } else {
+      //     msg = "接口请求失败";
+      //     if (response.status) {
+      //       msg += `(${response.status})`;
+      //     }
+      //   }
+      //   // alert(msg);
+      //   return response;
+      // }
       const data = response.data;
       if (data) {
         if (data.ok === -100 && data.url) {
@@ -72,7 +72,7 @@ ajax.install = function(Vue) {
         if (data.ok === 0) {
           switch (data.error_type) {
             case "alert": {
-              alert(data.msg);
+              // alert(data.msg);
               break;
             }
             case "confirm": {

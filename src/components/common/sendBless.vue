@@ -1,5 +1,6 @@
 <template>
   <div class="bless">
+    <div class="cover" @click="closeB"></div>
     <div>
       <span>祝福</span>
       <div class="bless-wrapper">
@@ -50,7 +51,7 @@ export default {
             this.show = true;
             if (response.body.code === "0000") {
               toast("发布成功！");
-              this.$emit("send");
+              this.$emit("send", this.blession);
             } else {
               toast("发布失败~");
             }
@@ -61,6 +62,9 @@ export default {
       } else {
         toast("信息不全！");
       }
+    },
+    closeB() {
+      this.$emit("closeB");
     },
     pickerSure() {
       console.log("pickerSure");
@@ -124,9 +128,19 @@ export default {
   bottom: 0;
   // top: 900 * $vh;
   left: 0;
+  .cover {
+    position: fixed;
+    top: 0%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+  }
   div {
     height: 139 * $vh;
     overflow: hidden;
+    background-color: #fff;
     span {
       height: 139 * $vh;
       line-height: 139 * $vh;

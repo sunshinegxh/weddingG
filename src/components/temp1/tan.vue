@@ -5,12 +5,12 @@
     <div class="message-wrapper">
       <div class="message-input" @click="showBless">写下你的祝福</div>
     </div>
-    <div class="message">
+    <div v-if="tanData.length > 0" class="message">
       <div class="message-item" :class="getClass(i)" v-for="(text, i) in showData" :key="i">
         {{ text }}
       </div>
     </div>
-    <send-bless v-show="showB" @send="send"></send-bless>
+    <send-bless v-show="showB" @send="send" @closeB="closeB"></send-bless>
   </div>
 </template>
 <script>
@@ -28,7 +28,8 @@ export default {
       showIndex: 0,
       showData: [],
       timmer: null,
-      showB: false
+      showB: false,
+      sendBlessText: ""
     };
   },
   created() {
@@ -56,7 +57,12 @@ export default {
     },
     startTimer() {
       this.timmer = setTimeout(() => {
-        this.index = (this.index + 1) % this.tanData.length;
+        if (this.sendBlessText) {
+          this.tanData.push(this.sendBlessText);
+          this.sendBlessText = "";
+        }
+
+        this.index = (this.index + 1) % this.tanData.length || 0;
         this.showData.splice(this.showIndex, 1, this.tanData[this.index]);
         this.showIndex = (this.showIndex + 1) % SIZE;
         this.timmer = this.startTimer();
@@ -76,14 +82,17 @@ export default {
             res.wishList.map(v => {
               this.tanData.push(v.wish);
             });
-            this.showData = Array.from(Array(SIZE), (i, item) => {
-              const pos = item % this.tanData.length;
-              return this.tanData[pos];
-            });
-            this.index = 2 % this.tanData.length;
-            this.showIndex = 0;
-            this.timmer = null;
-            this.startTimer();
+
+            if (res.wishList.length > 0) {
+              this.showData = Array.from(Array(SIZE), (i, item) => {
+                const pos = item % this.tanData.length;
+                return this.tanData[pos];
+              });
+              this.index = 2 % this.tanData.length;
+              this.showIndex = 0;
+              this.timmer = null;
+              this.startTimer();
+            }
           } else {
             console.log("getPublishWishList:", response.body.message);
           }
@@ -92,7 +101,18 @@ export default {
           document.write(e);
         });
     },
-    send() {
+    send(wish) {
+      this.showB = false;
+      // console.log(wish)
+      if (this.tanData.length <= 0) {
+        this.showIndex = 0;
+        this.timmer = null;
+        this.startTimer();
+      }
+      this.sendBlessText = wish;
+      // this.tanData.push(wish);
+    },
+    closeB() {
       this.showB = false;
     }
   },
@@ -124,7 +144,8 @@ export default {
   left: 0;
   height: 100%;
   background: url("../../assets/barrage_bg.png") no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
+  // background-size: 100% 100%;
   opacity: 0;
   animation: opacity 2s forwards;
 }
@@ -136,7 +157,7 @@ export default {
   text-indent: 2em;
   line-height: 78 * $vh;
   box-sizing: border-box;
-  bottom: 120 * $vh;
+  top: 1150 * $vh;
   display: flex;
   justify-content: space-between;
   text-align: left;
@@ -218,10 +239,10 @@ export default {
 }
 .from-right24 {
   position: absolute;
-  width: 40 * $px;
+  width: 40 * $vw;
   top: 50%;
   transform: translate(0, -50%);
-  right: -1000 * $px;
+  right: -1000 * $vw;
   opacity: 0;
   -webkit-animation: fRht24 2s ease forwards;
   -moz-animation: fRht24 2s ease forwards;
@@ -229,31 +250,31 @@ export default {
 }
 @-moz-keyframes fRht24 {
   0% {
-    right: -1000 * $px;
+    right: -1000 * $vw;
     opacity: 0;
   }
   100% {
-    right: 24 * $px;
+    right: 24 * $vw;
     opacity: 1;
   }
 }
 @-webkit-keyframes fRht24 {
   0% {
-    right: -1000 * $px;
+    right: -1000 * $vw;
     opacity: 0;
   }
   100% {
-    right: 24 * $px;
+    right: 24 * $vw;
     opacity: 1;
   }
 }
 @keyframes fRht24 {
   0% {
-    right: -1000 * $px;
+    right: -1000 * $vw;
     opacity: 0;
   }
   100% {
-    right: 24 * $px;
+    right: 24 * $vw;
     opacity: 1;
   }
 }
