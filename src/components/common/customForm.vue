@@ -9,7 +9,7 @@
     </div>
     <div class="form-item">
       <span class="label">关系</span>
-      <div class="input-wrapper" :class="{'black': isblack}" @click="showPicker">
+      <div class="input-wrapper" :class="{'black': isblack || done}" @click="showPicker">
         {{ roleText }}
       </div>
     </div>
@@ -160,6 +160,7 @@ export default {
             if (response.body.code === "0000") {
               toast("添加成功");
               this.done = true;
+              this.$store.commit("SET_INFODONE", this.done);
               this.$emit("submit");
             } else {
               toast(response.body.message);

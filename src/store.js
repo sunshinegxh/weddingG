@@ -14,7 +14,9 @@ export default new Vuex.Store({
     // 是否客户端调用设置页面方法
     isSkip: false,
     // 底部宾客信息填写内容
-    btmFormDta: {}
+    btmFormDta: {},
+    // 宾客信息页面是否填写完信息，填写完成底部浮层不显示
+    done: false
   },
   mutations: {
     SET_EDIT(state, data) {
@@ -31,6 +33,9 @@ export default new Vuex.Store({
     },
     SET_BTMDTA(state, data) {
       state.btmFormDta = data;
+    },
+    SET_INFODONE(state, data) {
+      state.done = data;
     }
   },
   actions: {}
