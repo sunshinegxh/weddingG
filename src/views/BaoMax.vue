@@ -368,7 +368,7 @@ export default {
     float: right;
     width: 148 * $vw;
     height: 60 * $vh;
-    line-height: 60 * $vh;
+    line-height: 65 * $vh;
     background: #fff;
     color: #8eb559;
     border-radius: 30 * $vw;

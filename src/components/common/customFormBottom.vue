@@ -245,6 +245,7 @@ export default {
   display: inline-block;
   width: 36 * $vw;
   height: 36 * $vh;
+  vertical-align: text-top;
   line-height: 34 * $vh;
   border: 1px solid #999999;
   text-align: center;
