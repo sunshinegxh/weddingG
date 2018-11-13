@@ -7,7 +7,7 @@
     </div>
     <div class="form-bottom-item">
       <span class="label">关系</span>
-      <div class="input-wrapper" @click="showPicker">
+      <div class="input-wrapper rela" @click="showPicker" :class="{'black': isblack}">
         {{ roleText }}
       </div>
     </div>
@@ -63,7 +63,8 @@ export default {
           className: "slot3",
           textAlign: "center"
         }
-      ]
+      ],
+      isblack: false
     };
   },
   computed: {
@@ -109,6 +110,7 @@ export default {
     pickerSure() {
       console.log("pickerSure");
       this.show = false;
+      this.isblack = true;
       /* eslint-disable no-undef */
       $.fn.pagepiling.setAllowScrolling(true);
       this.formDta.role = this.pickerData;
@@ -218,8 +220,11 @@ export default {
   text-align: left;
   justify-items: center;
   input {
-    color: #999999;
+    color: #000;
     font-size: 32 * $vh;
+  }
+  input::-webkit-input-placeholder {
+    color: #999999;
   }
 }
 .submit-btn {
@@ -294,4 +299,13 @@ export default {
 //     opacity: 1;
 //   }
 // }
+.input-wrapper.rela {
+  color: #999;
+}
+.input-wrapper.black {
+  color: #000;
+}
+.number.black {
+  color: #000;
+}
 </style>

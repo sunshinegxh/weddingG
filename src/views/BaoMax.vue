@@ -9,7 +9,7 @@
       </div>
     </div>
     <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
-    <div class="share-join" v-if="showInfo && +status === 3">
+    <div class="share-join" v-if="showInfo && +status === 3 && !done">
       <span class="share-join-text">是否参加婚宴？</span>
       <span class="share-join-btn" @click="join">参加</span>
       <span class="share-join-btn" @click="notjoin">不参加</span>
@@ -24,6 +24,7 @@ import Loading from "../components/common/loading";
 import domtoimage from "dom-to-image";
 import Utils from "../libs/utils";
 import cusFormBtn from "../components/common/customFormBottom";
+import { mapState } from "vuex";
 
 export default {
   name: "BaoMax",
@@ -52,6 +53,23 @@ export default {
     },
     musicType() {
       return `type${this.templateId}`;
+    },
+    ...mapState({
+      currentPage: state => state.currentPage,
+      done: state => state.done
+    })
+  },
+  watch: {
+    currentPage(val) {
+      if (
+        +val === this.indexData.length - 1 ||
+        +val === this.indexData.length - 2
+      ) {
+        this.showInfo = false;
+      } else {
+        this.showInfo = true;
+      }
+      console.log(val, this.indexData.length);
     }
   },
   updated() {
@@ -374,6 +392,7 @@ export default {
     border-radius: 30 * $vw;
     margin-right: 24 * $vw;
     margin-top: 19 * $vh;
+    text-align: center;
   }
   &-bg {
     position: fixed;
