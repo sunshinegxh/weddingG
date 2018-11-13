@@ -151,6 +151,8 @@ export default {
         .then(response => {
           if (response.body.code === "0000") {
             toast("添加成功");
+            this.$store.commit("SET_BTMDTA", this.formDta);
+            // console.log(this.formDta);
             this.$emit("submit");
           } else {
             toast(response.body.message);

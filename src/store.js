@@ -12,7 +12,9 @@ export default new Vuex.Store({
     // 当前页面
     currentPage: 0,
     // 是否客户端调用设置页面方法
-    isSkip: false
+    isSkip: false,
+    // 底部宾客信息填写内容
+    btmFormDta: {}
   },
   mutations: {
     SET_EDIT(state, data) {
@@ -26,6 +28,9 @@ export default new Vuex.Store({
     },
     SET_ISSKIP(state, data) {
       state.isSkip = data;
+    },
+    SET_BTMDTA(state, data) {
+      state.btmFormDta = data;
     }
   },
   actions: {}

@@ -74,7 +74,8 @@ export default {
   },
   computed: {
     ...mapState({
-      edit: state => state.edit
+      edit: state => state.edit,
+      btmFormDta: state => state.btmFormDta
     }),
     roleText() {
       if (!this.formDta.role || this.formDta.role.length === 0) {
@@ -168,6 +169,12 @@ export default {
             document.write(e);
           });
       }
+    }
+  },
+  watch: {
+    btmFormDta(val) {
+      this.formDta = val;
+      this.done = true;
     }
   },
   components: {
