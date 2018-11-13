@@ -7,7 +7,7 @@
     </div>
     <div class="form-bottom-item">
       <span class="label">关系</span>
-      <div class="input-wrapper" @click="showPicker" :class="{'black': isblack}">
+      <div class="input-wrapper rela" @click="showPicker" :class="{'black': isblack}">
         {{ roleText }}
       </div>
     </div>
@@ -223,6 +223,9 @@ export default {
     color: #000;
     font-size: 32 * $vh;
   }
+  input::-webkit-input-placeholder {
+    color: #999999;
+  }
 }
 .submit-btn {
   height: 94 * $vh;
@@ -295,6 +298,9 @@ export default {
 //     opacity: 1;
 //   }
 // }
+.input-wrapper.rela {
+  color: #999;
+}
 .input-wrapper.black {
   color: #000;
 }

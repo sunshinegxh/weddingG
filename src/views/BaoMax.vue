@@ -392,6 +392,7 @@ export default {
     border-radius: 30 * $vw;
     margin-right: 24 * $vw;
     margin-top: 19 * $vh;
+    text-align: center;
   }
   &-bg {
     position: fixed;
