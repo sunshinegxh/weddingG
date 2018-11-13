@@ -101,7 +101,7 @@ export default {
 .page1_pic_up {
   height: 600 * $vh;
   margin-bottom: 24 * $vh;
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   transform: translateX(-100%);
   opacity: 0;
@@ -109,7 +109,7 @@ export default {
 }
 .page1_pic_down {
   height: 448 * $vh;
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   transform: translateX(-100%);
   opacity: 0;
