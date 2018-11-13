@@ -9,12 +9,12 @@
       </div>
     </div>
     <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
-    <div class="share-join" v-if="showInfo && +status === 2">
+    <div class="share-join" v-if="showInfo && +status === 3">
       <span class="share-join-text">是否参加婚宴？</span>
       <span class="share-join-btn" @click="join">参加</span>
       <span class="share-join-btn" @click="notjoin">不参加</span>
     </div>
-    <div v-if="cfShow" class="share-join-bg"></div>
+    <div v-if="cfShow" class="share-join-bg" @click="closeCF"></div>
     <cus-form @submit="onSubmit" v-if="cfShow"></cus-form>
   </div>
 </template>
@@ -140,6 +140,10 @@ export default {
     }, 1000);
   },
   methods: {
+    closeCF() {
+      this.showInfo = true;
+      this.cfShow = false;
+    },
     onSubmit() {
       this.cfShow = false;
     },
@@ -332,7 +336,7 @@ export default {
   }
 }
 // TODO
-.music.type1 {
+.music {
   background-image: url(../assets/second/invitetion_ic_music_default.png);
   &.is-stop {
     background-image: url(../assets/second/invitetion_ic_music_select.png);
@@ -342,6 +346,10 @@ export default {
     animation: rotate 3s infinite linear;
   }
 }
+// .music.is-rotate {
+//   -webkit-animation: rotate 3s infinite linear;
+//   animation: rotate 3s infinite linear;
+// }
 .share-join {
   width: 100%;
   height: 98 * $vh;

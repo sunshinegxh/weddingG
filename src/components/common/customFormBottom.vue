@@ -114,20 +114,21 @@ export default {
       this.formDta.role = this.pickerData;
     },
     addNumber() {
-      if (+this.edit === 2) {
-        this.formDta.person += 1;
-      }
+      // if (+this.edit === 2) {
+      this.formDta.person += 1;
+      // }
     },
     delNumber() {
-      if (this.formDta.person > 1 && +this.edit === 2) {
+      if (this.formDta.person > 1) {
+        // if (this.formDta.person > 1 && +this.edit === 2) {
         this.formDta.person -= 1;
       }
     },
     showPicker() {
-      if (+this.edit === 2) {
-        this.stopRoll();
-        this.relation();
-      }
+      // if (+this.edit === 2) {
+      this.stopRoll();
+      this.relation();
+      // }
     },
     onValuesChange(picker, values) {
       console.log("picker", values);

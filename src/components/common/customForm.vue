@@ -3,21 +3,22 @@
     <p class="title">为了方便新人，请填写您的赴宴信息</p>
     <div class="form-item">
       <span class="label">姓名</span>
-      <div class="input-wrapper" v-if="+edit === 2"><input  type="text" placeholder="请输入您的姓名" v-model="formDta.name" /></div>
+      <div class="input-wrapper" v-if="+edit === 3 && !done"><input  type="text" placeholder="请输入您的姓名" v-model="formDta.name" /></div>
+      <div class="input-wrapper" v-else-if="+edit === 3 && done"><input type="text" placeholder="请输入您的姓名" v-model="formDta.name" readonly="readonly"/></div>
       <div class="input-wrapper" v-else><input type="text" placeholder="请输入您的姓名" v-model="formDta.name" readonly="readonly"/></div>
     </div>
     <div class="form-item">
       <span class="label">关系</span>
-      <div class="input-wrapper" @click="showPicker">
+      <div class="input-wrapper" :class="{'black': isblack}" @click="showPicker">
         {{ roleText }}
       </div>
     </div>
     <div class="form-item">
       <span class="label">赴宴人数</span>
       <div class="input-wrapper">
-        <span class="del-btn" role="button" @click="delNumber">-</span>
-        <span class="number">{{ formDta.person }}</span>
-        <span class="add-btn" role="button" @click="addNumber">+</span>
+        <span class="del-btn" role="button" v-if="!done" @click="delNumber">-</span>
+        <span class="number" :class="{'black': done}">{{ formDta.person }}</span>
+        <span class="add-btn" role="button" v-if="!done" @click="addNumber">+</span>
       </div>
     </div>
     <div class="submit-btn" v-if="!done" role="button" @click="onSubmit" :style="{backgroundColor: btnColor}">确认赴宴并提交信息</div>
@@ -67,7 +68,8 @@ export default {
           textAlign: "center"
         }
       ],
-      done: false
+      done: false,
+      isblack: false
     };
   },
   computed: {
@@ -113,22 +115,23 @@ export default {
     pickerSure() {
       console.log("pickerSure");
       this.show = false;
+      this.isblack = true;
       /* eslint-disable no-undef */
       $.fn.pagepiling.setAllowScrolling(true);
       this.formDta.role = this.pickerData;
     },
     addNumber() {
-      if (+this.edit === 2) {
+      if (+this.edit === 3) {
         this.formDta.person += 1;
       }
     },
     delNumber() {
-      if (this.formDta.person > 1 && +this.edit === 2) {
+      if (this.formDta.person > 1 && +this.edit === 3) {
         this.formDta.person -= 1;
       }
     },
     showPicker() {
-      if (+this.edit === 2) {
+      if (+this.edit === 3 && !this.done) {
         this.stopRoll();
         this.relation();
       }
@@ -138,7 +141,7 @@ export default {
       this.pickerData = values;
     },
     onSubmit() {
-      if (+this.edit === 2) {
+      if (+this.edit === 3) {
         const data = this.formDta;
         if (!data.name.trim() || (!data.role || data.role.length === 0)) {
           toast("请完善个人信息！");
@@ -218,7 +221,7 @@ export default {
   text-align: left;
   justify-items: center;
   input {
-    color: #999999;
+    color: #000;
     font-size: 32 * $vh;
   }
 }
@@ -310,5 +313,11 @@ export default {
     transform: none;
     opacity: 1;
   }
+}
+.input-wrapper.black {
+  color: #000;
+}
+.number.black {
+  color: #000;
 }
 </style>

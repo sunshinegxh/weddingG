@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     showBless() {
-      if (+this.edit === 2) {
+      if (+this.edit === 3) {
         this.showB = !this.showB;
       }
     },
