@@ -62,7 +62,7 @@ export default {
 
 .wrapper {
   height: 100%;
-  padding: 20 * $vh 24 * $vw 120 * $vw 24 * $vh;
+  padding: 90 * $vh 24 * $vw 120 * $vw 24 * $vh;
   box-sizing: border-box;
   position: relative;
   background: url(../../assets/second/invitation_bg.png) no-repeat;
@@ -116,7 +116,7 @@ export default {
   position: absolute;
   top: 420 * $vh;
   right: -260 * $vw;
-  background: url(../../assets/second/cover_cloud_right.png) no-repeat;
+  background: url(../../assets/second/cover_cloud_middle.png) no-repeat;
   background-size: 100% 100%;
   animation: right-to-left 2s 2s forwards;
 }
@@ -141,7 +141,9 @@ export default {
   animation: right-to-middle 2s 2.5s forwards;
 }
 .extra {
-  width: 520 * $vw;
+  max-width: 100%;
+  min-width: 520 * $vw;
+  padding: 0 20 * $vw;
   margin: auto;
   color: #e6bf72;
   text-align: center;

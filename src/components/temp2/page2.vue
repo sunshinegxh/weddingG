@@ -62,7 +62,7 @@ export default {
 @import "../../common.scss";
 .wrapper {
   height: 100%;
-  padding-top: 152 * $vh;
+  padding-top: 132 * $vh;
   padding-bottom: 110 * $vh;
   box-sizing: border-box;
   overflow: hidden;
@@ -93,10 +93,12 @@ export default {
   overflow: hidden;
 }
 .right {
+  height: 100%;
   width: 253 * $vw;
   padding-right: 24 * $vw;
   display: inline-block;
   overflow: hidden;
+  vertical-align: top;
 }
 .page1_pic_up {
   height: 600 * $vh;
@@ -170,7 +172,7 @@ export default {
 }
 .page1_cloud_gold {
   position: absolute;
-  bottom: 97 * $vh;
+  bottom: 110 * $vh;
   left: 390 * $vw;
   width: 140 * $vw;
   height: 70 * $vh;

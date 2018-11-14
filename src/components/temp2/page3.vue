@@ -46,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../common.scss";
 .wrapper {
-  padding-top: 128 * $vh;
+  padding-top: 118 * $vh;
   padding-bottom: 71 * $vh;
   box-sizing: border-box;
   position: relative;
@@ -103,7 +103,7 @@ export default {
   height: 156 * $vh;
   position: absolute;
   right: 24 * $vw;
-  top: 487 * $vh;
+  top: 467 * $vh;
   background: url(../../assets/second/page2_ic_cloud.png) no-repeat;
   background-size: 100% 100%;
   transform: translateX(264 * $vw);

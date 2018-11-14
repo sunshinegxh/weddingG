@@ -62,7 +62,7 @@ export default {
 @import "../../common.scss";
 .wrapper {
   position: relative;
-  padding-top: 176 * $vh;
+  padding-top: 136 * $vh;
   padding-bottom: 112 * $vh;
   box-sizing: border-box;
   background: url(../../assets/second/invitation_bg.png) no-repeat;
@@ -94,7 +94,7 @@ export default {
 }
 .page3_ic_cloud {
   position: absolute;
-  top: 534 * $vh;
+  top: 494 * $vh;
   right: 24 * $vw;
   width: 260 * $vw;
   height: 170 * $vh;
@@ -130,7 +130,7 @@ export default {
   position: absolute;
   width: 140 * $vw;
   height: 70 * $vh;
-  bottom: 112 * $vh;
+  bottom: 152 * $vh;
   left: 288 * $vw;
   background: url(../../assets/second/page1_cloud_gold.png) no-repeat;
   background-size: 100% 100%;

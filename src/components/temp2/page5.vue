@@ -62,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../common.scss";
 .wrapper {
-  padding-top: 129 * $vh;
+  padding-top: 109 * $vh;
   padding-bottom: 92 * $vh;
   overflow: hidden;
   position: relative;
@@ -71,7 +71,7 @@ export default {
   background-size: 100% 100%;
   .invite_ic_pic51 {
     position: absolute;
-    top: 900 * $px;
+    top: 880 * $px;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
@@ -141,7 +141,7 @@ export default {
   width: 220 * $vw;
   height: 144 * $vh;
   left: 24 * $vw;
-  top: 278 * $vh;
+  top: 258 * $vh;
   background: url(../../assets/second/page4_ic_cloud_left.png) no-repeat;
   background-size: 100% 100%;
   opacity: 0;
@@ -153,7 +153,7 @@ export default {
   width: 180 * $vw;
   height: 116 * $vh;
   right: 24 * $vw;
-  top: 176 * $vh;
+  top: 156 * $vh;
   background: url(../../assets/second/page4_ic_cloud_right.png) no-repeat;
   background-size: 100% 100%;
   opacity: 0;
@@ -174,7 +174,7 @@ export default {
   position: absolute;
   left: 48 * $vw;
   right: 48 * $vw;
-  bottom: 115 * $vh;
+  bottom: 135 * $vh;
   height: 634 * $vh;
   background-size: 100% 100%;
   background-repeat: no-repeat;

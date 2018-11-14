@@ -5,7 +5,7 @@
     <div class="address">
       <div class="address-info">
         <div class="text">{{ extra.address }}</div>
-        <div class="time">{{ extra.tome }}</div>
+        <div class="time">{{ extra.time }}</div>
       </div>
     </div>
     <div class="map"></div>
