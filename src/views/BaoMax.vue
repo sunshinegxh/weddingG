@@ -153,7 +153,7 @@ export default {
           viewheight +
           "px, width=" +
           viewwidth +
-          "px, initial-scale=1.0"
+          "px, initial-scale=1.0, user-scalable=0;"
       );
     }, 1000);
   },
