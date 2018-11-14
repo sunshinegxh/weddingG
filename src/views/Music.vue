@@ -28,16 +28,16 @@ export default {
     getMusic() {
       this.$http
         .post(`${utils.api()}/()/banhunli/card/getSystemMusicList.gg`, {
+          cardId: this.$route.query.cardId,
           pageNo: 1,
           pageSize: 20
         })
         .then(response => {
           // this.loading = false;
-          console.log(response.body.data.musics);
           let res = response.body.data;
           if (response.body.code === "0000") {
             this.musicList = res.musics;
-            this.cur = this.musicList[0];
+            this.cur = this.musicList[res.selectIndex];
           } else {
             console.log("res.respCode", response.body.message);
           }

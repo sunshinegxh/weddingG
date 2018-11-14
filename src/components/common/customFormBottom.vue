@@ -155,6 +155,7 @@ export default {
             toast("添加成功");
             this.$store.commit("SET_BTMDTA", this.formDta);
             // console.log(this.formDta);
+            this.$store.commit("SET_INFODONE", true);
             this.$emit("submit");
           } else {
             toast(response.body.message);
