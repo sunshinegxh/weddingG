@@ -7,7 +7,7 @@
     </div>
     <div class="form-bottom-item">
       <span class="label">关系</span>
-      <div class="input-wrapper rela" @click="showPicker" :class="{'black': isblack}">
+      <div class="input-wrapper input-wrapper2 rela" @click="showPicker" :class="{'black': isblack}">
         {{ roleText }}
       </div>
     </div>
@@ -176,7 +176,7 @@ export default {
 .form-bottom {
   width: 100%;
   font-family: PingFangSC-Regular;
-  font-size: 32 * $vh;
+  font-size: 32 * $vw;
   color: #999999;
   text-align: left;
   position: absolute;
@@ -222,7 +222,7 @@ export default {
   justify-items: center;
   input {
     color: #000;
-    font-size: 32 * $vh;
+    font-size: 32 * $vw;
   }
   input::-webkit-input-placeholder {
     color: #999999;
@@ -235,7 +235,7 @@ export default {
   background: #8eb559;
   // border-radius: 47 * $vw;
   color: #ffffff;
-  font-size: 36 * $vh;
+  font-size: 36 * $vw;
   text-align: center;
   opacity: 1;
 }
@@ -308,5 +308,8 @@ export default {
 }
 .number.black {
   color: #000;
+}
+.input-wrapper2 {
+  font-size: 32 * $vw;
 }
 </style>
