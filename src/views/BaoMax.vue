@@ -9,7 +9,7 @@
       </div>
     </div>
     <component :dataList="indexData" ref="temp" :is="template" class="template"></component>
-    <div class="share-join" v-if="showInfo && +status === 3 && !done">
+    <div v-if="showInfo && +status === 3 && !done" :class="colorTemp">
       <span class="share-join-text">是否参加婚宴？</span>
       <span class="share-join-btn" @click="join">参加</span>
       <span class="share-join-btn" @click="notjoin">不参加</span>
@@ -57,7 +57,15 @@ export default {
     ...mapState({
       currentPage: state => state.currentPage,
       done: state => state.done
-    })
+    }),
+    colorTemp() {
+      return {
+        "share-join": true,
+        color1: +this.templateId === 1,
+        color2: +this.templateId === 2,
+        color3: +this.templateId === 3
+      };
+    }
   },
   watch: {
     currentPage(val) {
@@ -368,11 +376,21 @@ export default {
 //   -webkit-animation: rotate 3s infinite linear;
 //   animation: rotate 3s infinite linear;
 // }
+.color1 {
+  background: #8eb559;
+}
+.color2 {
+  background: #e6bf72;
+}
+.color3 {
+  background: #000000;
+}
 .share-join {
   width: 100%;
   height: 98 * $vh;
   line-height: 98 * $vh;
-  background-color: rgba($color: #8eb559, $alpha: 0.8);
+  opacity: 0.8;
+  // background-color: rgba($color: #8eb559, $alpha: 0.8);
   color: #fff;
   font-size: 32 * $vw;
   position: fixed;

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="bg" :style="{backgroundImage: `url(${cover})`}"></div>
+    <div class="bg" :style="{backgroundImage: `url(${imgArr[0]})`}"></div>
     <div class="welcome"></div>
     <div class="address">
       <div class="address-info">
@@ -8,13 +8,25 @@
         <div class="time">{{ extra.time }}</div>
       </div>
     </div>
-    <div class="map"></div>
+    <div class="map" :style="{backgroundImage: `url(${imgArr[1]})`}"></div>
+    <div class="invite_ic_pic" v-if="+edit === 1" data-html2canvas-ignore="true">
+      <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+    </div>
   </div>
 </template>
+
 <script>
+import { mapState } from "vuex";
+import uploadImage from "../UploadImage";
+
 export default {
   name: "template-2-page-6",
   props: ["info"],
+  data() {
+    return {
+      imgArr: this.info.goodsImg
+    };
+  },
   computed: {
     extra() {
       // return this.info.extra;
@@ -22,6 +34,17 @@ export default {
     },
     cover() {
       return this.info.goodsImg[0];
+    },
+    ...mapState({
+      edit: state => state.edit
+    })
+  },
+  components: {
+    uploadImage
+  },
+  methods: {
+    changeUrl(info) {
+      this.$set(this.imgArr, info.index - 1, info.url);
     }
   }
 };
@@ -34,6 +57,13 @@ export default {
   overflow: hidden;
   background: url(../../assets/second/invitation_bg.png) no-repeat;
   background-size: 100% 100%;
+  .invite_ic_pic {
+    position: fixed;
+    top: 100 * $vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
 }
 .bg {
   position: absolute;
@@ -43,7 +73,7 @@ export default {
   left: 0;
   height: 100%;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   opacity: 0;
   animation: opacity 2s forwards;
 }

@@ -79,7 +79,7 @@ export default {
   span {
     display: inline-block;
     width: 100%;
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
   }
   span:nth-of-type(1) {
@@ -93,7 +93,6 @@ export default {
     height: 700 * $vh;
     clip-path: polygon(0 115 * $vh, 100% 0%, 100% 100%, 0 100%);
     position: relative;
-    // top:0;
     top: -114 * $vh;
   }
   p {

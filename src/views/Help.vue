@@ -1,7 +1,8 @@
 <template>
   <div class="help">
     <div class="help-title">
-      <img :src="user.userIcon" alt="">
+      <!-- <img :src="user.userIcon" alt=""> -->
+      <span class="help-title-user" :style="{'background-image': `url(${user.userIcon})`}"></span>
       <span>{{ user.nickName }}</span>
     </div>
     <p>邀请你使用伴婚礼</p>
@@ -40,6 +41,7 @@ export default {
     }
   },
   created() {
+    document.title = "wedding";
     this.getUserInfo();
   },
   methods: {
@@ -93,9 +95,12 @@ export default {
     height: 48 * $vh;
     margin: 56 * $vh 0 32 * $vh 0;
     text-align: center;
-    img {
+    &-user {
+      display: inline-block;
       width: 48 * $vw;
-      height: 48 * $vh;
+      height: 48 * $vw;
+      background-size: 100% 100%;
+      border-radius: 48 * $vw;
       vertical-align: middle;
       margin-right: 16 * $vw;
     }
@@ -116,7 +121,7 @@ export default {
   &-card {
     &-up {
       width: 702 * $vw;
-      height: 400 * $vh;
+      height: 410 * $vh;
       background: #fff;
       margin: 0 auto;
       border-top-left-radius: 50 * $vw;
@@ -146,19 +151,20 @@ export default {
     }
     &-middle {
       width: 702 * $vw;
+      margin-top: -1px;
     }
     &-down {
       width: 702 * $vw;
       height: 414 * $vh;
       background: #fff;
-      margin: -10 * $vh auto;
+      margin: -15 * $vh auto;
       border-top-left-radius: 0 * $vw;
       border-top-right-radius: 0 * $vw;
       border-bottom-right-radius: 50 * $vw;
       border-bottom-left-radius: 50 * $vw;
       img {
         width: 260 * $vw;
-        height: 260 * $vh;
+        height: 260 * $vw;
         margin: 40 * $vh 0 36 * $vh 0;
       }
       p {

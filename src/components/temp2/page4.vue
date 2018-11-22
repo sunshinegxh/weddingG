@@ -76,7 +76,7 @@ export default {
   }
   .invite_ic_pic42 {
     position: absolute;
-    top: 900 * $px;
+    top: 870 * $px;
     left: 75%;
     transform: translate(-50%, 0);
     z-index: 1000;
@@ -86,7 +86,7 @@ export default {
   width: 702 * $vw;
   height: 480 * $vh;
   margin: 0 auto 48 * $vh auto;
-  background-size: 100% 100%;
+  background-size: cover;
   transform: translateX(-100%);
   background-repeat: no-repeat;
   opacity: 0;
@@ -120,7 +120,7 @@ export default {
   display: inline-block;
   width: 332 * $vw;
   height: 518 * $vh;
-  background-size: 100% 100%;
+  background-size: cover;
   transform: translateX(100%);
   background-repeat: no-repeat;
   opacity: 0;

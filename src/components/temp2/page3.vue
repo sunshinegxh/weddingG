@@ -54,14 +54,14 @@ export default {
   background-size: 100% 100%;
   .invite_ic_pic31 {
     position: absolute;
-    top: 350 * $px;
+    top: 310 * $vh;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
   }
   .invite_ic_pic32 {
     position: absolute;
-    top: 1000 * $px;
+    top: 950 * $vh;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
@@ -87,7 +87,7 @@ export default {
 .pic {
   height: 100%;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .page2_copywriting {
   width: 702 * $vw;

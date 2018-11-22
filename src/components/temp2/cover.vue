@@ -79,7 +79,7 @@ export default {
   animation: zoomIn 2s;
   .invite_ic_pic2 {
     position: absolute;
-    top: 580 * $px;
+    top: 640 * $vh;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
@@ -108,7 +108,7 @@ export default {
 .cover_pic {
   height: 100%;
   background: url(../../assets/second/cover_pic.png) no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .cover_cloud_right {
   height: 170 * $vh;

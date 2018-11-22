@@ -71,7 +71,7 @@ export default {
   background-size: 100% 100%;
   .invite_ic_pic51 {
     position: absolute;
-    top: 880 * $px;
+    top: 850 * $px;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
@@ -176,7 +176,7 @@ export default {
   right: 48 * $vw;
   bottom: 135 * $vh;
   height: 634 * $vh;
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
   transform: translateY(726 * $vh) scale(1);
