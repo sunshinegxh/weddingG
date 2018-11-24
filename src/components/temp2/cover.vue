@@ -4,6 +4,13 @@
       <div class="invite_ic_pic2" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
+      <img
+        data-html2canvas-ignore="true"
+        src="../../assets/invite_ic_edit.png"
+        class="edit2"
+        v-if="+edit === 1"
+        @click="editNative"
+        alt="">
       <div class="cover_copywrite_wemarried"></div>
       <div class="cover_frame_tiny">
         <div class="cover_pic" :style="{'background-image': `url(${imgArr[0]})`}"></div>
@@ -28,6 +35,7 @@
 <script>
 import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
+import utils from "../../libs/utils";
 
 export default {
   name: "template-2-cover",
@@ -37,7 +45,8 @@ export default {
       return JSON.parse(this.info.extra);
     },
     ...mapState({
-      edit: state => state.edit
+      edit: state => state.edit,
+      cardId: state => state.cardId
     })
   },
   data() {
@@ -45,9 +54,43 @@ export default {
       imgArr: this.info.goodsImg
     };
   },
+  created() {
+    window.refreshInfo = this.setInfo;
+  },
   methods: {
     changeUrl(info) {
       this.$set(this.imgArr, info.index - 1, info.url);
+    },
+    setInfo() {
+      this.$http
+        .post(`${utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
+          cardId: this.cardId
+        })
+        .then(response => {
+          let res = response.body.data;
+          if (response.body.code === "0000") {
+            this.extra = res;
+          } else {
+            console.log("res.respCode", response.body.message);
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
+    editNative() {
+      let self = this;
+      const bridge = window.Android;
+      function toEditPage() {
+        window.Android.toEditPage(self.cardId);
+      }
+      if (bridge) {
+        toEditPage();
+      } else {
+        document.addEventListener("Android", () => {
+          toEditPage();
+        });
+      }
     }
   },
   components: {
@@ -82,6 +125,15 @@ export default {
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 1000;
+  }
+  .edit2 {
+    width: 112 * $vw;
+    height: 112 * $vw;
+    z-index: 1000;
+    position: absolute;
+    bottom: 180 * $vh;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
 .cover_copywrite_wemarried {

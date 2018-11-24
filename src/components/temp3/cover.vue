@@ -9,6 +9,14 @@
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
 
+    <img
+      data-html2canvas-ignore="true"
+      src="../../assets/invite_ic_edit.png"
+      class="edit3"
+      v-if="+edit === 1"
+      @click="editNative"
+      alt="">
+
     <div class="cover-bg3">
       <span class="cover_pic_copywrite delay1 from-top0"></span>
       <span class="name delayP15 from-top200">{{extra.groom}} & {{extra.bride}}</span>
@@ -22,6 +30,7 @@
 <script>
 import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
+import utils from "../../libs/utils";
 
 export default {
   name: "cover3",
@@ -40,10 +49,9 @@ export default {
     })
   },
   created() {
-    window.setInfo = this.setInfo;
+    window.refreshInfo = this.setInfo;
   },
   methods: {
-    setInfo() {},
     changeUrl(info) {
       this.$set(this.imgArr, info.index - 1, info.url);
     },
@@ -55,6 +63,37 @@ export default {
         toRead: true,
         big: this.current === 1
       };
+    },
+    setInfo() {
+      this.$http
+        .post(`${utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
+          cardId: this.cardId
+        })
+        .then(response => {
+          let res = response.body.data;
+          if (response.body.code === "0000") {
+            this.extra = res;
+          } else {
+            console.log("res.respCode", response.body.message);
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
+    editNative() {
+      let self = this;
+      const bridge = window.Android;
+      function toEditPage() {
+        window.Android.toEditPage(self.cardId);
+      }
+      if (bridge) {
+        toEditPage();
+      } else {
+        document.addEventListener("Android", () => {
+          toEditPage();
+        });
+      }
     }
   },
   components: {
@@ -293,5 +332,14 @@ export default {
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1000;
+}
+.edit3 {
+  width: 112 * $vw;
+  height: 112 * $vw;
+  z-index: 1000;
+  position: absolute;
+  bottom: 220 * $vh;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 </style>

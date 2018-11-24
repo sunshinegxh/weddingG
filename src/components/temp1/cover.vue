@@ -76,12 +76,6 @@ export default {
     changePage(index) {
       this.$emit("changePage", index);
     },
-    comClass() {
-      return {
-        toRead: true,
-        big: this.current === 1
-      };
-    },
     editNative() {
       let self = this;
       const bridge = window.Android;

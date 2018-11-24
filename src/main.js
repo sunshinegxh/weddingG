@@ -14,6 +14,9 @@ import jssdk from "./libs/jssdk";
 Vue.use(ajax);
 Vue.use(jssdk);
 
+import VueClipboard from "vue-clipboard2";
+Vue.use(VueClipboard);
+
 const app = {
   launch() {
     this.initRem();
