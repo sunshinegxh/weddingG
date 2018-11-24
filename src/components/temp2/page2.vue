@@ -108,6 +108,7 @@ export default {
   transform: translateX(-100%);
   opacity: 0;
   animation: opacity 2s forwards;
+  border-radius: 20 * $vw;
 }
 .page1_pic_down {
   height: 448 * $vh;
@@ -116,6 +117,7 @@ export default {
   transform: translateX(-100%);
   opacity: 0;
   animation: opacity 2s 0.5s forwards;
+  border-radius: 20 * $vw;
 }
 .text {
   color: #e6bf72;
