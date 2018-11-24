@@ -1,14 +1,14 @@
 <template>
     <div class="first">
       <img class="page1_ic_flower from-rTT" src="../../assets/third/page1_ic_flower.png" alt="">
-      <img class="page1_pic_up from-left0" :src="imgArr[0]" alt="">
+      <div class="page1_pic_up from-left0" :style="{'background-image': `url(${imgArr[0]})`}"></div>
       <div class="invite_ic_pic2" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :pageId="con.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img class="page1_copywrite from-oPC" src="../../assets/third/page1_copywrite.png" alt="">
-      <img class="page1_pic_down from-right0" :src="imgArr[0]" alt="">
+      <div class="page1_pic_down from-right0" :style="{'background-image': `url(${imgArr[1]})`}"></div>
       <div class="invite_ic_pic3" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :pageId="con.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img class="page1_ic_vine delay1 from-rTT60" src="../../assets/third/page1_ic_vine.png" alt="">
     </div>
@@ -20,11 +20,11 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "template-3-page-2",
-  props: ["con"],
+  props: ["info"],
   data() {
     return {
-      extra: this.con.extra,
-      imgArr: this.con.goodsImg
+      extra: this.info.extra,
+      imgArr: this.info.goodsImg
     };
   },
   computed: {
@@ -55,23 +55,29 @@ export default {
   }
   .page1_ic_flower {
     margin: 0 auto;
-    margin-top: 20 * $px;
-    width: 88 * $px;
-    height: 88 * $px;
+    margin-top: 20 * $vh;
+    width: 88 * $vw;
+    height: 88 * $vw;
   }
   .page1_pic_up {
     width: 100%;
+    height: 556 * $vh;
     position: relative;
+    background-size: cover;
   }
   .page1_copywrite,
   .page1_pic_down {
-    width: 566 * $px;
+    width: 565 * $vw;
     float: right;
     position: relative;
     z-index: 2;
   }
+  .page1_pic_down {
+    height: 406 * $vh;
+    background-size: cover;
+  }
   .page1_ic_vine {
-    width: 150 * $px;
+    width: 150 * $vw;
     float: right;
     opacity: 0;
     transform-origin: right bottom;
@@ -123,11 +129,11 @@ export default {
 }
 @keyframes fLft0 {
   0% {
-    left: -300 * $px;
+    left: -300 * $vw;
     opacity: 0;
   }
   100% {
-    left: 0 * $px;
+    left: 0 * $vw;
     opacity: 1;
   }
 }
@@ -137,18 +143,18 @@ export default {
 }
 @keyframes fRht0 {
   0% {
-    right: -300 * $px;
+    right: -300 * $vw;
     opacity: 0;
   }
   100% {
-    right: 0 * $px;
+    right: 0 * $vw;
     opacity: 1;
   }
 }
 
 .invite_ic_pic2 {
   position: absolute;
-  top: 300 * $px;
+  top: 330 * $vh;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1000;
@@ -156,8 +162,8 @@ export default {
 
 .invite_ic_pic3 {
   position: absolute;
-  top: 900 * $px;
-  left: 70%;
+  top: 900 * $vh;
+  left: 62%;
   transform: translate(-50%, 0);
   z-index: 1000;
 }

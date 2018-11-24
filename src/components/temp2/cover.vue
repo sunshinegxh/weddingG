@@ -34,7 +34,6 @@ export default {
   props: ["info"],
   computed: {
     extra() {
-      // return this.info.extra;
       return JSON.parse(this.info.extra);
     },
     ...mapState({

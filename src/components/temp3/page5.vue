@@ -1,14 +1,14 @@
 <template>
     <div class="page4">
       <img class="page4_ic_flower from-zoomIn" src="../../assets/third/page4_pic_flower.png" alt="">
-      <img class="page4_pic_up from-left0" :src="imgArr[0]" alt="">
+      <div class="page4_pic_up from-left0" :style="{'background-image': `url(${imgArr[0]})`}"></div>
       <div class="invite_ic_pic8" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="8" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
 
-      <img class="page4_pic_middle from-right0" :src="imgArr[1]" alt="">
+      <div class="page4_pic_middle from-right0" :style="{'background-image': `url(${imgArr[1]})`}"></div>
       <div class="invite_ic_pic9" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="9" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
 
       <div class="page4_word delay1 from-oPC">
@@ -18,9 +18,9 @@
         <p>不说话</p>
         <p>我就能感到十分美好</p>
       </div>
-      <img class="page4_pic_down delay2 from-left0" :src="imgArr[2]" alt="">
+      <div class="page4_pic_down delay2 from-left0" :style="{'background-image': `url(${imgArr[2]})`}"></div>
       <div class="invite_ic_pic10" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="10" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
       </div>
     </div>
 </template>
@@ -31,11 +31,11 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "template-3-page-5",
-  props: ["con"],
+  props: ["info"],
   data() {
     return {
-      extra: this.con.extra,
-      imgArr: this.con.goodsImg
+      extra: this.info.extra,
+      imgArr: this.info.goodsImg
     };
   },
   computed: {
@@ -67,44 +67,47 @@ export default {
   }
   .page4_ic_flower {
     position: absolute;
-    width: 318 * $px;
-    height: 210 * $px;
-    top: 128 * $px;
-    right: 24 * $px;
+    width: 318 * $vw;
+    height: 210 * $vh;
+    top: 128 * $vh;
+    right: 24 * $vw;
   }
   .page4_pic_up {
     position: absolute;
-    width: 360 * $px;
-    height: 360 * $px;
-    top: 128 * $px;
-    left: 24 * $px;
+    width: 360 * $vw;
+    height: 360 * $vh;
+    top: 128 * $vh;
+    left: 24 * $vw;
+    background-size: cover;
   }
   .page4_pic_middle {
     position: absolute;
-    width: 318 * $px;
-    height: 460 * $px;
-    top: 348 * $px;
-    right: 24 * $px;
+    width: 318 * $vw;
+    height: 460 * $vh;
+    top: 348 * $vh;
+    right: 24 * $vw;
+    background-size: cove;
   }
   .page4_pic_down {
     position: absolute;
-    width: 702 * $px;
-    height: 400 * $px;
-    top: 832 * $px;
+    width: 702 * $vw;
+    height: 400 * $vh;
+    top: 832 * $vh;
     opacity: 0;
-    right: 24 * $px;
+    right: 24 * $vw;
+    background-size: cover;
   }
   .page4_word {
     opacity: 0;
     position: absolute;
     text-align: left;
-    width: 332 * $px;
-    height: 224 * $px;
-    top: 520 * $px;
-    left: 24 * $px;
+    width: 332 * $vw;
+    height: 224 * $vh;
+    top: 520 * $vh;
+    left: 24 * $vw;
     color: #000;
-    font-size: 28 * $px;
-    line-height: 20 * $px;
+    font-size: 28 * $vw;
+    line-height: 20 * $vh;
   }
 }
 
@@ -139,11 +142,11 @@ export default {
 }
 @keyframes fLft0 {
   0% {
-    left: -300 * $px;
+    left: -300 * $vw;
     opacity: 0;
   }
   100% {
-    left: 24 * $px;
+    left: 24 * $vw;
     opacity: 1;
   }
 }
@@ -153,26 +156,26 @@ export default {
 }
 @keyframes fRht0 {
   0% {
-    right: -300 * $px;
+    right: -300 * $vw;
     opacity: 0;
   }
   100% {
-    right: 0 * $px;
+    right: 0 * $vw;
     opacity: 1;
   }
 }
 
 .invite_ic_pic8 {
   position: absolute;
-  top: 250 * $px;
-  left: 25%;
+  top: 255 * $vh;
+  left: 26%;
   transform: translate(-50%, 0);
   z-index: 1000;
 }
 
 .invite_ic_pic9 {
   position: absolute;
-  top: 500 * $px;
+  top: 530 * $vh;
   left: 80%;
   transform: translate(-50%, 0);
   z-index: 1000;
@@ -180,7 +183,7 @@ export default {
 
 .invite_ic_pic10 {
   position: absolute;
-  top: 1000 * $px;
+  top: 1000 * $vh;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1000;

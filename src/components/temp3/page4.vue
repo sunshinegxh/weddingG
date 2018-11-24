@@ -1,20 +1,20 @@
 <template>
     <div class="page3">
       <img class="page3_ic_flower from-zoomIn" src="../../assets/third/page3_ic_flower.png" alt="">
-      <img class="page3_pic_left from-left0" :src="imgArr[0]" alt="">
+      <div class="page3_pic_left from-left0" :style="{'background-image': `url(${imgArr[0]})`}"></div>
       <div class="invite_ic_pic5" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="5" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
 
-      <img class="page3_pic_right from-right0" :src="imgArr[1]" alt="">
+      <div class="page3_pic_right from-right0" :style="{'background-image': `url(${imgArr[1]})`}"></div>
       <div class="invite_ic_pic6" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="6" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
       </div>
 
       <img class="page3_copywrite from-oPC" src="../../assets/third/page3_pic_copywrite.png" alt="">
-      <img class="page3_pic_down delay1 from-bottom120" :src="imgArr[2]" alt="">
+      <div class="page3_pic_down delay1 from-bottom120" :style="{'background-image': `url(${imgArr[2]})`}"></div>
       <div class="invite_ic_pic7" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="7" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="3" v-on:change-url="changeUrl"></upload-image>
       </div>
 
       <img class="page3_ic_flowertwo delay1 from-right-top" src="../../assets/third/page3_ic_flowertwo.png" alt="">
@@ -27,11 +27,11 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "template-3-page-4",
-  props: ["con"],
+  props: ["info"],
   data() {
     return {
-      extra: this.con.extra,
-      imgArr: this.con.goodsImg
+      extra: this.info.extra,
+      imgArr: this.info.goodsImg
     };
   },
   computed: {
@@ -62,32 +62,34 @@ export default {
     display: block;
   }
   .page3_ic_flower {
-    width: 156 * $px;
-    height: 156 * $px;
+    width: 156 * $vw;
+    height: 156 * $vh;
     left: 0;
-    top: 20 * $px;
+    top: 20 * $vh;
     opacity: 0;
     z-index: 1;
     position: absolute;
   }
   .page3_pic_left {
     position: absolute;
-    width: 340 * $px;
-    height: 518 * $px;
-    margin-top: 128 * $px;
+    width: 340 * $vw;
+    height: 518 * $vh;
+    margin-top: 128 * $vh;
+    background-size: cover;
   }
   .page3_pic_right {
-    width: 340 * $px;
-    height: 518 * $px;
+    width: 340 * $vw;
+    height: 518 * $vh;
     position: absolute;
-    margin-right: 24 * $px;
-    margin-top: 128 * $px;
+    margin-right: 24 * $vw;
+    margin-top: 128 * $vh;
+    background-size: cover;
   }
   .page3_copywrite {
-    width: 702 * $px;
-    height: 108 * $px;
+    width: 702 * $vw;
+    height: 108 * $vh;
     position: absolute;
-    top: 646 * $px;
+    top: 646 * $vh;
     left: 50%;
     transform: translate(-50%, 0%);
     opacity: 0;
@@ -97,15 +99,16 @@ export default {
     left: 50%;
     opacity: 0;
     transform: translate(-50%, 0%);
-    width: 702 * $px;
-    height: 460 * $px;
+    width: 702 * $vw;
+    height: 460 * $vh;
+    background-size: cover;
   }
   .page3_ic_flowertwo {
     position: absolute;
     opacity: 0;
-    width: 108 * $px;
-    height: 190 * $px;
-    margin-top: -100 * $px;
+    width: 108 * $vw;
+    height: 190 * $vh;
+    margin-top: -100 * $vh;
     z-index: 1;
   }
 }
@@ -127,11 +130,11 @@ export default {
 }
 @keyframes fLft0 {
   0% {
-    left: -300 * $px;
+    left: -300 * $vw;
     opacity: 0;
   }
   100% {
-    left: 24 * $px;
+    left: 24 * $vw;
     opacity: 1;
   }
 }
@@ -141,11 +144,11 @@ export default {
 }
 @keyframes fRht0 {
   0% {
-    right: -300 * $px;
+    right: -300 * $vw;
     opacity: 0;
   }
   100% {
-    right: 0 * $px;
+    right: 0 * $vw;
     opacity: 1;
   }
 }
@@ -155,11 +158,11 @@ export default {
 }
 @keyframes fBtm120 {
   0% {
-    bottom: -300 * $px;
+    bottom: -300 * $vh;
     opacity: 0;
   }
   100% {
-    bottom: 120 * $px;
+    bottom: 120 * $vh;
     opacity: 0.8;
   }
 }
@@ -183,20 +186,20 @@ export default {
 }
 @keyframes fRtT {
   0% {
-    top: 850 * $px;
-    right: -300 * $px;
+    top: 850 * $vh;
+    right: -300 * $vw;
     opacity: 0;
   }
   100% {
-    top: 1180 * $px;
-    right: 0 * $px;
+    top: 1180 * $vh;
+    right: 0 * $vw;
     opacity: 1;
   }
 }
 
 .invite_ic_pic5 {
   position: absolute;
-  top: 300 * $px;
+  top: 300 * $vh;
   left: 25%;
   transform: translate(-50%, 0);
   z-index: 1000;
@@ -204,7 +207,7 @@ export default {
 
 .invite_ic_pic6 {
   position: absolute;
-  top: 300 * $px;
+  top: 300 * $vh;
   left: 75%;
   transform: translate(-50%, 0);
   z-index: 1000;
@@ -212,7 +215,7 @@ export default {
 
 .invite_ic_pic7 {
   position: absolute;
-  top: 900 * $px;
+  top: 900 * $vh;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1000;
