@@ -1,9 +1,9 @@
 <template>
     <div class="page2">
       <img class="page2_copywrite delay0_5 from-top0" src="../../assets/third/page2_pic_copywrite.png" alt="">
-      <img class="page2_main delay1 from-bottom300" :src="imgArr[0]" alt="">
+      <div class="page2_main delay1 from-bottom300" :style="{'background-image': `url(${imgArr[0]})`}"></div>
       <div class="invite_ic_pic4" v-if="+edit === 1" data-html2canvas-ignore="true">
-        <upload-image :cardId="cardId" :pageId="con.pageId" imageSort="4" v-on:change-url="changeUrl"></upload-image>
+        <upload-image :cardId="cardId" :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img class="page2_ic_flower_rotate from-rTT" src="../../assets/third/page2_ic_flower.png" alt="">
       <img class="page2_ic_flower_left delay2 from-left50" src="../../assets/third/page2_ic_flower2.png" alt="">
@@ -23,11 +23,11 @@ import uploadImage from "../UploadImage";
 
 export default {
   name: "template-3-page-3",
-  props: ["con"],
+  props: ["info"],
   data() {
     return {
-      extra: this.con.extra,
-      imgArr: this.con.goodsImg,
+      extra: this.info.extra,
+      imgArr: this.info.goodsImg,
       isCurrent: true
     };
   },
@@ -59,42 +59,43 @@ export default {
     display: block;
   }
   .page2_ic_flower_rotate {
-    width: 106 * $px;
-    height: 106 * $px;
+    width: 106 * $vw;
+    height: 106 * $vh;
     position: absolute;
-    top: 930 * $px;
+    top: 930 * $vh;
     z-index: 2;
   }
   .page2_main {
     position: absolute;
-    width: 700 * $px;
-    height: 880 * $px;
+    width: 700 * $vw;
+    height: 880 * $vh;
     z-index: 2;
     opacity: 0;
     left: 50%;
+    background-size: cover;
     transform: translate(-50%, 0%);
   }
   .page2_copywrite {
     opacity: 0;
-    width: 702 * $px;
+    width: 702 * $vw;
     position: relative;
-    margin-top: 40 * $px;
+    margin-top: 40 * $vh;
     z-index: 2;
   }
   .page2_ic_flower_left {
     position: absolute;
     opacity: 0;
-    top: 1100 * $px;
-    width: 138 * $px;
-    height: 150 * $px;
+    top: 1100 * $vh;
+    width: 138 * $vw;
+    height: 150 * $vh;
     z-index: 5;
   }
   .page2_ic_flower_right {
     position: absolute;
     opacity: 0;
-    top: 1030 * $px;
-    width: 118 * $px;
-    height: 220 * $px;
+    top: 1030 * $vh;
+    width: 118 * $vw;
+    height: 220 * $vh;
     z-index: 5;
   }
   .word {
@@ -102,10 +103,10 @@ export default {
     color: #000;
     left: 50%;
     opacity: 0;
-    width: 700 * $px;
+    width: 700 * $vw;
     transform: translate(-50%, 0%);
-    font-size: 28 * $px;
-    line-height: 24 * $px;
+    font-size: 28 * $vw;
+    line-height: 24 * $vh;
   }
 }
 
@@ -165,7 +166,7 @@ export default {
     opacity: 0;
   }
   100% {
-    right: 72 * $px;
+    right: 72 * $vw;
     opacity: 1;
   }
 }
@@ -175,7 +176,7 @@ export default {
     opacity: 0;
   }
   100% {
-    right: 72 * $px;
+    right: 72 * $vw;
     opacity: 1;
   }
 }
@@ -185,7 +186,7 @@ export default {
     opacity: 0;
   }
   100% {
-    right: 72 * $px;
+    right: 72 * $vw;
     opacity: 1;
   }
 }
@@ -195,31 +196,31 @@ export default {
 }
 @-moz-keyframes fTop0 {
   0% {
-    top: -300 * $px;
+    top: -300 * $vh;
     opacity: 0;
   }
   100% {
-    top: 0 * $px;
+    top: 0 * $vh;
     opacity: 0.8;
   }
 }
 @-webkit-keyframes fTop0 {
   0% {
-    top: -300px;
+    top: -300 * $vh;
     opacity: 0;
   }
   100% {
-    top: 0 * $px;
+    top: 0 * $vh;
     opacity: 0.8;
   }
 }
 @keyframes fTop0 {
   0% {
-    top: -300 * $px;
+    top: -300 * $vh;
     opacity: 0;
   }
   100% {
-    top: 0 * $px;
+    top: 0 * $vh;
     opacity: 0.8;
   }
 }
@@ -229,11 +230,11 @@ export default {
 }
 @keyframes fTop500 {
   0% {
-    top: 500 * $px;
+    top: 500 * $vh;
     opacity: 0;
   }
   100% {
-    top: 980 * $px;
+    top: 980 * $vh;
     opacity: 0.8;
   }
 }
@@ -247,7 +248,7 @@ export default {
     opacity: 0;
   }
   100% {
-    right: 0 * $px;
+    right: 0 * $vw;
     opacity: 1;
   }
 }
@@ -257,18 +258,18 @@ export default {
 }
 @keyframes fBtm300 {
   0% {
-    bottom: -300 * $px;
+    bottom: -300 * $vh;
     opacity: 0;
   }
   100% {
-    bottom: 360 * $px;
+    bottom: 360 * $vh;
     opacity: 0.8;
   }
 }
 
 .invite_ic_pic4 {
   position: absolute;
-  top: 450 * $px;
+  top: 450 * $vh;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1000;

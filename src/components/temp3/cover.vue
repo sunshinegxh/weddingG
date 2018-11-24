@@ -6,13 +6,21 @@
     <span class="border-bg cover-bg-top from-top0"></span>
 
     <div class="invite_ic_pic1" v-if="+edit === 1" data-html2canvas-ignore="true">
-      <upload-image :pageId="con.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
+      <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
+
+    <img
+      data-html2canvas-ignore="true"
+      src="../../assets/invite_ic_edit.png"
+      class="edit3"
+      v-if="+edit === 1"
+      @click="editNative"
+      alt="">
 
     <div class="cover-bg3">
       <span class="cover_pic_copywrite delay1 from-top0"></span>
       <span class="name delayP15 from-top200">{{extra.groom}} & {{extra.bride}}</span>
-      <img :src="imgArr[0]" alt="" class="cover_pic scale01 delayP25">
+      <div class="cover_pic scale01 delayP25" :style="{'background-image': `url(${imgArr[0]})`}"></div>
       <span class="address delay2 from-bottom100">{{extra.address}}</span>
       <span class="date delay3 from-bottom204">{{extra.time}}</span>
     </div>
@@ -22,16 +30,17 @@
 <script>
 import { mapState } from "vuex";
 import uploadImage from "../UploadImage";
+import utils from "../../libs/utils";
 
 export default {
   name: "cover3",
-  props: ["con"],
+  props: ["info"],
   data() {
     return {
       current: 0,
       loaded: false,
-      extra: JSON.parse(this.con.extra),
-      imgArr: this.con.goodsImg
+      extra: JSON.parse(this.info.extra),
+      imgArr: this.info.goodsImg
     };
   },
   computed: {
@@ -40,10 +49,9 @@ export default {
     })
   },
   created() {
-    window.setInfo = this.setInfo;
+    window.refreshInfo = this.setInfo;
   },
   methods: {
-    setInfo() {},
     changeUrl(info) {
       this.$set(this.imgArr, info.index - 1, info.url);
     },
@@ -55,6 +63,37 @@ export default {
         toRead: true,
         big: this.current === 1
       };
+    },
+    setInfo() {
+      this.$http
+        .post(`${utils.api()}/()/banhunli/card/getInvitationsInfo.gg`, {
+          cardId: this.cardId
+        })
+        .then(response => {
+          let res = response.body.data;
+          if (response.body.code === "0000") {
+            this.extra = res;
+          } else {
+            console.log("res.respCode", response.body.message);
+          }
+        })
+        .catch(e => {
+          document.write(e);
+        });
+    },
+    editNative() {
+      let self = this;
+      const bridge = window.Android;
+      function toEditPage() {
+        window.Android.toEditPage(self.cardId);
+      }
+      if (bridge) {
+        toEditPage();
+      } else {
+        document.addEventListener("Android", () => {
+          toEditPage();
+        });
+      }
     }
   },
   components: {
@@ -71,8 +110,8 @@ export default {
   height: 100vh;
   font-family: serif;
   &-bg3 {
-    width: 702 * $px;
-    height: 1072 * $px;
+    width: 702 * $vw;
+    height: 1072 * $vh;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -88,21 +127,21 @@ export default {
     background-size: contain;
   }
   .cover_pic_copywrite {
-    width: 702 * $px;
-    height: 200 * $px;
+    width: 702 * $vw;
+    height: 200 * $vh;
     display: inline-block;
     background: url("../../assets/third/cover_pic_copywrite.png") no-repeat;
     background-size: contain;
     position: absolute;
     left: 0;
-    top: -300 * $px;
+    top: -300 * $vh;
   }
   .name {
     position: absolute;
     left: 0;
     right: 0;
-    top: -300 * $px;
-    font-size: 48 * $px;
+    top: -300 * $vh;
+    font-size: 48 * $vw;
     color: #000;
     margin: 0 auto;
   }
@@ -116,15 +155,16 @@ export default {
     margin: 0 auto;
     -webkit-transform: scale(0);
     transform: scale(0);
+    background-size: cover;
   }
   .address {
     position: absolute;
     left: 0;
     right: 0;
-    width: 480 * $px;
+    width: 480 * $vw;
     text-align: center;
-    bottom: -300 * $px;
-    font-size: 36 * $px;
+    bottom: -300 * $vh;
+    font-size: 36 * $vw;
     color: #000;
     margin: 0 auto;
   }
@@ -133,38 +173,38 @@ export default {
     left: 0;
     right: 0;
     text-align: center;
-    bottom: -300 * $px;
-    font-size: 36 * $px;
+    bottom: -300 * $vh;
+    font-size: 36 * $vw;
     color: #000;
     margin: 0 auto;
   }
   &-bg-left {
     left: 0;
     top: 0;
-    width: 340 * $px;
-    height: 1206 * $px;
+    width: 340 * $vw;
+    height: 1206 * $vh;
     display: inline-block;
     background: url("../../assets/third/cover_pic_left.png") no-repeat;
   }
   &-bg-right {
     right: 0;
-    top: 70 * $px;
-    width: 230 * $px;
-    height: 1178 * $px;
+    top: 70 * $vh;
+    width: 230 * $vw;
+    height: 1178 * $vh;
     background: url("../../assets/third/cover_pic_right.png") no-repeat;
   }
   &-bg-top {
     top: 0;
     right: 0;
-    width: 400 * $px;
-    height: 200 * $px;
+    width: 400 * $vw;
+    height: 200 * $vh;
     background: url("../../assets/third/cover_pic_up.png") no-repeat;
   }
   &-bg-bottom {
     bottom: 0;
     left: 0;
-    width: 750 * $px;
-    height: 228 * $px;
+    width: 750 * $vw;
+    height: 228 * $vh;
     background: url("../../assets/third/cover_pic_down.png") no-repeat;
   }
 }
@@ -194,11 +234,11 @@ export default {
 }
 @keyframes fBtm204 {
   0% {
-    bottom: -300 * $px;
+    bottom: -300 * $vh;
     opacity: 0;
   }
   100% {
-    bottom: 204 * $px;
+    bottom: 204 * $vh;
     opacity: 0.8;
   }
 }
@@ -208,11 +248,11 @@ export default {
 }
 @keyframes fBtm100 {
   0% {
-    bottom: -300 * $px;
+    bottom: -300 * $vh;
     opacity: 0;
   }
   100% {
-    bottom: 100 * $px;
+    bottom: 100 * $vh;
     opacity: 0.8;
   }
 }
@@ -222,11 +262,11 @@ export default {
 }
 @keyframes fTop200 {
   0% {
-    top: -300 * $px;
+    top: -300 * $vh;
     opacity: 0;
   }
   100% {
-    top: 190 * $px;
+    top: 190 * $vh;
     opacity: 0.8;
   }
 }
@@ -236,11 +276,11 @@ export default {
 }
 @keyframes fTop0 {
   0% {
-    top: -300 * $px;
+    top: -300 * $vh;
     opacity: 0;
   }
   100% {
-    top: 0 * $px;
+    top: 0 * $vh;
     opacity: 0.8;
   }
 }
@@ -250,11 +290,11 @@ export default {
 }
 @keyframes fBtm0 {
   0% {
-    bottom: -300 * $px;
+    bottom: -300 * $vh;
     opacity: 0;
   }
   100% {
-    bottom: 0 * $px;
+    bottom: 0 * $vh;
     opacity: 0.8;
   }
 }
@@ -264,11 +304,11 @@ export default {
 }
 @keyframes fRht0 {
   0% {
-    right: -300 * $px;
+    right: -300 * $vw;
     opacity: 0;
   }
   100% {
-    right: 0 * $px;
+    right: 0 * $vw;
     opacity: 1;
   }
 }
@@ -278,20 +318,28 @@ export default {
 }
 @keyframes fLft0 {
   0% {
-    left: -300 * $px;
+    left: -300 * $vw;
     opacity: 0;
   }
   100% {
-    left: 0 * $px;
+    left: 0 * $vw;
     opacity: 1;
   }
 }
-
 .invite_ic_pic1 {
   position: fixed;
-  top: 580 * $px;
+  top: 620 * $vh;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1000;
+}
+.edit3 {
+  width: 112 * $vw;
+  height: 112 * $vw;
+  z-index: 1000;
+  position: absolute;
+  bottom: 220 * $vh;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 </style>

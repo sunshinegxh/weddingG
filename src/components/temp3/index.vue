@@ -10,7 +10,7 @@
 
   <div class="wrapper" id="wrapper">
     <div class="section" v-for="(data, index) in dataList" :key="index">
-      <component :is="isCom(data.templatePageId)" :con="data" :currentPage="current" v-show="index === current"></component>
+      <component :is="isCom(data.templatePageId)" :info="data" :currentPage="current" v-show="index === current"></component>
     </div>
   </div>
 </template>

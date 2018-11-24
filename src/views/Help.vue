@@ -10,8 +10,14 @@
     <div class="help-card">
       <div class="help-card-up">
         <span>他的婚礼ID</span>
-        <p>{{ weddingId }}</p>
-        <img src="../assets/help/synergy_share_btn_copy.png" alt="">
+        <p id="codeNum">{{ weddingId }}</p>
+        <input id="input" type="text" v-model="weddingId"/>
+        <img
+          src="../assets/help/synergy_share_btn_copy.png"
+          alt=""
+          v-clipboard:copy="weddingId"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError">
       </div>
       <img class="help-card-middle" src="../assets/help/middle.jpg" alt="">
       <div class="help-card-down">
@@ -24,6 +30,7 @@
 
 <script>
 import utils from "../libs/utils";
+import toast from "../components/common/toast";
 
 export default {
   name: "Help",
@@ -51,12 +58,8 @@ export default {
           userId: this.userId
         })
         .then(response => {
-          // this.loading = false;
-          // console.log(response.body.data);
-          // let res = response.body.data;
           if (response.body.code === "0000") {
             this.user = response.body.data;
-            // this.cur = this.musicList[0];
           } else {
             console.log("res.respCode", response.body.message);
           }
@@ -78,6 +81,12 @@ export default {
         item.musicId === this.cur.musicId
       );
       return item.musicId !== this.cur.musicId;
+    },
+    onCopy() {
+      toast("复制成功！");
+    },
+    onError() {
+      toast("复制失败！");
     }
   }
 };
@@ -158,6 +167,7 @@ export default {
       height: 414 * $vh;
       background: #fff;
       margin: -15 * $vh auto;
+      padding-bottom: 30 * $vh;
       border-top-left-radius: 0 * $vw;
       border-top-right-radius: 0 * $vw;
       border-bottom-right-radius: 50 * $vw;
@@ -172,9 +182,13 @@ export default {
         font-weight: 400;
         color: rgba(102, 102, 102, 1);
         line-height: 48 * $vh;
-        margin-bottom: 48 * $vh;
       }
     }
   }
+}
+#input {
+  opacity: 0;
+  z-index: -1;
+  display: none;
 }
 </style>
