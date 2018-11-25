@@ -17,9 +17,9 @@
       </div>
       <div class="extra">
         <div class="role">
-          <span>{{ extra.groom }}</span>
+          <span class="role-1">{{ extra.groom }}</span>
           <i class="heart"></i>
-          <span>{{ extra.bride }}</span>
+          <span class="role-2">{{ extra.bride }}</span>
         </div>
         <div class="time">{{ extra.time }}</div>
         <div class="address">{{ extra.address }}</div>
@@ -208,6 +208,16 @@ export default {
   opacity: 0;
   transform: translateY(48 * $vh);
   animation: opacity 2s 2s forwards;
+  display: flex;
+  > span {
+    flex: 1;
+  }
+  .role-1 {
+    text-align: right;
+  }
+  .role-2 {
+    text-align: left;
+  }
 }
 .heart {
   display: inline-block;
