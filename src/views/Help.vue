@@ -48,7 +48,7 @@ export default {
     }
   },
   created() {
-    document.title = "wedding";
+    document.title = "伴婚礼";
     this.getUserInfo();
   },
   methods: {
