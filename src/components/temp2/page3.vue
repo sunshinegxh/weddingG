@@ -1,14 +1,14 @@
 <template>
   <div class="wrapper">
+    <div class="pic page2_pic_up right" :style="{'background-image': `url(${imgArr[0]})`}"></div>
     <div class="page2_frame right">
-      <div class="pic page2_pic_up" :style="{'background-image': `url(${imgArr[0]})`}"></div>
     </div>
     <div class="invite_ic_pic31" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
     </div>
     <div class="page2_copywriting"></div>
+    <div class="pic page2_pic_down left" :style="{'background-image': `url(${imgArr[1]})`}"></div>
     <div class="page2_frame left">
-      <div class="pic page2_pic_down" :style="{'background-image': `url(${imgArr[1]})`}"></div>
     </div>
     <div class="invite_ic_pic32" v-if="+edit === 1" data-html2canvas-ignore="true">
       <upload-image :pageId="info.pageId" imageSort="2" v-on:change-url="changeUrl"></upload-image>
@@ -88,6 +88,22 @@ export default {
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
+  max-width: 702 * $vw;
+  width: 680 * $vw;
+  height: 470 * $vh;
+  position: absolute;
+  left: 50%;
+  margin-left: -340 * $vw;
+}
+.pic.right {
+  transform: translateX(100%);
+  animation: opacity 2s forwards;
+  top: 120 * $vh;
+}
+.pic.left {
+  transform: translateX(-100%);
+  animation: opacity 2s forwards;
+  top: 770 * $vh;
 }
 .page2_copywriting {
   width: 702 * $vw;

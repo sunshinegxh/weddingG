@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="cover_frame_line">
-      <div class="invite_ic_pic2" v-if="+edit === 1" data-html2canvas-ignore="true">
+      <div class="invite_ic_pic212" v-if="+edit === 1" data-html2canvas-ignore="true">
         <upload-image :pageId="info.pageId" imageSort="1" v-on:change-url="changeUrl"></upload-image>
       </div>
       <img
@@ -119,7 +119,7 @@ export default {
   background: url(../../assets/second/cover_frame_line.png) no-repeat;
   background-size: 100% 100%;
   animation: zoomIn 2s;
-  .invite_ic_pic2 {
+  .invite_ic_pic212 {
     position: absolute;
     top: 640 * $vh;
     left: 50%;
