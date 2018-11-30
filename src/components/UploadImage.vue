@@ -52,35 +52,37 @@ export default {
           }
         )
         .then(response => {
-          var self = this;
-          var imgUrl = response.body.data.imgUrl;
-          window.URL = window.URL || window.webkitURL;
-          var xhr = new XMLHttpRequest();
-          xhr.open("get", imgUrl, true);
-          // 至关重要
-          xhr.responseType = "blob";
-          xhr.onload = function() {
-            if (this.status == 200) {
-              //得到一个blob对象
-              var blob = this.response;
-              console.log("blob", blob);
-              //  至关重要
-              let oFileReader = new FileReader();
-              oFileReader.onloadend = function(e) {
-                let base64 = e.target.result;
-                self.$emit("change-url", {
-                  url: base64,
-                  index: self.imageSort
-                });
-                self.shotScreen();
-              };
-              oFileReader.readAsDataURL(blob);
-            }
-          };
-          xhr.onerror = function(e) {
-            console.log(e);
-          };
-          xhr.send();
+          if (response.body.code === "0000") {
+            var self = this;
+            var imgUrl = response.body.data.imgUrl;
+            window.URL = window.URL || window.webkitURL;
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", imgUrl, true);
+            // 至关重要
+            xhr.responseType = "blob";
+            xhr.onload = function() {
+              if (this.status == 200) {
+                //得到一个blob对象
+                var blob = this.response;
+                console.log("blob", blob);
+                //  至关重要
+                let oFileReader = new FileReader();
+                oFileReader.onloadend = function(e) {
+                  let base64 = e.target.result;
+                  self.$emit("change-url", {
+                    url: base64,
+                    index: self.imageSort
+                  });
+                  self.shotScreen();
+                };
+                oFileReader.readAsDataURL(blob);
+              }
+            };
+            xhr.onerror = function(e) {
+              console.log(e);
+            };
+            xhr.send();
+          }
         })
         .catch(e => {
           document.write(e);

@@ -336,7 +336,7 @@ export default {
 }
 .topbar {
   position: absolute;
-  top: 20 * $vh;
+  top: 52 * $vh;
   left: 26 * $vw;
   right: 26 * $vw;
   height: 60 * $vh;

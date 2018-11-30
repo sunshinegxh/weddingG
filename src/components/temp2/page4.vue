@@ -91,6 +91,7 @@ export default {
   background-repeat: no-repeat;
   opacity: 0;
   animation: move-opacity 2s forwards;
+  border-radius: 20 * $vw;
 }
 .page3_ic_cloud {
   position: absolute;
@@ -124,6 +125,7 @@ export default {
   transform: translateX(100%);
   background-repeat: no-repeat;
   opacity: 0;
+  border-radius: 20 * $vw;
   animation: move-opacity 2s 0.5s forwards;
 }
 .page1_cloud_gold {

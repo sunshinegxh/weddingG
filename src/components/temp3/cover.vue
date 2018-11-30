@@ -19,7 +19,12 @@
 
     <div class="cover-bg3">
       <span class="cover_pic_copywrite delay1 from-top0"></span>
-      <span class="name delayP15 from-top200">{{extra.groom}} & {{extra.bride}}</span>
+      <div class="role name delayP15 from-top200">
+        <span class="role-1">{{ extra.groom }}</span>
+        <i class="heart">&</i>
+        <span class="role-2">{{ extra.bride }}</span>
+      </div>
+      <!-- <span class="name delayP15 from-top200">{{extra.groom}} & {{extra.bride}}</span> -->
       <div class="cover_pic scale01 delayP25" :style="{'background-image': `url(${imgArr[0]})`}"></div>
       <span class="address delay2 from-bottom100">{{extra.address}}</span>
       <span class="date delay3 from-bottom204">{{extra.time}}</span>
@@ -45,7 +50,8 @@ export default {
   },
   computed: {
     ...mapState({
-      edit: state => state.edit
+      edit: state => state.edit,
+      cardId: state => state.cardId
     })
   },
   created() {
@@ -113,13 +119,45 @@ export default {
     width: 702 * $vw;
     height: 1072 * $vh;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+    // top: 0;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
+    // margin: auto;
+    left: 50%;
+    top: 50%;
+    // transform: translate(-50%, -50%);
+    margin-left: -351 * $vw;
+    margin-top: -536 * $vh;
     background: url("../../assets/third/cover_bg.png") no-repeat;
     background-size: contain;
+    .role {
+      font-size: 48 * $vh;
+      line-height: 48 * $vh;
+      margin-top: 35 * $vh;
+      opacity: 0;
+      // transform: translateY(48 * $vh);
+      // animation: opacity 2s 2s forwards;
+      display: flex;
+      > span {
+        flex: 1;
+      }
+      .role-1 {
+        text-align: right;
+      }
+      .role-2 {
+        text-align: left;
+      }
+    }
+    .heart {
+      display: inline-block;
+      width: 48 * $vw;
+      height: 48 * $vh;
+      margin: auto 46 * $vw;
+      vertical-align: middle;
+      // background: url(../../assets/second/cover_ic_heart.png) no-repeat;
+      background-size: 100% 100%;
+    }
   }
   .border-bg {
     position: absolute;
@@ -149,10 +187,12 @@ export default {
     width: 544 * $vw;
     height: 520 * $vh;
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 50%;
+    margin-left: -272 * $vw;
+    // left: 0;
+    // right: 0;
     top: 280 * $vh;
-    margin: 0 auto;
+    // margin: 0 auto;
     -webkit-transform: scale(0);
     transform: scale(0);
     background-size: cover;

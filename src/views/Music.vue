@@ -76,10 +76,10 @@ export default {
     position: relative;
     display: flex;
     img {
-      margin: 31 * $px 24 * $px;
-      width: 36 * $px;
-      height: 36 * $px;
-      line-height: 36 * $px;
+      margin: 31 * $vh 24 * $vw;
+      width: 36 * $vw;
+      height: 36 * $vh;
+      line-height: 36 * $vh;
     }
     img.nomussic {
       visibility: hidden;
@@ -87,9 +87,9 @@ export default {
     span {
       flex: 1;
       text-align: left;
-      padding-left: 84 * $px;
-      line-height: 96 * $px;
-      font-size: 32 * $px;
+      padding-left: 24 * $vw;
+      line-height: 96 * $vh;
+      font-size: 32 * $vw;
       border-bottom: 1px solid #e5e5e5;
       color: #010101;
     }

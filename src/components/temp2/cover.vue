@@ -187,7 +187,7 @@ export default {
   position: absolute;
   top: 876 * $vh;
   right: -130 * $vw;
-  background: url(../../assets/second/cover_cloud_left.png) no-repeat;
+  background: url(../../assets/second/cover_cloud_right.png) no-repeat;
   background-size: 100% 100%;
   animation: right-to-middle 2s 2.5s forwards;
 }
@@ -243,7 +243,8 @@ export default {
   position: absolute;
   width: 48 * $vw;
   height: 48 * $vh;
-  bottom: 120 * $vh;
+  // bottom: 10%;
+  bottom: 85 * $vh;
   left: 351 * $vw;
   margin: auto;
   vertical-align: middle;

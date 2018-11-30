@@ -127,7 +127,7 @@ export default {
   }
 }
 .text {
-  width: 260 * $vw;
+  width: 300 * $vw;
   height: 216 * $vh;
   margin: 47 * $vh auto 60 * $vh auto;
   font-size: 36 * $vh;
@@ -181,6 +181,7 @@ export default {
   opacity: 0;
   transform: translateY(726 * $vh) scale(1);
   animation: move-opacity 2s 1.5s forwards;
+  border-radius: 20 * $vw;
 }
 @keyframes zoomIn {
   100% {

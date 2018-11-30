@@ -85,8 +85,8 @@ export default {
     width: 318 * $vw;
     height: 460 * $vh;
     top: 348 * $vh;
-    right: 24 * $vw;
-    background-size: cove;
+    margin-right: 24 * $vw;
+    background-size: cover;
   }
   .page4_pic_down {
     position: absolute;
